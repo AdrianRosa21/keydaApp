@@ -8,12 +8,7 @@ namespace Datos
 {
     public class DbDashboard
     {
-        private readonly string cadenaConexion;
 
-        public DbDashboard(string cadenaConexion)
-        {
-            this.cadenaConexion = cadenaConexion;
-        }
 
         // INDICADORES
 
@@ -23,7 +18,7 @@ namespace Datos
 
             try
             {
-                using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+                using (SqlConnection conexion = Conexion.Conectar())
                 using (SqlCommand comando = new SqlCommand("sp_Dashboard_Indicadores", conexion))
                 {
                     comando.CommandType = CommandType.StoredProcedure;
@@ -43,7 +38,11 @@ namespace Datos
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error inesperado al obtener los indicadores:\n" + ex.Message, "C# - Error inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error inesperado al obtener los indicadores:\n" + ex.Message,
+                    "C# - Error inesperado",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
                 return new DataTable();
             }
         }

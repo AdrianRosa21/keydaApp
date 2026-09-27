@@ -1336,9 +1336,9 @@ ORDER BY v.IdVenta DESC;
 SELECT *FROM VerReporteVentas
 
 
+Select *from VerProveedores
 
-
-
+EXEC sp_help 'Factura';
 
 
 

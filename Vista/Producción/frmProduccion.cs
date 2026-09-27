@@ -229,8 +229,7 @@ namespace Vista.Producción
         {
             int totalRegistros = dtProduccion.Rows.Count;
 
-            totalPaginas = (int)Math.Ceiling(
-                (double)totalRegistros / registrosPorPagina
+            totalPaginas = (int)Math.Ceiling((double)totalRegistros / registrosPorPagina
             );
 
             if (totalPaginas == 0)

@@ -268,7 +268,7 @@ namespace Modelo.Entidades
 
                 string comandoSQL = @"INSERT INTO Usuario
                     (Nombre, Usuario, Contraseña,Correo, Rol, Estado)
-                    VALUES (@Nombre, @Usuario, @Contraseña,@Correo 'Administrador', 1);";
+                    VALUES (@Nombre, @Usuario, @Contraseña,@Correo ,'Administrador', 1);";
 
                 using (SqlConnection conexion = Conexion.Conectar())
                 using (SqlCommand comando = new SqlCommand(comandoSQL, conexion))

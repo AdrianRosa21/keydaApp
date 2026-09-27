@@ -26,8 +26,7 @@ namespace Vista.Responsive
             public Timer TimerResize { get; set; }
         }
 
-        private static Dictionary<Form, FormInfo> formularios =
-            new Dictionary<Form, FormInfo>();
+        private static Dictionary<Form, FormInfo> formularios = new Dictionary<Form, FormInfo>();
 
 
         public static void Apply(Form formulario)
@@ -47,34 +46,25 @@ namespace Vista.Responsive
 
 
             // Guardar posiciones y tamaños originales
-            GuardarControles(
-                formulario,
-                infoFormulario.Controles
-            );
+            GuardarControles(formulario, infoFormulario.Controles);
 
 
             // Timer para esperar a que termine el Resize
             Timer timer = new Timer();
 
-            timer.Interval = 150;
+            timer.Interval = 10;
 
             timer.Tick += (sender, e) =>
             {
                 timer.Stop();
 
-                AjustarFormulario(
-                    formulario,
-                    infoFormulario
-                );
+                AjustarFormulario(formulario, infoFormulario);
             };
 
 
             infoFormulario.TimerResize = timer;
 
-            formularios.Add(
-                formulario,
-                infoFormulario
-            );
+            formularios.Add(formulario, infoFormulario);
 
 
             // Cada vez que cambia el tamaño
@@ -86,9 +76,7 @@ namespace Vista.Responsive
         }
 
 
-        private static void GuardarControles(
-            Control padre,
-            List<ControlInfo> lista)
+        private static void GuardarControles(Control padre, List<ControlInfo> lista)
         {
             foreach (Control control in padre.Controls)
             {
@@ -106,24 +94,17 @@ namespace Vista.Responsive
                 // GroupBox, TabPage, etc.
                 if (control.HasChildren)
                 {
-                    GuardarControles(
-                        control,
-                        lista
-                    );
+                    GuardarControles(control, lista);
                 }
             }
         }
 
 
-        private static void AjustarFormulario(
-            Form formulario,
-            FormInfo info)
+        private static void AjustarFormulario(Form formulario, FormInfo info)
         {
-            int anchoOriginal =
-                info.TamanoOriginal.Width;
+            int anchoOriginal = info.TamanoOriginal.Width;
 
-            int altoOriginal =
-                info.TamanoOriginal.Height;
+            int altoOriginal = info.TamanoOriginal.Height;
 
 
             if (anchoOriginal <= 0 ||
@@ -133,25 +114,19 @@ namespace Vista.Responsive
 
             // Calcular escala
             float escalaX =
-                (float)formulario.ClientSize.Width /
-                anchoOriginal;
+                (float)formulario.ClientSize.Width / anchoOriginal;
 
             float escalaY =
-                (float)formulario.ClientSize.Height /
-                altoOriginal;
+                (float)formulario.ClientSize.Height / altoOriginal;
 
 
             // Usar una sola escala para mantener
             // las proporciones
-            float escala =
-                Math.Min(escalaX, escalaY);
+            float escala = Math.Min(escalaX, escalaY);
 
-
-            foreach (ControlInfo controlInfo
-                in info.Controles)
+            foreach (ControlInfo controlInfo in info.Controles)
             {
-                Control control =
-                    controlInfo.Control;
+                Control control = controlInfo.Control;
 
 
                 // Si el control fue eliminado
@@ -160,52 +135,39 @@ namespace Vista.Responsive
                     continue;
 
 
-                Rectangle original =
-                    controlInfo.BoundsOriginales;
+                Rectangle original = controlInfo.BoundsOriginales;
 
 
-                int x =
-                    (int)(original.X * escala);
+                int x = (int)(original.X * escala);
 
-                int y =
-                    (int)(original.Y * escala);
+                int y = (int)(original.Y * escala);
 
-                int ancho =
-                    (int)(original.Width * escala);
+                int ancho = (int)(original.Width * escala);
 
-                int alto =
-                    (int)(original.Height * escala);
+                int alto = (int)(original.Height * escala);
 
 
-                control.SetBounds(
-                    x,
-                    y,
-                    ancho,
-                    alto
-                );
+                control.SetBounds(x, y, ancho, alto);
 
-
-                // Escalar fuente
                 float nuevoTamano =
-                    controlInfo.TamanoFuenteOriginal
-                    * escala;
+    controlInfo.TamanoFuenteOriginal * escala;
 
-
-                // Evitar texto demasiado pequeño
                 if (nuevoTamano < 6)
                     nuevoTamano = 6;
 
-
-                // Evitar tamaños exagerados
                 if (nuevoTamano > 40)
                     nuevoTamano = 40;
 
+                if (Math.Abs(control.Font.Size - nuevoTamano) > 0.1f)
+                {
+                    control.Font = new Font(
+                        control.Font.FontFamily,
+                        nuevoTamano,
+                        control.Font.Style
+                    );
+                }
 
-                control.Font = new Font(
-                    control.Font.FontFamily,
-                    nuevoTamano,
-                    control.Font.Style
-                );
+
             }
         }
     }

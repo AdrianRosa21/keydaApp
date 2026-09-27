@@ -12,18 +12,15 @@ namespace Vista.Dashboard
 {
     public partial class frmInicio : Form
     {
-        private static string servidor = "(localdb)\\MSSQLLocalDB";
-        private static string baseDeDatos = "MueblesKeyda";
-        private string cadena = $"Data source={servidor};" + $"Initial Catalog={baseDeDatos};" + $"Integrated Security=true;";
 
         private DbDashboard dbDashboard;
         public frmInicio()
         {
             InitializeComponent();
             ResponsiveHelper.Apply(this);
+            dbDashboard = new DbDashboard();
 
-            // Inicializar acceso al Dashboard
-            dbDashboard = new DbDashboard(cadena);
+
         }
         private void CargarLogoEmpresa()
         {
@@ -69,18 +66,12 @@ namespace Vista.Dashboard
                 {
                     DataRow fila = datos.Rows[0];
 
-                    // Materiales registrados
                     lblMateriales.Text = Convert.ToInt32(fila["MaterialesRegistrados"]).ToString();
-
-                    // Clientes registrados
                     lblClientess.Text = Convert.ToInt32(fila["ClientesRegistrados"]).ToString();
 
-                    // Ventas del mes
                     decimal ventas = Convert.ToDecimal(fila["VentasDelMes"]);
-
                     lblVentas.Text = ventas.ToString("$#,##0.00");
 
-                    // Cotizaciones registradas
                     lblCotizacioness.Text = Convert.ToInt32(fila["CotizacionesRegistradas"]).ToString();
                 }
             }
@@ -89,7 +80,6 @@ namespace Vista.Dashboard
                 MessageBox.Show("Error al cargar los indicadores: " + ex.Message, "Dashboard", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
 
         private void CargarPedidosPorEstado()

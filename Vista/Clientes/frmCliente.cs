@@ -1,4 +1,5 @@
-﻿using Modelo.Entidades;
+﻿using Guna.UI2.WinForms;
+using Modelo.Entidades;
 using System;
 using System.Data;
 using System.Drawing;
@@ -16,9 +17,20 @@ namespace Vista.Clientes
             ResponsiveHelper.Apply(this);
             ConfigurarTablasClientes();
 
+
+            ConfigurarTarjetas();
+            ConfigurarPestanas();
+            ConfigurarSeparadores();
+            mensaje = new Guna2MessageDialog();
+            mensaje.Parent = this;
+
+
+
+
             errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
 
         }
+
         //VARIABLES
         private int idClienteSeleccionado = 0;
         private int tipoClienteSeleccionado = 0;
@@ -58,6 +70,245 @@ namespace Vista.Clientes
 
         // Manejo visual de errores de validación
         private ErrorProvider errorProvider = new ErrorProvider();
+
+        private Guna2Elipse elipseActivos;
+        private Guna2Elipse elipseInactivos;
+        private Guna2Elipse elipseTotales;
+
+        private Guna2Elipse elipseNuevoCliente;
+        private Guna2Elipse elipseEditar;
+        private Guna2Elipse elipseGuardarIndividual;
+        private Guna2Elipse elipseGuardarCorporativo;
+        private Guna2Elipse elipseGuardarCambios;
+        private Guna2Elipse elipseDatosCliente;
+        private Guna2Elipse elipseRegistroIndividual;
+        private Guna2Elipse elipseRegistroCorporativo;
+        private Guna2MessageDialog mensaje;
+
+
+        private void ConfigurarTarjetas()
+        {
+            // INDICADORES
+
+            elipseActivos = new Guna2Elipse
+            {
+                TargetControl = pnlIndicador3,
+                BorderRadius = 12
+            };
+
+            elipseInactivos = new Guna2Elipse
+            {
+                TargetControl = pnlIndicador1,
+                BorderRadius = 12
+            };
+
+            elipseTotales = new Guna2Elipse
+            {
+                TargetControl = pnlIndicador4,
+                BorderRadius = 12
+            };
+
+
+            // BOTONES
+
+            elipseNuevoCliente = new Guna2Elipse
+            {
+                TargetControl = btnNuevoCliente,
+                BorderRadius = 6
+            };
+
+            elipseEditar = new Guna2Elipse
+            {
+                TargetControl = btnEditar,
+                BorderRadius = 6
+            };
+
+            elipseGuardarIndividual = new Guna2Elipse
+            {
+                TargetControl = btnGuardarIndividual,
+                BorderRadius = 6
+            };
+
+            elipseGuardarCorporativo = new Guna2Elipse
+            {
+                TargetControl = btnGuardarCorporativo,
+                BorderRadius = 6
+            };
+
+            elipseGuardarCambios = new Guna2Elipse
+            {
+                TargetControl = btnGuardarCambios,
+                BorderRadius = 6
+            };
+
+            // PANELES
+
+            elipseRegistroIndividual = new Guna2Elipse
+            {
+                TargetControl = pnlRegistroClienteIndividual,
+                BorderRadius = 10
+            };
+
+            elipseRegistroCorporativo = new Guna2Elipse
+            {
+                TargetControl = pnlRegistroClienteCorporativo,
+                BorderRadius = 10
+            };
+
+            // HOVER
+
+            ConfigurarHoverTarjeta(pnlIndicador3);
+            ConfigurarHoverTarjeta(pnlIndicador1);
+            ConfigurarHoverTarjeta(pnlIndicador4);
+
+            ConfigurarHoverBoton(btnNuevoCliente);
+            ConfigurarHoverBoton(btnEditar);
+            ConfigurarHoverBoton(btnGuardarIndividual);
+            ConfigurarHoverBoton(btnGuardarCorporativo);
+            ConfigurarHoverBoton(btnGuardarCambios);
+
+
+        }
+
+        private void ConfigurarHoverTarjeta(Control tarjeta)
+        {
+            tarjeta.MouseEnter += Tarjeta_MouseEnter;
+            tarjeta.MouseLeave += Tarjeta_MouseLeave;
+
+            foreach (Control control in tarjeta.Controls)
+                ConfigurarHoverTarjeta(control);
+        }
+        private void ConfigurarHoverBoton(Button boton)
+        {
+            Color colorOriginal = boton.BackColor;
+            Color colorHover = Color.FromArgb(220, 190, 160);
+
+            boton.MouseEnter += (sender, e) =>
+            {
+                boton.BackColor = colorHover;
+            };
+
+            boton.MouseLeave += (sender, e) =>
+            {
+                boton.BackColor = colorOriginal;
+            };
+        }
+
+
+        private void Tarjeta_MouseEnter(object sender, EventArgs e)
+        {
+            Control control = sender as Control;
+
+            while (control != null && control != pnlIndicador1 &&
+                   control != pnlIndicador3 && control != pnlIndicador4)
+            {
+                control = control.Parent;
+            }
+
+            if (control == pnlIndicador3)
+                control.BackColor = Color.FromArgb(151, 225, 130);
+            else if (control == pnlIndicador1)
+                control.BackColor = Color.FromArgb(235, 143, 132);
+            else if (control == pnlIndicador4)
+                control.BackColor = Color.FromArgb(245, 238, 225);
+        }
+
+        private void Tarjeta_MouseLeave(object sender, EventArgs e)
+        {
+            Control control = sender as Control;
+
+            while (control != null && control != pnlIndicador1 &&
+                   control != pnlIndicador3 && control != pnlIndicador4)
+            {
+                control = control.Parent;
+            }
+
+            if (control == pnlIndicador3)
+                control.BackColor = Color.FromArgb(157, 230, 132);
+            else if (control == pnlIndicador1)
+                control.BackColor = Color.FromArgb(235, 157, 145);
+            else if (control == pnlIndicador4)
+                control.BackColor = Color.White;
+        }
+
+        private void ConfigurarPestanas()
+        {
+            pnlBarraClienteIndividual.BackColor = Color.FromArgb(121, 75, 45);
+            pnlBarraClienteCorporativo.BackColor = Color.FromArgb(220, 200, 180);
+
+            btnClienteIndividual.ForeColor = Color.White;
+            btnClienteCorporativo.ForeColor = Color.Black;
+        }
+
+        private void ActivarPestana(bool individual)
+        {
+            if (individual)
+            {
+                pnlBarraClienteIndividual.BackColor = Color.FromArgb(121, 75, 45);
+                pnlBarraClienteCorporativo.BackColor = Color.FromArgb(220, 200, 180);
+
+                btnClienteIndividual.ForeColor = Color.White;
+                btnClienteCorporativo.ForeColor = Color.Black;
+            }
+            else
+            {
+                pnlBarraClienteIndividual.BackColor = Color.FromArgb(220, 200, 180);
+                pnlBarraClienteCorporativo.BackColor = Color.FromArgb(121, 75, 45);
+
+                btnClienteIndividual.ForeColor = Color.Black;
+                btnClienteCorporativo.ForeColor = Color.White;
+            }
+        }
+
+        private void ConfigurarSeparadores()
+        {
+            separadorDatosCliente.FillColor = Color.FromArgb(190, 160, 130);
+            separadorDatosCliente.FillThickness = 1;
+        }
+
+
+
+        private void MostrarExito(string texto)
+        {
+            mensaje.Caption = "Éxito";
+            mensaje.Text = texto;
+            mensaje.Icon = MessageDialogIcon.Information;
+            mensaje.Buttons = MessageDialogButtons.OK;
+            mensaje.Show(texto);
+        }
+
+
+        private void MostrarAdvertencia(string texto)
+        {
+            mensaje.Caption = "Advertencia";
+            mensaje.Text = texto;
+            mensaje.Icon = MessageDialogIcon.Warning;
+            mensaje.Buttons = MessageDialogButtons.OK;
+            mensaje.Show(texto);
+        }
+
+        private void MostrarError(string texto)
+        {
+            mensaje.Caption = "Error";
+            mensaje.Text = texto;
+            mensaje.Icon = MessageDialogIcon.Error;
+            mensaje.Buttons = MessageDialogButtons.OK;
+            mensaje.Show(texto);
+        }
+
+        private bool ConfirmarAccion(string mensajeTexto)
+        {
+            mensaje.Caption = "Muebles Keyda";
+            mensaje.Text = mensajeTexto;
+            mensaje.Icon = MessageDialogIcon.Warning;
+            mensaje.Buttons = MessageDialogButtons.YesNo;
+            mensaje.Style = MessageDialogStyle.Light;
+
+            return mensaje.Show(mensajeTexto) == DialogResult.Yes;
+        }
+
+
+
 
         //MOSTRAR CLIENTES
         private void MostrarClientes()
@@ -442,7 +693,7 @@ namespace Vista.Clientes
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error al actualizar las estadísticas.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MostrarError("Ocurrió un error al actualizar las estadísticas.\n" + ex.Message);
             }
         }
 
@@ -620,7 +871,7 @@ namespace Vista.Clientes
             }
             catch
             {
-                MessageBox.Show("Ingrese un correo válido.");
+                MostrarError("Ingrese un correo válido.");
                 txtCorreo.Focus();
                 return false;
             }
@@ -753,6 +1004,8 @@ namespace Vista.Clientes
             //Barra de busqueda
             txtBuscarCorporativo.Visible = false;
             txtBuscarIndividual.Visible = true;
+
+            ActivarPestana(true);
         }
 
         private void btnClienteCorporativo_Click_1(object sender, EventArgs e)
@@ -768,6 +1021,8 @@ namespace Vista.Clientes
             //Barra de busqueda
             txtBuscarCorporativo.Visible = true;
             txtBuscarIndividual.Visible = false;
+
+            ActivarPestana(false);
         }
         //---------------------------------------------------------------------------------------------
         // CONFIGURAR TOOLTIPS
@@ -843,8 +1098,7 @@ namespace Vista.Clientes
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error al cargar el formulario.\n" + ex.Message, "Error", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MostrarError("Ocurrió un error al cargar el formulario.\n" + ex.Message);
             }
         }
 
@@ -956,7 +1210,7 @@ namespace Vista.Clientes
             }
             catch
             {
-                MessageBox.Show("Ingrese un correo válido.");
+                MostrarError("Ingrese un correo válido.");
                 txtCorreo.Focus();
                 return;
             }
@@ -976,7 +1230,7 @@ namespace Vista.Clientes
 
             if (cliente.InsertarClienteIndividual())
             {
-                MessageBox.Show("Cliente individual registrado correctamente.", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MostrarExito("Cliente individual registrado correctamente.");
 
                 paginaActualIndividual = 1;
                 dtIndividualesBusqueda = null;
@@ -1031,7 +1285,7 @@ namespace Vista.Clientes
 
                 if (cliente.InsertarClienteCorporativo())
                 {
-                    MessageBox.Show("Cliente corporativo registrado correctamente.", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MostrarExito("Cliente corporativo registrado correctamente.");
 
                     paginaActual = 1;
                     dtCorporativosBusqueda = null;
@@ -1042,8 +1296,7 @@ namespace Vista.Clientes
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error al registrar el cliente.\n" + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MostrarError("Ocurrió un error al registrar el cliente.\n" + ex.Message);
             }
         }
 
@@ -1111,8 +1364,7 @@ namespace Vista.Clientes
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error al seleccionar el cliente.\n" + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MostrarError("Ocurrió un error al seleccionar el cliente.\n" + ex.Message);
             }
         }
 
@@ -1178,8 +1430,7 @@ namespace Vista.Clientes
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error al seleccionar el cliente.\n" + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MostrarError("Ocurrió un error al seleccionar el cliente.\n" + ex.Message);
             }
         }
         //-------------------------------------------------------------------------------
@@ -1189,7 +1440,7 @@ namespace Vista.Clientes
         {
             if (idClienteSeleccionado == 0)
             {
-                MessageBox.Show("Seleccione un cliente primero."); return;
+                MostrarAdvertencia("Seleccione un cliente primero."); return;
             }
             modoEdicion = true;
             cbEstadoCliente.Enabled = true;
@@ -1213,20 +1464,20 @@ namespace Vista.Clientes
         {
             if (idClienteSeleccionado == 0)
             {
-                MessageBox.Show("Seleccione un cliente primero.");
+                MostrarAdvertencia("Seleccione un cliente primero.");
                 return;
             }
 
             if (!modoEdicion)
             {
-                MessageBox.Show("Debe presionar Editar antes de guardar cambios.");
+                MostrarAdvertencia("Debe presionar Editar antes de guardar cambios.");
                 return;
             }
 
             // Revisar si realmente se modificó algún dato
             if (!HayCambios())
             {
-                MessageBox.Show("No se han realizado cambios en los datos del cliente.", "Sin cambios", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MostrarAdvertencia("No se han realizado cambios en los datos del cliente.");
                 return;
             }
 
@@ -1246,7 +1497,7 @@ namespace Vista.Clientes
                 if (txtDUI.Text.Length != 10 ||
                     txtDUI.Text[8] != '-')
                 {
-                    MessageBox.Show("El DUI debe tener el formato 12345678-9.");
+                    MostrarAdvertencia("El DUI debe tener el formato 12345678-9.");
                     txtDUI.Focus();
                     return;
                 }
@@ -1258,6 +1509,7 @@ namespace Vista.Clientes
                 if (txtNIT.Text.Length != 14)
                 {
                     errorProvider1.SetError(txtNIT, "El NIT debe tener el formato 8181-929200-182-9.");
+
                     txtNIT.Focus();
                     return;
                 }
@@ -1268,6 +1520,7 @@ namespace Vista.Clientes
                 txtTelefono.Text[4] != '-')
             {
                 errorProvider1.SetError(txtTelefono, "El teléfono debe tener el formato 1234-5678.");
+
                 txtTelefono.Focus();
                 return;
             }
@@ -1280,43 +1533,31 @@ namespace Vista.Clientes
                 cliente.TipoCliente1 = tipoClienteSeleccionado;
 
                 // PERSONA NATURAL
-
-
                 if (tipoClienteSeleccionado == 2)
                 {
                     cliente.Identificador11 = txtNombres.Text.Trim();
-
                     cliente.Identificador21 = txtApellidos.Text.Trim();
-
                     cliente.Documento1 = txtDUI.Text.Trim();
                 }
 
                 // EMPRESA
-
                 else if (tipoClienteSeleccionado == 1)
                 {
                     cliente.Identificador11 = txtNombreEmpresa.Text.Trim();
-
                     cliente.Identificador21 = txtNombreEncargado.Text.Trim();
-
                     cliente.Documento1 = txtNIT.Text.Trim();
                 }
 
-                // Datos que comparten ambos tipos
+                // DATOS COMPARTIDOS
                 cliente.Telefono1 = txtTelefono.Text.Trim();
-
                 cliente.Correo1 = txtCorreo.Text.Trim();
-
                 cliente.Direccion1 = txtDireccion.Text.Trim();
-
                 cliente.Estado1 = cbEstadoCliente.Text.Trim();
 
-                // Actualizar los datos
+                // ACTUALIZAR CLIENTE
                 if (cliente.ActualizarCliente())
                 {
-                    MessageBox.Show("Cliente actualizado correctamente.", "Actualización exitosa",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information
-                    );
+                    MostrarExito("Cliente actualizado correctamente.");
 
                     // Actualizar la tabla correspondiente
                     if (tipoClienteSeleccionado == 1)
@@ -1334,9 +1575,9 @@ namespace Vista.Clientes
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error al actualizar el cliente.\n" + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MostrarError("Ocurrió un error al actualizar el cliente.\n" + ex.Message);
             }
+
         }
         //------------------------------------------------------------------------
 
@@ -1459,7 +1700,7 @@ namespace Vista.Clientes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError(ex.Message);
             }
         }
         private void MostrarPaginaCorporativosBusqueda()
@@ -1545,7 +1786,7 @@ namespace Vista.Clientes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError(ex.Message);
             }
         }
 
@@ -1630,6 +1871,11 @@ namespace Vista.Clientes
 
             txtNIT.Text = resultado;
             txtNIT.SelectionStart = txtNIT.Text.Length;
+        }
+
+        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

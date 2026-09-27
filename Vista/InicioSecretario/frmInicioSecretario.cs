@@ -13,22 +13,11 @@ namespace Vista.InicioSecretario
 
     public partial class frmInicioSecretario : Form
     {
-
-        private static string servidor = "(localdb)\\MSSQLLocalDB";
-        private static string baseDeDatos = "MueblesKeyda";
-
-        private string cadena =
-            $"Data source={servidor};" +
-            $"Initial Catalog={baseDeDatos};" +
-            $"Integrated Security=true;";
-
         private DbDashboard dbDashboard;
         public frmInicioSecretario()
         {
             InitializeComponent();
 
-            // Inicializar acceso al Dashboard
-            dbDashboard = new DbDashboard(cadena);
 
             //CONFIGURACIÓN DEL DATA GRID
             ConfigurarDataGrid();
@@ -41,6 +30,8 @@ namespace Vista.InicioSecretario
             ConfigurarGraficoInventario();
 
             ResponsiveHelper.Apply(this);
+            dbDashboard = new DbDashboard();
+
         }
 
         //PEDIDOS RECIENTES

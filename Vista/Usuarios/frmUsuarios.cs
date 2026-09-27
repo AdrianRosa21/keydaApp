@@ -188,7 +188,7 @@ namespace Vista.Usuarios
                     return;
                 }
 
-                int idUsuario = Convert.ToInt32(dgvUsuariosRegistrados.CurrentRow.Cells["IdUsuario"].Value);
+                int idUsuario = Convert.ToInt32(dgvUsuariosRegistrados.CurrentRow.Cells["#"].Value);
                 string estado = dgvUsuariosRegistrados.CurrentRow.Cells["Estado"].Value?.ToString();
 
                 if (estado == "Inactivo")
