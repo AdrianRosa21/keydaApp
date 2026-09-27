@@ -1,3 +1,4 @@
+using Guna.UI2.WinForms;
 using Modelo.Entidades;
 using System;
 using System.Data;
@@ -20,11 +21,107 @@ namespace Vista.Ventas
             InitializeComponent();
             ResponsiveHelper.Apply(this);
             pnlFacturaRegistrada.Visible = false;
+            ConfigurarBotones();
         }
         private void panel6_Paint(object sender, PaintEventArgs e)
         {
 
         }
+        private const string TextoBusqueda = "Buscar...";
+        private readonly Color ColorPlaceholder = Color.LightGray;
+        private readonly Color ColorCafe = Color.FromArgb(121, 75, 45);
+
+
+        private void ConfigurarBarraBusqueda()
+        {
+            ConfigurarBusqueda(txtBuscar);
+
+        }
+        private void ConfigurarBusqueda(Guna2TextBox txtBuscar)
+        {
+            txtBuscar.Text = TextoBusqueda;
+            txtBuscar.ForeColor = ColorPlaceholder;
+
+            txtBuscar.BorderRadius = 10;
+            txtBuscar.BorderThickness = 1;
+            txtBuscar.BorderColor = Color.LightGray;
+
+            txtBuscar.FocusedState.BorderColor = ColorCafe;
+
+            txtBuscar.Enter += (s, e) =>
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                {
+                    txtBuscar.Text = "";
+                    txtBuscar.ForeColor = Color.Black;
+                }
+
+                txtBuscar.BorderColor = ColorCafe;
+                txtBuscar.BorderThickness = 2;
+            };
+
+            txtBuscar.Leave += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+                {
+                    txtBuscar.Text = TextoBusqueda;
+                    txtBuscar.ForeColor = ColorPlaceholder;
+                }
+
+                txtBuscar.BorderColor = Color.LightGray;
+                txtBuscar.BorderThickness = 1;
+            };
+        }
+
+        private void ConfigurarBotones()
+        {
+            ConfigurarBoton(btnRegistrarFactura);
+            ConfigurarBoton(btnEliminar);
+        }
+
+        private void ConfigurarBoton(Guna.UI2.WinForms.Guna2Button boton)
+        {
+            boton.FillColor = Color.FromArgb(230, 215, 198);
+            boton.ForeColor = Color.FromArgb(121, 75, 45);
+
+            boton.BorderColor = Color.FromArgb(121, 75, 45);
+            boton.BorderThickness = 1;
+            boton.BorderRadius = 10;
+
+            boton.HoverState.FillColor = Color.FromArgb(215, 195, 173);
+            boton.HoverState.ForeColor = Color.FromArgb(90, 55, 32);
+            boton.HoverState.BorderColor = Color.FromArgb(121, 75, 45);
+
+            boton.PressedColor = Color.FromArgb(200, 175, 150);
+
+            boton.Cursor = Cursors.Hand;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //-----------------------------SECCION DE BUSCAR UNA VENTA--------------//
         private void txtBuscar_Enter(object sender, EventArgs e)
         {
@@ -449,6 +546,8 @@ namespace Vista.Ventas
                 txtSubTotal.TabIndex = 4;
                 btnRegistrarFactura.TabIndex = 5;
                 btnEliminar.TabIndex = 6;
+
+                ConfigurarBarraBusqueda();
             }
             catch (Exception ex)
             {

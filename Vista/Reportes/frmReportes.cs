@@ -1,3 +1,4 @@
+using Guna.UI2.WinForms;
 using Modelo;
 using Modelo.Entidades;
 using Modelo.PDF;
@@ -5,6 +6,7 @@ using QuestPDF.Fluent;
 using System;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Vista.Responsive;
@@ -21,7 +23,105 @@ namespace Vista.Reportes
             btnVentas.Cursor = Cursors.Default;
             btnConsultarVentas.Visible = false;
             btnExportarReporteVentas.Visible = false;
+            ConfigurarBotonesReportes();
+            ConfigurarDataGridViews();
+            ConfigurarPanelesReportes();
         }
+
+        private void ConfigurarBotonesReportes()
+        {
+            ConfigurarBotonReporte(btnConsultarVentas, Color.FromArgb(121, 75, 45));
+            ConfigurarBotonReporte(btnConsultar, Color.FromArgb(166, 126, 91));
+            ConfigurarBotonReporte(btnConsultarCotizaciones, Color.FromArgb(174, 91, 57));
+            ConfigurarBotonReporte(btnExportarReporteClientes, Color.FromArgb(112, 153, 82));
+            ConfigurarBotonReporte(btnExportarCotizaciones, Color.FromArgb(196, 133, 67));
+            ConfigurarBotonReporte(btnExportarReporteVentas, Color.FromArgb(94, 58, 36));
+        }
+        private void ConfigurarBotonReporte(Guna.UI2.WinForms.Guna2Button boton, Color color)
+        {
+            boton.FillColor = color;
+            boton.ForeColor = Color.White;
+
+            boton.BorderColor = Color.FromArgb(
+                Math.Max(color.R - 15, 0),
+                Math.Max(color.G - 15, 0),
+                Math.Max(color.B - 15, 0)
+            );
+
+            boton.BorderThickness = 1;
+            boton.BorderRadius = 6;
+
+            boton.HoverState.FillColor = Color.FromArgb(
+                Math.Min(color.R + 20, 255),
+                Math.Min(color.G + 20, 255),
+                Math.Min(color.B + 20, 255)
+            );
+
+            boton.HoverState.ForeColor = Color.White;
+            boton.HoverState.BorderColor = color;
+
+            boton.PressedColor = Color.FromArgb(
+                Math.Max(color.R - 25, 0),
+                Math.Max(color.G - 25, 0),
+                Math.Max(color.B - 25, 0)
+            );
+
+            boton.Cursor = Cursors.Hand;
+        }
+        private Guna2Elipse elipseDgvVentas;
+        private Guna2Elipse elipseDgvClientes;
+        private Guna2Elipse elipseDgvCotizaciones;
+
+        private void ConfigurarDataGridViews()
+        {
+            elipseDgvVentas = new Guna2Elipse
+            {
+                TargetControl = dgvReporteVentas,
+                BorderRadius = 10
+            };
+
+            elipseDgvClientes = new Guna2Elipse
+            {
+                TargetControl = dgvReporteClientes,
+                BorderRadius = 10
+            };
+
+            elipseDgvCotizaciones = new Guna2Elipse
+            {
+                TargetControl = dgvReporteCotizaciones,
+                BorderRadius = 10
+            };
+        }
+        private Guna2Elipse elipseReporteCotizaciones;
+        private Guna2Elipse elipseReporteVentas;
+        private Guna2Elipse elipseReporteClientes;
+
+        private void ConfigurarPanelesReportes()
+        {
+            elipseReporteCotizaciones = new Guna2Elipse
+            {
+                TargetControl = pnlReporteCotizaciones,
+                BorderRadius = 12
+            };
+
+            elipseReporteVentas = new Guna2Elipse
+            {
+                TargetControl = pnlReportesVentas,
+                BorderRadius = 12
+            };
+
+            elipseReporteClientes = new Guna2Elipse
+            {
+                TargetControl = pnlReporteDeClientes,
+                BorderRadius = 12
+            };
+        }
+
+
+
+
+
+
 
         private void btnClientes_Click(object sender, EventArgs e)
         {

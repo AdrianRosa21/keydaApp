@@ -1,3 +1,4 @@
+using Guna.UI2.WinForms;
 using Microsoft.Web.WebView2.WinForms;
 using Modelo;
 using Modelo.Entidades;
@@ -20,6 +21,7 @@ namespace Vista.Cotizaciones
         {
             InitializeComponent();
             ResponsiveHelper.Apply(this);
+            ConfigurarPaneles();
 
             visorPDF = new WebView2
             {
@@ -29,6 +31,89 @@ namespace Vista.Cotizaciones
             pnlPDFPreview.Controls.Add(visorPDF);
 
         }
+        private Guna2Elipse elipseDatosGenerales;
+        private Guna2Elipse elipseDetalleProductos;
+        private Guna2Elipse elipseResumenPago;
+        private Guna2Elipse elipseVistaPrevia;
+        private Guna2Elipse elipsePDFPreview;
+        private Guna2Elipse elipseObservaciones;
+        private Guna2Elipse elipseRegistrosCotizaciones;
+
+        private void ConfigurarPaneles()
+        {
+            elipseDatosGenerales = new Guna2Elipse
+            {
+                TargetControl = pnlDatosGenerales,
+                BorderRadius = 10
+            };
+
+            elipseDetalleProductos = new Guna2Elipse
+            {
+                TargetControl = pnlDatalledeProductos,
+                BorderRadius = 10
+            };
+
+            elipseResumenPago = new Guna2Elipse
+            {
+                TargetControl = pnlResumenDePago,
+                BorderRadius = 10
+            };
+
+            elipseVistaPrevia = new Guna2Elipse
+            {
+                TargetControl = pnlVistaPrevia,
+                BorderRadius = 10
+            };
+
+            elipsePDFPreview = new Guna2Elipse
+            {
+                TargetControl = pnlPDFPreview,
+                BorderRadius = 8
+            };
+
+            elipseObservaciones = new Guna2Elipse
+            {
+                TargetControl = pnlObeservaciones,
+                BorderRadius = 10
+            };
+
+            elipseRegistrosCotizaciones = new Guna2Elipse
+            {
+                TargetControl = pnlRegistrosCotizaciones,
+                BorderRadius = 10
+            };
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // VARIABLES PARA LA PAGINACIÓN
         private DataTable dtCotizaciones;
         private int paginaActual = 1;

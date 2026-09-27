@@ -1,3 +1,4 @@
+using Guna.UI2.WinForms;
 using Modelo.Entidades;
 using System;
 using System.Data;
@@ -15,10 +16,15 @@ namespace Vista.Producción
         private int registrosPorPagina = 10;
         private int totalPaginas = 0;
         private DataTable dtProduccionOriginal;
+
+        private const string TextoBusqueda = "Buscar...";
+        private readonly Color ColorPlaceholder = Color.LightGray;
+        private readonly Color ColorCafe = Color.FromArgb(121, 75, 45);
         public frmProduccion()
         {
             InitializeComponent();
             ResponsiveHelper.Apply(this);
+
         }
         // CARGA INICIAL DEL FORMULARIO
         private void frmProduccion_Load(object sender, EventArgs e)
@@ -43,12 +49,197 @@ namespace Vista.Producción
 
                 //Mostrar Tooltips
                 ConfigurarTooltips();
+                ConfigurarBotones();
+                ConfigurarBarraBusqueda();
+                ConfigurarIndicadores();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar producción: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void ConfigurarBotones()
+        {
+            ConfigurarBoton(btnEditar);
+            ConfigurarBoton(btnMaterialUtilizado);
+            ConfigurarBoton(btnLimpiar);
+        }
+
+        private void ConfigurarBoton(Guna.UI2.WinForms.Guna2Button boton)
+        {
+            boton.FillColor = Color.FromArgb(230, 215, 198);
+            boton.ForeColor = Color.FromArgb(121, 75, 45);
+
+            boton.BorderColor = Color.FromArgb(121, 75, 45);
+            boton.BorderThickness = 1;
+            boton.BorderRadius = 10;
+
+            boton.HoverState.FillColor = Color.FromArgb(215, 195, 173);
+            boton.HoverState.ForeColor = Color.FromArgb(90, 55, 32);
+            boton.HoverState.BorderColor = Color.FromArgb(121, 75, 45);
+
+            boton.PressedColor = Color.FromArgb(200, 175, 150);
+
+            boton.Cursor = Cursors.Hand;
+        }
+
+        private void ConfigurarBarraBusqueda()
+        {
+            ConfigurarBusqueda(txtBuscar);
+
+        }
+        private void ConfigurarBusqueda(Guna2TextBox txtBuscar)
+        {
+            txtBuscar.Text = TextoBusqueda;
+            txtBuscar.ForeColor = ColorPlaceholder;
+
+            txtBuscar.BorderRadius = 10;
+            txtBuscar.BorderThickness = 1;
+            txtBuscar.BorderColor = Color.LightGray;
+
+            txtBuscar.FocusedState.BorderColor = ColorCafe;
+
+            txtBuscar.Enter += (s, e) =>
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                {
+                    txtBuscar.Text = "";
+                    txtBuscar.ForeColor = Color.Black;
+                }
+
+                txtBuscar.BorderColor = ColorCafe;
+                txtBuscar.BorderThickness = 2;
+            };
+
+            txtBuscar.Leave += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+                {
+                    txtBuscar.Text = TextoBusqueda;
+                    txtBuscar.ForeColor = ColorPlaceholder;
+                }
+
+                txtBuscar.BorderColor = Color.LightGray;
+                txtBuscar.BorderThickness = 1;
+            };
+        }
+
+        private Guna2Elipse elipseIndicador1;
+        private Guna2Elipse elipseIndicador2;
+        private Guna2Elipse elipseIndicador3;
+        private Guna2Elipse elipseIndicador4;
+
+        private void ConfigurarIndicadores()
+        {
+            elipseIndicador1 = new Guna2Elipse
+            {
+                TargetControl = pnlIndicador1,
+                BorderRadius = 12
+            };
+
+            elipseIndicador2 = new Guna2Elipse
+            {
+                TargetControl = pnlIndicador2,
+                BorderRadius = 12
+            };
+
+            elipseIndicador3 = new Guna2Elipse
+            {
+                TargetControl = pnlIndicador3,
+                BorderRadius = 12
+            };
+
+            elipseIndicador4 = new Guna2Elipse
+            {
+                TargetControl = pnlIndicador4,
+                BorderRadius = 12
+            };
+
+            ConfigurarHoverTarjeta(pnlIndicador1);
+            ConfigurarHoverTarjeta(pnlIndicador2);
+            ConfigurarHoverTarjeta(pnlIndicador3);
+            ConfigurarHoverTarjeta(pnlIndicador4);
+        }
+
+        private void ConfigurarHoverTarjeta(Control tarjeta)
+        {
+            tarjeta.MouseEnter += Tarjeta_MouseEnter;
+            tarjeta.MouseLeave += Tarjeta_MouseLeave;
+
+            foreach (Control control in tarjeta.Controls)
+                ConfigurarHoverTarjeta(control);
+        }
+
+        private void Tarjeta_MouseEnter(object sender, EventArgs e)
+        {
+            Control control = sender as Control;
+
+            while (control != null &&
+                   control != pnlIndicador1 &&
+                   control != pnlIndicador2 &&
+                   control != pnlIndicador3 &&
+                   control != pnlIndicador4)
+            {
+                control = control.Parent;
+            }
+
+            if (control == pnlIndicador1)
+                control.BackColor = Color.FromArgb(235, 143, 132);
+
+            else if (control == pnlIndicador2)
+                control.BackColor = Color.FromArgb(245, 195, 130);
+
+            else if (control == pnlIndicador3)
+                control.BackColor = Color.FromArgb(151, 225, 130);
+
+            else if (control == pnlIndicador4)
+                control.BackColor = Color.FromArgb(245, 238, 225);
+        }
+        private void Tarjeta_MouseLeave(object sender, EventArgs e)
+        {
+            Control control = sender as Control;
+
+            while (control != null &&
+                   control != pnlIndicador1 &&
+                   control != pnlIndicador2 &&
+                   control != pnlIndicador3 &&
+                   control != pnlIndicador4)
+            {
+                control = control.Parent;
+            }
+
+            if (control == pnlIndicador1)
+                control.BackColor = Color.FromArgb(235, 157, 145);
+
+            else if (control == pnlIndicador2)
+                control.BackColor = Color.FromArgb(245, 185, 115);
+
+            else if (control == pnlIndicador3)
+                control.BackColor = Color.FromArgb(157, 230, 132);
+
+            else if (control == pnlIndicador4)
+                control.BackColor = Color.White;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //---------------------------------------------------------------
         // CONFIGURAR DISEÑO DE LA TABLA
         private void ConfigurarTablaProduccion()
@@ -446,7 +637,7 @@ namespace Vista.Producción
         }
         //---------------------------------------------------------------------------
         // MATERIAL UTILIZADO
-        private void btnMaterialUtilizado_Click(object sender, EventArgs e)
+        private void btnMaterialUtilizado_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -476,9 +667,7 @@ namespace Vista.Producción
             {
                 MessageBox.Show("Error al mostrar los materiales utilizados: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
-
         //-------------------------------------------------------------------
         // ESTADÍSTICAS
 
@@ -507,6 +696,8 @@ namespace Vista.Producción
                 );
             }
         }
+
+
     }
 }
 

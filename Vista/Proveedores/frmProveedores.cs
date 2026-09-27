@@ -1,3 +1,4 @@
+using Guna.UI2.WinForms;
 using Modelo.Entidades;
 using System;
 using System.Data;
@@ -15,7 +16,138 @@ namespace Vista.Proveedores
         {
             InitializeComponent();
             ResponsiveHelper.Apply(this);
+            ConfigurarBarraBusqueda();
+            ConfigurarBotones();
         }
+        private const string TextoBusqueda = "Buscar...";
+        private readonly Color ColorPlaceholder = Color.LightGray;
+        private readonly Color ColorCafe = Color.FromArgb(121, 75, 45);
+
+
+        private void ConfigurarBarraBusqueda()
+        {
+            ConfigurarBusqueda(txtBuscar);
+
+        }
+        private void ConfigurarBusqueda(Guna2TextBox txtBuscar)
+        {
+            txtBuscar.Text = TextoBusqueda;
+            txtBuscar.ForeColor = ColorPlaceholder;
+
+            txtBuscar.BorderRadius = 10;
+            txtBuscar.BorderThickness = 1;
+            txtBuscar.BorderColor = Color.LightGray;
+
+            txtBuscar.FocusedState.BorderColor = ColorCafe;
+
+            txtBuscar.Enter += (s, e) =>
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                {
+                    txtBuscar.Text = "";
+                    txtBuscar.ForeColor = Color.Black;
+                }
+
+                txtBuscar.BorderColor = ColorCafe;
+                txtBuscar.BorderThickness = 2;
+            };
+
+            txtBuscar.Leave += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+                {
+                    txtBuscar.Text = TextoBusqueda;
+                    txtBuscar.ForeColor = ColorPlaceholder;
+                }
+
+                txtBuscar.BorderColor = Color.LightGray;
+                txtBuscar.BorderThickness = 1;
+            };
+        }
+
+        private void ActualizarBotonEstado()
+        {
+            if (dgvProveedores.CurrentRow == null)
+                return;
+
+            string estado = dgvProveedores.CurrentRow.Cells["Estado"].Value?.ToString();
+
+            if (estado == "Activo")
+            {
+                btnDesactivarProveedor.Text = "Desactivar";
+                btnDesactivarProveedor.FillColor = Color.FromArgb(174, 91, 75);
+                btnDesactivarProveedor.ForeColor = Color.White;
+                btnDesactivarProveedor.BorderColor = Color.FromArgb(121, 75, 45);
+
+                btnDesactivarProveedor.HoverState.FillColor = Color.FromArgb(195, 110, 90);
+                btnDesactivarProveedor.HoverState.ForeColor = Color.White;
+                btnDesactivarProveedor.HoverState.BorderColor = Color.FromArgb(121, 75, 45);
+
+                btnDesactivarProveedor.PressedColor = Color.FromArgb(145, 70, 55);
+            }
+            else
+            {
+                btnDesactivarProveedor.Text = "Activar";
+                btnDesactivarProveedor.FillColor = Color.FromArgb(112, 153, 82);
+                btnDesactivarProveedor.ForeColor = Color.White;
+                btnDesactivarProveedor.BorderColor = Color.FromArgb(82, 120, 58);
+
+                btnDesactivarProveedor.HoverState.FillColor = Color.FromArgb(135, 175, 100);
+                btnDesactivarProveedor.HoverState.ForeColor = Color.White;
+                btnDesactivarProveedor.HoverState.BorderColor = Color.FromArgb(82, 120, 58);
+
+                btnDesactivarProveedor.PressedColor = Color.FromArgb(90, 130, 65);
+            }
+        }
+
+        private void ConfigurarBotones()
+        {
+            ConfigurarBoton(btnNuevo);
+            ConfigurarBoton(btnEditar);
+            ConfigurarBoton(btnGuardar);
+            ConfigurarBoton(btnGuardarCambios);
+            ConfigurarBoton(btnDesactivarProveedor);
+        }
+
+        private void ConfigurarBoton(Guna.UI2.WinForms.Guna2Button boton)
+        {
+            boton.FillColor = Color.FromArgb(230, 215, 198);
+            boton.ForeColor = Color.FromArgb(121, 75, 45);
+
+            boton.BorderColor = Color.FromArgb(121, 75, 45);
+            boton.BorderThickness = 1;
+            boton.BorderRadius = 10;
+
+            boton.HoverState.FillColor = Color.FromArgb(215, 195, 173);
+            boton.HoverState.ForeColor = Color.FromArgb(90, 55, 32);
+            boton.HoverState.BorderColor = Color.FromArgb(121, 75, 45);
+
+            boton.PressedColor = Color.FromArgb(200, 175, 150);
+
+            boton.Cursor = Cursors.Hand;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // VARIABLES PARA LA PAGINACIÓN
         private DataTable dtProveedores;
@@ -75,7 +207,7 @@ namespace Vista.Proveedores
 
             toolTip1.SetToolTip(btnGuardarCambios, "Guarda los cambios realizados al proveedor.");
 
-            toolTip1.SetToolTip(btnDesactivar, "Desactiva o vuelve a activar el proveedor el proveedor seleccionado.");
+            toolTip1.SetToolTip(btnDesactivarProveedor, "Desactiva o vuelve a activar el proveedor el proveedor seleccionado.");
 
             // Tabla
             toolTip1.SetToolTip(dgvProveedores, "Muestra los proveedores registrados. Haz doble clic en un proveedor para seleccionarlo.");
@@ -171,7 +303,7 @@ namespace Vista.Proveedores
             txtUbicacion.TabIndex = 4;
             btnGuardar.TabIndex = 5;
             btnEditar.TabIndex = 6;
-            btnDesactivar.TabIndex = 7;
+            btnDesactivarProveedor.TabIndex = 7;
 
             btnEditar.Visible = false;
 
@@ -397,7 +529,7 @@ namespace Vista.Proveedores
             idProveedorSeleccionado = 0;
             btnEditar.Visible = false;
             btnGuardar.Visible = true;
-            btnDesactivar.Visible = true;
+            btnDesactivarProveedor.Visible = true;
         }
 
         private void txtTelefono_TextChanged(object sender, EventArgs e)
@@ -561,26 +693,7 @@ namespace Vista.Proveedores
             }
             dgvProveedores.Columns["IdProveedor"].Visible = false;
         }
-        private void ActualizarBotonEstado()
-        {
-            if (dgvProveedores.CurrentRow == null)
-                return;
 
-            string estado = dgvProveedores.CurrentRow.Cells["Estado"].Value?.ToString();
-
-            if (estado == "Activo")
-            {
-                btnDesactivar.Text = "Desactivar";
-                btnDesactivar.BackColor = Color.FromArgb(220, 53, 69);
-                btnDesactivar.ForeColor = Color.White;
-            }
-            else
-            {
-                btnDesactivar.Text = "Activar";
-                btnDesactivar.BackColor = Color.FromArgb(40, 167, 69);
-                btnDesactivar.ForeColor = Color.White;
-            }
-        }
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {

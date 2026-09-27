@@ -1,3 +1,4 @@
+using Guna.UI2.WinForms;
 using Modelo.Entidades;
 using System;
 using System.Data;
@@ -55,12 +56,199 @@ namespace Vista.Categorías
 
                 // Configurar diseño de la tabla
                 ConfigurarTablaCategorias();
+                ConfigurarIndicadores();
+                ConfigurarBotones();
+                ConfigurarBarraBusqueda();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar las categorías: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private Guna2Elipse elipseIndicador1;
+        private Guna2Elipse elipseIndicador2;
+        private Guna2Elipse elipseIndicador3;
+        private const string TextoBusqueda = "Buscar...";
+        private readonly Color ColorPlaceholder = Color.LightGray;
+        private readonly Color ColorCafe = Color.FromArgb(121, 75, 45);
+
+        private void ConfigurarIndicadores()
+        {
+            elipseIndicador1 = new Guna2Elipse
+            {
+                TargetControl = pnlIndicador1,
+                BorderRadius = 12
+            };
+
+            elipseIndicador2 = new Guna2Elipse
+            {
+                TargetControl = pnlIndicador2,
+                BorderRadius = 12
+            };
+
+            elipseIndicador3 = new Guna2Elipse
+            {
+                TargetControl = pnlIndicador3,
+                BorderRadius = 12
+            };
+
+            ConfigurarHoverTarjeta(pnlIndicador1);
+            ConfigurarHoverTarjeta(pnlIndicador2);
+            ConfigurarHoverTarjeta(pnlIndicador3);
+        }
+
+        private void Tarjeta_MouseEnter(object sender, EventArgs e)
+        {
+            Control control = sender as Control;
+
+            while (control != null &&
+                   control != pnlIndicador1 &&
+                   control != pnlIndicador2 &&
+                   control != pnlIndicador3)
+            {
+                control = control.Parent;
+            }
+
+            if (control == pnlIndicador1)
+                control.BackColor = Color.FromArgb(245, 175, 160);
+
+            else if (control == pnlIndicador2)
+                control.BackColor = Color.FromArgb(175, 240, 150);
+
+            else if (control == pnlIndicador3)
+                control.BackColor = Color.FromArgb(245, 238, 225);
+        }
+
+        private void Tarjeta_MouseLeave(object sender, EventArgs e)
+        {
+            Control control = sender as Control;
+
+            while (control != null &&
+                   control != pnlIndicador1 &&
+                   control != pnlIndicador2 &&
+                   control != pnlIndicador3)
+            {
+                control = control.Parent;
+            }
+
+            if (control == pnlIndicador1)
+                control.BackColor = Color.FromArgb(235, 157, 145);
+
+            else if (control == pnlIndicador2)
+                control.BackColor = Color.FromArgb(157, 230, 132);
+
+            else if (control == pnlIndicador3)
+                control.BackColor = Color.White;
+        }
+
+        private void ConfigurarHoverTarjeta(Control tarjeta)
+        {
+            tarjeta.MouseEnter += Tarjeta_MouseEnter;
+            tarjeta.MouseLeave += Tarjeta_MouseLeave;
+
+            foreach (Control control in tarjeta.Controls)
+                ConfigurarHoverTarjeta(control);
+        }
+
+        private void ConfigurarBotones()
+        {
+            ConfigurarBoton(btnEditar);
+            ConfigurarBoton(btnGuardar);
+            ConfigurarBoton(btnGuardarCambios);
+        }
+
+        private void ConfigurarBoton(Guna.UI2.WinForms.Guna2Button boton)
+        {
+            boton.FillColor = Color.FromArgb(230, 215, 198);
+            boton.ForeColor = Color.FromArgb(121, 75, 45);
+
+            boton.BorderColor = Color.FromArgb(121, 75, 45);
+            boton.BorderThickness = 1;
+            boton.BorderRadius = 10;
+
+            boton.HoverState.FillColor = Color.FromArgb(215, 195, 173);
+            boton.HoverState.ForeColor = Color.FromArgb(90, 55, 32);
+            boton.HoverState.BorderColor = Color.FromArgb(121, 75, 45);
+
+            boton.PressedColor = Color.FromArgb(200, 175, 150);
+
+            boton.Cursor = Cursors.Hand;
+        }
+
+        private void ConfigurarBarraBusqueda()
+        {
+            ConfigurarBusqueda(txtBuscarCategoria);
+
+        }
+        private void ConfigurarBusqueda(Guna2TextBox txtBuscar)
+        {
+            txtBuscar.Text = TextoBusqueda;
+            txtBuscar.ForeColor = ColorPlaceholder;
+
+            txtBuscar.BorderRadius = 10;
+            txtBuscar.BorderThickness = 1;
+            txtBuscar.BorderColor = Color.LightGray;
+
+            txtBuscar.FocusedState.BorderColor = ColorCafe;
+
+            txtBuscar.Enter += (s, e) =>
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                {
+                    txtBuscar.Text = "";
+                    txtBuscar.ForeColor = Color.Black;
+                }
+
+                txtBuscar.BorderColor = ColorCafe;
+                txtBuscar.BorderThickness = 2;
+            };
+
+            txtBuscar.Leave += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+                {
+                    txtBuscar.Text = TextoBusqueda;
+                    txtBuscar.ForeColor = ColorPlaceholder;
+                }
+
+                txtBuscar.BorderColor = Color.LightGray;
+                txtBuscar.BorderThickness = 1;
+            };
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         //-------------------------------------------------------------------------
         // CONFIGURAR DISEÑO DE LA TABLA
@@ -171,7 +359,6 @@ namespace Vista.Categorías
 
             // Buscador
             toolTip.SetToolTip(txtBuscarCategoria, "Ingrese el nombre de una categoría para buscarla.");
-            toolTip.SetToolTip(btnBuscar, "Busca la categoría ingresada.");
 
             // Botones
             toolTip.SetToolTip(btnNueva, "Limpia el formulario para registrar una nueva categoría.");

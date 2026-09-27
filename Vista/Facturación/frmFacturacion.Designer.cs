@@ -46,12 +46,13 @@ namespace Vista.Facturación
             this.btnRegistrosfacturas = new System.Windows.Forms.Button();
             this.btnNuevaFactura = new System.Windows.Forms.Button();
             this.pnlContenedorDeCotizacionNueva = new System.Windows.Forms.Panel();
+            this.btnLimpiarFactura = new Guna.UI2.WinForms.Guna2Button();
+            this.btnGuardarFactura = new Guna.UI2.WinForms.Guna2Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtObservaciones = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.lblObservacion = new System.Windows.Forms.Label();
-            this.btnGenerarPDF = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pnlInfo = new System.Windows.Forms.Panel();
             this.ptbInformacion = new System.Windows.Forms.PictureBox();
@@ -72,7 +73,6 @@ namespace Vista.Facturación
             this.txtCorreo = new System.Windows.Forms.TextBox();
             this.lblDatosCliente = new System.Windows.Forms.Label();
             this.lblTelefono = new System.Windows.Forms.Label();
-            this.btnLimpiarFactura = new System.Windows.Forms.Button();
             this.pnlDatosGeneralesFactura = new System.Windows.Forms.Panel();
             this.dtpFechaVencimiento = new System.Windows.Forms.DateTimePicker();
             this.lblNFactura = new System.Windows.Forms.Label();
@@ -101,7 +101,6 @@ namespace Vista.Facturación
             this.txtSubTotal = new System.Windows.Forms.TextBox();
             this.lblIvaFactura = new System.Windows.Forms.Label();
             this.lblTotalFactura = new System.Windows.Forms.Label();
-            this.btnGuardarFactura = new System.Windows.Forms.Button();
             this.pnlRegistroCotizacion = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -113,6 +112,7 @@ namespace Vista.Facturación
             this.btnSiguiente = new System.Windows.Forms.Button();
             this.dgvFacturasRegistradas = new System.Windows.Forms.DataGridView();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnGenerarPDF = new Guna.UI2.WinForms.Guna2Button();
             this.pnlContenedorPrincipalFacturacion.SuspendLayout();
             this.pnlBarraSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -270,28 +270,56 @@ namespace Vista.Facturación
             // 
             this.pnlContenedorDeCotizacionNueva.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlContenedorDeCotizacionNueva.Controls.Add(this.btnLimpiarFactura);
+            this.pnlContenedorDeCotizacionNueva.Controls.Add(this.btnGuardarFactura);
             this.pnlContenedorDeCotizacionNueva.Controls.Add(this.panel4);
             this.pnlContenedorDeCotizacionNueva.Controls.Add(this.panel3);
             this.pnlContenedorDeCotizacionNueva.Controls.Add(this.pnlDatosVenta);
-            this.pnlContenedorDeCotizacionNueva.Controls.Add(this.btnLimpiarFactura);
             this.pnlContenedorDeCotizacionNueva.Controls.Add(this.pnlDatosGeneralesFactura);
             this.pnlContenedorDeCotizacionNueva.Controls.Add(this.pnlDatalledeProductos);
             this.pnlContenedorDeCotizacionNueva.Controls.Add(this.pnlResumenDePagoFactura);
-            this.pnlContenedorDeCotizacionNueva.Controls.Add(this.btnGuardarFactura);
             this.pnlContenedorDeCotizacionNueva.Location = new System.Drawing.Point(0, 135);
             this.pnlContenedorDeCotizacionNueva.Name = "pnlContenedorDeCotizacionNueva";
             this.pnlContenedorDeCotizacionNueva.Size = new System.Drawing.Size(1102, 492);
             this.pnlContenedorDeCotizacionNueva.TabIndex = 54;
             // 
+            // btnLimpiarFactura
+            // 
+            this.btnLimpiarFactura.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnLimpiarFactura.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnLimpiarFactura.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnLimpiarFactura.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnLimpiarFactura.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiarFactura.ForeColor = System.Drawing.Color.White;
+            this.btnLimpiarFactura.Location = new System.Drawing.Point(828, 441);
+            this.btnLimpiarFactura.Name = "btnLimpiarFactura";
+            this.btnLimpiarFactura.Size = new System.Drawing.Size(223, 24);
+            this.btnLimpiarFactura.TabIndex = 44;
+            this.btnLimpiarFactura.Text = "Cancelar factura";
+            // 
+            // btnGuardarFactura
+            // 
+            this.btnGuardarFactura.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardarFactura.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardarFactura.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnGuardarFactura.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnGuardarFactura.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardarFactura.ForeColor = System.Drawing.Color.White;
+            this.btnGuardarFactura.Location = new System.Drawing.Point(828, 407);
+            this.btnGuardarFactura.Name = "btnGuardarFactura";
+            this.btnGuardarFactura.Size = new System.Drawing.Size(223, 24);
+            this.btnGuardarFactura.TabIndex = 43;
+            this.btnGuardarFactura.Text = "Guardar Factura";
+            // 
             // panel4
             // 
             this.panel4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
+            this.panel4.Controls.Add(this.btnGenerarPDF);
             this.panel4.Controls.Add(this.txtObservaciones);
             this.panel4.Controls.Add(this.label5);
             this.panel4.Controls.Add(this.label9);
             this.panel4.Controls.Add(this.lblObservacion);
-            this.panel4.Controls.Add(this.btnGenerarPDF);
             this.panel4.Location = new System.Drawing.Point(19, 391);
             this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
@@ -306,7 +334,7 @@ namespace Vista.Facturación
             this.txtObservaciones.Margin = new System.Windows.Forms.Padding(2);
             this.txtObservaciones.Multiline = true;
             this.txtObservaciones.Name = "txtObservaciones";
-            this.txtObservaciones.Size = new System.Drawing.Size(468, 37);
+            this.txtObservaciones.Size = new System.Drawing.Size(513, 37);
             this.txtObservaciones.TabIndex = 36;
             // 
             // label5
@@ -341,21 +369,6 @@ namespace Vista.Facturación
             this.lblObservacion.Size = new System.Drawing.Size(169, 25);
             this.lblObservacion.TabIndex = 0;
             this.lblObservacion.Text = "Observaciones  :";
-            // 
-            // btnGenerarPDF
-            // 
-            this.btnGenerarPDF.BackColor = System.Drawing.Color.Silver;
-            this.btnGenerarPDF.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGenerarPDF.Image = global::Vista.Properties.Resources.archivo_pdfIconoManuales;
-            this.btnGenerarPDF.Location = new System.Drawing.Point(584, 16);
-            this.btnGenerarPDF.Margin = new System.Windows.Forms.Padding(2);
-            this.btnGenerarPDF.Name = "btnGenerarPDF";
-            this.btnGenerarPDF.Size = new System.Drawing.Size(120, 54);
-            this.btnGenerarPDF.TabIndex = 32;
-            this.btnGenerarPDF.Text = "Generar PDF";
-            this.btnGenerarPDF.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnGenerarPDF.UseVisualStyleBackColor = false;
-            this.btnGenerarPDF.Click += new System.EventHandler(this.btnGenerarPDF_Click);
             // 
             // panel3
             // 
@@ -585,19 +598,6 @@ namespace Vista.Facturación
             this.lblTelefono.TabIndex = 1;
             this.lblTelefono.Text = "Teléfono :";
             // 
-            // btnLimpiarFactura
-            // 
-            this.btnLimpiarFactura.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnLimpiarFactura.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLimpiarFactura.Location = new System.Drawing.Point(832, 437);
-            this.btnLimpiarFactura.Margin = new System.Windows.Forms.Padding(2);
-            this.btnLimpiarFactura.Name = "btnLimpiarFactura";
-            this.btnLimpiarFactura.Size = new System.Drawing.Size(219, 34);
-            this.btnLimpiarFactura.TabIndex = 35;
-            this.btnLimpiarFactura.Text = "Cancelar Factura";
-            this.btnLimpiarFactura.UseVisualStyleBackColor = false;
-            this.btnLimpiarFactura.Click += new System.EventHandler(this.btnLimpiarFactura_Click);
-            // 
             // pnlDatosGeneralesFactura
             // 
             this.pnlDatosGeneralesFactura.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
@@ -782,7 +782,7 @@ namespace Vista.Facturación
             this.pnlResumenDePagoFactura.Location = new System.Drawing.Point(759, 166);
             this.pnlResumenDePagoFactura.Margin = new System.Windows.Forms.Padding(2);
             this.pnlResumenDePagoFactura.Name = "pnlResumenDePagoFactura";
-            this.pnlResumenDePagoFactura.Size = new System.Drawing.Size(332, 211);
+            this.pnlResumenDePagoFactura.Size = new System.Drawing.Size(332, 229);
             this.pnlResumenDePagoFactura.TabIndex = 39;
             // 
             // panel5
@@ -792,7 +792,7 @@ namespace Vista.Facturación
             this.panel5.Controls.Add(this.lblTotalAPagar);
             this.panel5.Controls.Add(this.pictureBox5);
             this.panel5.Controls.Add(this.label10);
-            this.panel5.Location = new System.Drawing.Point(26, 153);
+            this.panel5.Location = new System.Drawing.Point(26, 166);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(275, 41);
             this.panel5.TabIndex = 34;
@@ -801,18 +801,17 @@ namespace Vista.Facturación
             // 
             this.label12.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(214, 1);
+            this.label12.Location = new System.Drawing.Point(214, 3);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(39, 36);
             this.label12.TabIndex = 3;
-            this.label12.Text = ".";
             // 
             // lblTotalAPagar
             // 
             this.lblTotalAPagar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.lblTotalAPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalAPagar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.lblTotalAPagar.Location = new System.Drawing.Point(55, 5);
+            this.lblTotalAPagar.Location = new System.Drawing.Point(51, 5);
             this.lblTotalAPagar.Name = "lblTotalAPagar";
             this.lblTotalAPagar.Size = new System.Drawing.Size(198, 32);
             this.lblTotalAPagar.TabIndex = 2;
@@ -840,7 +839,7 @@ namespace Vista.Facturación
             // 
             this.lblDescuento.AutoSize = true;
             this.lblDescuento.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.lblDescuento.Location = new System.Drawing.Point(24, 94);
+            this.lblDescuento.Location = new System.Drawing.Point(35, 104);
             this.lblDescuento.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDescuento.Name = "lblDescuento";
             this.lblDescuento.Size = new System.Drawing.Size(80, 19);
@@ -851,7 +850,7 @@ namespace Vista.Facturación
             // 
             this.txtDescuento.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtDescuento.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.txtDescuento.Location = new System.Drawing.Point(109, 94);
+            this.txtDescuento.Location = new System.Drawing.Point(120, 104);
             this.txtDescuento.Margin = new System.Windows.Forms.Padding(2);
             this.txtDescuento.Name = "txtDescuento";
             this.txtDescuento.Size = new System.Drawing.Size(155, 19);
@@ -862,7 +861,7 @@ namespace Vista.Facturación
             // 
             this.txtTotal.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtTotal.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.txtTotal.Location = new System.Drawing.Point(109, 122);
+            this.txtTotal.Location = new System.Drawing.Point(120, 132);
             this.txtTotal.Margin = new System.Windows.Forms.Padding(2);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
@@ -874,7 +873,7 @@ namespace Vista.Facturación
             // 
             this.txtIVA.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtIVA.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.txtIVA.Location = new System.Drawing.Point(109, 67);
+            this.txtIVA.Location = new System.Drawing.Point(120, 77);
             this.txtIVA.Margin = new System.Windows.Forms.Padding(2);
             this.txtIVA.Name = "txtIVA";
             this.txtIVA.Size = new System.Drawing.Size(155, 19);
@@ -895,7 +894,7 @@ namespace Vista.Facturación
             // 
             this.lblSubTotalFactura.AutoSize = true;
             this.lblSubTotalFactura.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.lblSubTotalFactura.Location = new System.Drawing.Point(27, 41);
+            this.lblSubTotalFactura.Location = new System.Drawing.Point(38, 51);
             this.lblSubTotalFactura.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSubTotalFactura.Name = "lblSubTotalFactura";
             this.lblSubTotalFactura.Size = new System.Drawing.Size(66, 19);
@@ -906,7 +905,7 @@ namespace Vista.Facturación
             // 
             this.txtSubTotal.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSubTotal.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.txtSubTotal.Location = new System.Drawing.Point(109, 40);
+            this.txtSubTotal.Location = new System.Drawing.Point(120, 50);
             this.txtSubTotal.Margin = new System.Windows.Forms.Padding(2);
             this.txtSubTotal.Name = "txtSubTotal";
             this.txtSubTotal.Size = new System.Drawing.Size(155, 19);
@@ -916,7 +915,7 @@ namespace Vista.Facturación
             // 
             this.lblIvaFactura.AutoSize = true;
             this.lblIvaFactura.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.lblIvaFactura.Location = new System.Drawing.Point(27, 67);
+            this.lblIvaFactura.Location = new System.Drawing.Point(38, 77);
             this.lblIvaFactura.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblIvaFactura.Name = "lblIvaFactura";
             this.lblIvaFactura.Size = new System.Drawing.Size(37, 19);
@@ -927,25 +926,12 @@ namespace Vista.Facturación
             // 
             this.lblTotalFactura.AutoSize = true;
             this.lblTotalFactura.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.lblTotalFactura.Location = new System.Drawing.Point(28, 122);
+            this.lblTotalFactura.Location = new System.Drawing.Point(39, 132);
             this.lblTotalFactura.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotalFactura.Name = "lblTotalFactura";
             this.lblTotalFactura.Size = new System.Drawing.Size(42, 19);
             this.lblTotalFactura.TabIndex = 1;
             this.lblTotalFactura.Text = "Total:";
-            // 
-            // btnGuardarFactura
-            // 
-            this.btnGuardarFactura.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnGuardarFactura.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardarFactura.Location = new System.Drawing.Point(832, 394);
-            this.btnGuardarFactura.Margin = new System.Windows.Forms.Padding(2);
-            this.btnGuardarFactura.Name = "btnGuardarFactura";
-            this.btnGuardarFactura.Size = new System.Drawing.Size(219, 34);
-            this.btnGuardarFactura.TabIndex = 33;
-            this.btnGuardarFactura.Text = "Guardar Factura";
-            this.btnGuardarFactura.UseVisualStyleBackColor = false;
-            this.btnGuardarFactura.Click += new System.EventHandler(this.btnGuardarFactura_Click);
             // 
             // pnlRegistroCotizacion
             // 
@@ -1093,6 +1079,21 @@ namespace Vista.Facturación
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // btnGenerarPDF
+            // 
+            this.btnGenerarPDF.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnGenerarPDF.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnGenerarPDF.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnGenerarPDF.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnGenerarPDF.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGenerarPDF.ForeColor = System.Drawing.Color.White;
+            this.btnGenerarPDF.Image = global::Vista.Properties.Resources.archivo_pdfIconoManuales;
+            this.btnGenerarPDF.Location = new System.Drawing.Point(552, 28);
+            this.btnGenerarPDF.Name = "btnGenerarPDF";
+            this.btnGenerarPDF.Size = new System.Drawing.Size(164, 34);
+            this.btnGenerarPDF.TabIndex = 37;
+            this.btnGenerarPDF.Text = "Generar PDF";
+            // 
             // frmFacturacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1152,11 +1153,8 @@ namespace Vista.Facturación
         private System.Windows.Forms.Panel pnlContenedorTabla;
         private System.Windows.Forms.DataGridView dgvFacturasRegistradas;
         private System.Windows.Forms.Panel pnlContenedorDeCotizacionNueva;
-        private System.Windows.Forms.Button btnLimpiarFactura;
-        private System.Windows.Forms.Button btnGenerarPDF;
         private System.Windows.Forms.Panel pnlDatalledeProductos;
         private System.Windows.Forms.Label lblDetalleProductosDeFactura;
-        private System.Windows.Forms.Button btnGuardarFactura;
         private System.Windows.Forms.Panel pnlResumenDePagoFactura;
         private System.Windows.Forms.TextBox txtTotal;
         private System.Windows.Forms.TextBox txtIVA;
@@ -1223,6 +1221,9 @@ namespace Vista.Facturación
         private System.Windows.Forms.Button btnAnterior;
         private System.Windows.Forms.Button btnSiguiente;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private Guna.UI2.WinForms.Guna2Button btnLimpiarFactura;
+        private Guna.UI2.WinForms.Guna2Button btnGuardarFactura;
+        private Guna.UI2.WinForms.Guna2Button btnGenerarPDF;
     }
 }
 

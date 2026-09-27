@@ -1,3 +1,4 @@
+using Guna.UI2.WinForms;
 using Modelo.Entidades;
 using System;
 using System.Data;
@@ -19,6 +20,177 @@ namespace Vista.Inventario
             InitializeComponent();
             ResponsiveHelper.Apply(this);
         }
+        private Guna2Elipse elipseIndicador;
+        private Guna2Elipse elipseIndicador1;
+        private Guna2Elipse elipseIndicador2;
+        private Guna2Elipse elipseIndicador3;
+
+        private const string TextoBusqueda = "Buscar...";
+        private readonly Color ColorPlaceholder = Color.LightGray;
+        private readonly Color ColorCafe = Color.FromArgb(121, 75, 45);
+
+
+        private void ConfigurarIndicadores()
+        {
+            elipseIndicador1 = new Guna2Elipse
+            {
+                TargetControl = pnlIndicador,
+                BorderRadius = 12
+            };
+
+            elipseIndicador1 = new Guna2Elipse
+            {
+                TargetControl = pnlIndicador1,
+                BorderRadius = 12
+            };
+
+            elipseIndicador2 = new Guna2Elipse
+            {
+                TargetControl = pnlIndicador2,
+                BorderRadius = 12
+            };
+
+            elipseIndicador3 = new Guna2Elipse
+            {
+                TargetControl = pnlIndicador3,
+                BorderRadius = 12
+            };
+
+            ConfigurarHoverTarjeta(pnlIndicador);
+            ConfigurarHoverTarjeta(pnlIndicador1);
+            ConfigurarHoverTarjeta(pnlIndicador2);
+            ConfigurarHoverTarjeta(pnlIndicador3);
+        }
+
+        private void ConfigurarHoverTarjeta(Control tarjeta)
+        {
+            tarjeta.MouseEnter += Tarjeta_MouseEnter;
+            tarjeta.MouseLeave += Tarjeta_MouseLeave;
+
+            foreach (Control control in tarjeta.Controls)
+                ConfigurarHoverTarjeta(control);
+        }
+        private void Tarjeta_MouseEnter(object sender, EventArgs e)
+        {
+            Control control = sender as Control;
+
+            while (control != null &&
+                   control != pnlIndicador &&
+                   control != pnlIndicador1 &&
+                   control != pnlIndicador2 &&
+                   control != pnlIndicador3)
+            {
+                control = control.Parent;
+            }
+
+            if (control == pnlIndicador)
+                control.BackColor = Color.FromArgb(245, 175, 160);
+
+            else if (control == pnlIndicador1)
+                control.BackColor = Color.FromArgb(175, 240, 150);
+
+            else if (control == pnlIndicador2)
+                control.BackColor = Color.FromArgb(255, 210, 145);
+
+            else if (control == pnlIndicador3)
+                control.BackColor = Color.FromArgb(245, 238, 225);
+        }
+
+        private void Tarjeta_MouseLeave(object sender, EventArgs e)
+        {
+            Control control = sender as Control;
+
+            while (control != null &&
+                   control != pnlIndicador &&
+                   control != pnlIndicador1 &&
+                   control != pnlIndicador2 &&
+                   control != pnlIndicador3)
+            {
+                control = control.Parent;
+            }
+
+            if (control == pnlIndicador)
+                control.BackColor = Color.FromArgb(235, 157, 145);
+
+            else if (control == pnlIndicador1)
+                control.BackColor = Color.FromArgb(157, 230, 132);
+
+            else if (control == pnlIndicador2)
+                control.BackColor = Color.FromArgb(245, 185, 115);
+
+            else if (control == pnlIndicador3)
+                control.BackColor = Color.White;
+        }
+
+        private void ConfigurarBarraBusqueda()
+        {
+            ConfigurarBusqueda(txtBuscar);
+
+        }
+        private void ConfigurarBusqueda(Guna2TextBox txtBuscar)
+        {
+            txtBuscar.Text = TextoBusqueda;
+            txtBuscar.ForeColor = ColorPlaceholder;
+
+            txtBuscar.BorderRadius = 10;
+            txtBuscar.BorderThickness = 1;
+            txtBuscar.BorderColor = Color.LightGray;
+
+            txtBuscar.FocusedState.BorderColor = ColorCafe;
+
+            txtBuscar.Enter += (s, e) =>
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                {
+                    txtBuscar.Text = "";
+                    txtBuscar.ForeColor = Color.Black;
+                }
+
+                txtBuscar.BorderColor = ColorCafe;
+                txtBuscar.BorderThickness = 2;
+            };
+
+            txtBuscar.Leave += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+                {
+                    txtBuscar.Text = TextoBusqueda;
+                    txtBuscar.ForeColor = ColorPlaceholder;
+                }
+
+                txtBuscar.BorderColor = Color.LightGray;
+                txtBuscar.BorderThickness = 1;
+            };
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void CargarPaginacion()
         {
@@ -246,6 +418,7 @@ namespace Vista.Inventario
 
             //CONFIGURA LOS TOOLTIPS
             ConfigurarTooltips();
+            ConfigurarBarraBusqueda();
 
             // Configurar diseño de la tabla
             ConfigurarTablaInventario();
@@ -267,6 +440,7 @@ namespace Vista.Inventario
             txtCantidad.MaxLength = 100000;
 
             CargarEstadisticasInventario();
+            ConfigurarIndicadores();
         }
 
         //Combo box para cargar categorias

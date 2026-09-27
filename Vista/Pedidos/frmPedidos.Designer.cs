@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblSubTexto = new System.Windows.Forms.Label();
             this.lblEstado = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
@@ -41,11 +41,9 @@
             this.pnlTitulo2 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.dgvPedidosRegistrados = new System.Windows.Forms.DataGridView();
-            this.pbxBuscar = new System.Windows.Forms.PictureBox();
             this.pnlBarraInformativa = new System.Windows.Forms.Panel();
             this.lblAdministrador = new System.Windows.Forms.Label();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.txtBuscar = new System.Windows.Forms.TextBox();
             this.lblMensajeInformativoPedidos = new System.Windows.Forms.Label();
             this.pnlDEtalles = new System.Windows.Forms.Panel();
             this.pnlTitulo1 = new System.Windows.Forms.Panel();
@@ -53,8 +51,6 @@
             this.dgvDetallesDePedido = new System.Windows.Forms.DataGridView();
             this.pnlPedidaDeDatos = new System.Windows.Forms.Panel();
             this.txtEstado = new System.Windows.Forms.TextBox();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnGuardar = new System.Windows.Forms.Button();
             this.txtClienteSeleccionado = new System.Windows.Forms.TextBox();
             this.dtpFechaDeEntrega = new System.Windows.Forms.DateTimePicker();
             this.lblFechaPedido = new System.Windows.Forms.Label();
@@ -64,11 +60,14 @@
             this.lblFechaEntrega = new System.Windows.Forms.Label();
             this.lblCliente = new System.Windows.Forms.Label();
             this.pnlContenedorPrincipalInventario = new System.Windows.Forms.Panel();
+            this.txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnGuardar = new Guna.UI2.WinForms.Guna2Button();
+            this.btnCancelar = new Guna.UI2.WinForms.Guna2Button();
             this.pnlHeader.SuspendLayout();
             this.pnlRegistros.SuspendLayout();
             this.pnlTitulo2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedidosRegistrados)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxBuscar)).BeginInit();
             this.pnlBarraInformativa.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.pnlDEtalles.SuspendLayout();
@@ -77,13 +76,14 @@
             this.pnlPedidaDeDatos.SuspendLayout();
             this.pnlTituloDetallesPedido.SuspendLayout();
             this.pnlContenedorPrincipalInventario.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblSubTexto
             // 
             this.lblSubTexto.AutoSize = true;
             this.lblSubTexto.Font = new System.Drawing.Font("Times New Roman", 13F);
-            this.lblSubTexto.Location = new System.Drawing.Point(16, 66);
+            this.lblSubTexto.Location = new System.Drawing.Point(78, 60);
             this.lblSubTexto.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSubTexto.Name = "lblSubTexto";
             this.lblSubTexto.Size = new System.Drawing.Size(276, 20);
@@ -103,10 +103,11 @@
             // 
             // pnlHeader
             // 
-            this.pnlHeader.Controls.Add(this.pnlRegistros);
-            this.pnlHeader.Controls.Add(this.pbxBuscar);
-            this.pnlHeader.Controls.Add(this.pnlBarraInformativa);
+            this.pnlHeader.Controls.Add(this.pictureBox1);
+            this.pnlHeader.Controls.Add(this.lblSubTexto);
             this.pnlHeader.Controls.Add(this.txtBuscar);
+            this.pnlHeader.Controls.Add(this.pnlRegistros);
+            this.pnlHeader.Controls.Add(this.pnlBarraInformativa);
             this.pnlHeader.Controls.Add(this.lblMensajeInformativoPedidos);
             this.pnlHeader.Controls.Add(this.pnlDEtalles);
             this.pnlHeader.Controls.Add(this.pnlPedidaDeDatos);
@@ -198,45 +199,34 @@
             this.dgvPedidosRegistrados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPedidosRegistrados.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvPedidosRegistrados.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.PeachPuff;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPedidosRegistrados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.PeachPuff;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPedidosRegistrados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvPedidosRegistrados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPedidosRegistrados.GridColor = System.Drawing.Color.Black;
             this.dgvPedidosRegistrados.Location = new System.Drawing.Point(11, 34);
             this.dgvPedidosRegistrados.Name = "dgvPedidosRegistrados";
             this.dgvPedidosRegistrados.ReadOnly = true;
             this.dgvPedidosRegistrados.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Peru;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPedidosRegistrados.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Peru;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPedidosRegistrados.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvPedidosRegistrados.RowHeadersVisible = false;
             this.dgvPedidosRegistrados.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvPedidosRegistrados.Size = new System.Drawing.Size(794, 206);
             this.dgvPedidosRegistrados.TabIndex = 0;
             this.dgvPedidosRegistrados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPedidosRegistrados_CellClick);
             this.dgvPedidosRegistrados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPedidosRegistrados_CellDoubleClick);
-            // 
-            // pbxBuscar
-            // 
-            this.pbxBuscar.BackColor = System.Drawing.Color.Transparent;
-            this.pbxBuscar.Image = global::Vista.Properties.Resources.zoom_5611171;
-            this.pbxBuscar.Location = new System.Drawing.Point(966, 56);
-            this.pbxBuscar.Name = "pbxBuscar";
-            this.pbxBuscar.Size = new System.Drawing.Size(26, 26);
-            this.pbxBuscar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbxBuscar.TabIndex = 26;
-            this.pbxBuscar.TabStop = false;
             // 
             // pnlBarraInformativa
             // 
@@ -271,25 +261,11 @@
             this.pictureBox4.TabIndex = 25;
             this.pictureBox4.TabStop = false;
             // 
-            // txtBuscar
-            // 
-            this.txtBuscar.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.ForeColor = System.Drawing.Color.Gray;
-            this.txtBuscar.Location = new System.Drawing.Point(504, 56);
-            this.txtBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(488, 26);
-            this.txtBuscar.TabIndex = 8;
-            this.txtBuscar.Text = "Buscar Pedido...";
-            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
-            this.txtBuscar.Enter += new System.EventHandler(this.txtBuscar_Enter);
-            this.txtBuscar.Leave += new System.EventHandler(this.txtBuscar_Leave);
-            // 
             // lblMensajeInformativoPedidos
             // 
             this.lblMensajeInformativoPedidos.AutoSize = true;
             this.lblMensajeInformativoPedidos.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold);
-            this.lblMensajeInformativoPedidos.Location = new System.Drawing.Point(13, 26);
+            this.lblMensajeInformativoPedidos.Location = new System.Drawing.Point(71, 25);
             this.lblMensajeInformativoPedidos.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMensajeInformativoPedidos.Name = "lblMensajeInformativoPedidos";
             this.lblMensajeInformativoPedidos.Size = new System.Drawing.Size(274, 36);
@@ -337,14 +313,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDetallesDePedido.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDetallesDePedido.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.PeachPuff;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDetallesDePedido.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.PeachPuff;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetallesDePedido.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvDetallesDePedido.GridColor = System.Drawing.Color.Black;
             this.dgvDetallesDePedido.Location = new System.Drawing.Point(11, 35);
             this.dgvDetallesDePedido.Name = "dgvDetallesDePedido";
@@ -361,9 +337,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPedidaDeDatos.AutoScroll = true;
             this.pnlPedidaDeDatos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
-            this.pnlPedidaDeDatos.Controls.Add(this.txtEstado);
-            this.pnlPedidaDeDatos.Controls.Add(this.btnCancelar);
             this.pnlPedidaDeDatos.Controls.Add(this.btnGuardar);
+            this.pnlPedidaDeDatos.Controls.Add(this.btnCancelar);
+            this.pnlPedidaDeDatos.Controls.Add(this.txtEstado);
             this.pnlPedidaDeDatos.Controls.Add(this.txtClienteSeleccionado);
             this.pnlPedidaDeDatos.Controls.Add(this.dtpFechaDeEntrega);
             this.pnlPedidaDeDatos.Controls.Add(this.lblFechaPedido);
@@ -372,10 +348,10 @@
             this.pnlPedidaDeDatos.Controls.Add(this.lblEstado);
             this.pnlPedidaDeDatos.Controls.Add(this.lblFechaEntrega);
             this.pnlPedidaDeDatos.Controls.Add(this.lblCliente);
-            this.pnlPedidaDeDatos.Location = new System.Drawing.Point(20, 109);
+            this.pnlPedidaDeDatos.Location = new System.Drawing.Point(20, 96);
             this.pnlPedidaDeDatos.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPedidaDeDatos.Name = "pnlPedidaDeDatos";
-            this.pnlPedidaDeDatos.Size = new System.Drawing.Size(228, 377);
+            this.pnlPedidaDeDatos.Size = new System.Drawing.Size(228, 316);
             this.pnlPedidaDeDatos.TabIndex = 2;
             // 
             // txtEstado
@@ -386,32 +362,6 @@
             this.txtEstado.Size = new System.Drawing.Size(190, 20);
             this.txtEstado.TabIndex = 41;
             this.txtEstado.TabStop = false;
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnCancelar.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(119, 323);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(91, 39);
-            this.btnCancelar.TabIndex = 39;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnGuardar.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar.Location = new System.Drawing.Point(14, 323);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(2);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(101, 39);
-            this.btnGuardar.TabIndex = 40;
-            this.btnGuardar.Text = "Guardar cambios";
-            this.btnGuardar.UseVisualStyleBackColor = false;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // txtClienteSeleccionado
             // 
@@ -499,7 +449,6 @@
             // pnlContenedorPrincipalInventario
             // 
             this.pnlContenedorPrincipalInventario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(221)))), ((int)(((byte)(175)))));
-            this.pnlContenedorPrincipalInventario.Controls.Add(this.lblSubTexto);
             this.pnlContenedorPrincipalInventario.Controls.Add(this.pnlHeader);
             this.pnlContenedorPrincipalInventario.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContenedorPrincipalInventario.Location = new System.Drawing.Point(0, 0);
@@ -507,6 +456,68 @@
             this.pnlContenedorPrincipalInventario.Name = "pnlContenedorPrincipalInventario";
             this.pnlContenedorPrincipalInventario.Size = new System.Drawing.Size(1102, 627);
             this.pnlContenedorPrincipalInventario.TabIndex = 4;
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtBuscar.DefaultText = "";
+            this.txtBuscar.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtBuscar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtBuscar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscar.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscar.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtBuscar.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscar.IconLeft = global::Vista.Properties.Resources.zoom_5611171;
+            this.txtBuscar.Location = new System.Drawing.Point(648, 39);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.PlaceholderText = "";
+            this.txtBuscar.SelectedText = "";
+            this.txtBuscar.Size = new System.Drawing.Size(432, 23);
+            this.txtBuscar.TabIndex = 8;
+            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged_1);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Vista.Properties.Resources.PedidosActivos128px;
+            this.pictureBox1.Location = new System.Drawing.Point(20, 28);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(57, 52);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardar.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnGuardar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnGuardar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnGuardar.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardar.ForeColor = System.Drawing.Color.Black;
+            this.btnGuardar.Location = new System.Drawing.Point(10, 265);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(97, 36);
+            this.btnGuardar.TabIndex = 10;
+            this.btnGuardar.Text = "Guardar Cambios";
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click_1);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnCancelar.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnCancelar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnCancelar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnCancelar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnCancelar.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.ForeColor = System.Drawing.Color.Black;
+            this.btnCancelar.Location = new System.Drawing.Point(115, 266);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(97, 36);
+            this.btnCancelar.TabIndex = 11;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
             // 
             // frmPedidos
             // 
@@ -526,7 +537,6 @@
             this.pnlTitulo2.ResumeLayout(false);
             this.pnlTitulo2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedidosRegistrados)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxBuscar)).EndInit();
             this.pnlBarraInformativa.ResumeLayout(false);
             this.pnlBarraInformativa.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
@@ -539,7 +549,7 @@
             this.pnlTituloDetallesPedido.ResumeLayout(false);
             this.pnlTituloDetallesPedido.PerformLayout();
             this.pnlContenedorPrincipalInventario.ResumeLayout(false);
-            this.pnlContenedorPrincipalInventario.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -556,8 +566,6 @@
         private System.Windows.Forms.Panel pnlPedidaDeDatos;
         private System.Windows.Forms.Panel pnlContenedorPrincipalInventario;
         private System.Windows.Forms.Panel pnlBarraInformativa;
-        private System.Windows.Forms.TextBox txtBuscar;
-        private System.Windows.Forms.PictureBox pbxBuscar;
         private System.Windows.Forms.DataGridView dgvDetallesDePedido;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Label lblAdministrador;
@@ -576,9 +584,11 @@
         private System.Windows.Forms.Label lblPagina;
         private System.Windows.Forms.Button btnAnterior;
         private System.Windows.Forms.Button btnSiguiente;
-        private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.TextBox txtEstado;
+        private Guna.UI2.WinForms.Guna2TextBox txtBuscar;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private Guna.UI2.WinForms.Guna2Button btnGuardar;
+        private Guna.UI2.WinForms.Guna2Button btnCancelar;
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using Modelo.Entidades;
+﻿using Guna.UI2.WinForms;
+using Modelo.Entidades;
 using System;
 using System.Data;
 using System.Drawing;
@@ -24,6 +25,10 @@ namespace Vista.Pedidos
                 UseColumnTextForButtonValue = true
             });
             dgvDetallesDePedido.CellContentClick += EliminarProducto_Click;
+
+            ConfigurarBarraBusqueda();
+            ConfigurarBoton(btnGuardar);
+            ConfigurarBoton(btnCancelar);
         }
         // PAGINACIÓN
         private DataTable dtPedidos;
@@ -39,6 +44,72 @@ namespace Vista.Pedidos
         int idPedidoSeleccionado = 0;
         private string estadoOriginal = "";
         private DateTime fechaEntregaOriginal;
+        private const string TextoBusqueda = "Buscar...";
+        private readonly Color ColorPlaceholder = Color.LightGray;
+        private readonly Color ColorCafe = Color.FromArgb(121, 75, 45);
+
+
+        private void ConfigurarBarraBusqueda()
+        {
+            ConfigurarBusqueda(txtBuscar);
+
+        }
+        private void ConfigurarBusqueda(Guna2TextBox txtBuscar)
+        {
+            txtBuscar.Text = TextoBusqueda;
+            txtBuscar.ForeColor = ColorPlaceholder;
+
+            txtBuscar.BorderRadius = 10;
+            txtBuscar.BorderThickness = 1;
+            txtBuscar.BorderColor = Color.LightGray;
+
+            txtBuscar.FocusedState.BorderColor = ColorCafe;
+
+            txtBuscar.Enter += (s, e) =>
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                {
+                    txtBuscar.Text = "";
+                    txtBuscar.ForeColor = Color.Black;
+                }
+
+                txtBuscar.BorderColor = ColorCafe;
+                txtBuscar.BorderThickness = 2;
+            };
+
+            txtBuscar.Leave += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+                {
+                    txtBuscar.Text = TextoBusqueda;
+                    txtBuscar.ForeColor = ColorPlaceholder;
+                }
+
+                txtBuscar.BorderColor = Color.LightGray;
+                txtBuscar.BorderThickness = 1;
+            };
+        }
+
+        private void ConfigurarBoton(Guna2Button boton)
+        {
+            boton.BorderRadius = 10;
+            boton.BorderThickness = 1;
+            boton.BorderColor = Color.FromArgb(121, 75, 45);
+
+            boton.FillColor = Color.FromArgb(220, 200, 180);
+            boton.ForeColor = Color.FromArgb(121, 75, 45);
+
+            boton.HoverState.FillColor = Color.FromArgb(121, 75, 45);
+            boton.HoverState.ForeColor = Color.White;
+            boton.HoverState.BorderColor = Color.FromArgb(121, 75, 45);
+
+            boton.PressedColor = Color.FromArgb(95, 55, 35);
+        }
+
+
+
+
+
         //------------------------------------------------------------------------
         // CONFIGURAR TABLAS DE PEDIDOS
         private void ConfigurarTablas()
@@ -285,35 +356,15 @@ namespace Vista.Pedidos
         }
         //--------------------------------------------------------------------------------
         //SECCION DE BUSQUEDA
-
-
-        private void txtBuscar_Enter(object sender, EventArgs e)
-        {
-            if (txtBuscar.Text == "Buscar Pedido...")
-            {
-                txtBuscar.Text = "";
-                txtBuscar.ForeColor = Color.Black;
-            }
-        }
-
-        private void txtBuscar_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtBuscar.Text))
-            {
-                txtBuscar.Text = "Buscar Pedido...";
-                txtBuscar.ForeColor = Color.Gray;
-            }
-        }
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        private void txtBuscar_TextChanged_1(object sender, EventArgs e)
         {
             try
             {
-                if (txtBuscar.Text == "Buscar Pedido...")
+                if (txtBuscar.Text == TextoBusqueda)
                     return;
 
                 string texto = txtBuscar.Text.Trim();
 
-                // Si el buscador está vacío
                 if (string.IsNullOrWhiteSpace(texto))
                 {
                     buscandoPedidos = false;
@@ -326,24 +377,20 @@ namespace Vista.Pedidos
 
                 buscandoPedidos = true;
 
-                // Buscar pedidos
                 dtPedidos = DbPedidos.BuscarPedido(texto);
 
                 paginaActual = 1;
 
-                // Calcular páginas de los resultados
                 totalPaginas = (int)Math.Ceiling((double)dtPedidos.Rows.Count / registrosPorPagina);
 
                 if (totalPaginas == 0)
-                {
                     totalPaginas = 1;
-                }
 
                 MostrarPaginaPedidos();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ocurrió un error al buscar pedidos.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         //------------------------------------------------------------------
@@ -636,7 +683,7 @@ namespace Vista.Pedidos
         //---------------------------------------------------------------------------------------------------------
         //------------------BOTON DE GUARDAR LOS CAMBIOS PARA ACTUALIZAR UN PEDIDO-------------------------------//
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void btnGuardar_Click_1(object sender, EventArgs e)
         {
             if (dtpFechaDeEntrega.Value.Date < dtpFechaPedido.Value.Date)
             {
@@ -677,7 +724,7 @@ namespace Vista.Pedidos
             }
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             // Limpiar selección del pedido
             idPedidoSeleccionado = 0;

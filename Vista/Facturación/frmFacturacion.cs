@@ -1,3 +1,4 @@
+using Guna.UI2.WinForms;
 using Modelo.Entidades;
 using System;
 using System.Data;
@@ -15,7 +16,118 @@ namespace Vista.Facturación
 
             InitializeComponent();
             ResponsiveHelper.Apply(this);
+
+            ConfigurarPaneles();
+            ConfigurarBotonesFactura();
         }
+
+        private Guna2Elipse elipseDatosVenta;
+        private Guna2Elipse elipseDatosCliente;
+        private Guna2Elipse elipseDatosFactura;
+        private Guna2Elipse elipseDetalleProductos;
+        private Guna2Elipse elipseResumenPago;
+        private Guna2Elipse elipseObservaciones;
+
+        private void ConfigurarPaneles()
+        {
+            elipseDatosVenta = new Guna2Elipse
+            {
+                TargetControl = panel3,
+                BorderRadius = 10
+            };
+
+            elipseDatosCliente = new Guna2Elipse
+            {
+                TargetControl = pnlDatosVenta,
+                BorderRadius = 10
+            };
+
+            elipseDatosFactura = new Guna2Elipse
+            {
+                TargetControl = pnlDatosGeneralesFactura,
+                BorderRadius = 10
+            };
+
+            elipseDetalleProductos = new Guna2Elipse
+            {
+                TargetControl = pnlDatalledeProductos,
+                BorderRadius = 10
+            };
+
+            elipseResumenPago = new Guna2Elipse
+            {
+                TargetControl = pnlResumenDePagoFactura,
+                BorderRadius = 10
+            };
+
+            elipseObservaciones = new Guna2Elipse
+            {
+                TargetControl = panel4,
+                BorderRadius = 10
+            };
+        }
+
+        private void ConfigurarBotonesFactura()
+        {
+            ConfigurarBotonFactura(btnGuardarFactura, Color.FromArgb(121, 75, 45));
+
+            ConfigurarBotonFactura(btnGenerarPDF, Color.FromArgb(112, 153, 82));
+
+            ConfigurarBotonFactura(btnLimpiarFactura, Color.FromArgb(174, 91, 75));
+        }
+
+        private void ConfigurarBotonFactura(Guna.UI2.WinForms.Guna2Button boton, Color color)
+        {
+            boton.FillColor = color;
+            boton.ForeColor = Color.White;
+
+            boton.BorderColor = Color.FromArgb(121, 75, 45);
+            boton.BorderThickness = 1;
+            boton.BorderRadius = 8;
+
+            boton.HoverState.FillColor = Color.FromArgb(
+                Math.Min(color.R + 20, 255),
+                Math.Min(color.G + 20, 255),
+                Math.Min(color.B + 20, 255)
+            );
+
+            boton.HoverState.ForeColor = Color.White;
+            boton.HoverState.BorderColor = Color.FromArgb(121, 75, 45);
+
+            boton.PressedColor = Color.FromArgb(
+                Math.Max(color.R - 25, 0),
+                Math.Max(color.G - 25, 0),
+                Math.Max(color.B - 25, 0)
+            );
+
+            boton.Cursor = Cursors.Hand;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // VARIABLES PARA LA PAGINACIÓN
         private DataTable dtFacturas;
         private int paginaActual = 1;

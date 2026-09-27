@@ -28,23 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblDetalleVentas = new System.Windows.Forms.Label();
             this.dgvDetalleDeVenta = new System.Windows.Forms.DataGridView();
             this.pnlBarraSuperior = new System.Windows.Forms.Panel();
             this.lblAdministrador = new System.Windows.Forms.Label();
-            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.pbPerfil = new System.Windows.Forms.PictureBox();
             this.pnlPedidaDeDatos = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnlFacturaRegistrada = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtMostrarCliente = new System.Windows.Forms.TextBox();
-            this.btnRegistrarFactura = new System.Windows.Forms.Button();
             this.lblSubTotal = new System.Windows.Forms.Label();
             this.txtSubTotal = new System.Windows.Forms.TextBox();
             this.dtFechaVenta = new System.Windows.Forms.DateTimePicker();
             this.txtNVenta = new System.Windows.Forms.TextBox();
-            this.btnEliminar = new System.Windows.Forms.Button();
             this.lblNVenta = new System.Windows.Forms.Label();
             this.lblFechaVenta = new System.Windows.Forms.Label();
             this.lblCodigoCliente = new System.Windows.Forms.Label();
@@ -53,41 +57,37 @@
             this.lblMensajeInformativoPrincipal = new System.Windows.Forms.Label();
             this.pnlTablaContenido = new System.Windows.Forms.Panel();
             this.lblPagina = new System.Windows.Forms.Label();
-            this.lblRegistroVentas = new System.Windows.Forms.Label();
-            this.dgvVentas = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.pbxBuscar = new System.Windows.Forms.PictureBox();
-            this.pbPerfil = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnAnterior = new System.Windows.Forms.Button();
             this.btnSiguiente = new System.Windows.Forms.Button();
+            this.lblRegistroVentas = new System.Windows.Forms.Label();
+            this.dgvVentas = new System.Windows.Forms.DataGridView();
             this.Eliminar = new System.Windows.Forms.DataGridViewImageColumn();
-            this.pnlFacturaRegistrada = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.btnRegistrarFactura = new Guna.UI2.WinForms.Guna2TileButton();
+            this.btnEliminar = new Guna.UI2.WinForms.Guna2TileButton();
+            this.txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pnlHeader.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleDeVenta)).BeginInit();
             this.pnlBarraSuperior.SuspendLayout();
-            this.pnlPedidaDeDatos.SuspendLayout();
-            this.pnlTablaContenido.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxBuscar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPerfil)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pnlPedidaDeDatos.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.pnlFacturaRegistrada.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pnlTablaContenido.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHeader
             // 
             this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(221)))), ((int)(((byte)(175)))));
-            this.pnlHeader.Controls.Add(this.panel1);
-            this.pnlHeader.Controls.Add(this.pbxBuscar);
-            this.pnlHeader.Controls.Add(this.pnlBarraSuperior);
+            this.pnlHeader.Controls.Add(this.pictureBox3);
             this.pnlHeader.Controls.Add(this.txtBuscar);
+            this.pnlHeader.Controls.Add(this.panel1);
+            this.pnlHeader.Controls.Add(this.pnlBarraSuperior);
             this.pnlHeader.Controls.Add(this.pnlPedidaDeDatos);
             this.pnlHeader.Controls.Add(this.lblSubTexto);
             this.pnlHeader.Controls.Add(this.lblMensajeInformativoPrincipal);
@@ -132,14 +132,14 @@
             this.dgvDetalleDeVenta.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDetalleDeVenta.BackgroundColor = System.Drawing.Color.White;
             this.dgvDetalleDeVenta.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.PeachPuff;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDetalleDeVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.PeachPuff;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetalleDeVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDetalleDeVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvDetalleDeVenta.GridColor = System.Drawing.Color.Black;
             this.dgvDetalleDeVenta.Location = new System.Drawing.Point(14, 37);
@@ -171,33 +171,29 @@
             this.lblAdministrador.TabIndex = 29;
             this.lblAdministrador.Text = "Admin";
             // 
-            // txtBuscar
+            // pbPerfil
             // 
-            this.txtBuscar.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.ForeColor = System.Drawing.Color.Gray;
-            this.txtBuscar.Location = new System.Drawing.Point(470, 56);
-            this.txtBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(488, 26);
-            this.txtBuscar.TabIndex = 0;
-            this.txtBuscar.Text = "Buscar Venta...";
-            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
-            this.txtBuscar.Enter += new System.EventHandler(this.txtBuscar_Enter);
-            this.txtBuscar.Leave += new System.EventHandler(this.txtBuscar_Leave);
+            this.pbPerfil.Image = global::Vista.Properties.Resources.Imagen_perfil_2;
+            this.pbPerfil.Location = new System.Drawing.Point(1054, -1);
+            this.pbPerfil.Name = "pbPerfil";
+            this.pbPerfil.Size = new System.Drawing.Size(22, 22);
+            this.pbPerfil.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbPerfil.TabIndex = 12;
+            this.pbPerfil.TabStop = false;
             // 
             // pnlPedidaDeDatos
             // 
             this.pnlPedidaDeDatos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPedidaDeDatos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
+            this.pnlPedidaDeDatos.Controls.Add(this.btnEliminar);
+            this.pnlPedidaDeDatos.Controls.Add(this.btnRegistrarFactura);
             this.pnlPedidaDeDatos.Controls.Add(this.panel2);
             this.pnlPedidaDeDatos.Controls.Add(this.txtMostrarCliente);
-            this.pnlPedidaDeDatos.Controls.Add(this.btnRegistrarFactura);
             this.pnlPedidaDeDatos.Controls.Add(this.lblSubTotal);
             this.pnlPedidaDeDatos.Controls.Add(this.txtSubTotal);
             this.pnlPedidaDeDatos.Controls.Add(this.dtFechaVenta);
             this.pnlPedidaDeDatos.Controls.Add(this.txtNVenta);
-            this.pnlPedidaDeDatos.Controls.Add(this.btnEliminar);
             this.pnlPedidaDeDatos.Controls.Add(this.lblNVenta);
             this.pnlPedidaDeDatos.Controls.Add(this.lblFechaVenta);
             this.pnlPedidaDeDatos.Controls.Add(this.lblCodigoCliente);
@@ -208,25 +204,73 @@
             this.pnlPedidaDeDatos.Size = new System.Drawing.Size(241, 335);
             this.pnlPedidaDeDatos.TabIndex = 2;
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.MistyRose;
+            this.panel2.Controls.Add(this.pnlFacturaRegistrada);
+            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Location = new System.Drawing.Point(26, 234);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(194, 39);
+            this.panel2.TabIndex = 34;
+            // 
+            // pnlFacturaRegistrada
+            // 
+            this.pnlFacturaRegistrada.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.pnlFacturaRegistrada.Controls.Add(this.pictureBox2);
+            this.pnlFacturaRegistrada.Controls.Add(this.label2);
+            this.pnlFacturaRegistrada.Location = new System.Drawing.Point(0, 0);
+            this.pnlFacturaRegistrada.Name = "pnlFacturaRegistrada";
+            this.pnlFacturaRegistrada.Size = new System.Drawing.Size(194, 39);
+            this.pnlFacturaRegistrada.TabIndex = 35;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Vista.Properties.Resources.controlar;
+            this.pictureBox2.Location = new System.Drawing.Point(22, 7);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(27, 27);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 34;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(63, 1);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(122, 35);
+            this.label2.TabIndex = 33;
+            this.label2.Text = "Venta disponible para facturar";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Vista.Properties.Resources.error;
+            this.pictureBox1.Location = new System.Drawing.Point(22, 8);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(27, 27);
+            this.pictureBox1.TabIndex = 34;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(63, 1);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(122, 35);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "Venta con factura registrada";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // txtMostrarCliente
             // 
             this.txtMostrarCliente.Location = new System.Drawing.Point(23, 117);
             this.txtMostrarCliente.Name = "txtMostrarCliente";
             this.txtMostrarCliente.Size = new System.Drawing.Size(197, 20);
             this.txtMostrarCliente.TabIndex = 32;
-            // 
-            // btnRegistrarFactura
-            // 
-            this.btnRegistrarFactura.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnRegistrarFactura.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegistrarFactura.Location = new System.Drawing.Point(18, 284);
-            this.btnRegistrarFactura.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRegistrarFactura.Name = "btnRegistrarFactura";
-            this.btnRegistrarFactura.Size = new System.Drawing.Size(130, 40);
-            this.btnRegistrarFactura.TabIndex = 31;
-            this.btnRegistrarFactura.Text = "Registrar Factura";
-            this.btnRegistrarFactura.UseVisualStyleBackColor = false;
-            this.btnRegistrarFactura.Click += new System.EventHandler(this.btnRegistrarFactura_Click);
             // 
             // lblSubTotal
             // 
@@ -269,19 +313,6 @@
             this.txtNVenta.Name = "txtNVenta";
             this.txtNVenta.Size = new System.Drawing.Size(109, 19);
             this.txtNVenta.TabIndex = 17;
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnEliminar.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Location = new System.Drawing.Point(152, 284);
-            this.btnEliminar.Margin = new System.Windows.Forms.Padding(2);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(68, 40);
-            this.btnEliminar.TabIndex = 16;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = false;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // lblNVenta
             // 
@@ -331,7 +362,7 @@
             // 
             this.lblSubTexto.AutoSize = true;
             this.lblSubTexto.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubTexto.Location = new System.Drawing.Point(27, 75);
+            this.lblSubTexto.Location = new System.Drawing.Point(72, 75);
             this.lblSubTexto.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSubTexto.Name = "lblSubTexto";
             this.lblSubTexto.Size = new System.Drawing.Size(327, 21);
@@ -342,7 +373,7 @@
             // 
             this.lblMensajeInformativoPrincipal.AutoSize = true;
             this.lblMensajeInformativoPrincipal.Font = new System.Drawing.Font("Times New Roman", 26F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMensajeInformativoPrincipal.Location = new System.Drawing.Point(25, 33);
+            this.lblMensajeInformativoPrincipal.Location = new System.Drawing.Point(69, 35);
             this.lblMensajeInformativoPrincipal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMensajeInformativoPrincipal.Name = "lblMensajeInformativoPrincipal";
             this.lblMensajeInformativoPrincipal.Size = new System.Drawing.Size(285, 40);
@@ -377,97 +408,6 @@
             this.lblPagina.TabIndex = 32;
             this.lblPagina.Text = "label1";
             // 
-            // lblRegistroVentas
-            // 
-            this.lblRegistroVentas.AutoSize = true;
-            this.lblRegistroVentas.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lblRegistroVentas.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRegistroVentas.Location = new System.Drawing.Point(14, 5);
-            this.lblRegistroVentas.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblRegistroVentas.Name = "lblRegistroVentas";
-            this.lblRegistroVentas.Size = new System.Drawing.Size(168, 22);
-            this.lblRegistroVentas.TabIndex = 29;
-            this.lblRegistroVentas.Text = "Registro de Ventas.";
-            // 
-            // dgvVentas
-            // 
-            this.dgvVentas.AllowUserToResizeColumns = false;
-            this.dgvVentas.AllowUserToResizeRows = false;
-            this.dgvVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvVentas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvVentas.BackgroundColor = System.Drawing.Color.White;
-            this.dgvVentas.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.PeachPuff;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVentas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvVentas.GridColor = System.Drawing.Color.Black;
-            this.dgvVentas.Location = new System.Drawing.Point(14, 30);
-            this.dgvVentas.Name = "dgvVentas";
-            this.dgvVentas.RowHeadersVisible = false;
-            this.dgvVentas.Size = new System.Drawing.Size(741, 243);
-            this.dgvVentas.TabIndex = 0;
-            this.dgvVentas.SelectionChanged += new System.EventHandler(this.dgvVentas_SelectionChanged);
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(63, 1);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 35);
-            this.label1.TabIndex = 33;
-            this.label1.Text = "Venta con factura registrada";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.MistyRose;
-            this.panel2.Controls.Add(this.pnlFacturaRegistrada);
-            this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(26, 234);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(194, 39);
-            this.panel2.TabIndex = 34;
-            // 
-            // pbxBuscar
-            // 
-            this.pbxBuscar.BackColor = System.Drawing.Color.Transparent;
-            this.pbxBuscar.Image = global::Vista.Properties.Resources.zoom_5611171;
-            this.pbxBuscar.Location = new System.Drawing.Point(932, 56);
-            this.pbxBuscar.Name = "pbxBuscar";
-            this.pbxBuscar.Size = new System.Drawing.Size(26, 26);
-            this.pbxBuscar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbxBuscar.TabIndex = 27;
-            this.pbxBuscar.TabStop = false;
-            // 
-            // pbPerfil
-            // 
-            this.pbPerfil.Image = global::Vista.Properties.Resources.Imagen_perfil_2;
-            this.pbPerfil.Location = new System.Drawing.Point(1054, -1);
-            this.pbPerfil.Name = "pbPerfil";
-            this.pbPerfil.Size = new System.Drawing.Size(22, 22);
-            this.pbPerfil.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbPerfil.TabIndex = 12;
-            this.pbPerfil.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Vista.Properties.Resources.error;
-            this.pictureBox1.Location = new System.Drawing.Point(22, 8);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(27, 27);
-            this.pictureBox1.TabIndex = 34;
-            this.pictureBox1.TabStop = false;
-            // 
             // btnAnterior
             // 
             this.btnAnterior.FlatAppearance.BorderSize = 0;
@@ -492,6 +432,45 @@
             this.btnSiguiente.UseVisualStyleBackColor = true;
             this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
             // 
+            // lblRegistroVentas
+            // 
+            this.lblRegistroVentas.AutoSize = true;
+            this.lblRegistroVentas.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lblRegistroVentas.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRegistroVentas.Location = new System.Drawing.Point(14, 5);
+            this.lblRegistroVentas.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRegistroVentas.Name = "lblRegistroVentas";
+            this.lblRegistroVentas.Size = new System.Drawing.Size(168, 22);
+            this.lblRegistroVentas.TabIndex = 29;
+            this.lblRegistroVentas.Text = "Registro de Ventas.";
+            // 
+            // dgvVentas
+            // 
+            this.dgvVentas.AllowUserToResizeColumns = false;
+            this.dgvVentas.AllowUserToResizeRows = false;
+            this.dgvVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvVentas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvVentas.BackgroundColor = System.Drawing.Color.White;
+            this.dgvVentas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.PeachPuff;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVentas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvVentas.GridColor = System.Drawing.Color.Black;
+            this.dgvVentas.Location = new System.Drawing.Point(14, 30);
+            this.dgvVentas.Name = "dgvVentas";
+            this.dgvVentas.RowHeadersVisible = false;
+            this.dgvVentas.Size = new System.Drawing.Size(741, 243);
+            this.dgvVentas.TabIndex = 0;
+            this.dgvVentas.SelectionChanged += new System.EventHandler(this.dgvVentas_SelectionChanged);
+            // 
             // Eliminar
             // 
             this.Eliminar.HeaderText = "";
@@ -500,35 +479,60 @@
             this.Eliminar.Name = "Eliminar";
             this.Eliminar.Width = 740;
             // 
-            // pnlFacturaRegistrada
+            // btnRegistrarFactura
             // 
-            this.pnlFacturaRegistrada.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.pnlFacturaRegistrada.Controls.Add(this.pictureBox2);
-            this.pnlFacturaRegistrada.Controls.Add(this.label2);
-            this.pnlFacturaRegistrada.Location = new System.Drawing.Point(0, 0);
-            this.pnlFacturaRegistrada.Name = "pnlFacturaRegistrada";
-            this.pnlFacturaRegistrada.Size = new System.Drawing.Size(194, 39);
-            this.pnlFacturaRegistrada.TabIndex = 35;
+            this.btnRegistrarFactura.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnRegistrarFactura.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnRegistrarFactura.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnRegistrarFactura.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnRegistrarFactura.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnRegistrarFactura.ForeColor = System.Drawing.Color.White;
+            this.btnRegistrarFactura.Location = new System.Drawing.Point(16, 290);
+            this.btnRegistrarFactura.Name = "btnRegistrarFactura";
+            this.btnRegistrarFactura.Size = new System.Drawing.Size(118, 33);
+            this.btnRegistrarFactura.TabIndex = 35;
+            this.btnRegistrarFactura.Text = "Registrar Factura";
             // 
-            // pictureBox2
+            // btnEliminar
             // 
-            this.pictureBox2.Image = global::Vista.Properties.Resources.controlar;
-            this.pictureBox2.Location = new System.Drawing.Point(22, 7);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(27, 27);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 34;
-            this.pictureBox2.TabStop = false;
+            this.btnEliminar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnEliminar.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnEliminar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnEliminar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnEliminar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnEliminar.ForeColor = System.Drawing.Color.White;
+            this.btnEliminar.Location = new System.Drawing.Point(140, 290);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(80, 33);
+            this.btnEliminar.TabIndex = 36;
+            this.btnEliminar.Text = "Eliminar";
             // 
-            // label2
+            // txtBuscar
             // 
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(63, 1);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 35);
-            this.label2.TabIndex = 33;
-            this.label2.Text = "Venta disponible para facturar";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.txtBuscar.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtBuscar.DefaultText = "";
+            this.txtBuscar.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtBuscar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtBuscar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscar.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscar.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtBuscar.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscar.IconLeft = global::Vista.Properties.Resources.zoom_5611171;
+            this.txtBuscar.Location = new System.Drawing.Point(600, 50);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.PlaceholderText = "";
+            this.txtBuscar.SelectedText = "";
+            this.txtBuscar.Size = new System.Drawing.Size(451, 25);
+            this.txtBuscar.TabIndex = 7;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Location = new System.Drawing.Point(16, 39);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(51, 51);
+            this.pictureBox3.TabIndex = 8;
+            this.pictureBox3.TabStop = false;
             // 
             // frmVentas
             // 
@@ -548,17 +552,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleDeVenta)).EndInit();
             this.pnlBarraSuperior.ResumeLayout(false);
             this.pnlBarraSuperior.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPerfil)).EndInit();
             this.pnlPedidaDeDatos.ResumeLayout(false);
             this.pnlPedidaDeDatos.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.pnlFacturaRegistrada.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlTablaContenido.ResumeLayout(false);
             this.pnlTablaContenido.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).EndInit();
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbxBuscar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPerfil)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.pnlFacturaRegistrada.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -566,13 +570,11 @@
         #endregion
 
         private System.Windows.Forms.Panel pnlHeader;
-        private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Panel pnlPedidaDeDatos;
         private System.Windows.Forms.Label lblSubTotal;
         private System.Windows.Forms.TextBox txtSubTotal;
         private System.Windows.Forms.DateTimePicker dtFechaVenta;
         private System.Windows.Forms.TextBox txtNVenta;
-        private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Label lblNVenta;
         private System.Windows.Forms.Label lblFechaVenta;
         private System.Windows.Forms.Label lblDetalleVenta;
@@ -581,7 +583,6 @@
         private System.Windows.Forms.Panel pnlTablaContenido;
         private System.Windows.Forms.Panel pnlBarraSuperior;
         private System.Windows.Forms.Label lblCodigoCliente;
-        private System.Windows.Forms.PictureBox pbxBuscar;
         private System.Windows.Forms.DataGridView dgvVentas;
         private System.Windows.Forms.PictureBox pbPerfil;
         private System.Windows.Forms.Label lblAdministrador;
@@ -589,7 +590,6 @@
         private System.Windows.Forms.Label lblDetalleVentas;
         private System.Windows.Forms.DataGridView dgvDetalleDeVenta;
         private System.Windows.Forms.Label lblRegistroVentas;
-        private System.Windows.Forms.Button btnRegistrarFactura;
         private System.Windows.Forms.TextBox txtMostrarCliente;
         private System.Windows.Forms.DataGridViewImageColumn Eliminar;
         private System.Windows.Forms.Label lblPagina;
@@ -601,5 +601,9 @@
         private System.Windows.Forms.Panel pnlFacturaRegistrada;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label2;
+        private Guna.UI2.WinForms.Guna2TileButton btnEliminar;
+        private Guna.UI2.WinForms.Guna2TileButton btnRegistrarFactura;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private Guna.UI2.WinForms.Guna2TextBox txtBuscar;
     }
 }

@@ -19,12 +19,8 @@ namespace Vista.Clientes
 
 
             ConfigurarTarjetas();
-            ConfigurarPestanas();
             ConfigurarSeparadores();
-            mensaje = new Guna2MessageDialog();
-            mensaje.Parent = this;
-
-
+            ConfigurarBarraBusqueda();
 
 
             errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
@@ -83,8 +79,9 @@ namespace Vista.Clientes
         private Guna2Elipse elipseDatosCliente;
         private Guna2Elipse elipseRegistroIndividual;
         private Guna2Elipse elipseRegistroCorporativo;
-        private Guna2MessageDialog mensaje;
-
+        private const string TextoBusqueda = "Buscar...";
+        private readonly Color ColorPlaceholder = Color.LightGray;
+        private readonly Color ColorCafe = Color.FromArgb(121, 75, 45);
 
         private void ConfigurarTarjetas()
         {
@@ -231,24 +228,20 @@ namespace Vista.Clientes
                 control.BackColor = Color.White;
         }
 
-        private void ConfigurarPestanas()
-        {
-            pnlBarraClienteIndividual.BackColor = Color.FromArgb(121, 75, 45);
-            pnlBarraClienteCorporativo.BackColor = Color.FromArgb(220, 200, 180);
 
-            btnClienteIndividual.ForeColor = Color.White;
-            btnClienteCorporativo.ForeColor = Color.Black;
-        }
 
         private void ActivarPestana(bool individual)
         {
             if (individual)
             {
-                pnlBarraClienteIndividual.BackColor = Color.FromArgb(121, 75, 45);
                 pnlBarraClienteCorporativo.BackColor = Color.FromArgb(220, 200, 180);
+                pnlBarraClienteIndividual.BackColor = Color.FromArgb(121, 75, 45);
 
                 btnClienteIndividual.ForeColor = Color.White;
+                btnClienteIndividual.Font = new Font(btnClienteIndividual.Font, FontStyle.Bold);
+
                 btnClienteCorporativo.ForeColor = Color.Black;
+                btnClienteCorporativo.Font = new Font(btnClienteCorporativo.Font, FontStyle.Regular);
             }
             else
             {
@@ -256,7 +249,10 @@ namespace Vista.Clientes
                 pnlBarraClienteCorporativo.BackColor = Color.FromArgb(121, 75, 45);
 
                 btnClienteIndividual.ForeColor = Color.Black;
+                btnClienteIndividual.Font = new Font(btnClienteIndividual.Font, FontStyle.Regular);
+
                 btnClienteCorporativo.ForeColor = Color.White;
+                btnClienteCorporativo.Font = new Font(btnClienteCorporativo.Font, FontStyle.Bold);
             }
         }
 
@@ -265,48 +261,50 @@ namespace Vista.Clientes
             separadorDatosCliente.FillColor = Color.FromArgb(190, 160, 130);
             separadorDatosCliente.FillThickness = 1;
         }
-
-
-
-        private void MostrarExito(string texto)
+        private void ConfigurarBarraBusqueda()
         {
-            mensaje.Caption = "Éxito";
-            mensaje.Text = texto;
-            mensaje.Icon = MessageDialogIcon.Information;
-            mensaje.Buttons = MessageDialogButtons.OK;
-            mensaje.Show(texto);
+            ConfigurarBusqueda(txtBuscarIndividual);
+            ConfigurarBusqueda(txtBuscarCorporativo);
+        }
+
+        private void ConfigurarBusqueda(Guna2TextBox txtBuscar)
+        {
+            txtBuscar.Text = TextoBusqueda;
+            txtBuscar.ForeColor = ColorPlaceholder;
+
+            txtBuscar.BorderRadius = 10;
+            txtBuscar.BorderThickness = 1;
+            txtBuscar.BorderColor = Color.LightGray;
+
+            txtBuscar.FocusedState.BorderColor = ColorCafe;
+
+            txtBuscar.Enter += (s, e) =>
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                {
+                    txtBuscar.Text = "";
+                    txtBuscar.ForeColor = Color.Black;
+                }
+
+                txtBuscar.BorderColor = ColorCafe;
+                txtBuscar.BorderThickness = 2;
+            };
+
+            txtBuscar.Leave += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+                {
+                    txtBuscar.Text = TextoBusqueda;
+                    txtBuscar.ForeColor = ColorPlaceholder;
+                }
+
+                txtBuscar.BorderColor = Color.LightGray;
+                txtBuscar.BorderThickness = 1;
+            };
         }
 
 
-        private void MostrarAdvertencia(string texto)
-        {
-            mensaje.Caption = "Advertencia";
-            mensaje.Text = texto;
-            mensaje.Icon = MessageDialogIcon.Warning;
-            mensaje.Buttons = MessageDialogButtons.OK;
-            mensaje.Show(texto);
-        }
-
-        private void MostrarError(string texto)
-        {
-            mensaje.Caption = "Error";
-            mensaje.Text = texto;
-            mensaje.Icon = MessageDialogIcon.Error;
-            mensaje.Buttons = MessageDialogButtons.OK;
-            mensaje.Show(texto);
-        }
-
-        private bool ConfirmarAccion(string mensajeTexto)
-        {
-            mensaje.Caption = "Muebles Keyda";
-            mensaje.Text = mensajeTexto;
-            mensaje.Icon = MessageDialogIcon.Warning;
-            mensaje.Buttons = MessageDialogButtons.YesNo;
-            mensaje.Style = MessageDialogStyle.Light;
-
-            return mensaje.Show(mensajeTexto) == DialogResult.Yes;
-        }
-
+        //-----------------------------------------------------------------------------------------------------------------------------------------//
 
 
 
@@ -693,7 +691,7 @@ namespace Vista.Clientes
             }
             catch (Exception ex)
             {
-                MostrarError("Ocurrió un error al actualizar las estadísticas.\n" + ex.Message);
+                MessageBox.Show("Ocurrió un error al actualizar las estadísticas.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -871,7 +869,7 @@ namespace Vista.Clientes
             }
             catch
             {
-                MostrarError("Ingrese un correo válido.");
+                MessageBox.Show("Ingrese un correo electrónico válido.", "Correo no válido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCorreo.Focus();
                 return false;
             }
@@ -1098,7 +1096,7 @@ namespace Vista.Clientes
             }
             catch (Exception ex)
             {
-                MostrarError("Ocurrió un error al cargar el formulario.\n" + ex.Message);
+                MessageBox.Show("Ocurrió un error al cargar el formulario.\n" + ex.Message);
             }
         }
 
@@ -1210,7 +1208,7 @@ namespace Vista.Clientes
             }
             catch
             {
-                MostrarError("Ingrese un correo válido.");
+                MessageBox.Show("Ingrese un correo válido.", "Correo inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCorreo.Focus();
                 return;
             }
@@ -1230,8 +1228,7 @@ namespace Vista.Clientes
 
             if (cliente.InsertarClienteIndividual())
             {
-                MostrarExito("Cliente individual registrado correctamente.");
-
+                MessageBox.Show("Cliente actualizado correctamente.", "Actualización exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 paginaActualIndividual = 1;
                 dtIndividualesBusqueda = null;
 
@@ -1285,8 +1282,7 @@ namespace Vista.Clientes
 
                 if (cliente.InsertarClienteCorporativo())
                 {
-                    MostrarExito("Cliente corporativo registrado correctamente.");
-
+                    MessageBox.Show("Cliente registrado correctamente.", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     paginaActual = 1;
                     dtCorporativosBusqueda = null;
 
@@ -1296,7 +1292,7 @@ namespace Vista.Clientes
             }
             catch (Exception ex)
             {
-                MostrarError("Ocurrió un error al registrar el cliente.\n" + ex.Message);
+                MessageBox.Show("Ocurrió un error al registrar el cliente.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1364,7 +1360,7 @@ namespace Vista.Clientes
             }
             catch (Exception ex)
             {
-                MostrarError("Ocurrió un error al seleccionar el cliente.\n" + ex.Message);
+                MessageBox.Show("Ocurrió un error al seleccionar el cliente.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1430,7 +1426,7 @@ namespace Vista.Clientes
             }
             catch (Exception ex)
             {
-                MostrarError("Ocurrió un error al seleccionar el cliente.\n" + ex.Message);
+                MessageBox.Show("Ocurrió un error al seleccionar el cliente.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         //-------------------------------------------------------------------------------
@@ -1440,7 +1436,8 @@ namespace Vista.Clientes
         {
             if (idClienteSeleccionado == 0)
             {
-                MostrarAdvertencia("Seleccione un cliente primero."); return;
+                MessageBox.Show("Seleccione un cliente primero.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             modoEdicion = true;
             cbEstadoCliente.Enabled = true;
@@ -1464,20 +1461,17 @@ namespace Vista.Clientes
         {
             if (idClienteSeleccionado == 0)
             {
-                MostrarAdvertencia("Seleccione un cliente primero.");
+                MessageBox.Show("Seleccione un cliente primero.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             if (!modoEdicion)
             {
-                MostrarAdvertencia("Debe presionar Editar antes de guardar cambios.");
+                MessageBox.Show("Debe presionar Editar antes de guardar cambios.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            // Revisar si realmente se modificó algún dato
             if (!HayCambios())
             {
-                MostrarAdvertencia("No se han realizado cambios en los datos del cliente.");
+                MessageBox.Show("No se han realizado cambios en los datos del cliente.", "Sin cambios", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1497,8 +1491,7 @@ namespace Vista.Clientes
                 if (txtDUI.Text.Length != 10 ||
                     txtDUI.Text[8] != '-')
                 {
-                    MostrarAdvertencia("El DUI debe tener el formato 12345678-9.");
-                    txtDUI.Focus();
+                    MessageBox.Show("El DUI debe tener el formato 12345678-9.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); txtDUI.Focus();
                     return;
                 }
             }
@@ -1557,8 +1550,7 @@ namespace Vista.Clientes
                 // ACTUALIZAR CLIENTE
                 if (cliente.ActualizarCliente())
                 {
-                    MostrarExito("Cliente actualizado correctamente.");
-
+                    MessageBox.Show("Cliente actualizado correctamente.", "Actualización exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     // Actualizar la tabla correspondiente
                     if (tipoClienteSeleccionado == 1)
                     {
@@ -1575,7 +1567,7 @@ namespace Vista.Clientes
             }
             catch (Exception ex)
             {
-                MostrarError("Ocurrió un error al actualizar el cliente.\n" + ex.Message);
+                MessageBox.Show("Ocurrió un error al actualizar el cliente.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -1663,46 +1655,6 @@ namespace Vista.Clientes
         //---------------------------------------------------------------------------------
         //Metodos de busqueda
 
-        private void txtBuscarCorporativo_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txtBuscarCorporativo.Text == "Buscar Cliente...")
-                    return;
-
-                string buscar = txtBuscarCorporativo.Text.Trim();
-
-                if (string.IsNullOrWhiteSpace(buscar))
-                {
-                    paginaActual = 1;
-
-                    dtCorporativosBusqueda = null;
-
-                    MostrarClientes();
-
-                    return;
-                }
-
-                dtCorporativosBusqueda = DbCliente.BuscarClienteCorporativo(buscar);
-
-                int totalResultados = dtCorporativosBusqueda.Rows.Count;
-
-                totalPaginas = (int)Math.Ceiling((double)totalResultados / registrosPorPagina);
-
-                if (totalPaginas == 0)
-                {
-                    totalPaginas = 1;
-                }
-
-                paginaActual = 1;
-
-                MostrarPaginaCorporativosBusqueda();
-            }
-            catch (Exception ex)
-            {
-                MostrarError(ex.Message);
-            }
-        }
         private void MostrarPaginaCorporativosBusqueda()
         {
             if (dtCorporativosBusqueda == null)
@@ -1730,65 +1682,7 @@ namespace Vista.Clientes
             btnSiguienteC.Enabled = paginaActual < totalPaginas;
         }
 
-        private void txtBuscarCorporativo_Leave(object sender, EventArgs e)
-        {
-            txtBuscarCorporativo.Text = "Buscar Cliente...";
-            txtBuscarCorporativo.ForeColor = Color.Gray;
-        }
 
-        private void txtBuscarCorporativo_Enter(object sender, EventArgs e)
-        {
-            //Cuando el usuario de enter para escribir, se va a borrar el texto de indicacion
-            // Y el texto ya no sera opaco, sera color negro
-            if (txtBuscarCorporativo.Text == "Buscar Cliente...")
-            {
-                txtBuscarCorporativo.Text = "";
-                txtBuscarCorporativo.ForeColor = Color.Black;
-            }
-        }
-
-        private void txtBuscarIndividual_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txtBuscarIndividual.Text == "Buscar Cliente...")
-                    return;
-
-                string buscar = txtBuscarIndividual.Text.Trim();
-
-                if (string.IsNullOrWhiteSpace(buscar))
-                {
-                    paginaActualIndividual = 1;
-
-                    dtIndividualesBusqueda = null;
-
-                    MostrarClientes2();
-
-                    return;
-                }
-
-                dtIndividualesBusqueda = DbCliente.BuscarClienteIndividual(buscar);
-
-                int totalResultados = dtIndividualesBusqueda.Rows.Count;
-
-                totalPaginasIndividual = (int)Math.Ceiling((double)totalResultados / registrosPorPagina);
-
-                if (totalPaginasIndividual == 0)
-                {
-                    totalPaginasIndividual = 1;
-                }
-
-                paginaActualIndividual = 1;
-
-                MostrarPaginaIndividualesBusqueda();
-
-
-            }
-            catch (Exception ex)
-            {
-                MostrarError(ex.Message);
-            }
-        }
 
         private void MostrarPaginaIndividualesBusqueda()
         {
@@ -1819,24 +1713,78 @@ namespace Vista.Clientes
 
 
         }
-
-        private void txtBuscarIndividual_Leave(object sender, EventArgs e)
+        private void txtBuscarCorporativo_TextChanged_1(object sender, EventArgs e)
         {
-            txtBuscarIndividual.Text = "Buscar Cliente...";
-            txtBuscarIndividual.ForeColor = Color.Gray;
-        }
-
-        private void txtBuscarIndividual_Enter(object sender, EventArgs e)
-        {
-            //Cuando el usuario de enter para escribir, se va a borrar el texto de indicacion
-            // Y el texto ya no sera opaco, sera color negro
-            if (txtBuscarIndividual.Text == "Buscar Cliente...")
+            try
             {
-                txtBuscarIndividual.Text = "";
-                txtBuscarIndividual.ForeColor = Color.Black;
+                if (txtBuscarCorporativo.Text == TextoBusqueda)
+                    return;
 
+                string buscar = txtBuscarCorporativo.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(buscar))
+                {
+                    paginaActual = 1;
+                    dtCorporativosBusqueda = null;
+                    MostrarClientes();
+                    return;
+                }
+
+                dtCorporativosBusqueda = DbCliente.BuscarClienteCorporativo(buscar);
+
+                int totalResultados = dtCorporativosBusqueda.Rows.Count;
+
+                totalPaginas = (int)Math.Ceiling((double)totalResultados / registrosPorPagina);
+
+                if (totalPaginas == 0)
+                    totalPaginas = 1;
+
+                paginaActual = 1;
+
+                MostrarPaginaCorporativosBusqueda();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al buscar clientes.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void txtBuscarIndividual_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtBuscarIndividual.Text == TextoBusqueda)
+                    return;
+
+                string buscar = txtBuscarIndividual.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(buscar))
+                {
+                    paginaActualIndividual = 1;
+                    dtIndividualesBusqueda = null;
+                    MostrarClientes2();
+                    return;
+                }
+
+                dtIndividualesBusqueda = DbCliente.BuscarClienteIndividual(buscar);
+
+                int totalResultados = dtIndividualesBusqueda.Rows.Count;
+
+                totalPaginasIndividual = (int)Math.Ceiling((double)totalResultados / registrosPorPagina);
+
+                if (totalPaginasIndividual == 0)
+                    totalPaginasIndividual = 1;
+
+                paginaActualIndividual = 1;
+
+                MostrarPaginaIndividualesBusqueda();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al buscar clientes.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
         //-----------------------------------------------------------------------------------
 
@@ -1873,10 +1821,9 @@ namespace Vista.Clientes
             txtNIT.SelectionStart = txtNIT.Text.Length;
         }
 
-        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
-        {
 
-        }
+
+
     }
 }
 

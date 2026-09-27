@@ -46,8 +46,6 @@
             this.lblDatosMaterial = new System.Windows.Forms.Label();
             this.lblSubTexto = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.txtBuscar = new System.Windows.Forms.TextBox();
             this.pnlBarraSuperior = new System.Windows.Forms.Panel();
             this.lblAdministrador = new System.Windows.Forms.Label();
             this.pbPerfil = new System.Windows.Forms.PictureBox();
@@ -74,10 +72,10 @@
             this.btnSiguiente = new System.Windows.Forms.Button();
             this.dgvMateriales = new System.Windows.Forms.DataGridView();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
             this.pnlContenedorPrincipalInventario.SuspendLayout();
             this.pnlPedidaDeDatos.SuspendLayout();
             this.pnlHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlBarraSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPerfil)).BeginInit();
             this.pnlIndicador3.SuspendLayout();
@@ -124,7 +122,7 @@
             this.pnlPedidaDeDatos.Controls.Add(this.txtMaterial);
             this.pnlPedidaDeDatos.Controls.Add(this.lblMaterial);
             this.pnlPedidaDeDatos.Controls.Add(this.lblDatosMaterial);
-            this.pnlPedidaDeDatos.Location = new System.Drawing.Point(6, 117);
+            this.pnlPedidaDeDatos.Location = new System.Drawing.Point(17, 117);
             this.pnlPedidaDeDatos.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPedidaDeDatos.Name = "pnlPedidaDeDatos";
             this.pnlPedidaDeDatos.Size = new System.Drawing.Size(220, 390);
@@ -291,7 +289,6 @@
             // 
             // pnlHeader
             // 
-            this.pnlHeader.Controls.Add(this.pictureBox1);
             this.pnlHeader.Controls.Add(this.txtBuscar);
             this.pnlHeader.Controls.Add(this.pnlBarraSuperior);
             this.pnlHeader.Controls.Add(this.pnlIndicador3);
@@ -306,30 +303,6 @@
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Size = new System.Drawing.Size(1102, 627);
             this.pnlHeader.TabIndex = 0;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Vista.Properties.Resources.zoom_5611171;
-            this.pictureBox1.Location = new System.Drawing.Point(998, 56);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(32, 26);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
-            // 
-            // txtBuscar
-            // 
-            this.txtBuscar.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.ForeColor = System.Drawing.Color.Gray;
-            this.txtBuscar.Location = new System.Drawing.Point(541, 56);
-            this.txtBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(488, 26);
-            this.txtBuscar.TabIndex = 9;
-            this.txtBuscar.Text = "Buscar Material...";
-            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
-            this.txtBuscar.Enter += new System.EventHandler(this.txtBuscar_Enter);
-            this.txtBuscar.Leave += new System.EventHandler(this.txtBuscar_Leave);
             // 
             // pnlBarraSuperior
             // 
@@ -613,6 +586,24 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtBuscar.DefaultText = "";
+            this.txtBuscar.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtBuscar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtBuscar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscar.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscar.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtBuscar.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscar.Location = new System.Drawing.Point(683, 51);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.PlaceholderText = "";
+            this.txtBuscar.SelectedText = "";
+            this.txtBuscar.Size = new System.Drawing.Size(390, 33);
+            this.txtBuscar.TabIndex = 9;
+            // 
             // frmInventario
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -629,7 +620,6 @@
             this.pnlPedidaDeDatos.PerformLayout();
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlBarraSuperior.ResumeLayout(false);
             this.pnlBarraSuperior.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPerfil)).EndInit();
@@ -675,7 +665,6 @@
         private System.Windows.Forms.Panel pnlIndicador3;
         private System.Windows.Forms.ComboBox cbUnidadMedida;
         private System.Windows.Forms.Panel pnlBarraSuperior;
-        private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.PictureBox pbTotalInventario;
         private System.Windows.Forms.PictureBox pbPocasUnidades;
         private System.Windows.Forms.PictureBox pbAgotados;
@@ -695,10 +684,10 @@
         private System.Windows.Forms.Label lblMaterialesAgotados;
         private System.Windows.Forms.Label lblDisponibles;
         private System.Windows.Forms.Button btnNuevo;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblPagina;
         private System.Windows.Forms.Button btnAnterior;
         private System.Windows.Forms.Button btnSiguiente;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private Guna.UI2.WinForms.Guna2TextBox txtBuscar;
     }
 }
