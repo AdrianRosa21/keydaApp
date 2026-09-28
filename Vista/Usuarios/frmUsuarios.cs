@@ -15,6 +15,8 @@ namespace Vista.Usuarios
             InitializeComponent();
             ResponsiveHelper.Apply(this);
             ConfigurarTooltips();
+            ConfigurarBotonesUsuarios();
+
         }
 
         // VARIABLES PARA LA PAGINACIÓN
@@ -22,6 +24,62 @@ namespace Vista.Usuarios
         private int paginaActual = 1;
         private int registrosPorPagina = 20;
         private int totalPaginas = 0;
+
+        private Guna.UI2.WinForms.Guna2Elipse elipseContenedor;
+        private Guna.UI2.WinForms.Guna2Elipse elipsePedidoDatos;
+        private Guna.UI2.WinForms.Guna2Elipse elipsePedidosRegistrados;
+
+
+
+
+        private void ConfigurarBotonesUsuarios()
+        {
+            ConfigurarBotonCafe(btnNuevoUsuario);
+            ConfigurarBotonCafe(btnGuardarUsuario);
+            ConfigurarBotonCafe(btnDesactivarUsuario);
+        }
+
+        private void ConfigurarBotonCafe(Guna.UI2.WinForms.Guna2TileButton boton)
+        {
+            boton.FillColor = Color.FromArgb(235, 218, 198);
+            boton.ForeColor = Color.FromArgb(121, 75, 45);
+
+            boton.BorderColor = Color.FromArgb(121, 75, 45);
+            boton.BorderThickness = 1;
+            boton.BorderRadius = 10;
+
+            boton.HoverState.FillColor = Color.FromArgb(220, 190, 160);
+            boton.HoverState.ForeColor = Color.FromArgb(121, 75, 45);
+            boton.HoverState.BorderColor = Color.FromArgb(121, 75, 45);
+
+            boton.PressedColor = Color.FromArgb(205, 175, 145);
+
+            boton.Cursor = Cursors.Hand;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         private void ConfigurarTooltips()
         {
             ToolTip toolTip1 = new ToolTip

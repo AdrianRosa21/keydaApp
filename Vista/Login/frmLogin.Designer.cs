@@ -32,7 +32,6 @@
             this.pnlPrincipalLogin = new System.Windows.Forms.Panel();
             this.pnlContenedorLogin = new System.Windows.Forms.Panel();
             this.btnRecuperarContrasena = new System.Windows.Forms.Button();
-            this.btnIngresar = new System.Windows.Forms.Button();
             this.txtContraseña = new System.Windows.Forms.TextBox();
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.lblContraseña = new System.Windows.Forms.Label();
@@ -40,15 +39,16 @@
             this.lblIndoInicio = new System.Windows.Forms.Label();
             this.lblIniciarSesion = new System.Windows.Forms.Label();
             this.pbImagenPrincipal = new System.Windows.Forms.PictureBox();
+            this.picLogo = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnCerrarClientes = new System.Windows.Forms.Button();
-            this.picLogo = new System.Windows.Forms.PictureBox();
+            this.btnIngresar = new Guna.UI2.WinForms.Guna2TileButton();
             this.panel1.SuspendLayout();
             this.pnlPrincipalLogin.SuspendLayout();
             this.pnlContenedorLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagenPrincipal)).BeginInit();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -75,8 +75,8 @@
             // 
             this.pnlContenedorLogin.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.pnlContenedorLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(221)))), ((int)(((byte)(175)))));
-            this.pnlContenedorLogin.Controls.Add(this.btnRecuperarContrasena);
             this.pnlContenedorLogin.Controls.Add(this.btnIngresar);
+            this.pnlContenedorLogin.Controls.Add(this.btnRecuperarContrasena);
             this.pnlContenedorLogin.Controls.Add(this.txtContraseña);
             this.pnlContenedorLogin.Controls.Add(this.txtUsuario);
             this.pnlContenedorLogin.Controls.Add(this.lblContraseña);
@@ -96,28 +96,10 @@
             this.btnRecuperarContrasena.Location = new System.Drawing.Point(523, 439);
             this.btnRecuperarContrasena.Name = "btnRecuperarContrasena";
             this.btnRecuperarContrasena.Size = new System.Drawing.Size(143, 27);
-            this.btnRecuperarContrasena.TabIndex = 10;
+            this.btnRecuperarContrasena.TabIndex = 4;
             this.btnRecuperarContrasena.Text = "Recuperar contraseña";
             this.btnRecuperarContrasena.UseVisualStyleBackColor = true;
             this.btnRecuperarContrasena.Click += new System.EventHandler(this.btnRecuperarContrasena_Click);
-            // 
-            // btnIngresar
-            // 
-            this.btnIngresar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnIngresar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnIngresar.FlatAppearance.BorderSize = 0;
-            this.btnIngresar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnIngresar.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIngresar.ForeColor = System.Drawing.Color.White;
-            this.btnIngresar.Location = new System.Drawing.Point(521, 484);
-            this.btnIngresar.Margin = new System.Windows.Forms.Padding(0);
-            this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Size = new System.Drawing.Size(435, 43);
-            this.btnIngresar.TabIndex = 7;
-            this.btnIngresar.Text = "Ingresar";
-            this.btnIngresar.UseVisualStyleBackColor = false;
-            this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click_1);
             // 
             // txtContraseña
             // 
@@ -127,7 +109,7 @@
             this.txtContraseña.Location = new System.Drawing.Point(523, 393);
             this.txtContraseña.Name = "txtContraseña";
             this.txtContraseña.Size = new System.Drawing.Size(435, 32);
-            this.txtContraseña.TabIndex = 6;
+            this.txtContraseña.TabIndex = 2;
             this.txtContraseña.UseSystemPasswordChar = true;
             // 
             // txtUsuario
@@ -138,7 +120,7 @@
             this.txtUsuario.Location = new System.Drawing.Point(523, 318);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(435, 32);
-            this.txtUsuario.TabIndex = 5;
+            this.txtUsuario.TabIndex = 1;
             // 
             // lblContraseña
             // 
@@ -195,6 +177,15 @@
             this.pbImagenPrincipal.TabIndex = 0;
             this.pbImagenPrincipal.TabStop = false;
             // 
+            // picLogo
+            // 
+            this.picLogo.Location = new System.Drawing.Point(615, 3);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(281, 201);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picLogo.TabIndex = 12;
+            this.picLogo.TabStop = false;
+            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(129)))), ((int)(((byte)(62)))), ((int)(((byte)(36)))));
@@ -215,14 +206,20 @@
             this.btnCerrarClientes.UseVisualStyleBackColor = true;
             this.btnCerrarClientes.Click += new System.EventHandler(this.btnCerrarClientes_Click);
             // 
-            // picLogo
+            // btnIngresar
             // 
-            this.picLogo.Location = new System.Drawing.Point(615, 3);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(281, 201);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picLogo.TabIndex = 12;
-            this.picLogo.TabStop = false;
+            this.btnIngresar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnIngresar.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnIngresar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnIngresar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnIngresar.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIngresar.ForeColor = System.Drawing.Color.White;
+            this.btnIngresar.Location = new System.Drawing.Point(535, 490);
+            this.btnIngresar.Name = "btnIngresar";
+            this.btnIngresar.Size = new System.Drawing.Size(402, 32);
+            this.btnIngresar.TabIndex = 3;
+            this.btnIngresar.Text = "Ingresar";
+            this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
             // 
             // frmLogin
             // 
@@ -242,8 +239,8 @@
             this.pnlContenedorLogin.ResumeLayout(false);
             this.pnlContenedorLogin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagenPrincipal)).EndInit();
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -253,7 +250,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel pnlPrincipalLogin;
         private System.Windows.Forms.Panel pnlContenedorLogin;
-        private System.Windows.Forms.Button btnIngresar;
         private System.Windows.Forms.TextBox txtContraseña;
         private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.Label lblContraseña;
@@ -265,5 +261,6 @@
         private System.Windows.Forms.Button btnCerrarClientes;
         private System.Windows.Forms.Button btnRecuperarContrasena;
         private System.Windows.Forms.PictureBox picLogo;
+        private Guna.UI2.WinForms.Guna2TileButton btnIngresar;
     }
 }

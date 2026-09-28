@@ -17,7 +17,7 @@ namespace Vista.Producción
         private int totalPaginas = 0;
         private DataTable dtProduccionOriginal;
 
-        private const string TextoBusqueda = "Buscar...";
+        private const string TextoBusqueda = "Buscar por código o nombre de cliente...";
         private readonly Color ColorPlaceholder = Color.LightGray;
         private readonly Color ColorCafe = Color.FromArgb(121, 75, 45);
         public frmProduccion()
@@ -223,23 +223,6 @@ namespace Vista.Producción
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //---------------------------------------------------------------
         // CONFIGURAR DISEÑO DE LA TABLA
         private void ConfigurarTablaProduccion()
@@ -373,7 +356,6 @@ namespace Vista.Producción
         // MOSTRAR PRODUCCIÓN
         public void MostrarProduccion()
         {
-
             try
             {
                 // Obtiene las producciones de la base de datos
@@ -486,7 +468,7 @@ namespace Vista.Producción
         //------------------------------------------------------------------
         // EDITAR PRODUCCIÓN
 
-        private void btnEditar_Click(object sender, EventArgs e)
+        private void btnEditar_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -517,31 +499,15 @@ namespace Vista.Producción
             {
                 MessageBox.Show("Error al editar la producción: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         //_---------------------------------------------------------------------------------------
         // BUSCAR PRODUCCIÓN
-
-        // Quita el texto de indicación
-        private void txtBuscar_Enter(object sender, EventArgs e)
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
-            if (txtBuscar.Text == "Buscar por código o nombre de cliente...")
+            if (txtBuscar.Text != "Buscar por código o nombre de cliente...")
             {
-                txtBuscar.Text = "";
-                txtBuscar.ForeColor = Color.Black;
-            }
-        }
-
-        // Vuelve a mostrar el texto de indicación
-        private void txtBuscar_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtBuscar.Text))
-            {
-                txtBuscar.Text =
-                    "Buscar por código o nombre de cliente...";
-
-                txtBuscar.ForeColor = Color.Gray;
+                FiltrarTabla();
             }
         }
 
@@ -602,39 +568,38 @@ namespace Vista.Producción
             FiltrarTabla();
         }
         // Ejecuta el filtro cuando cambia el texto
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
-        {
-            if (txtBuscar.Text != "Buscar por código o nombre de cliente...")
-            {
-                FiltrarTabla();
-            }
-        }
+
         //------------------------------------------------------------------------------
         // LIMPIAR FILTROS
-
-        private void btnLimpiar_Click(object sender, EventArgs e)
+        private void btnLimpiar_Click_1(object sender, EventArgs e)
         {
             try
             {
-                // Reinicia el ComboBox
+                // Reiniciar buscador
+                txtBuscar.Text = TextoBusqueda;
+                txtBuscar.ForeColor = Color.LightGray;
+
+                // Reiniciar estado
                 cbEstados.SelectedIndex = -1;
 
-                // Reinicia el buscador
-                txtBuscar.Text = "Buscar por código o nombre de cliente...";
+                // Restaurar todos los registros originales
+                dtProduccion = dtProduccionOriginal.Copy();
 
-                txtBuscar.ForeColor = Color.Gray;
+                // Volver a la primera página
+                paginaActual = 1;
 
-                // Elimina el filtro de la tabla
-                if (dgvProduccion.DataSource is DataTable dt)
-                {
-                    dt.DefaultView.RowFilter = "";
-                }
+                // Recalcular páginas
+                CalcularPaginas();
+
+                // Mostrar nuevamente todos los registros
+                MostrarPaginaProduccion();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al limpiar los filtros: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         //---------------------------------------------------------------------------
         // MATERIAL UTILIZADO
         private void btnMaterialUtilizado_Click_1(object sender, EventArgs e)
@@ -690,12 +655,13 @@ namespace Vista.Producción
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al actualizar las estadísticas: " + ex.Message, "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
+                MessageBox.Show("Error al actualizar las estadísticas: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
+
 
 
     }

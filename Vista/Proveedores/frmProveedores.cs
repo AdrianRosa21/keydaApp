@@ -18,7 +18,12 @@ namespace Vista.Proveedores
             ResponsiveHelper.Apply(this);
             ConfigurarBarraBusqueda();
             ConfigurarBotones();
+
         }
+        private string nombreProveedorOriginal = "";
+        private string telefonoProveedorOriginal = "";
+        private string correoProveedorOriginal = "";
+        private string ubicacionProveedorOriginal = "";
         private const string TextoBusqueda = "Buscar...";
         private readonly Color ColorPlaceholder = Color.LightGray;
         private readonly Color ColorCafe = Color.FromArgb(121, 75, 45);
@@ -127,26 +132,7 @@ namespace Vista.Proveedores
             boton.Cursor = Cursors.Hand;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //-----------------------------------------------------------------------------------------------------------------------------------------------
 
 
         // VARIABLES PARA LA PAGINACIÓN
@@ -154,24 +140,7 @@ namespace Vista.Proveedores
         private int paginaActual = 1;
         private int registrosPorPagina = 10;
         private int totalPaginas = 0;
-        private void txtBuscar_Enter(object sender, EventArgs e)
-        {
-            //Cuando el usuario de enter para escribir, se va a borrar el texto de indicacion
-            // Y el texto ya no sera opaco, sera color negro
-            if (txtBuscar.Text == "Buscar Proveedor...")
-            {
-                txtBuscar.Text = "";
-                txtBuscar.ForeColor = Color.Black;
-            }
-        }
-        private void txtBuscar_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtBuscar.Text))
-            {
-                txtBuscar.Text = "Buscar proveedor...";
-                txtBuscar.ForeColor = Color.Gray;
-            }
-        }
+
         //------------------------------------------------------------------------------------------------------
         //// CONFIGURAR TOOLTIPS
         private void ConfigurarTooltips()
@@ -226,7 +195,7 @@ namespace Vista.Proveedores
 
             dgvProveedores.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
 
-            dgvProveedores.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 9, FontStyle.Regular);
+            dgvProveedores.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
 
             dgvProveedores.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
@@ -313,6 +282,9 @@ namespace Vista.Proveedores
             chkEstado.Checked = true;
             chkEstado.Enabled = false;
             chkEstado.Visible = false;
+
+            errorProvider1.SetIconAlignment(txtTelefono, ErrorIconAlignment.MiddleRight);
+            errorProvider1.SetIconPadding(txtTelefono, 2);
         }
         private void MostrarProveedor()
         {
@@ -408,38 +380,43 @@ namespace Vista.Proveedores
                 MostrarPaginaProveedores();
             }
         }
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void btnGuardar_Click_1(object sender, EventArgs e)
         {
-            //Validar que el nombre del proveedor no quede vacío
+            // Validar que el nombre del proveedor no quede vacío
             if (string.IsNullOrWhiteSpace(txtNombreProveedor.Text))
             {
                 errorProvider1.SetError(txtNombreProveedor, "Ingrese el nombre del proveedor.");
+                MessageBox.Show("Ingrese el nombre del proveedor.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtNombreProveedor.Focus();
                 return;
             }
-            //Validar que telefono no este vacío
+
+            // Validar que teléfono no esté vacío
             if (string.IsNullOrWhiteSpace(txtTelefono.Text))
             {
                 errorProvider1.SetError(txtTelefono, "Ingrese el teléfono del proveedor.");
+                MessageBox.Show("Ingrese el teléfono del proveedor.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtTelefono.Focus();
                 return;
             }
-            // Validar que ubicacion no este vacía
+
+            // Validar que ubicación no esté vacía
             if (string.IsNullOrWhiteSpace(txtUbicacion.Text))
             {
                 errorProvider1.SetError(txtUbicacion, "Ingrese la ubicación del proveedor.");
+                MessageBox.Show("Ingrese la ubicación del proveedor.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtUbicacion.Focus();
                 return;
             }
 
-            //Validar Correo
+            // Validar correo
             if (string.IsNullOrWhiteSpace(txtCorreo.Text))
             {
                 errorProvider1.SetError(txtCorreo, "El correo es obligatorio.");
+                MessageBox.Show("El correo es obligatorio.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCorreo.Focus();
                 return;
             }
-
             try
             {
                 MailAddress correo = new MailAddress(txtCorreo.Text);
@@ -471,7 +448,6 @@ namespace Vista.Proveedores
                 MostrarProveedor();
             }
         }
-
         private int idProveedorSeleccionado = 0;
         private void dgvProveedor_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -488,19 +464,25 @@ namespace Vista.Proveedores
                 txtUbicacion.Text = fila.Cells["Ubicacion"].Value.ToString();
                 chkEstado.Checked = fila.Cells["Estado"].Value.ToString() == "Activo";
 
+                // Guardar valores originales
+                nombreProveedorOriginal = txtNombreProveedor.Text.Trim();
+                telefonoProveedorOriginal = txtTelefono.Text.Trim();
+                correoProveedorOriginal = txtCorreo.Text.Trim();
+                ubicacionProveedorOriginal = txtUbicacion.Text.Trim();
+
                 btnEditar.Visible = true;
                 btnGuardar.Visible = true;
 
             }
         }
-        private void btnEditar_Click(object sender, EventArgs e)
+
+        private void btnEditar_Click_1(object sender, EventArgs e)
         {
             btnGuardar.Visible = false;
             btnGuardarCambios.Visible = true;
-            chkEstado.Visible = true;
             HabilitarCampos();
-
         }
+
         private void HabilitarCampos()
         {
             chkEstado.Enabled = true;
@@ -526,14 +508,27 @@ namespace Vista.Proveedores
             txtTelefono.Clear();
             txtCorreo.Clear();
             txtUbicacion.Clear();
+
             idProveedorSeleccionado = 0;
+
+            txtNombreProveedor.ReadOnly = false;
+            txtTelefono.ReadOnly = false;
+            txtCorreo.ReadOnly = false;
+            txtUbicacion.ReadOnly = false;
+
+            chkEstado.Checked = true;
+            chkEstado.Enabled = false;
+
             btnEditar.Visible = false;
+            btnGuardarCambios.Visible = false;
             btnGuardar.Visible = true;
             btnDesactivarProveedor.Visible = true;
         }
 
         private void txtTelefono_TextChanged(object sender, EventArgs e)
         {
+            errorProvider1.Clear();
+
             string texto = txtTelefono.Text.Replace("-", "");
 
             if (texto.Length > 4)
@@ -541,11 +536,6 @@ namespace Vista.Proveedores
                 txtTelefono.Text = texto.Insert(4, "-");
                 txtTelefono.SelectionStart = txtTelefono.Text.Length;
             }
-        }
-
-        private void txtCorreo_TextChanged(object sender, EventArgs e)
-        {
-
         }
         private void DesactivarCopiarPegar(Control control)
         {
@@ -580,42 +570,57 @@ namespace Vista.Proveedores
             }
         }
 
+
+
+        private void dgvProveedores_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ActualizarBotonEstado();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo actualizar el botón de estado.\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                if (txtBuscar.Text == "Buscar proveedor...")
+                if (txtBuscar.Text == TextoBusqueda)
                     return;
 
-                string texto = txtBuscar.Text.Trim();
+                string buscar = txtBuscar.Text.Trim();
 
-                // Si la búsqueda está vacía,
-                // mostrar nuevamente todos los proveedores
-                if (string.IsNullOrWhiteSpace(texto))
+                if (string.IsNullOrWhiteSpace(buscar))
                 {
+                    paginaActual = 1;
+                    dtProveedores = null;
                     MostrarProveedor();
                     return;
                 }
 
-                // Buscar los proveedores
-                dtProveedores = DbProveedor.BuscarProveedor(texto);
+                dtProveedores = DbProveedor.BuscarProveedor(buscar);
 
-                // Volver a la primera página
+                int totalResultados = dtProveedores.Rows.Count;
+
+                totalPaginas = (int)Math.Ceiling((double)totalResultados / registrosPorPagina);
+
+                if (totalPaginas == 0)
+                    totalPaginas = 1;
+
                 paginaActual = 1;
 
-                // Calcular páginas
-                CalcularPaginasProveedores();
-
-                // Mostrar resultados paginados
                 MostrarPaginaProveedores();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ocurrió un error al buscar proveedores.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void btnDesactivar_Click(object sender, EventArgs e)
+        private void btnDesactivarProveedor_Click(object sender, EventArgs e)
         {
             try
             {
@@ -648,21 +653,56 @@ namespace Vista.Proveedores
             }
         }
 
-        private void btnGuardarCambios_Click(object sender, EventArgs e)
+        private void btnNuevo_Click_1(object sender, EventArgs e)
+        {
+            Limpiar();
+            dgvProveedores.ClearSelection();
+            dgvProveedores.CurrentCell = null;
+        }
+
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '-' && !char.IsControl(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void txtNombreProveedor_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+        }
+
+        private void txtCorreo_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+        }
+
+        private void txtUbicacion_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+        }
+
+        private void btnGuardarCambios_Click_1(object sender, EventArgs e)
         {
             if (idProveedorSeleccionado == 0)
             {
-                MessageBox.Show("Seleccione un proveedor para editar.");
+                MessageBox.Show("Seleccione un proveedor para editar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            DbProveedor proveedor = new DbProveedor();
-            proveedor.IdProveedor1 = idProveedorSeleccionado;
-            proveedor.Nombre_Proveedor1 = txtNombreProveedor.Text.Trim();
-            proveedor.Telefono1 = txtTelefono.Text.Trim();
-            proveedor.Correo1 = txtCorreo.Text.Trim();
-            proveedor.Ubicacion1 = txtUbicacion.Text.Trim();
-            // Validar correo
+            bool cambioNombre = txtNombreProveedor.Text.Trim() != nombreProveedorOriginal;
+            bool cambioTelefono = txtTelefono.Text.Trim() != telefonoProveedorOriginal;
+            bool cambioCorreo = txtCorreo.Text.Trim() != correoProveedorOriginal;
+            bool cambioUbicacion = txtUbicacion.Text.Trim() != ubicacionProveedorOriginal;
+
+            if (!cambioNombre && !cambioTelefono && !cambioCorreo && !cambioUbicacion)
+            {
+                MessageBox.Show("No se detectaron cambios en el proveedor.", "Sin cambios", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             if (string.IsNullOrWhiteSpace(txtCorreo.Text))
             {
                 errorProvider1.SetError(txtCorreo, "El correo es obligatorio.");
@@ -672,7 +712,8 @@ namespace Vista.Proveedores
 
             try
             {
-                MailAddress correo = new MailAddress(txtCorreo.Text);
+                MailAddress correo = new MailAddress(txtCorreo.Text.Trim());
+                errorProvider1.SetError(txtCorreo, "");
             }
             catch
             {
@@ -681,35 +722,41 @@ namespace Vista.Proveedores
                 return;
             }
 
+            DbProveedor proveedor = new DbProveedor();
+
+            proveedor.IdProveedor1 = idProveedorSeleccionado;
+            proveedor.Nombre_Proveedor1 = txtNombreProveedor.Text.Trim();
+            proveedor.Telefono1 = txtTelefono.Text.Trim();
+            proveedor.Correo1 = txtCorreo.Text.Trim();
+            proveedor.Ubicacion1 = txtUbicacion.Text.Trim();
+
             if (proveedor.ActualizarProveedor())
             {
-                MessageBox.Show("Proveedor actualizado correctamente.");
+                string cambios = "Se realizaron los siguientes cambios:\n\n";
+
+                if (cambioNombre)
+                    cambios += "• Nombre: " + nombreProveedorOriginal + " → " + txtNombreProveedor.Text.Trim() + "\n";
+
+                if (cambioTelefono)
+                    cambios += "• Teléfono: " + telefonoProveedorOriginal + " → " + txtTelefono.Text.Trim() + "\n";
+
+                if (cambioCorreo)
+                    cambios += "• Correo: " + correoProveedorOriginal + " → " + txtCorreo.Text.Trim() + "\n";
+
+                if (cambioUbicacion)
+                    cambios += "• Ubicación: " + ubicacionProveedorOriginal + " → " + txtUbicacion.Text.Trim() + "\n";
+
+                MessageBox.Show(cambios, "Proveedor actualizado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 MostrarProveedor();
                 Limpiar();
             }
             else
             {
-                MessageBox.Show("Error al actualizar el proveedor.");
+                MessageBox.Show("No se pudo actualizar el proveedor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
             dgvProveedores.Columns["IdProveedor"].Visible = false;
-        }
-
-
-        private void btnNuevo_Click(object sender, EventArgs e)
-        {
-            Limpiar();
-        }
-
-        private void dgvProveedores_SelectionChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                ActualizarBotonEstado();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("No se pudo actualizar el botón de estado.\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
     }
 }

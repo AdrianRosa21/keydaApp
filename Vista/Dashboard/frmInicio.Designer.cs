@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pnlContenedor = new System.Windows.Forms.Panel();
             this.chartCotizacionesEstado = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartPedidosEstado = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -58,6 +58,7 @@
             this.lblSubTexto = new System.Windows.Forms.Label();
             this.lblMensajeInformativoPrincipal = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pbPerfil = new System.Windows.Forms.PictureBox();
             this.pbInventario = new System.Windows.Forms.PictureBox();
@@ -73,6 +74,7 @@
             this.pnlProductosInventario.SuspendLayout();
             this.pnlClientesRegistrados.SuspendLayout();
             this.pnlpPedidosActivos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPerfil)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbInventario)).BeginInit();
@@ -84,6 +86,7 @@
             // pnlContenedor
             // 
             this.pnlContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(221)))), ((int)(((byte)(175)))));
+            this.pnlContenedor.Controls.Add(this.pictureBox2);
             this.pnlContenedor.Controls.Add(this.chartCotizacionesEstado);
             this.pnlContenedor.Controls.Add(this.chartPedidosEstado);
             this.pnlContenedor.Controls.Add(this.chartVentasMes);
@@ -105,32 +108,32 @@
             // 
             // chartCotizacionesEstado
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chartCotizacionesEstado.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chartCotizacionesEstado.Legends.Add(legend4);
+            chartArea1.Name = "ChartArea1";
+            this.chartCotizacionesEstado.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartCotizacionesEstado.Legends.Add(legend1);
             this.chartCotizacionesEstado.Location = new System.Drawing.Point(653, 413);
             this.chartCotizacionesEstado.Name = "chartCotizacionesEstado";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chartCotizacionesEstado.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartCotizacionesEstado.Series.Add(series1);
             this.chartCotizacionesEstado.Size = new System.Drawing.Size(412, 190);
             this.chartCotizacionesEstado.TabIndex = 12;
             this.chartCotizacionesEstado.Text = "chart1";
             // 
             // chartPedidosEstado
             // 
-            chartArea5.Name = "ChartArea1";
-            this.chartPedidosEstado.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.chartPedidosEstado.Legends.Add(legend5);
+            chartArea2.Name = "ChartArea1";
+            this.chartPedidosEstado.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chartPedidosEstado.Legends.Add(legend2);
             this.chartPedidosEstado.Location = new System.Drawing.Point(653, 213);
             this.chartPedidosEstado.Name = "chartPedidosEstado";
-            series5.ChartArea = "ChartArea1";
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.chartPedidosEstado.Series.Add(series5);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartPedidosEstado.Series.Add(series2);
             this.chartPedidosEstado.Size = new System.Drawing.Size(412, 190);
             this.chartPedidosEstado.TabIndex = 11;
             this.chartPedidosEstado.Text = "chart1";
@@ -138,16 +141,16 @@
             // 
             // chartVentasMes
             // 
-            chartArea6.Name = "ChartArea1";
-            this.chartVentasMes.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.chartVentasMes.Legends.Add(legend6);
+            chartArea3.Name = "ChartArea1";
+            this.chartVentasMes.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chartVentasMes.Legends.Add(legend3);
             this.chartVentasMes.Location = new System.Drawing.Point(25, 220);
             this.chartVentasMes.Name = "chartVentasMes";
-            series6.ChartArea = "ChartArea1";
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            this.chartVentasMes.Series.Add(series6);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartVentasMes.Series.Add(series3);
             this.chartVentasMes.Size = new System.Drawing.Size(595, 377);
             this.chartVentasMes.TabIndex = 12;
             this.chartVentasMes.Text = "chart1";
@@ -309,7 +312,7 @@
             // 
             this.lblSubTexto.AutoSize = true;
             this.lblSubTexto.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubTexto.Location = new System.Drawing.Point(21, 77);
+            this.lblSubTexto.Location = new System.Drawing.Point(71, 71);
             this.lblSubTexto.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSubTexto.Name = "lblSubTexto";
             this.lblSubTexto.Size = new System.Drawing.Size(213, 21);
@@ -320,7 +323,7 @@
             // 
             this.lblMensajeInformativoPrincipal.AutoSize = true;
             this.lblMensajeInformativoPrincipal.Font = new System.Drawing.Font("Times New Roman", 30F, System.Drawing.FontStyle.Bold);
-            this.lblMensajeInformativoPrincipal.Location = new System.Drawing.Point(17, 29);
+            this.lblMensajeInformativoPrincipal.Location = new System.Drawing.Point(65, 27);
             this.lblMensajeInformativoPrincipal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMensajeInformativoPrincipal.Name = "lblMensajeInformativoPrincipal";
             this.lblMensajeInformativoPrincipal.Size = new System.Drawing.Size(207, 45);
@@ -336,6 +339,16 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(622, 392);
             this.panel3.TabIndex = 12;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Vista.Properties.Resources.hogar;
+            this.pictureBox2.Location = new System.Drawing.Point(9, 34);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(61, 56);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 13;
+            this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
@@ -422,6 +435,7 @@
             this.pnlClientesRegistrados.PerformLayout();
             this.pnlpPedidosActivos.ResumeLayout(false);
             this.pnlpPedidosActivos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPerfil)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbInventario)).EndInit();
@@ -461,5 +475,6 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chartCotizacionesEstado;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartPedidosEstado;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

@@ -11,7 +11,6 @@ namespace Modelo.Entidades
         private int IdFactura;
         private DateTime FechaEmision;
         private DateTime FechaVencimiento;
-
         private decimal Descuento;
         private int IdVenta;
         private string Observaciones;
@@ -27,7 +26,6 @@ namespace Modelo.Entidades
 
         public DbFactura()
         {
-
         }
 
         public int IdFactura1 { get => IdFactura; set => IdFactura = value; }
@@ -37,6 +35,7 @@ namespace Modelo.Entidades
         public string Observaciones1 { get => Observaciones; set => Observaciones = value; }
         public decimal Descuento1 { get => Descuento; set => Descuento = value; }
 
+        // CARGAR FACTURAS
         public static DataTable CargarRegistrosFacturas()
         {
             DataTable dt = new DataTable();
@@ -57,46 +56,60 @@ namespace Modelo.Entidades
             {
                 switch (ex.Number)
                 {
-                    case 208:
-                        MessageBox.Show("No se encontró la vista VerFacturas.",
-                            "Error 208", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
                     case 53:
-                        MessageBox.Show("No se pudo conectar con el servidor SQL.",
-                            "Error 53", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("No se puede conectar al servidor SQL.", "ERR-SQL-001", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
 
                     case 4060:
-                        MessageBox.Show("No se pudo acceder a la base de datos.",
-                            "Error 4060", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("No se puede acceder a la base de datos.", "ERR-SQL-002", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
 
                     case -2:
-                        MessageBox.Show("La operación tardó demasiado tiempo.",
-                            "Error -2", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Tiempo de espera agotado.", "ERR-SQL-003", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+
+                    case 208:
+                    case 207:
+                        MessageBox.Show("Tabla, vista o procedimiento no encontrado.", "ERR-SQL-004", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+
+                    case 2812:
+                        MessageBox.Show("Procedimiento almacenado inexistente.", "ERR-SQL-012", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+
+                    case 201:
+                        MessageBox.Show("Faltan parámetros requeridos.", "ERR-SQL-013", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+
+                    case 8144:
+                        MessageBox.Show("Parámetros no válidos.", "ERR-SQL-014", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+
+                    case 18456:
+                        MessageBox.Show("Error de autenticación SQL Server.", "ERR-SQL-017", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
 
                     default:
-                        MessageBox.Show("Ocurrió un error al cargar las facturas.",
-                            "Error " + ex.Number, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Error SQL inesperado.", "ERR-SQL-999", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Ocurrió un error inesperado al cargar las facturas.",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error inesperado.", "ERR-SQL-999", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return dt;
         }
 
+        // INSERTAR FACTURA
         public int InsertarFactura()
         {
-            string sql = @"INSERT INTO Factura (FechaEmision, FechaVencimiento, IdVenta, Descuento, Observaciones)
-                   VALUES(@FechaEmision, @FechaVencimiento, @IdVenta, @Descuento, @Observaciones);
-                   SELECT CAST(SCOPE_IDENTITY() AS INT);";
+            string sql = @"INSERT INTO Factura 
+                           (FechaEmision, FechaVencimiento, IdVenta, Descuento, Observaciones)
+                           VALUES
+                           (@FechaEmision, @FechaVencimiento, @IdVenta, @Descuento, @Observaciones);
+                           SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
             try
             {
@@ -107,8 +120,8 @@ namespace Modelo.Entidades
                     cmd.Parameters.AddWithValue("@FechaVencimiento", FechaVencimiento);
                     cmd.Parameters.AddWithValue("@IdVenta", IdVenta);
                     cmd.Parameters.AddWithValue("@Descuento", Descuento);
-
-                    cmd.Parameters.AddWithValue("@Observaciones", string.IsNullOrWhiteSpace(Observaciones) ? (object)DBNull.Value : Observaciones);
+                    cmd.Parameters.AddWithValue("@Observaciones",
+                        string.IsNullOrWhiteSpace(Observaciones) ? (object)DBNull.Value : Observaciones);
 
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
@@ -118,63 +131,85 @@ namespace Modelo.Entidades
                 switch (ex.Number)
                 {
                     case 2627:
+                        MessageBox.Show("Registro duplicado.", "ERR-SQL-005", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+
                     case 2601:
-                        MessageBox.Show("La factura ya existe en la base de datos.",
-                            "Error " + ex.Number, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Índice UNIQUE duplicado.", "ERR-SQL-006", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
 
                     case 547:
-                        MessageBox.Show("La venta indicada no existe en la base de datos.",
-                            "Error 547", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Violación de clave foránea o restricción CHECK.", "ERR-SQL-007", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
 
                     case 515:
-                        MessageBox.Show("Faltan datos obligatorios para guardar la factura.",
-                            "Error 515", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    case 8115:
-                        MessageBox.Show("El descuento excede el límite permitido.",
-                            "Error 8115", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Campo obligatorio sin valor.", "ERR-SQL-008", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
 
                     case 245:
-                        MessageBox.Show("Uno de los datos ingresados tiene un formato incorrecto.",
-                            "Error 245", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Conversión de datos incorrecta.", "ERR-SQL-009", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+
+                    case 8115:
+                        MessageBox.Show("Desbordamiento numérico.", "ERR-SQL-010", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+
+                    case 8152:
+                    case 2628:
+                        MessageBox.Show("Los datos exceden la longitud permitida.", "ERR-SQL-011", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
 
                     case 53:
-                        MessageBox.Show("No se pudo conectar con el servidor SQL.",
-                            "Error 53", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("No se puede conectar al servidor SQL.", "ERR-SQL-001", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
 
                     case 4060:
-                        MessageBox.Show("No se pudo acceder a la base de datos.",
-                            "Error 4060", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("No se puede acceder a la base de datos.", "ERR-SQL-002", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
 
                     case -2:
-                        MessageBox.Show("La operación tardó demasiado tiempo.",
-                            "Error -2", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Tiempo de espera agotado.", "ERR-SQL-003", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+
+                    case 2812:
+                        MessageBox.Show("Procedimiento almacenado inexistente.", "ERR-SQL-012", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+
+                    case 201:
+                        MessageBox.Show("Faltan parámetros requeridos.", "ERR-SQL-013", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+
+                    case 8144:
+                        MessageBox.Show("Parámetros no válidos.", "ERR-SQL-014", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+
+                    case 8114:
+                        MessageBox.Show("Error de conversión de valores.", "ERR-SQL-015", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+
+                    case 1205:
+                        MessageBox.Show("Bloqueo o deadlock entre transacciones.", "ERR-SQL-016", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+
+                    case 18456:
+                        MessageBox.Show("Error de autenticación SQL Server.", "ERR-SQL-017", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
 
                     default:
-                        MessageBox.Show("Error al insertar la factura:\n\n" + ex.Message, "Error " + ex.Number, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Error SQL inesperado.", "ERR-SQL-999", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
 
                 return 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Ocurrió un error inesperado al insertar la factura.",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                MessageBox.Show("Error inesperado.", "ERR-SQL-999", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return 0;
             }
         }
 
-
+        // BUSCAR VENTA PARA FACTURA
         public static DataTable BuscarVentaParaFactura(int idVenta)
         {
             DataTable dt = new DataTable();
@@ -183,57 +218,30 @@ namespace Modelo.Entidades
             {
                 using (SqlConnection conectar = Conexion.Conectar())
                 {
-                    string comando = @"SELECT * FROM VerVentasParaFactura WHERE [#] = @IdVenta;";
+                    string comando = @"SELECT * 
+                                       FROM VerVentasParaFactura 
+                                       WHERE [#] = @IdVenta;";
 
                     using (SqlDataAdapter adapter = new SqlDataAdapter(comando, conectar))
                     {
                         adapter.SelectCommand.Parameters.AddWithValue("@IdVenta", idVenta);
-
                         adapter.Fill(dt);
                     }
                 }
             }
             catch (SqlException ex)
             {
-                switch (ex.Number)
-                {
-                    case 208:
-                        MessageBox.Show("No se encontró la vista VerVentasParaFactura.",
-                            "Error 208", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    case 53:
-                        MessageBox.Show("No se pudo conectar con el servidor SQL.",
-                            "Error 53", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    case 4060:
-                        MessageBox.Show("No se pudo acceder a la base de datos.",
-                            "Error 4060", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    case -2:
-                        MessageBox.Show("La operación tardó demasiado tiempo.",
-                            "Error -2", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    default:
-                        MessageBox.Show("Ocurrió un error al buscar la venta para factura.",
-                            "Error " + ex.Number, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                }
+                MostrarErrorSql(ex, "buscar la venta para factura");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Ocurrió un error inesperado al buscar la venta.",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error inesperado.", "ERR-SQL-999", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return dt;
         }
 
-
-        // Método que manda la información de la venta para factura
+        // CARGAR DETALLE DE VENTA
         public static DataTable CargarDetalleVentaParaFactura(int idVenta)
         {
             DataTable dt = new DataTable();
@@ -242,57 +250,30 @@ namespace Modelo.Entidades
             {
                 using (SqlConnection conectar = Conexion.Conectar())
                 {
-                    string comando = @"SELECT * FROM VerDetalleVenta WHERE IdVenta = @IdVenta;";
+                    string comando = @"SELECT * 
+                                       FROM VerDetalleVenta 
+                                       WHERE IdVenta = @IdVenta;";
 
                     using (SqlDataAdapter adapter = new SqlDataAdapter(comando, conectar))
                     {
                         adapter.SelectCommand.Parameters.AddWithValue("@IdVenta", idVenta);
-
                         adapter.Fill(dt);
                     }
                 }
             }
             catch (SqlException ex)
             {
-                switch (ex.Number)
-                {
-                    case 208:
-                        MessageBox.Show("No se encontró la vista VerDetalleVenta.",
-                            "Error 208", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    case 53:
-                        MessageBox.Show("No se pudo conectar con el servidor SQL.",
-                            "Error 53", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    case 4060:
-                        MessageBox.Show("No se pudo acceder a la base de datos.",
-                            "Error 4060", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    case -2:
-                        MessageBox.Show("La operación tardó demasiado tiempo.",
-                            "Error -2", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    default:
-                        MessageBox.Show("Ocurrió un error al cargar el detalle de la venta.",
-                            "Error " + ex.Number, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                }
+                MostrarErrorSql(ex, "cargar el detalle de la venta");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Ocurrió un error inesperado al cargar el detalle.",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error inesperado.", "ERR-SQL-999", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return dt;
         }
 
-
-        // Carga los datos al formulario de editar la factura
+        // CARGAR FACTURA POR ID
         public static DataTable CargarFacturaPorId(int idFactura)
         {
             DataTable dt = new DataTable();
@@ -301,63 +282,37 @@ namespace Modelo.Entidades
             {
                 using (SqlConnection conectar = Conexion.Conectar())
                 {
-                    string comando = @"SELECT * FROM VerFacturaEditar WHERE IdFactura = @IdFactura";
+                    string comando = @"SELECT * 
+                                       FROM VerFacturaEditar 
+                                       WHERE IdFactura = @IdFactura";
 
                     using (SqlDataAdapter adapter = new SqlDataAdapter(comando, conectar))
                     {
                         adapter.SelectCommand.Parameters.AddWithValue("@IdFactura", idFactura);
-
                         adapter.Fill(dt);
                     }
                 }
             }
             catch (SqlException ex)
             {
-                switch (ex.Number)
-                {
-                    case 208:
-                        MessageBox.Show("No se encontró la vista VerFacturaEditar.",
-                            "Error 208", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    case 53:
-                        MessageBox.Show("No se pudo conectar con el servidor SQL.",
-                            "Error 53", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    case 4060:
-                        MessageBox.Show("No se pudo acceder a la base de datos.",
-                            "Error 4060", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    case -2:
-                        MessageBox.Show("La operación tardó demasiado tiempo.",
-                            "Error -2", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    default:
-                        MessageBox.Show("Ocurrió un error al cargar la factura.",
-                            "Error " + ex.Number, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                }
+                MostrarErrorSql(ex, "cargar la factura");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Ocurrió un error inesperado al cargar la factura.",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error inesperado.", "ERR-SQL-999", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return dt;
         }
 
-
-        public static void ActualizarFactura(
-            int idFactura,
-            DateTime fechaVencimiento,
-            decimal? descuento,
-            string observaciones)
+        // ACTUALIZAR FACTURA
+        public static void ActualizarFactura(int idFactura, DateTime fechaVencimiento, decimal? descuento, string observaciones)
         {
-            string sql = @"UPDATE Factura SET FechaVencimiento = @FechaVencimiento, Descuento = @Descuento, Observaciones = @Observaciones  WHERE IdFactura = @IdFactura";
+            string sql = @"UPDATE Factura 
+                           SET FechaVencimiento = @FechaVencimiento,
+                               Descuento = @Descuento,
+                               Observaciones = @Observaciones
+                           WHERE IdFactura = @IdFactura";
 
             try
             {
@@ -365,89 +320,47 @@ namespace Modelo.Entidades
                 using (SqlCommand cmd = new SqlCommand(sql, cn))
                 {
                     cmd.Parameters.AddWithValue("@FechaVencimiento", fechaVencimiento);
-
                     cmd.Parameters.AddWithValue("@Descuento", (object)descuento ?? DBNull.Value);
-
-                    cmd.Parameters.AddWithValue("@Observaciones", string.IsNullOrWhiteSpace(observaciones) ? (object)DBNull.Value : observaciones);
-
+                    cmd.Parameters.AddWithValue("@Observaciones",
+                        string.IsNullOrWhiteSpace(observaciones) ? (object)DBNull.Value : observaciones);
                     cmd.Parameters.AddWithValue("@IdFactura", idFactura);
 
                     int filasAfectadas = cmd.ExecuteNonQuery();
 
                     if (filasAfectadas > 0)
                     {
-                        MessageBox.Show("Factura actualizada correctamente.",
-                            "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Factura actualizada correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MessageBox.Show("No se encontró la factura seleccionada.",
-                            "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("No se encontró la factura seleccionada.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
             catch (SqlException ex)
             {
-                switch (ex.Number)
-                {
-                    case 547:
-                        MessageBox.Show("No se puede actualizar la factura por datos relacionados.",
-                            "Error 547", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    case 515:
-                        MessageBox.Show("Faltan datos obligatorios para actualizar la factura.",
-                            "Error 515", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    case 8115:
-                        MessageBox.Show("El descuento excede el límite permitido.",
-                            "Error 8115", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    case 245:
-                        MessageBox.Show("Uno de los datos ingresados tiene un formato incorrecto.",
-                            "Error 245", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    case 53:
-                        MessageBox.Show("No se pudo conectar con el servidor SQL.",
-                            "Error 53", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    case 4060:
-                        MessageBox.Show("No se pudo acceder a la base de datos.",
-                            "Error 4060", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    case -2:
-                        MessageBox.Show("La operación tardó demasiado tiempo.",
-                            "Error -2", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-
-                    default:
-                        MessageBox.Show("Ocurrió un error al actualizar la factura.",
-                            "Error " + ex.Number, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                }
+                MostrarErrorSql(ex, "actualizar la factura");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Ocurrió un error inesperado al actualizar la factura.",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error inesperado.", "ERR-SQL-999", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        // BUSCAR FACTURAS
         public static DataTable BuscarFacturas(string texto)
         {
             DataTable dt = new DataTable();
 
-            using (SqlConnection conexion = Conexion.Conectar())
+            try
             {
-                try
+                using (SqlConnection conexion = Conexion.Conectar())
                 {
-                    string consulta = @"SELECT * FROM VerFacturas WHERE CAST(IdFactura AS VARCHAR) LIKE '%' + @Texto + '%'
-                    OR Cliente LIKE '%' + @Texto + '%' OR [Método de Pago] LIKE '%' + @Texto + '%' ORDER BY IdFactura DESC";
+                    string consulta = @"SELECT *
+                                        FROM VerFacturas
+                                        WHERE CAST(IdFactura AS VARCHAR) LIKE '%' + @Texto + '%'
+                                        OR Cliente LIKE '%' + @Texto + '%'
+                                        ORDER BY IdFactura DESC";
 
                     using (SqlCommand comando = new SqlCommand(consulta, conexion))
                     {
@@ -459,46 +372,98 @@ namespace Modelo.Entidades
                         }
                     }
                 }
-                catch (SqlException ex)
-                {
-                    switch (ex.Number)
-                    {
-                        case 208:
-                            MessageBox.Show("No se encontró la vista VerFacturas.",
-                                "Error 208", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-
-                        case 53:
-                            MessageBox.Show("No se pudo conectar con el servidor SQL.",
-                                "Error 53", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-
-                        case 4060:
-                            MessageBox.Show("No se pudo acceder a la base de datos.",
-                                "Error 4060", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-
-                        case -2:
-                            MessageBox.Show("La operación tardó demasiado tiempo.",
-                                "Error -2", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-
-                        default:
-                            MessageBox.Show("Ocurrió un error al buscar las facturas.",
-                                "Error " + ex.Number, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-                    }
-                }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show("Ocurrió un error inesperado al buscar las facturas.",
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }
+            catch (SqlException ex)
+            {
+                MostrarErrorSql(ex, "buscar las facturas");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error inesperado.", "ERR-SQL-999", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return dt;
         }
 
-    }
+        // MÉTODO CENTRALIZADO PARA ERRORES SQL
+        private static void MostrarErrorSql(SqlException ex, string operacion)
+        {
+            switch (ex.Number)
+            {
+                case 53:
+                    MessageBox.Show("No se puede conectar al servidor SQL.", "ERR-SQL-001", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
 
+                case 4060:
+                    MessageBox.Show("No se puede acceder a la base de datos.", "ERR-SQL-002", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+
+                case -2:
+                    MessageBox.Show("Tiempo de espera agotado.", "ERR-SQL-003", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+
+                case 208:
+                case 207:
+                    MessageBox.Show("Tabla, vista o procedimiento no encontrado.", "ERR-SQL-004", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+
+                case 2627:
+                    MessageBox.Show("Registro duplicado.", "ERR-SQL-005", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    break;
+
+                case 2601:
+                    MessageBox.Show("Índice UNIQUE duplicado.", "ERR-SQL-006", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    break;
+
+                case 547:
+                    MessageBox.Show("Violación de clave foránea o restricción CHECK.", "ERR-SQL-007", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    break;
+
+                case 515:
+                    MessageBox.Show("Campo obligatorio sin valor.", "ERR-SQL-008", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+
+                case 245:
+                    MessageBox.Show("Conversión de datos incorrecta.", "ERR-SQL-009", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+
+                case 8115:
+                    MessageBox.Show("Desbordamiento numérico.", "ERR-SQL-010", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+
+                case 8152:
+                case 2628:
+                    MessageBox.Show("Los datos exceden la longitud permitida.", "ERR-SQL-011", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+
+                case 2812:
+                    MessageBox.Show("Procedimiento almacenado inexistente.", "ERR-SQL-012", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+
+                case 201:
+                    MessageBox.Show("Faltan parámetros requeridos.", "ERR-SQL-013", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+
+                case 8144:
+                    MessageBox.Show("Parámetros no válidos.", "ERR-SQL-014", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+
+                case 8114:
+                    MessageBox.Show("Error de conversión de valores.", "ERR-SQL-015", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+
+                case 1205:
+                    MessageBox.Show("Bloqueo o deadlock entre transacciones.", "ERR-SQL-016", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+
+                case 18456:
+                    MessageBox.Show("Error de autenticación SQL Server.", "ERR-SQL-017", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+
+                default:
+                    MessageBox.Show("Error SQL inesperado.", "ERR-SQL-999", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }
+        }
+    }
 }

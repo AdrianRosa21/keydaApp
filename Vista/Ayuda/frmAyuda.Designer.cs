@@ -601,9 +601,9 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = global::Vista.Properties.Resources.pregunta;
-            this.pictureBox3.Location = new System.Drawing.Point(13, 9);
+            this.pictureBox3.Location = new System.Drawing.Point(13, 6);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(52, 64);
+            this.pictureBox3.Size = new System.Drawing.Size(66, 64);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 6;
             this.pictureBox3.TabStop = false;

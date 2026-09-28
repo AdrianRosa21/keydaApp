@@ -8,7 +8,8 @@ namespace Vista.Producción
     public partial class frmEditarProduccion : Form
     {
         private int idProduccion;
-
+        private DateTime fechaOriginal;
+        private int progresoOriginal;
         public frmEditarProduccion(int idProduccion)
         {
             InitializeComponent();
@@ -46,9 +47,15 @@ namespace Vista.Producción
 
                 txtMuebleRealizar.Text = produccion.Mueble1;
 
+                // Cargar datos reales de la producción
+                dtpFechaEntrega.Value = produccion.FechaEntrega1;
                 nudProgreso.Value = produccion.Progreso1;
 
                 lblEstado.Text = produccion.Estado1;
+
+                // Guardar valores originales
+                fechaOriginal = produccion.FechaEntrega1.Date;
+                progresoOriginal = produccion.Progreso1;
             }
             else
             {
@@ -56,23 +63,7 @@ namespace Vista.Producción
             }
         }
 
-        private void nudProgreso_ValueChanged(object sender, EventArgs e)
-        {
-            int progreso = (int)nudProgreso.Value;
 
-            if (progreso == 0)
-            {
-                lblEstado.Text = "Pendiente";
-            }
-            else if (progreso < 100)
-            {
-                lblEstado.Text = "En producción";
-            }
-            else
-            {
-                lblEstado.Text = "Finalizado";
-            }
-        }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -88,44 +79,68 @@ namespace Vista.Producción
 
         private void nudProgreso_ValueChanged_1(object sender, EventArgs e)
         {
+            ActualizarEstado();
+
+        }
+        private void ActualizarEstado()
+        {
             int progreso = (int)nudProgreso.Value;
 
             if (progreso == 0)
-            {
                 lblEstado.Text = "Pendiente";
-            }
             else if (progreso < 100)
-            {
                 lblEstado.Text = "En producción";
-            }
             else
-            {
                 lblEstado.Text = "Finalizado";
-            }
         }
         private void btnGuardarCambios_Click_1(object sender, EventArgs e)
         {
-            if (dtpFechaEntrega.Value.Date < DateTime.Today)
+            bool cambioFecha = dtpFechaEntrega.Value.Date != fechaOriginal.Date;
+
+            bool cambioProgreso = (int)nudProgreso.Value != progresoOriginal;
+
+            // No se modificó nada
+            if (!cambioFecha && !cambioProgreso)
             {
-                errorProvider1.SetError(dtpFechaEntrega, "La fecha no puede ser anterior a la fecha actual.");
-                dtpFechaEntrega.Focus();
+                MessageBox.Show("No se detectaron cambios en la producción.", "Sin cambios", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 return;
             }
-
             DbProducción produccion = new DbProducción();
 
             produccion.IdProduccion1 = idProduccion;
+            produccion.FechaEntrega1 = dtpFechaEntrega.Value.Date;
             produccion.Progreso1 = (int)nudProgreso.Value;
 
             if (produccion.ActualizarProduccion())
             {
-                MessageBox.Show("Producción actualizada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string mensaje;
 
-                DialogResult = DialogResult.OK;
+                if (cambioFecha && cambioProgreso)
+                {
+                    mensaje = "La fecha de entrega y el progreso de la producción han sido actualizados correctamente.";
+                }
+                else if (cambioFecha)
+                {
+                    mensaje = "La fecha de entrega de la producción ha sido modificada correctamente.";
+                }
+                else
+                {
+                    mensaje = "El progreso de la producción ha sido actualizado correctamente.";
+                    DialogResult = DialogResult.OK;
+
+                }
+
+                MessageBox.Show(mensaje, "Producción actualizada", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 Close();
             }
+            else
+            {
+                MessageBox.Show("No se pudo actualizar la producción.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-
     }
+
 }
+

@@ -97,80 +97,36 @@ namespace Vista.Ventas
             boton.Cursor = Cursors.Hand;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //--------------------------------------------------------------------------------------------------------------------------------------------
         //-----------------------------SECCION DE BUSCAR UNA VENTA--------------//
-        private void txtBuscar_Enter(object sender, EventArgs e)
-        {
-            //Cuando el usuario de enter para escribir, se va a borrar el texto de indicacion
-            // Y el texto ya no sera opaco, sera color negro
-            if (txtBuscar.Text == "Buscar Venta...")
-            {
-                txtBuscar.Text = "";
-                txtBuscar.ForeColor = Color.Black;
-
-            }
-        }
-
-        private void txtBuscar_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtBuscar.Text))
-            {
-                txtBuscar.Text = "Buscar venta...";
-                txtBuscar.ForeColor = Color.Gray;
-            }
-        }
-
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        private void txtBuscar_TextChanged_1(object sender, EventArgs e)
         {
             try
             {
-                if (txtBuscar.Text == "Buscar venta...")
+                if (txtBuscar.Text == TextoBusqueda)
                     return;
 
-                string texto = txtBuscar.Text.Trim();
+                string buscar = txtBuscar.Text.Trim();
 
-                // Si la búsqueda está vacía,
-                // mostrar nuevamente todas las ventas
-                if (string.IsNullOrWhiteSpace(texto))
+                if (string.IsNullOrWhiteSpace(buscar))
                 {
+                    paginaActual = 1;
+                    dtVentas = null;
                     MostrarVentas();
                     return;
                 }
 
-                // Buscar las ventas
-                dtVentas = DbVentas.BuscarVenta(texto);
+                dtVentas = DbVentas.BuscarVenta(buscar);
 
-                // Volver a la primera página
+                int totalResultados = dtVentas.Rows.Count;
+
+                totalPaginas = (int)Math.Ceiling((double)totalResultados / registrosPorPagina);
+
+                if (totalPaginas == 0)
+                    totalPaginas = 1;
+
                 paginaActual = 1;
 
-                // Calcular páginas
-                CalcularPaginasVentas();
-
-                // Mostrar resultados paginados
                 MostrarPaginaVentas();
             }
             catch (Exception ex)
@@ -178,7 +134,6 @@ namespace Vista.Ventas
                 MessageBox.Show("Error al buscar la venta:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         //----------------------METODO PARA CARGAR LA TABLA DE VENTAS-------------------------------//
         public void MostrarVentas()
         {
@@ -211,7 +166,7 @@ namespace Vista.Ventas
             dgvVentas.EnableHeadersVisualStyles = false;
             dgvVentas.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
             dgvVentas.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvVentas.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 9, FontStyle.Regular);
+            dgvVentas.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
             dgvVentas.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvVentas.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
             dgvVentas.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
@@ -258,7 +213,7 @@ namespace Vista.Ventas
             dgvDetalleDeVenta.EnableHeadersVisualStyles = false;
             dgvDetalleDeVenta.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
             dgvDetalleDeVenta.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvDetalleDeVenta.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 9, FontStyle.Regular);
+            dgvDetalleDeVenta.ColumnHeadersDefaultCellStyle.Font = new Font("", 9, FontStyle.Regular);
             dgvDetalleDeVenta.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvDetalleDeVenta.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
             dgvDetalleDeVenta.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
@@ -555,7 +510,6 @@ namespace Vista.Ventas
             }
         }
         //-------------------------------BOTON DE ELIMIAR UNA VENTA---------------------------------//
-
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (dgvVentas.CurrentRow == null)
@@ -583,6 +537,9 @@ namespace Vista.Ventas
             }
         }
 
+        //DESACTIVAR COMANDOS DE COPIAR CORTAR Y PEGAR------------------------------------
+
+
         private void DesactivarCopiarPegar(Control control)
         {
             foreach (Control elemento in control.Controls)
@@ -599,7 +556,9 @@ namespace Vista.Ventas
             }
         }
 
-        private void btnRegistrarFactura_Click(object sender, EventArgs e)
+
+
+        private void btnRegistrarFactura_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -621,11 +580,6 @@ namespace Vista.Ventas
             {
                 MessageBox.Show("Error al abrir el formulario de facturación:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -91,43 +91,7 @@ namespace Vista.Compras
             boton.Cursor = Cursors.Hand;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // VARIABLES PARA COMPRA Y DETALLES
 
@@ -478,7 +442,6 @@ namespace Vista.Compras
             cbProveedor.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
-
         private string ObtenerNombreMaterial(int idMaterial)
         {
             DataTable dt = Material.CargarMateriales();
@@ -572,8 +535,7 @@ namespace Vista.Compras
 
 
             // Ajustar columnas
-            dgvDetalleCompras.AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.Fill;
+            dgvDetalleCompras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
 
             // Ajustar columnas
@@ -583,14 +545,51 @@ namespace Vista.Compras
             ConfigurarTablasCompras();
 
         }
+        private void btnActualizar_Click_1(object sender, EventArgs e)
+        {
+            if (!decimal.TryParse(txtPrecioUnitario.Text, out decimal precio))
+            {
+                errorProvider1.SetError(txtPrecioUnitario, "Ingresa un precio válido.");
+                MessageBox.Show("Ingresa un precio válido.", "Precio inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPrecioUnitario.Focus();
+                return;
+            }
+            int cantidad = Convert.ToInt32(nudCantidad.Value);
 
+            int idMaterial = Convert.ToInt32(cbMaterial.SelectedValue);
 
-        private void btnAgregarProductos_Click_1(object sender, EventArgs e)
+            // Buscar el detalle que estamos editando
+            foreach (DetalleCompraMaterial detalle in detallesTemporales)
+            {
+                if (detalle.IdDetalleCompraMaterial1 == idDetalleEditando)
+                {
+                    detalle.IdMaterial1 = idMaterial;
+                    detalle.Cantidad1 = cantidad;
+                    detalle.PrecioUnitario1 = precio;
+
+                    break;
+                }
+            }
+
+            // Mostrar nuevamente los materiales
+            MostrarDetallesTemporales();
+
+            // Limpiar SOLO los controles para ingresar/editar otro material
+            cbMaterial.SelectedIndex = -1;
+            nudCantidad.Value = 1;
+            txtPrecioUnitario.Clear();
+
+            // Reiniciar el detalle que se está editando
+            idDetalleEditando = 0;
+        }
+
+        private void btnAgregarProductos_Click(object sender, EventArgs e)
         {
             // Validar material
             if (cbMaterial.SelectedIndex == -1)
             {
                 errorProvider1.SetError(cbMaterial, "Selecciona un material.");
+                MessageBox.Show("Selecciona un material.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cbMaterial.Focus();
                 return;
             }
@@ -599,6 +598,7 @@ namespace Vista.Compras
             if (string.IsNullOrWhiteSpace(txtPrecioUnitario.Text))
             {
                 errorProvider1.SetError(txtPrecioUnitario, "Ingresa el precio unitario.");
+                MessageBox.Show("Ingresa el precio unitario.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtPrecioUnitario.Focus();
                 return;
             }
@@ -606,7 +606,8 @@ namespace Vista.Compras
             // Validar que el precio sea numérico
             if (!decimal.TryParse(txtPrecioUnitario.Text, out decimal precio))
             {
-                errorProvider1.SetError(txtPrecioUnitario, "Ingresa un precio vlido.");
+                errorProvider1.SetError(txtPrecioUnitario, "Ingresa un precio válido.");
+                MessageBox.Show("Ingresa un precio válido.", "Precio inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtPrecioUnitario.Focus();
                 return;
             }
@@ -615,6 +616,7 @@ namespace Vista.Compras
             if (precio <= 0)
             {
                 errorProvider1.SetError(txtPrecioUnitario, "El precio unitario debe ser mayor que 0.");
+                MessageBox.Show("El precio unitario debe ser mayor que 0.", "Precio inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtPrecioUnitario.Focus();
                 return;
             }
@@ -626,21 +628,23 @@ namespace Vista.Compras
             if (cantidad <= 0)
             {
                 errorProvider1.SetError(nudCantidad, "La cantidad debe ser mayor que 0.");
+                MessageBox.Show("La cantidad debe ser mayor que 0.", "Cantidad inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 nudCantidad.Focus();
                 return;
             }
+
             int idMaterial = Convert.ToInt32(cbMaterial.SelectedValue);
-            // Verificar si ya est en la lista
-            foreach (DetalleCompraMaterial detalle
-            in detallesTemporales)
+
+            // Verificar si ya está en la lista
+            foreach (DetalleCompraMaterial detalle in detallesTemporales)
             {
                 if (detalle.IdMaterial1 == idMaterial)
                 {
-                    MessageBox.Show("Este material ya est agregado.");
-
+                    MessageBox.Show("Este material ya está agregado.", "Material duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
+
             string nombreMaterial = cbMaterial.Text;
 
             // Crear detalle
@@ -715,13 +719,13 @@ namespace Vista.Compras
             btnActualizarCompra.Visible = false;
         }
 
-
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void btnGuardar_Click_1(object sender, EventArgs e)
         {
             // Validar que se seleccionó un proveedor
             if (cbProveedor.SelectedIndex == -1)
             {
                 errorProvider1.SetError(cbProveedor, "Selecciona un proveedor.");
+                MessageBox.Show("Selecciona un proveedor.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cbProveedor.Focus();
                 return;
             }
@@ -730,6 +734,7 @@ namespace Vista.Compras
             if (dgvDetalleCompras.Rows.Count == 0)
             {
                 errorProvider1.SetError(dgvDetalleCompras, "Agrega al menos un material.");
+                MessageBox.Show("Agrega al menos un material.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 dgvDetalleCompras.Focus();
                 return;
             }
@@ -738,6 +743,7 @@ namespace Vista.Compras
             if (dtpFechaDeCompra.Value == null)
             {
                 errorProvider1.SetError(dtpFechaDeCompra, "Debe ingresar la fecha de la compra.");
+                MessageBox.Show("Debe ingresar la fecha de la compra.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 dtpFechaDeCompra.Focus();
                 return;
             }
@@ -748,6 +754,7 @@ namespace Vista.Compras
             int idProveedor = Convert.ToInt32(cbProveedor.SelectedValue);
 
             int idCompra;
+
             try
             {
                 idCompra = ComprasDb.GuardarCompleta(0, dtpFechaDeCompra.Value, idProveedor, detallesTemporales);
@@ -758,9 +765,9 @@ namespace Vista.Compras
                 return;
             }
 
-            MessageBox.Show("Compra registrada correctamente.\n\n" + "Nmero de compra: " + idCompra, "Compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Compra registrada correctamente.\n\nNúmero de compra: " + idCompra, "Compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            // Actualizar historial de compras ya actualizado
+            // Actualizar historial de compras
             MostrarCompras();
 
             // Limpiar formulario de compras
@@ -778,8 +785,6 @@ namespace Vista.Compras
             modoEdicion = true;
 
             CargarCompraParaEditar(idCompraSeleccionada);
-
-
         }
 
         private void CargarCompraParaEditar(int idCompra)
@@ -874,71 +879,6 @@ namespace Vista.Compras
             txtPrecioUnitario.Text = precio.ToString("0.00");
         }
 
-        private void btnActualizar_Click(object sender, EventArgs e)
-        {
-            if (!decimal.TryParse(txtPrecioUnitario.Text, out decimal precio))
-            {
-                errorProvider1.SetError(txtPrecioUnitario, "Ingresa un precio válido.");
-                return;
-            }
-
-            int cantidad = Convert.ToInt32(nudCantidad.Value);
-
-            int idMaterial = Convert.ToInt32(cbMaterial.SelectedValue);
-
-            // Buscar el detalle que estamos editando
-            foreach (DetalleCompraMaterial detalle in detallesTemporales)
-            {
-                if (detalle.IdDetalleCompraMaterial1 == idDetalleEditando)
-                {
-                    detalle.IdMaterial1 = idMaterial;
-                    detalle.Cantidad1 = cantidad;
-                    detalle.PrecioUnitario1 = precio;
-
-                    break;
-                }
-            }
-
-            // Mostrar nuevamente los materiales
-            MostrarDetallesTemporales();
-
-            // Limpiar SOLO los controles para ingresar/editar otro material
-            cbMaterial.SelectedIndex = -1;
-            nudCantidad.Value = 1;
-            txtPrecioUnitario.Clear();
-
-            // Reiniciar el detalle que se está editando
-            idDetalleEditando = 0;
-
-        }
-
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            if (idCompraSeleccionada == 0)
-            {
-                MessageBox.Show("Seleccione una compra dando doble clic en la tabla inferior.");
-                return;
-            }
-
-            DialogResult res = MessageBox.Show("¿Desea eliminar esta compra y todos sus materiales? Se revertirá el inventario que sumó esta compra, conservando los demás movimientos.", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-            if (res == DialogResult.Yes)
-            {
-                ComprasDb compra = new ComprasDb();
-                compra.IdCompra1 = idCompraSeleccionada;
-                if (compra.EliminarCompra())
-                {
-                    MessageBox.Show("Compra eliminada correctamente.");
-                    MostrarCompras();
-                    LimpiarCompra();
-                    CargarComboBoxMateriales();
-                }
-                else
-                {
-                    MessageBox.Show("Error al eliminar la compra.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
         private void DesactivarCopiarPegar(Control control)
         {
             foreach (Control elemento in control.Controls)
@@ -963,43 +903,9 @@ namespace Vista.Compras
             }
         }
 
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                // Si el texto no realiza alguna busqueda, recarga la tabla
-                if (txtBuscar.Text == "Buscar compra...")
-                    return;
 
-                string texto = txtBuscar.Text.Trim();
 
-                // Si la búsqueda está vacía,
-                // mostrar nuevamente todas las compras
-                if (string.IsNullOrWhiteSpace(texto))
-                {
-                    MostrarCompras();
-                    return;
-                }
-
-                // Buscar las compras
-                dtCompras = ComprasDb.Buscar(texto);
-
-                // Volver a la primera página
-                paginaActual = 1;
-
-                // Calcular páginas
-                CalcularPaginasCompras();
-
-                // Mostrar resultados paginados
-                MostrarPaginaCompras();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnActualizarCompra_Click(object sender, EventArgs e)
+        private void btnActualizarCompra_Click_1(object sender, EventArgs e)
         {
             // Validar que exista una compra seleccionada
             if (!modoEdicion || idCompraSeleccionada == 0)
@@ -1048,6 +954,8 @@ namespace Vista.Compras
         private void btnNueva_Click(object sender, EventArgs e)
         {
             LimpiarCompra();
+            dgvHistorialCompras.ClearSelection();
+            dgvHistorialCompras.CurrentCell = null;
         }
 
         private void dgvDetalleCompras_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -1095,6 +1003,69 @@ namespace Vista.Compras
 
             MessageBox.Show("Material quitado de la lista. Guarda o actualiza la compra para aplicar el cambio.", "Eliminación",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            if (idCompraSeleccionada == 0)
+            {
+                MessageBox.Show("Seleccione una compra dando doble clic en la tabla inferior.");
+                return;
+            }
+
+            DialogResult res = MessageBox.Show("¿Desea eliminar esta compra y todos sus materiales? Se revertirá el inventario que sumó esta compra, conservando los demás movimientos.", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (res == DialogResult.Yes)
+            {
+                ComprasDb compra = new ComprasDb();
+                compra.IdCompra1 = idCompraSeleccionada;
+                if (compra.EliminarCompra())
+                {
+                    MessageBox.Show("Compra eliminada correctamente.");
+                    MostrarCompras();
+                    LimpiarCompra();
+                    CargarComboBoxMateriales();
+                }
+                else
+                {
+                    MessageBox.Show("Error al eliminar la compra.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                    return;
+
+                string buscar = txtBuscar.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(buscar))
+                {
+                    paginaActual = 1;
+                    dtCompras = null;
+                    MostrarCompras();
+                    return;
+                }
+
+                dtCompras = ComprasDb.Buscar(buscar);
+
+                int totalResultados = dtCompras.Rows.Count;
+
+                totalPaginas = (int)Math.Ceiling((double)totalResultados / registrosPorPagina);
+
+                if (totalPaginas == 0)
+                    totalPaginas = 1;
+
+                paginaActual = 1;
+
+                MostrarPaginaCompras();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al buscar compras.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

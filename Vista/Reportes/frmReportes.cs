@@ -116,13 +116,7 @@ namespace Vista.Reportes
                 BorderRadius = 12
             };
         }
-
-
-
-
-
-
-
+        //--------------------------------------------------------------------------------------------------------------------------------
         private void btnClientes_Click(object sender, EventArgs e)
         {
             //Ventas
@@ -203,10 +197,7 @@ namespace Vista.Reportes
         public void CargarReporteCotizaciones()
         {
             dgvReporteCotizaciones.DataSource = null;
-            dgvReporteCotizaciones.DataSource =
-                ReportesCotizaciones.CargarReporteCotizaciones();
-
-
+            dgvReporteCotizaciones.DataSource = ReportesCotizaciones.CargarReporteCotizaciones();
         }
 
         private void ConfigurarTooltips()
@@ -340,7 +331,90 @@ namespace Vista.Reportes
             lblMostrarFacturasEmitidas.Text = ReportesVentas.ContarFacturasEmitidas().ToString();
         }
 
-        private void btnConsultar_Click(object sender, EventArgs e)
+        private void ActualizarEstadisticasCotizaciones()
+        {
+            try
+            {
+                // Tomamos todo el período disponible
+                DateTime fechaInicio = new DateTime(2000, 1, 1);
+                DateTime fechaFin = DateTime.Today;
+
+                DataTable estadisticas = ReportesCotizaciones.ObtenerEstadisticasCotizaciones(fechaInicio, fechaFin);
+
+                if (estadisticas != null && estadisticas.Rows.Count > 0)
+                {
+                    lblMostrarCotizacionesAprobadas.Text = Convert.ToInt32(estadisticas.Rows[0]["CotizacionesAprobadas"]).ToString();
+
+                    lblMostrarCotizacionesRechazadas.Text = Convert.ToInt32(estadisticas.Rows[0]["CotizacionesRechazadas"]).ToString();
+
+                    lblMostrarTotalCotizaciones.Text = Convert.ToInt32(estadisticas.Rows[0]["CotizacionesRegistradas"]).ToString();
+                }
+                else
+                {
+                    lblMostrarCotizacionesAprobadas.Text = "0";
+                    lblMostrarCotizacionesRechazadas.Text = "0";
+                    lblMostrarTotalCotizaciones.Text = "0";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al actualizar las estadísticas de cotizaciones:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void GenerarReportePDF(DataTable cotizaciones, DateTime fechaInicio, DateTime fechaFin, int cotizacionesRegistradas, int cotizacionesAprobadas, int cotizacionesRechazadas)
+        {
+            try
+            {
+                // CREAR CARPETA DE REPORTES
+
+                string carpetaReportes = Path.Combine(Application.StartupPath, "Reportes");
+
+                if (!Directory.Exists(carpetaReportes))
+                {
+                    Directory.CreateDirectory(carpetaReportes);
+                }
+
+                // NOMBRE DEL ARCHIVO
+
+                string nombreArchivo = $"Reporte_Cotizaciones_{fechaInicio:dd-MM-yyyy}_{fechaFin:dd-MM-yyyy}.pdf";
+
+                string rutaArchivo = Path.Combine(carpetaReportes, nombreArchivo);
+
+
+                // CREAR DOCUMENTO
+
+                CotizacionesDocumentoPDF documento = new CotizacionesDocumentoPDF(cotizaciones, fechaInicio, fechaFin, cotizacionesRegistradas, cotizacionesAprobadas, cotizacionesRechazadas);
+
+                // GENERAR PDF
+
+                documento.GeneratePdf(rutaArchivo);
+
+                // MENSAJE
+
+                MessageBox.Show("El reporte de cotizaciones se generó correctamente.\n\n" + $"Período: {fechaInicio:dd/MM/yyyy} - {fechaFin:dd/MM/yyyy}\n\n" + $"Cotizaciones registradas: {cotizacionesRegistradas}\n" +
+                    $"Cotizaciones aprobadas: {cotizacionesAprobadas}\n" + $"Cotizaciones rechazadas: {cotizacionesRechazadas}\n\n" + $"Guardado en:\n{rutaArchivo}", "Reporte generado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                // ABRIR PDF
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = rutaArchivo,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al generar el reporte de cotizaciones:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnExportarCotizaciones_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnConsultar_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -373,7 +447,7 @@ namespace Vista.Reportes
             }
         }
 
-        private void btnExportarReporteClientes_Click(object sender, EventArgs e)
+        private void btnExportarReporteClientes_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -459,7 +533,7 @@ namespace Vista.Reportes
             }
         }
 
-        private void btnConsultarVentas_Click(object sender, EventArgs e)
+        private void btnConsultarVentas_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -481,7 +555,7 @@ namespace Vista.Reportes
             }
         }
 
-        private void btnExportarReporteVentas_Click(object sender, EventArgs e)
+        private void btnExportarReporteVentas_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -578,40 +652,8 @@ namespace Vista.Reportes
             }
         }
 
-        private void ActualizarEstadisticasCotizaciones()
+        private void btnConsultarCotizaciones_Click(object sender, EventArgs e)
         {
-            try
-            {
-                // Tomamos todo el período disponible
-                DateTime fechaInicio = new DateTime(2000, 1, 1);
-                DateTime fechaFin = DateTime.Today;
-
-                DataTable estadisticas = ReportesCotizaciones.ObtenerEstadisticasCotizaciones(fechaInicio, fechaFin);
-
-                if (estadisticas != null && estadisticas.Rows.Count > 0)
-                {
-                    lblMostrarCotizacionesAprobadas.Text = Convert.ToInt32(estadisticas.Rows[0]["CotizacionesAprobadas"]).ToString();
-
-                    lblMostrarCotizacionesRechazadas.Text = Convert.ToInt32(estadisticas.Rows[0]["CotizacionesRechazadas"]).ToString();
-
-                    lblMostrarTotalCotizaciones.Text = Convert.ToInt32(estadisticas.Rows[0]["CotizacionesRegistradas"]).ToString();
-                }
-                else
-                {
-                    lblMostrarCotizacionesAprobadas.Text = "0";
-                    lblMostrarCotizacionesRechazadas.Text = "0";
-                    lblMostrarTotalCotizaciones.Text = "0";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocurrió un error al actualizar las estadísticas de cotizaciones:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnConsultarCotizaciones_Click_1(object sender, EventArgs e)
-        {
-
             try
             {
                 DateTime fechaInicio = dtpFechaInicio.Value.Date;
@@ -672,55 +714,7 @@ namespace Vista.Reportes
             }
         }
 
-        private void GenerarReportePDF(DataTable cotizaciones, DateTime fechaInicio, DateTime fechaFin, int cotizacionesRegistradas, int cotizacionesAprobadas, int cotizacionesRechazadas)
-        {
-            try
-            {
-                // CREAR CARPETA DE REPORTES
-
-                string carpetaReportes = Path.Combine(Application.StartupPath, "Reportes");
-
-                if (!Directory.Exists(carpetaReportes))
-                {
-                    Directory.CreateDirectory(carpetaReportes);
-                }
-
-                // NOMBRE DEL ARCHIVO
-
-                string nombreArchivo = $"Reporte_Cotizaciones_{fechaInicio:dd-MM-yyyy}_{fechaFin:dd-MM-yyyy}.pdf";
-
-                string rutaArchivo = Path.Combine(carpetaReportes, nombreArchivo);
-
-
-                // CREAR DOCUMENTO
-
-                CotizacionesDocumentoPDF documento = new CotizacionesDocumentoPDF(cotizaciones, fechaInicio, fechaFin, cotizacionesRegistradas, cotizacionesAprobadas, cotizacionesRechazadas);
-
-                // GENERAR PDF
-
-                documento.GeneratePdf(rutaArchivo);
-
-                // MENSAJE
-
-                MessageBox.Show("El reporte de cotizaciones se generó correctamente.\n\n" + $"Período: {fechaInicio:dd/MM/yyyy} - {fechaFin:dd/MM/yyyy}\n\n" + $"Cotizaciones registradas: {cotizacionesRegistradas}\n" +
-                    $"Cotizaciones aprobadas: {cotizacionesAprobadas}\n" + $"Cotizaciones rechazadas: {cotizacionesRechazadas}\n\n" + $"Guardado en:\n{rutaArchivo}", "Reporte generado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
-                // ABRIR PDF
-
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = rutaArchivo,
-                    UseShellExecute = true
-                });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocurrió un error al generar el reporte de cotizaciones:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnExportarCotizaciones_Click(object sender, EventArgs e)
+        private void btnExportarCotizaciones_Click_1(object sender, EventArgs e)
         {
             try
             {

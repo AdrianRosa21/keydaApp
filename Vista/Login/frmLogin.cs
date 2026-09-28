@@ -19,11 +19,31 @@ namespace Vista.Login
             InitializeComponent();
             ResponsiveHelper.Apply(this);
             ConfigurarTooltips();
+            ConfigurarBotonIngresar();
         }
-        private void btnIngresar_Click_1(object sender, EventArgs e)
-        {
-            IniciarSesion();
 
+
+
+        private void ConfigurarBotonIngresar()
+        {
+            btnIngresar.FillColor = Color.FromArgb(121, 75, 45);
+            btnIngresar.ForeColor = Color.White;
+
+            btnIngresar.BorderColor = Color.FromArgb(121, 75, 45);
+            btnIngresar.BorderThickness = 0;
+            btnIngresar.BorderRadius = 15;
+
+            btnIngresar.Font = new Font("Times New Roman", 16, FontStyle.Bold);
+
+            // Efecto Hover
+            btnIngresar.HoverState.FillColor = Color.FromArgb(92, 55, 35);
+            btnIngresar.HoverState.ForeColor = Color.White;
+            btnIngresar.HoverState.BorderColor = Color.FromArgb(92, 55, 35);
+
+            // Efecto al presionar
+            btnIngresar.PressedColor = Color.FromArgb(75, 45, 30);
+
+            btnIngresar.Cursor = Cursors.Hand;
         }
 
         private void btnCerrarClientes_Click(object sender, EventArgs e)
@@ -204,6 +224,11 @@ namespace Vista.Login
         private void frmLogin_Load(object sender, EventArgs e)
         {
             CargarLogoEmpresa();
+        }
+
+        private void btnIngresar_Click(object sender, EventArgs e)
+        {
+            IniciarSesion();
         }
     }
 

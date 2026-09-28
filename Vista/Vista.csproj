@@ -741,6 +741,15 @@
     <None Include="Resources\curriculum.png" />
     <None Include="Resources\ajuste.png" />
     <None Include="Resources\ajuste %281%29.png" />
+    <None Include="Resources\usuario %281%29.png" />
+    <None Include="Resources\anadir-al-carrito.png" />
+    <None Include="Resources\aplicacion.png" />
+    <None Include="Resources\hogar.png" />
+    <None Include="Resources\solicitud-de-cotizacion.png" />
+    <None Include="Resources\gestion-de-proyectos.png" />
+    <None Include="Resources\ventas.png" />
+    <None Include="Resources\proveedor.png" />
+    <None Include="Resources\segmento-de-clientes.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

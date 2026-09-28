@@ -1633,6 +1633,8 @@ namespace Vista.Clientes_Secretario
         private void btnNuevoCliente_Click(object sender, EventArgs e)
         {
             LimpiarFormularioCliente();
+            dgvClientesCorporativos.ClearSelection();
+            dgvClientesCorporativos.CurrentCell = null;
         }
 
         private void txtNIT_TextChanged(object sender, EventArgs e)

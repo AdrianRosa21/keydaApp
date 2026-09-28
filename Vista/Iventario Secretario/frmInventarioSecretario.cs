@@ -552,84 +552,65 @@ namespace Vista.Iventario_Secretario
         // Guarda los cambios realizados al material
         private void btnGuardarCambios_Click(object sender, EventArgs e)
         {
-            try
+            if (idMaterialSeleccionado == 0)
             {
-                // Verifica que se haya escrito el nombre
-                if (string.IsNullOrWhiteSpace(txtMaterial.Text))
-                {
-                    errorProvider1.SetError(txtMaterial, "Ingrese el nombre del material.");
-                    txtMaterial.Focus();
-                    return;
-                }
-
-                // Verifica que se haya seleccionado una unidad
-                if (cbUnidadMedida.SelectedIndex == -1)
-                {
-                    errorProvider1.SetError(cbUnidadMedida, "Seleccione la unidad de medida.");
-                    cbUnidadMedida.Focus();
-                    return;
-                }
-
-                // Verifica que se haya seleccionado una categoría
-                if (cbCategorias.SelectedIndex == -1)
-                {
-                    errorProvider1.SetError(cbCategorias, "Seleccione una categoría.");
-                    cbCategorias.Focus();
-                    return;
-                }
-
-                // Verifica que se haya ingresado el stock
-                if (string.IsNullOrWhiteSpace(txtCantidad.Text))
-                {
-                    errorProvider1.SetError(txtCantidad, "Ingrese el stock inicial.");
-                    txtCantidad.Focus();
-                    return;
-                }
-
-                // Verifica que el stock sea un número entero
-                if (!int.TryParse(txtCantidad.Text, out int stock))
-                {
-                    errorProvider1.SetError(txtCantidad, "El stock inicial debe ser un número.");
-                    txtCantidad.Focus();
-                    return;
-                }
-
-                // Evita que se registren cantidades negativas
-                if (stock < 0)
-                {
-                    errorProvider1.SetError(txtCantidad, "El stock inicial no puede ser negativo.");
-                    txtCantidad.Focus();
-                    return;
-                }
-                // Crea el objeto con los datos modificados
-                Material material = new Material();
-
-                material.idMaterial1 = idMaterialSeleccionado;
-                material.NombreDelMaterial1 = txtMaterial.Text.Trim();
-                material.UnidadDeMedida1 = Convert.ToInt32(cbUnidadMedida.SelectedValue);
-                material.Stock1 = stock;
-                material.Categoria1 = cbCategorias.Text;
-
-                // Actualiza el material en la base de datos
-                bool resultado = material.ActualizarMaterial();
-
-                if (resultado)
-                {
-                    MessageBox.Show("Material actualizado correctamente.", "Actualización exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information
-                    );
-
-                    // Actualiza la tabla y limpia los controles
-                    paginaActual = 1;
-                    dtInventarioBusqueda = null;
-                    // Actualiza la tabla y limpia los controles
-                    MostrarInventario();
-                    LimpiarFormulario();
-                }
+                MessageBox.Show("Seleccione un material primero.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            catch (Exception ex)
+
+            bool cambioNombre = txtMaterial.Text != nombreMaterialOriginal;
+            bool cambioUnidad = cbUnidadMedida.Text != unidadMedidaOriginal;
+            bool cambioStock = txtCantidad.Text != stockOriginal;
+            bool cambioCategoria = cbCategorias.Text != categoriaOriginal;
+
+            if (!cambioNombre && !cambioUnidad && !cambioStock && !cambioCategoria)
             {
-                MessageBox.Show("Error al actualizar el material: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No se detectaron cambios en el material.", "Sin cambios", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
+
+            string cambios = "Se realizaron los siguientes cambios:\n\n";
+
+            if (cambioNombre)
+                cambios += "• Material: " + nombreMaterialOriginal + " → " + txtMaterial.Text + "\n";
+
+            if (cambioUnidad)
+                cambios += "• Unidad de medida: " + unidadMedidaOriginal + " → " + cbUnidadMedida.Text + "\n";
+
+            if (cambioStock)
+                cambios += "• Stock: " + stockOriginal + " → " + txtCantidad.Text + "\n";
+
+            if (cambioCategoria)
+                cambios += "• Categoría: " + categoriaOriginal + " → " + cbCategorias.Text + "\n";
+
+            Material material = new Material();
+
+            material.idMaterial1 = idMaterialSeleccionado;
+            material.NombreDelMaterial1 = txtMaterial.Text;
+            material.UnidadDeMedida1 = Convert.ToInt32(cbUnidadMedida.SelectedValue);
+            material.Stock1 = Convert.ToInt32(txtCantidad.Text);
+            material.Categoria1 = cbCategorias.Text;
+
+            if (material.ActualizarMaterial())
+            {
+                MessageBox.Show(cambios, "Material actualizado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                MostrarInventario();
+
+                btnGuardarCambios.Visible = false;
+                btnEditar.Visible = true;
+                btnGuardar.Visible = true;
+
+                txtMaterial.ReadOnly = true;
+                cbUnidadMedida.Enabled = false;
+                txtCantidad.ReadOnly = true;
+                cbCategorias.Enabled = false;
+
+                idMaterialSeleccionado = 0;
+            }
+
+            CargarEstadisticasInventario();
+            LimpiarFormulario();
         }
         //------------------------------------------------------------------------
         //METODO DE BUSQUEDA

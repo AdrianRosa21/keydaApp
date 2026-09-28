@@ -318,6 +318,7 @@
             this.txtMaterial.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.txtMaterial.Location = new System.Drawing.Point(21, 123);
             this.txtMaterial.Margin = new System.Windows.Forms.Padding(2);
+            this.txtMaterial.MaxLength = 100;
             this.txtMaterial.Name = "txtMaterial";
             this.txtMaterial.Size = new System.Drawing.Size(182, 19);
             this.txtMaterial.TabIndex = 2;

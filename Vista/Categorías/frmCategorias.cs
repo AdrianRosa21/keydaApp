@@ -50,6 +50,7 @@ namespace Vista.Categorías
                 cbEstado.TabIndex = 3;
                 btnGuardar.TabIndex = 4;
                 btnEditar.TabIndex = 5;
+                cbEstado.Text = "Activa";
 
                 // Configura los encabezados del DataGridView
                 ConfigurarColumnas();
@@ -216,96 +217,36 @@ namespace Vista.Categorías
             };
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //-------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------
         // CONFIGURAR DISEÑO DE LA TABLA
 
         private void ConfigurarTablaCategorias()
         {
             // Encabezado
             dgvCategorias.EnableHeadersVisualStyles = false;
-
-            dgvCategorias.ColumnHeadersDefaultCellStyle.BackColor =
-                Color.FromArgb(121, 75, 45);
-
-            dgvCategorias.ColumnHeadersDefaultCellStyle.ForeColor =
-                Color.White;
-
-            dgvCategorias.ColumnHeadersDefaultCellStyle.Font =
-                new Font("Segoe UI", 9, FontStyle.Regular);
-
-            dgvCategorias.ColumnHeadersDefaultCellStyle.Alignment =
-                DataGridViewContentAlignment.MiddleCenter;
-
-            dgvCategorias.ColumnHeadersDefaultCellStyle.SelectionBackColor =
-                Color.FromArgb(121, 75, 45);
-
-            dgvCategorias.ColumnHeadersDefaultCellStyle.SelectionForeColor =
-                Color.White;
+            dgvCategorias.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
+            dgvCategorias.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCategorias.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+            dgvCategorias.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvCategorias.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
+            dgvCategorias.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
 
             // Filas
-            dgvCategorias.DefaultCellStyle.BackColor =
-                Color.White;
-
-            dgvCategorias.DefaultCellStyle.ForeColor =
-                Color.FromArgb(45, 45, 45);
-
-            dgvCategorias.DefaultCellStyle.Font =
-                new Font("Segoe UI", 9, FontStyle.Regular);
-
-            dgvCategorias.DefaultCellStyle.Alignment =
-                DataGridViewContentAlignment.MiddleLeft;
+            dgvCategorias.DefaultCellStyle.BackColor = Color.White;
+            dgvCategorias.DefaultCellStyle.ForeColor = Color.FromArgb(45, 45, 45);
+            dgvCategorias.DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+            dgvCategorias.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
             // Filas alternadas
-            dgvCategorias.AlternatingRowsDefaultCellStyle.BackColor =
-                Color.FromArgb(248, 241, 232);
+            dgvCategorias.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 241, 232);
 
             // Selección
-            dgvCategorias.DefaultCellStyle.SelectionBackColor =
-                Color.FromArgb(224, 193, 157);
-
-            dgvCategorias.DefaultCellStyle.SelectionForeColor =
-                Color.Black;
+            dgvCategorias.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 193, 157);
+            dgvCategorias.DefaultCellStyle.SelectionForeColor = Color.Black;
 
             // Bordes
-            dgvCategorias.CellBorderStyle =
-                DataGridViewCellBorderStyle.SingleHorizontal;
-
-            dgvCategorias.GridColor =
-                Color.FromArgb(220, 220, 220);
+            dgvCategorias.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvCategorias.GridColor = Color.FromArgb(220, 220, 220);
 
             // Alto de las filas
             dgvCategorias.RowTemplate.Height = 32;
@@ -315,32 +256,26 @@ namespace Vista.Categorías
 
             // No permitir modificar
             dgvCategorias.ReadOnly = true;
-
             dgvCategorias.AllowUserToAddRows = false;
-
             dgvCategorias.AllowUserToDeleteRows = false;
 
             // Seleccionar fila completa
-            dgvCategorias.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
-
+            dgvCategorias.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCategorias.MultiSelect = false;
 
             // Quitar borde exterior
-            dgvCategorias.BorderStyle =
-                BorderStyle.None;
+            dgvCategorias.BorderStyle = BorderStyle.None;
 
             // Ajustar contenido
-            dgvCategorias.DefaultCellStyle.WrapMode =
-                DataGridViewTriState.True;
+            dgvCategorias.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dgvCategorias.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
-            dgvCategorias.AutoSizeRowsMode =
-                DataGridViewAutoSizeRowsMode.AllCells;
+            // Desactivar redimensionamiento del encabezado de filas
             dgvCategorias.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+
             // Ocultar cuadrito de la izquierda
             dgvCategorias.RowHeadersVisible = false;
         }
-
         //CONFIGURAR TOOLTIPS--------------------------------------
         private void ConfigurarTooltips()
         {
@@ -393,8 +328,7 @@ namespace Vista.Categorías
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al mostrar las categorías: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al mostrar las categorías: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -482,23 +416,17 @@ namespace Vista.Categorías
         }
         //--------------------------------------------------------------------------
         // REGISTRAR CATEGORÍA
-
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void btnGuardar_Click_1(object sender, EventArgs e)
         {
+            cbEstado.Enabled = false;
+
             try
             {
-                // Verifica que exista una categoría seleccionada
-                if (idCategoriaSeleccionada == 0)
-                {
-                    errorProvider1.SetError(txtCategoria, "No hay ninguna categoría seleccionada.");
-                    txtCategoria.Focus();
-                    return;
-                }
-
                 // Valida el nombre
                 if (string.IsNullOrWhiteSpace(txtCategoria.Text))
                 {
                     errorProvider1.SetError(txtCategoria, "Debe ingresar el nombre de la categoría.");
+                    MessageBox.Show("Debe ingresar el nombre de la categoría.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtCategoria.Focus();
                     return;
                 }
@@ -507,15 +435,8 @@ namespace Vista.Categorías
                 if (string.IsNullOrWhiteSpace(txtDescripcion.Text))
                 {
                     errorProvider1.SetError(txtDescripcion, "Debe ingresar la descripción de la categoría.");
+                    MessageBox.Show("Debe ingresar la descripción de la categoría.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtDescripcion.Focus();
-                    return;
-                }
-
-                // Valida el estado
-                if (cbEstado.SelectedIndex == -1)
-                {
-                    errorProvider1.SetError(cbEstado, "Debe seleccionar el estado de la categoría.");
-                    cbEstado.Focus();
                     return;
                 }
 
@@ -523,18 +444,17 @@ namespace Vista.Categorías
                 Categorias categoria = new Categorias();
 
                 categoria.Nombre_Categoria1 = txtCategoria.Text.Trim();
-
                 categoria.Descripción1 = txtDescripcion.Text.Trim();
 
-                categoria.Estado1 = cbEstado.Text;
+                // Estado inicial
+                categoria.Estado1 = "Activa";
 
                 // Inserta la categoría en la base de datos
                 bool resultado = categoria.InsertarCategoria();
 
                 if (resultado)
                 {
-                    MessageBox.Show("Categoría registrada correctamente.", "Registro exitoso",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Categoría registrada correctamente.", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     MostrarCategorias();
                     LimpiarFormulario();
@@ -542,8 +462,7 @@ namespace Vista.Categorías
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al registrar la categoría: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al registrar la categoría: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -571,8 +490,7 @@ namespace Vista.Categorías
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al seleccionar la categoría: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al seleccionar la categoría: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -623,7 +541,7 @@ namespace Vista.Categorías
         }
         //------------------------------------------------------------
         // BOTON DE EDITAR CATEGORÍA
-        private void btnEditar_Click(object sender, EventArgs e)
+        private void btnEditar_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -671,7 +589,7 @@ namespace Vista.Categorías
         }
         //--------------------------------------------------------------
         //GUARDAR CAMBIOS
-        private void btnGuardarCambios_Click(object sender, EventArgs e)
+        private void btnGuardarCambios_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -679,6 +597,7 @@ namespace Vista.Categorías
                 if (idCategoriaSeleccionada == 0)
                 {
                     errorProvider1.SetError(txtCategoria, "No hay ninguna categoría seleccionada.");
+                    MessageBox.Show("No hay ninguna categoría seleccionada.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtCategoria.Focus();
                     return;
                 }
@@ -687,6 +606,7 @@ namespace Vista.Categorías
                 if (string.IsNullOrWhiteSpace(txtCategoria.Text))
                 {
                     errorProvider1.SetError(txtCategoria, "Debe ingresar el nombre de la categoría.");
+                    MessageBox.Show("Debe ingresar el nombre de la categoría.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtCategoria.Focus();
                     return;
                 }
@@ -695,6 +615,7 @@ namespace Vista.Categorías
                 if (string.IsNullOrWhiteSpace(txtDescripcion.Text))
                 {
                     errorProvider1.SetError(txtDescripcion, "Debe ingresar la descripción de la categoría.");
+                    MessageBox.Show("Debe ingresar la descripción de la categoría.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtDescripcion.Focus();
                     return;
                 }
@@ -703,6 +624,7 @@ namespace Vista.Categorías
                 if (cbEstado.SelectedIndex == -1)
                 {
                     errorProvider1.SetError(cbEstado, "Debe seleccionar el estado de la categoría.");
+                    MessageBox.Show("Debe seleccionar el estado de la categoría.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cbEstado.Focus();
                     return;
                 }
@@ -718,8 +640,7 @@ namespace Vista.Categorías
 
                 if (!cambioNombre && !cambioDescripcion && !cambioEstado)
                 {
-                    MessageBox.Show("No se detectaron cambios en la categoría.", "Sin cambios",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("No se detectaron cambios en la categoría.", "Sin cambios", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     return;
                 }
@@ -756,8 +677,7 @@ namespace Vista.Categorías
                         cambios += "• Estado: " + estadoOriginal + " → " + nuevoEstado + "\n";
                     }
 
-                    MessageBox.Show("Categoría actualizada correctamente.\n\n" + cambios, "Actualización exitosa",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Categoría actualizada correctamente.\n\n" + cambios, "Actualización exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // Actualizar tabla
                     MostrarCategorias();
@@ -776,75 +696,48 @@ namespace Vista.Categorías
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al actualizar la categoría: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al actualizar la categoría: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
         //------------------------------------------------------
         //BUSQUEDA
-        private void txtBuscarCategoria_Enter(object sender, EventArgs e)
-        {
-            //Cuando el usuario de enter para escribir, se va a borrar el texto de indicacion
-            // Y el texto ya no sera opaco, sera color negro
-            if (txtBuscarCategoria.Text == "Buscar Categoría...")
-            {
-                txtBuscarCategoria.Text = "";
-                txtBuscarCategoria.ForeColor = Color.Black;
 
-            }
-        }
+        // Actualiza la tabla cuando se borra el texto de búsqueda
 
-        private void txtBuscarCategoria_Leave(object sender, EventArgs e)
-        {
-            // Vuelve a mostrar el texto de indicación
-            if (string.IsNullOrWhiteSpace(txtBuscarCategoria.Text))
-            {
-                txtBuscarCategoria.Text = "Buscar Categoría...";
-                txtBuscarCategoria.ForeColor = Color.Gray;
-            }
-        }
-        // Realiza la búsqueda de categorías
-        private void btnBuscar_Click(object sender, EventArgs e)
+        private void txtBuscarCategoria_TextChanged_1(object sender, EventArgs e)
         {
             try
             {
-                if (txtBuscarCategoria.Text == "Buscar Categoría...")
+                if (txtBuscarCategoria.Text == TextoBusqueda)
+                    return;
+
+                string buscar = txtBuscarCategoria.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(buscar))
                 {
+                    paginaActual = 1;
+                    dtCategorias = null;
+                    MostrarCategorias();
                     return;
                 }
 
-                dgvCategorias.DataSource = null;
+                dtCategorias = Categorias.Buscar(buscar);
 
-                dgvCategorias.DataSource = Categorias.Buscar(txtBuscarCategoria.Text.Trim());
+                int totalResultados = dtCategorias.Rows.Count;
 
-                ConfigurarColumnas();
+                totalPaginas = (int)Math.Ceiling((double)totalResultados / registrosPorPagina);
 
-                // Mantener el diseño después de buscar
-                ConfigurarTablaCategorias();
+                if (totalPaginas == 0)
+                    totalPaginas = 1;
+
+                paginaActual = 1;
+
+                MostrarPaginaCategorias();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al buscar la categoría: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-
-        }
-        // Actualiza la tabla cuando se borra el texto de búsqueda
-        private void txtBuscarCategoria_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(
-                    txtBuscarCategoria.Text))
-                {
-                    MostrarCategorias();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al actualizar la búsqueda: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ocurrió un error al buscar categorías.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -943,6 +836,7 @@ namespace Vista.Categorías
                 }
             }
         }
+
     }
 }
 

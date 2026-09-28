@@ -1,4 +1,5 @@
 using Datos;
+using Guna.UI2.WinForms;
 using System;
 using System.Data;
 using System.Drawing;
@@ -19,9 +20,113 @@ namespace Vista.Dashboard
             InitializeComponent();
             ResponsiveHelper.Apply(this);
             dbDashboard = new DbDashboard();
-
+            ConfigurarTarjetas();
 
         }
+        private Guna2Elipse elipseVentas;
+        private Guna2Elipse elipseMateriales;
+        private Guna2Elipse elipseClientes;
+        private Guna2Elipse elipsePedidos;
+        private void ConfigurarTarjetas()
+        {
+            elipseVentas = new Guna2Elipse
+            {
+                TargetControl = panel1,
+                BorderRadius = 12
+            };
+
+            elipseMateriales = new Guna2Elipse
+            {
+                TargetControl = pnlProductosInventario,
+                BorderRadius = 12
+            };
+
+            elipseClientes = new Guna2Elipse
+            {
+                TargetControl = pnlClientesRegistrados,
+                BorderRadius = 12
+            };
+
+            elipsePedidos = new Guna2Elipse
+            {
+                TargetControl = pnlpPedidosActivos,
+                BorderRadius = 12
+            };
+
+            // HOVER
+            ConfigurarHoverTarjeta(panel1);
+            ConfigurarHoverTarjeta(pnlProductosInventario);
+            ConfigurarHoverTarjeta(pnlClientesRegistrados);
+            ConfigurarHoverTarjeta(pnlpPedidosActivos);
+        }
+        private void ConfigurarHoverTarjeta(Control tarjeta)
+        {
+            tarjeta.MouseEnter += Tarjeta_MouseEnter;
+            tarjeta.MouseLeave += Tarjeta_MouseLeave;
+
+            foreach (Control control in tarjeta.Controls)
+                ConfigurarHoverTarjeta(control);
+        }
+        private void Tarjeta_MouseEnter(object sender, EventArgs e)
+        {
+            Control control = sender as Control;
+
+            while (control != null &&
+                   control != panel1 &&
+                   control != pnlProductosInventario &&
+                   control != pnlClientesRegistrados &&
+                   control != pnlpPedidosActivos)
+            {
+                control = control.Parent;
+            }
+
+            if (control == panel1)
+                control.BackColor = Color.FromArgb(235, 135, 95);
+
+            else if (control == pnlProductosInventario)
+                control.BackColor = Color.FromArgb(125, 140, 215);
+
+            else if (control == pnlClientesRegistrados)
+                control.BackColor = Color.FromArgb(135, 210, 115);
+
+            else if (control == pnlpPedidosActivos)
+                control.BackColor = Color.FromArgb(125, 88, 190);
+        }
+        private void Tarjeta_MouseLeave(object sender, EventArgs e)
+        {
+            Control control = sender as Control;
+
+            while (control != null &&
+                   control != panel1 &&
+                   control != pnlProductosInventario &&
+                   control != pnlClientesRegistrados &&
+                   control != pnlpPedidosActivos)
+            {
+                control = control.Parent;
+            }
+
+            if (control == panel1)
+                control.BackColor = Color.FromArgb(255, 155, 115);
+
+            else if (control == pnlProductosInventario)
+                control.BackColor = Color.FromArgb(145, 160, 235);
+
+            else if (control == pnlClientesRegistrados)
+                control.BackColor = Color.FromArgb(155, 230, 135);
+
+            else if (control == pnlpPedidosActivos)
+                control.BackColor = Color.FromArgb(145, 108, 210);
+        }
+
+
+
+
+
+
+
+
+
+
         private void CargarLogoEmpresa()
         {
             try

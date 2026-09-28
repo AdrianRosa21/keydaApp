@@ -28,13 +28,14 @@ namespace Vista.Producción
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblSubTexto = new System.Windows.Forms.Label();
             this.cbEstados = new System.Windows.Forms.ComboBox();
             this.lblMostrarRegistrados = new System.Windows.Forms.Label();
             this.pbTotalTrabajos = new System.Windows.Forms.PictureBox();
             this.lblRegistrados = new System.Windows.Forms.Label();
             this.pnlContenedorTabla = new System.Windows.Forms.Panel();
+            this.btnEditar = new Guna.UI2.WinForms.Guna2Button();
             this.btnMaterialUtilizado = new Guna.UI2.WinForms.Guna2Button();
             this.lblPage = new System.Windows.Forms.Label();
             this.btnAtrass = new System.Windows.Forms.Button();
@@ -54,17 +55,16 @@ namespace Vista.Producción
             this.pbFinalizados = new System.Windows.Forms.PictureBox();
             this.lblFinalizados = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
+            this.txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
+            this.pnlIndicador4 = new Guna.UI2.WinForms.Guna2Panel();
+            this.pnlIndicador3 = new Guna.UI2.WinForms.Guna2Panel();
+            this.pnlIndicador2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.pnlIndicador1 = new Guna.UI2.WinForms.Guna2Panel();
             this.btnLimpiar = new Guna.UI2.WinForms.Guna2Button();
             this.lblPagina = new System.Windows.Forms.Label();
             this.btnAnterior = new System.Windows.Forms.Button();
             this.btnSiguiente = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.btnEditar = new Guna.UI2.WinForms.Guna2Button();
-            this.pnlIndicador1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.pnlIndicador2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.pnlIndicador3 = new Guna.UI2.WinForms.Guna2Panel();
-            this.pnlIndicador4 = new Guna.UI2.WinForms.Guna2Panel();
-            this.txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbTotalTrabajos)).BeginInit();
             this.pnlContenedorTabla.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProduccion)).BeginInit();
@@ -74,10 +74,10 @@ namespace Vista.Producción
             ((System.ComponentModel.ISupportInitialize)(this.pbCancelados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFinalizados)).BeginInit();
             this.pnlHeader.SuspendLayout();
-            this.pnlIndicador1.SuspendLayout();
-            this.pnlIndicador2.SuspendLayout();
-            this.pnlIndicador3.SuspendLayout();
             this.pnlIndicador4.SuspendLayout();
+            this.pnlIndicador3.SuspendLayout();
+            this.pnlIndicador2.SuspendLayout();
+            this.pnlIndicador1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblSubTexto
@@ -154,6 +154,21 @@ namespace Vista.Producción
             this.pnlContenedorTabla.Size = new System.Drawing.Size(1045, 337);
             this.pnlContenedorTabla.TabIndex = 3;
             // 
+            // btnEditar
+            // 
+            this.btnEditar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnEditar.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnEditar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnEditar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnEditar.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditar.ForeColor = System.Drawing.Color.White;
+            this.btnEditar.Location = new System.Drawing.Point(19, 296);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(183, 30);
+            this.btnEditar.TabIndex = 29;
+            this.btnEditar.Text = "Editar ";
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click_1);
+            // 
             // btnMaterialUtilizado
             // 
             this.btnMaterialUtilizado.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -215,14 +230,14 @@ namespace Vista.Producción
             this.dgvProduccion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProduccion.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvProduccion.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.PeachPuff;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProduccion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.PeachPuff;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProduccion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvProduccion.ColumnHeadersHeight = 42;
             this.dgvProduccion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvProduccion.GridColor = System.Drawing.Color.Black;
@@ -386,6 +401,70 @@ namespace Vista.Producción
             this.pnlHeader.Size = new System.Drawing.Size(1102, 627);
             this.pnlHeader.TabIndex = 3;
             // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtBuscar.DefaultText = "";
+            this.txtBuscar.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtBuscar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtBuscar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscar.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscar.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtBuscar.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscar.IconLeft = global::Vista.Properties.Resources.zoom_5611171;
+            this.txtBuscar.Location = new System.Drawing.Point(282, 227);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.PlaceholderText = "";
+            this.txtBuscar.SelectedText = "";
+            this.txtBuscar.Size = new System.Drawing.Size(499, 31);
+            this.txtBuscar.TabIndex = 33;
+            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
+            // 
+            // pnlIndicador4
+            // 
+            this.pnlIndicador4.BackColor = System.Drawing.Color.White;
+            this.pnlIndicador4.Controls.Add(this.lblMostrarRegistrados);
+            this.pnlIndicador4.Controls.Add(this.pbTotalTrabajos);
+            this.pnlIndicador4.Controls.Add(this.lblRegistrados);
+            this.pnlIndicador4.Location = new System.Drawing.Point(704, 132);
+            this.pnlIndicador4.Name = "pnlIndicador4";
+            this.pnlIndicador4.Size = new System.Drawing.Size(208, 78);
+            this.pnlIndicador4.TabIndex = 32;
+            // 
+            // pnlIndicador3
+            // 
+            this.pnlIndicador3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(237)))), ((int)(((byte)(147)))));
+            this.pnlIndicador3.Controls.Add(this.lblMostrarFinalizados);
+            this.pnlIndicador3.Controls.Add(this.pbFinalizados);
+            this.pnlIndicador3.Controls.Add(this.lblFinalizados);
+            this.pnlIndicador3.Location = new System.Drawing.Point(487, 132);
+            this.pnlIndicador3.Name = "pnlIndicador3";
+            this.pnlIndicador3.Size = new System.Drawing.Size(208, 78);
+            this.pnlIndicador3.TabIndex = 31;
+            // 
+            // pnlIndicador2
+            // 
+            this.pnlIndicador2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.pnlIndicador2.Controls.Add(this.lblMostrarEnProduccion);
+            this.pnlIndicador2.Controls.Add(this.pbPendientes);
+            this.pnlIndicador2.Controls.Add(this.lblEnProduccion);
+            this.pnlIndicador2.Location = new System.Drawing.Point(269, 133);
+            this.pnlIndicador2.Name = "pnlIndicador2";
+            this.pnlIndicador2.Size = new System.Drawing.Size(208, 78);
+            this.pnlIndicador2.TabIndex = 30;
+            // 
+            // pnlIndicador1
+            // 
+            this.pnlIndicador1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(162)))), ((int)(((byte)(147)))));
+            this.pnlIndicador1.Controls.Add(this.lblMostrarPendientes);
+            this.pnlIndicador1.Controls.Add(this.pbCancelados);
+            this.pnlIndicador1.Controls.Add(this.lblPendientes);
+            this.pnlIndicador1.Location = new System.Drawing.Point(48, 133);
+            this.pnlIndicador1.Name = "pnlIndicador1";
+            this.pnlIndicador1.Size = new System.Drawing.Size(208, 78);
+            this.pnlIndicador1.TabIndex = 29;
+            // 
             // btnLimpiar
             // 
             this.btnLimpiar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -399,6 +478,7 @@ namespace Vista.Producción
             this.btnLimpiar.Size = new System.Drawing.Size(150, 32);
             this.btnLimpiar.TabIndex = 28;
             this.btnLimpiar.Text = "Limpiar filtros";
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click_1);
             // 
             // lblPagina
             // 
@@ -442,83 +522,6 @@ namespace Vista.Producción
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // btnEditar
-            // 
-            this.btnEditar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnEditar.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnEditar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnEditar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnEditar.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.ForeColor = System.Drawing.Color.White;
-            this.btnEditar.Location = new System.Drawing.Point(19, 296);
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(183, 30);
-            this.btnEditar.TabIndex = 29;
-            this.btnEditar.Text = "Editar ";
-            // 
-            // pnlIndicador1
-            // 
-            this.pnlIndicador1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(162)))), ((int)(((byte)(147)))));
-            this.pnlIndicador1.Controls.Add(this.lblMostrarPendientes);
-            this.pnlIndicador1.Controls.Add(this.pbCancelados);
-            this.pnlIndicador1.Controls.Add(this.lblPendientes);
-            this.pnlIndicador1.Location = new System.Drawing.Point(48, 133);
-            this.pnlIndicador1.Name = "pnlIndicador1";
-            this.pnlIndicador1.Size = new System.Drawing.Size(208, 78);
-            this.pnlIndicador1.TabIndex = 29;
-            // 
-            // pnlIndicador2
-            // 
-            this.pnlIndicador2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.pnlIndicador2.Controls.Add(this.lblMostrarEnProduccion);
-            this.pnlIndicador2.Controls.Add(this.pbPendientes);
-            this.pnlIndicador2.Controls.Add(this.lblEnProduccion);
-            this.pnlIndicador2.Location = new System.Drawing.Point(269, 133);
-            this.pnlIndicador2.Name = "pnlIndicador2";
-            this.pnlIndicador2.Size = new System.Drawing.Size(208, 78);
-            this.pnlIndicador2.TabIndex = 30;
-            // 
-            // pnlIndicador3
-            // 
-            this.pnlIndicador3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(237)))), ((int)(((byte)(147)))));
-            this.pnlIndicador3.Controls.Add(this.lblMostrarFinalizados);
-            this.pnlIndicador3.Controls.Add(this.pbFinalizados);
-            this.pnlIndicador3.Controls.Add(this.lblFinalizados);
-            this.pnlIndicador3.Location = new System.Drawing.Point(487, 132);
-            this.pnlIndicador3.Name = "pnlIndicador3";
-            this.pnlIndicador3.Size = new System.Drawing.Size(208, 78);
-            this.pnlIndicador3.TabIndex = 31;
-            // 
-            // pnlIndicador4
-            // 
-            this.pnlIndicador4.BackColor = System.Drawing.Color.White;
-            this.pnlIndicador4.Controls.Add(this.lblMostrarRegistrados);
-            this.pnlIndicador4.Controls.Add(this.pbTotalTrabajos);
-            this.pnlIndicador4.Controls.Add(this.lblRegistrados);
-            this.pnlIndicador4.Location = new System.Drawing.Point(704, 132);
-            this.pnlIndicador4.Name = "pnlIndicador4";
-            this.pnlIndicador4.Size = new System.Drawing.Size(208, 78);
-            this.pnlIndicador4.TabIndex = 32;
-            // 
-            // txtBuscar
-            // 
-            this.txtBuscar.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtBuscar.DefaultText = "";
-            this.txtBuscar.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtBuscar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtBuscar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtBuscar.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtBuscar.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBuscar.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtBuscar.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBuscar.IconLeft = global::Vista.Properties.Resources.zoom_5611171;
-            this.txtBuscar.Location = new System.Drawing.Point(282, 227);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.PlaceholderText = "";
-            this.txtBuscar.SelectedText = "";
-            this.txtBuscar.Size = new System.Drawing.Size(499, 31);
-            this.txtBuscar.TabIndex = 33;
-            // 
             // frmProduccion
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -544,14 +547,14 @@ namespace Vista.Producción
             ((System.ComponentModel.ISupportInitialize)(this.pbFinalizados)).EndInit();
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
-            this.pnlIndicador1.ResumeLayout(false);
-            this.pnlIndicador1.PerformLayout();
-            this.pnlIndicador2.ResumeLayout(false);
-            this.pnlIndicador2.PerformLayout();
-            this.pnlIndicador3.ResumeLayout(false);
-            this.pnlIndicador3.PerformLayout();
             this.pnlIndicador4.ResumeLayout(false);
             this.pnlIndicador4.PerformLayout();
+            this.pnlIndicador3.ResumeLayout(false);
+            this.pnlIndicador3.PerformLayout();
+            this.pnlIndicador2.ResumeLayout(false);
+            this.pnlIndicador2.PerformLayout();
+            this.pnlIndicador1.ResumeLayout(false);
+            this.pnlIndicador1.PerformLayout();
             this.ResumeLayout(false);
 
         }

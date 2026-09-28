@@ -21,6 +21,7 @@ namespace Vista.Clientes
             ConfigurarTarjetas();
             ConfigurarSeparadores();
             ConfigurarBarraBusqueda();
+            ConfigurarBotonesCliente();
 
 
             errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
@@ -105,39 +106,6 @@ namespace Vista.Clientes
                 BorderRadius = 12
             };
 
-
-            // BOTONES
-
-            elipseNuevoCliente = new Guna2Elipse
-            {
-                TargetControl = btnNuevoCliente,
-                BorderRadius = 6
-            };
-
-            elipseEditar = new Guna2Elipse
-            {
-                TargetControl = btnEditar,
-                BorderRadius = 6
-            };
-
-            elipseGuardarIndividual = new Guna2Elipse
-            {
-                TargetControl = btnGuardarIndividual,
-                BorderRadius = 6
-            };
-
-            elipseGuardarCorporativo = new Guna2Elipse
-            {
-                TargetControl = btnGuardarCorporativo,
-                BorderRadius = 6
-            };
-
-            elipseGuardarCambios = new Guna2Elipse
-            {
-                TargetControl = btnGuardarCambios,
-                BorderRadius = 6
-            };
-
             // PANELES
 
             elipseRegistroIndividual = new Guna2Elipse
@@ -158,13 +126,6 @@ namespace Vista.Clientes
             ConfigurarHoverTarjeta(pnlIndicador1);
             ConfigurarHoverTarjeta(pnlIndicador4);
 
-            ConfigurarHoverBoton(btnNuevoCliente);
-            ConfigurarHoverBoton(btnEditar);
-            ConfigurarHoverBoton(btnGuardarIndividual);
-            ConfigurarHoverBoton(btnGuardarCorporativo);
-            ConfigurarHoverBoton(btnGuardarCambios);
-
-
         }
 
         private void ConfigurarHoverTarjeta(Control tarjeta)
@@ -175,22 +136,6 @@ namespace Vista.Clientes
             foreach (Control control in tarjeta.Controls)
                 ConfigurarHoverTarjeta(control);
         }
-        private void ConfigurarHoverBoton(Button boton)
-        {
-            Color colorOriginal = boton.BackColor;
-            Color colorHover = Color.FromArgb(220, 190, 160);
-
-            boton.MouseEnter += (sender, e) =>
-            {
-                boton.BackColor = colorHover;
-            };
-
-            boton.MouseLeave += (sender, e) =>
-            {
-                boton.BackColor = colorOriginal;
-            };
-        }
-
 
         private void Tarjeta_MouseEnter(object sender, EventArgs e)
         {
@@ -302,6 +247,36 @@ namespace Vista.Clientes
                 txtBuscar.BorderThickness = 1;
             };
         }
+
+        private void ConfigurarBotonCliente(Guna.UI2.WinForms.Guna2Button boton)
+        {
+            boton.FillColor = Color.FromArgb(235, 218, 198);
+            boton.ForeColor = Color.FromArgb(121, 75, 45);
+
+            boton.BorderColor = Color.FromArgb(121, 75, 45);
+            boton.BorderThickness = 1;
+            boton.BorderRadius = 10;
+
+            boton.Font = new Font("Times New Roman", 10, FontStyle.Bold);
+
+            boton.HoverState.FillColor = Color.FromArgb(220, 190, 160);
+            boton.HoverState.ForeColor = Color.FromArgb(121, 75, 45);
+            boton.HoverState.BorderColor = Color.FromArgb(121, 75, 45);
+
+            boton.PressedColor = Color.FromArgb(205, 175, 145);
+
+            boton.Cursor = Cursors.Hand;
+        }
+        private void ConfigurarBotonesCliente()
+        {
+            ConfigurarBotonCliente(btnNuevoCliente);
+            ConfigurarBotonCliente(btnEditar);
+            ConfigurarBotonCliente(btnGuardarIndividual);
+            ConfigurarBotonCliente(btnGuardarCambios);
+            ConfigurarBotonCliente(btnGuardarCorporativo);
+        }
+
+
 
 
         //-----------------------------------------------------------------------------------------------------------------------------------------//
@@ -748,12 +723,11 @@ namespace Vista.Clientes
 
         private bool ValidarCampos()
         {
-            errorProvider.Clear();
-
             // Validar que haya seleccionado un tipo de cliente
             if (!modoEdicion && cbTipoCliente.SelectedIndex == -1)
             {
                 errorProvider.SetError(cbTipoCliente, "Seleccione un tipo de cliente.");
+                MessageBox.Show("Seleccione un tipo de cliente.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cbTipoCliente.Focus();
                 return false;
             }
@@ -764,6 +738,7 @@ namespace Vista.Clientes
                 if (string.IsNullOrWhiteSpace(txtNombres.Text))
                 {
                     errorProvider.SetError(txtNombres, "Debe ingresar el nombre del cliente.");
+                    MessageBox.Show("Debe ingresar el nombre del cliente.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtNombres.Focus();
                     return false;
                 }
@@ -771,6 +746,7 @@ namespace Vista.Clientes
                 if (string.IsNullOrWhiteSpace(txtApellidos.Text))
                 {
                     errorProvider.SetError(txtApellidos, "Debe ingresar los apellidos del cliente.");
+                    MessageBox.Show("Debe ingresar los apellidos del cliente.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtApellidos.Focus();
                     return false;
                 }
@@ -778,6 +754,7 @@ namespace Vista.Clientes
                 if (string.IsNullOrWhiteSpace(txtDUI.Text))
                 {
                     errorProvider.SetError(txtDUI, "Debe ingresar el DUI del cliente.");
+                    MessageBox.Show("Debe ingresar el DUI del cliente.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtDUI.Focus();
                     return false;
                 }
@@ -785,6 +762,7 @@ namespace Vista.Clientes
                 if (string.IsNullOrWhiteSpace(txtTelefono.Text))
                 {
                     errorProvider.SetError(txtTelefono, "Debe ingresar el teléfono del cliente.");
+                    MessageBox.Show("Debe ingresar el teléfono del cliente.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtTelefono.Focus();
                     return false;
                 }
@@ -792,6 +770,7 @@ namespace Vista.Clientes
                 if (string.IsNullOrWhiteSpace(txtCorreo.Text))
                 {
                     errorProvider.SetError(txtCorreo, "Debe ingresar el correo del cliente.");
+                    MessageBox.Show("Debe ingresar el correo del cliente.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtCorreo.Focus();
                     return false;
                 }
@@ -799,6 +778,7 @@ namespace Vista.Clientes
                 if (string.IsNullOrWhiteSpace(txtDireccion.Text))
                 {
                     errorProvider.SetError(txtDireccion, "Debe ingresar la dirección del cliente.");
+                    MessageBox.Show("Debe ingresar la dirección del cliente.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtDireccion.Focus();
                     return false;
                 }
@@ -810,6 +790,7 @@ namespace Vista.Clientes
                 if (string.IsNullOrWhiteSpace(txtNombreEmpresa.Text))
                 {
                     errorProvider.SetError(txtNombreEmpresa, "Debe ingresar el nombre de la empresa.");
+                    MessageBox.Show("Debe ingresar el nombre de la empresa.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtNombreEmpresa.Focus();
                     return false;
                 }
@@ -817,6 +798,7 @@ namespace Vista.Clientes
                 if (string.IsNullOrWhiteSpace(txtNombreEncargado.Text))
                 {
                     errorProvider.SetError(txtNombreEncargado, "Debe ingresar el nombre del encargado.");
+                    MessageBox.Show("Debe ingresar el nombre del encargado.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtNombreEncargado.Focus();
                     return false;
                 }
@@ -824,6 +806,7 @@ namespace Vista.Clientes
                 if (string.IsNullOrWhiteSpace(txtNIT.Text))
                 {
                     errorProvider.SetError(txtNIT, "Debe ingresar el NIT de la empresa.");
+                    MessageBox.Show("Debe ingresar el NIT de la empresa.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtNIT.Focus();
                     return false;
                 }
@@ -831,6 +814,7 @@ namespace Vista.Clientes
                 if (string.IsNullOrWhiteSpace(txtTelefono.Text))
                 {
                     errorProvider.SetError(txtTelefono, "Debe ingresar el teléfono.");
+                    MessageBox.Show("Debe ingresar el teléfono.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtTelefono.Focus();
                     return false;
                 }
@@ -838,6 +822,7 @@ namespace Vista.Clientes
                 if (string.IsNullOrWhiteSpace(txtCorreo.Text))
                 {
                     errorProvider.SetError(txtCorreo, "Debe ingresar el correo.");
+                    MessageBox.Show("Debe ingresar el correo.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtCorreo.Focus();
                     return false;
                 }
@@ -845,6 +830,7 @@ namespace Vista.Clientes
                 if (string.IsNullOrWhiteSpace(txtDireccion.Text))
                 {
                     errorProvider.SetError(txtDireccion, "Debe ingresar la dirección de la empresa.");
+                    MessageBox.Show("Debe ingresar la dirección de la empresa.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtDireccion.Focus();
                     return false;
                 }
@@ -862,19 +848,25 @@ namespace Vista.Clientes
                 if (correo.Address != txtCorreo.Text)
                 {
                     errorProvider1.SetError(txtCorreo, "Ingrese un correo válido.");
+
+                    MessageBox.Show("Ingrese un correo electrónico válido.", "Correo no válido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                     txtCorreo.Focus();
                     return false;
                 }
+
                 return true;
             }
             catch
             {
+                errorProvider1.SetError(txtCorreo, "Ingrese un correo electrónico válido.");
+
                 MessageBox.Show("Ingrese un correo electrónico válido.", "Correo no válido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                 txtCorreo.Focus();
                 return false;
             }
         }
-
 
         //DESACTIVAR COPIAR Y PEGAR
         private void DesactivarCopiarPegar(Control control)
@@ -913,7 +905,7 @@ namespace Vista.Clientes
                 e.Handled = true;
             }
 
-            if (char.IsDigit(e.KeyChar) && txtNIT.Text.Length >= 18)
+            if (char.IsDigit(e.KeyChar) && txtNIT.Text.Length >= 17)
             {
                 e.Handled = true;
             }
@@ -1047,7 +1039,7 @@ namespace Vista.Clientes
             toolTip1.SetToolTip(cbEstadoCliente, "Seleccione el estado actual del cliente.");
             toolTip1.SetToolTip(btnNuevoCliente, "Limpia los campos para registrar un nuevo cliente.");
             toolTip1.SetToolTip(btnEditar, "Edita los datos del cliente seleccionado.");
-            toolTip1.SetToolTip(btnGuardarCorporativo, "Guarda los datos del cliente corporativo.");
+            toolTip1.SetToolTip(btnGuardarCambios, "Guarda los datos del cliente corporativo.");
             toolTip1.SetToolTip(btnGuardarIndividual, "Guarda los datos del cliente individual.");
             toolTip1.SetToolTip(btnGuardarCambios, "Guarda los cambios realizados al cliente seleccionado.");
         }
@@ -1087,7 +1079,7 @@ namespace Vista.Clientes
                 txtNombreEmpresa.MaxLength = 40;
                 txtNombreEncargado.MaxLength = 40;
                 txtDUI.MaxLength = 10;
-                txtNIT.MaxLength = 14;
+                txtNIT.MaxLength = 17;
                 txtTelefono.MaxLength = 9;
                 txtCorreo.MaxLength = 50;
 
@@ -1139,7 +1131,7 @@ namespace Vista.Clientes
 
                 // Botones
                 btnGuardarIndividual.Visible = true;
-                btnGuardarCorporativo.Visible = false;
+                btnGuardarCambios.Visible = false;
 
                 //Group Box
 
@@ -1162,7 +1154,7 @@ namespace Vista.Clientes
 
                 // Botones
                 btnGuardarIndividual.Visible = false;
-                btnGuardarCorporativo.Visible = true;
+                btnGuardarCambios.Visible = true;
 
                 //Group Box
                 gbPersonaNatural.Visible = false;
@@ -1175,7 +1167,8 @@ namespace Vista.Clientes
         }
         //--------------------------------------------------------------
         // REGISTRAR CLIENTE INDIVIDUAL
-        private void btnGuardarIndividual_Click_1(object sender, EventArgs e)
+
+        private void btnGuardarIndividuales_Click(object sender, EventArgs e)
         {
             if (!ValidarCampos())
             {
@@ -1185,19 +1178,24 @@ namespace Vista.Clientes
             if (txtDUI.Text.Length != 10 || txtDUI.Text[8] != '-')
             {
                 errorProvider1.SetError(txtDUI, "El DUI debe tener el formato 12345678-9.");
+                MessageBox.Show("El DUI debe tener el formato 12345678-9.", "DUI inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDUI.Focus();
                 return;
             }
 
             if (txtTelefono.Text.Length != 9 || txtTelefono.Text[4] != '-')
             {
                 errorProvider1.SetError(txtTelefono, "El teléfono debe tener el formato 1234-5678.");
+                MessageBox.Show("El teléfono debe tener el formato 1234-5678.", "Teléfono inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTelefono.Focus();
                 return;
             }
 
-            //Validar Correo
+            // Validar Correo
             if (string.IsNullOrWhiteSpace(txtCorreo.Text))
             {
                 errorProvider1.SetError(txtCorreo, "El correo es obligatorio.");
+                MessageBox.Show("El correo es obligatorio.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCorreo.Focus();
                 return;
             }
@@ -1208,11 +1206,11 @@ namespace Vista.Clientes
             }
             catch
             {
+                errorProvider1.SetError(txtCorreo, "Ingrese un correo válido.");
                 MessageBox.Show("Ingrese un correo válido.", "Correo inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCorreo.Focus();
                 return;
             }
-
 
             DbCliente cliente = new DbCliente();
 
@@ -1237,26 +1235,29 @@ namespace Vista.Clientes
                 LimpiarFormularioCliente();
             }
         }
+
         // REGISTRAR CLIENTE CORPORATIVO
-        private void btnGuardarCorporativo_Click_1(object sender, EventArgs e)
+        private void btnGuardarCorporativo_Click(object sender, EventArgs e)
         {
+
             // Validar campos obligatorios
             if (!ValidarCampos())
                 return;
 
             // Validar NIT
-            if (txtNIT.Text.Length != 14)
+            if (txtNIT.Text.Length != 18)
             {
                 errorProvider1.SetError(txtNIT, "El NIT debe tener el formato 7172-910203-020-1.");
+                MessageBox.Show("El NIT debe tener el formato 7172-910203-020-1.", "NIT inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtNIT.Focus();
                 return;
             }
 
             // Validar teléfono
-            if (txtTelefono.Text.Length != 9 ||
-                txtTelefono.Text[4] != '-')
+            if (txtTelefono.Text.Length != 9 || txtTelefono.Text[4] != '-')
             {
                 errorProvider1.SetError(txtTelefono, "El teléfono debe tener el formato 1234-5678.");
+                MessageBox.Show("El teléfono debe tener el formato 1234-5678.", "Teléfono inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtTelefono.Focus();
                 return;
             }
@@ -1347,7 +1348,7 @@ namespace Vista.Clientes
                 btnEditar.Visible = true;
                 btnGuardarCambios.Visible = false;
 
-                btnGuardarCorporativo.Visible = false;
+                btnGuardarCambios.Visible = false;
                 btnGuardarIndividual.Visible = false;
 
                 // Mostrar datos de empresa
@@ -1370,8 +1371,7 @@ namespace Vista.Clientes
             try
             {
                 // Revisar que se haya seleccionado una fila válida
-                if (e.RowIndex < 0 ||
-                    dgvClientesIndividuales.Rows[e.RowIndex].IsNewRow)
+                if (e.RowIndex < 0 || dgvClientesIndividuales.Rows[e.RowIndex].IsNewRow)
                     return;
 
                 DataGridViewRow fila = dgvClientesIndividuales.Rows[e.RowIndex];
@@ -1413,7 +1413,7 @@ namespace Vista.Clientes
                 // Mostrar botones
                 btnEditar.Visible = true;
                 btnGuardarIndividual.Visible = false;
-                btnGuardarCorporativo.Visible = false;
+                btnGuardarCambios.Visible = false;
                 btnGuardarCambios.Visible = false;
 
                 // Mostrar datos de persona natural
@@ -1431,8 +1431,7 @@ namespace Vista.Clientes
         }
         //-------------------------------------------------------------------------------
         // BOTÓN EDITAR
-
-        private void btnEditar_Click_1(object sender, EventArgs e)
+        private void btnEditar_Click(object sender, EventArgs e)
         {
             if (idClienteSeleccionado == 0)
             {
@@ -1448,16 +1447,12 @@ namespace Vista.Clientes
             // Ahora sí aparece Guardar cambios
             btnGuardarCambios.Visible = true;
 
-            btnGuardarCorporativo.Visible = false;
             btnGuardarIndividual.Visible = false;
-
-
         }
 
         //----------------------------------------------------------------------------------
         //BOTON GUARDAR CAMBIOS
-
-        private void btnGuardarCambios_Click_1(object sender, EventArgs e)
+        private void btnGuardarCambios_Click(object sender, EventArgs e)
         {
             if (idClienteSeleccionado == 0)
             {
@@ -1488,10 +1483,11 @@ namespace Vista.Clientes
             // Persona natural
             if (tipoClienteSeleccionado == 2)
             {
-                if (txtDUI.Text.Length != 10 ||
-                    txtDUI.Text[8] != '-')
+                if (txtDUI.Text.Length != 10 || txtDUI.Text[8] != '-')
                 {
-                    MessageBox.Show("El DUI debe tener el formato 12345678-9.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); txtDUI.Focus();
+                    errorProvider1.SetError(txtDUI, "El DUI debe tener el formato 12345678-9.");
+                    MessageBox.Show("El DUI debe tener el formato 12345678-9.", "DUI inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtDUI.Focus();
                     return;
                 }
             }
@@ -1499,25 +1495,23 @@ namespace Vista.Clientes
             // Empresa
             else if (tipoClienteSeleccionado == 1)
             {
-                if (txtNIT.Text.Length != 14)
+                if (txtNIT.Text.Length != 17)
                 {
                     errorProvider1.SetError(txtNIT, "El NIT debe tener el formato 8181-929200-182-9.");
-
+                    MessageBox.Show("El NIT debe tener el formato 8181-929200-182-9.", "NIT inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtNIT.Focus();
                     return;
                 }
             }
 
             // Validar teléfono
-            if (txtTelefono.Text.Length != 9 ||
-                txtTelefono.Text[4] != '-')
+            if (txtTelefono.Text.Length != 9 || txtTelefono.Text[4] != '-')
             {
                 errorProvider1.SetError(txtTelefono, "El teléfono debe tener el formato 1234-5678.");
-
+                MessageBox.Show("El teléfono debe tener el formato 1234-5678.", "Teléfono inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtTelefono.Focus();
                 return;
             }
-
             try
             {
                 DbCliente cliente = new DbCliente();
@@ -1571,6 +1565,7 @@ namespace Vista.Clientes
             }
 
         }
+
         //------------------------------------------------------------------------
 
         // COMPROBAR SI HUBO CAMBIOS
@@ -1644,7 +1639,7 @@ namespace Vista.Clientes
             btnGuardarCambios.Visible = false;
             if (cbTipoCliente.Text == "Empresa")
             {
-                btnGuardarCorporativo.Visible = true;
+                btnGuardarCambios.Visible = true;
             }
             else
             {
@@ -1681,8 +1676,6 @@ namespace Vista.Clientes
 
             btnSiguienteC.Enabled = paginaActual < totalPaginas;
         }
-
-
 
         private void MostrarPaginaIndividualesBusqueda()
         {
@@ -1784,16 +1777,17 @@ namespace Vista.Clientes
                 MessageBox.Show("Ocurrió un error al buscar clientes.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
         //-----------------------------------------------------------------------------------
 
         //BOTON DE NUEVO CLIENTE
 
-        private void btnNuevoCliente_Click(object sender, EventArgs e)
+        private void btnNuevoCliente_Click_1(object sender, EventArgs e)
         {
             LimpiarFormularioCliente();
-
+            dgvClientesIndividuales.ClearSelection();
+            dgvClientesIndividuales.CurrentCell = null;
+            dgvClientesCorporativos.ClearSelection();
+            dgvClientesCorporativos.CurrentCell = null;
         }
 
         private void txtNIT_TextChanged(object sender, EventArgs e)
@@ -1820,9 +1814,6 @@ namespace Vista.Clientes
             txtNIT.Text = resultado;
             txtNIT.SelectionStart = txtNIT.Text.Length;
         }
-
-
-
 
     }
 }

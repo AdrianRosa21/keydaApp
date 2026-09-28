@@ -30,8 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pnlContenedor = new System.Windows.Forms.Panel();
-            this.btnNuevoUsuario = new System.Windows.Forms.Button();
+            this.btnNuevoUsuario = new Guna.UI2.WinForms.Guna2TileButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlPedidaDeDatos = new System.Windows.Forms.Panel();
+            this.btnGuardarUsuario = new Guna.UI2.WinForms.Guna2TileButton();
+            this.btnDesactivarUsuario = new Guna.UI2.WinForms.Guna2TileButton();
+            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.cmbRol = new System.Windows.Forms.ComboBox();
             this.txtContrasena = new System.Windows.Forms.TextBox();
             this.lblClave = new System.Windows.Forms.Label();
@@ -43,7 +47,7 @@
             this.pnlBarraInformativa = new System.Windows.Forms.Panel();
             this.lblAdministrador = new System.Windows.Forms.Label();
             this.pbPerfil = new System.Windows.Forms.PictureBox();
-            this.pnlPedidosRecientes = new System.Windows.Forms.Panel();
+            this.pnlUsuariosRegistrados = new System.Windows.Forms.Panel();
             this.lblPagina = new System.Windows.Forms.Label();
             this.btnAnterior = new System.Windows.Forms.Button();
             this.btnSiguiente = new System.Windows.Forms.Button();
@@ -54,29 +58,25 @@
             this.lblMensajeInformativoPrincipal = new System.Windows.Forms.Label();
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.btnGuardarUsuario = new Guna.UI2.WinForms.Guna2TileButton();
-            this.btnDesactivarUsuario = new Guna.UI2.WinForms.Guna2TileButton();
             this.pnlContenedor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlPedidaDeDatos.SuspendLayout();
             this.pnlBarraInformativa.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPerfil)).BeginInit();
-            this.pnlPedidosRecientes.SuspendLayout();
+            this.pnlUsuariosRegistrados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuariosRegistrados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlContenedor
             // 
             this.pnlContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(221)))), ((int)(((byte)(175)))));
-            this.pnlContenedor.Controls.Add(this.pictureBox1);
             this.pnlContenedor.Controls.Add(this.btnNuevoUsuario);
+            this.pnlContenedor.Controls.Add(this.pictureBox1);
             this.pnlContenedor.Controls.Add(this.pnlPedidaDeDatos);
             this.pnlContenedor.Controls.Add(this.pnlBarraInformativa);
-            this.pnlContenedor.Controls.Add(this.pnlPedidosRecientes);
+            this.pnlContenedor.Controls.Add(this.pnlUsuariosRegistrados);
             this.pnlContenedor.Controls.Add(this.lblSubTexto);
             this.pnlContenedor.Controls.Add(this.lblMensajeInformativoPrincipal);
             this.pnlContenedor.Controls.Add(this.picLogo);
@@ -89,18 +89,27 @@
             // 
             // btnNuevoUsuario
             // 
-            this.btnNuevoUsuario.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnNuevoUsuario.Font = new System.Drawing.Font("Times New Roman", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNuevoUsuario.Image = global::Vista.Properties.Resources.agregar_usuario;
-            this.btnNuevoUsuario.Location = new System.Drawing.Point(26, 133);
+            this.btnNuevoUsuario.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnNuevoUsuario.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnNuevoUsuario.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnNuevoUsuario.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnNuevoUsuario.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNuevoUsuario.ForeColor = System.Drawing.Color.White;
+            this.btnNuevoUsuario.Location = new System.Drawing.Point(23, 156);
             this.btnNuevoUsuario.Name = "btnNuevoUsuario";
-            this.btnNuevoUsuario.Size = new System.Drawing.Size(241, 56);
-            this.btnNuevoUsuario.TabIndex = 12;
+            this.btnNuevoUsuario.Size = new System.Drawing.Size(241, 29);
+            this.btnNuevoUsuario.TabIndex = 30;
             this.btnNuevoUsuario.Text = "Nuevo Usuario";
-            this.btnNuevoUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnNuevoUsuario.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnNuevoUsuario.UseVisualStyleBackColor = false;
-            this.btnNuevoUsuario.Click += new System.EventHandler(this.btnNuevoUsuario_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Vista.Properties.Resources.usuario__1_;
+            this.pictureBox1.Location = new System.Drawing.Point(13, 28);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(71, 84);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
             // 
             // pnlPedidaDeDatos
             // 
@@ -121,8 +130,49 @@
             this.pnlPedidaDeDatos.Location = new System.Drawing.Point(25, 206);
             this.pnlPedidaDeDatos.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPedidaDeDatos.Name = "pnlPedidaDeDatos";
-            this.pnlPedidaDeDatos.Size = new System.Drawing.Size(241, 342);
+            this.pnlPedidaDeDatos.Size = new System.Drawing.Size(241, 341);
             this.pnlPedidaDeDatos.TabIndex = 11;
+            // 
+            // btnGuardarUsuario
+            // 
+            this.btnGuardarUsuario.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardarUsuario.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardarUsuario.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnGuardarUsuario.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnGuardarUsuario.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardarUsuario.ForeColor = System.Drawing.Color.White;
+            this.btnGuardarUsuario.Location = new System.Drawing.Point(17, 293);
+            this.btnGuardarUsuario.Name = "btnGuardarUsuario";
+            this.btnGuardarUsuario.Size = new System.Drawing.Size(99, 27);
+            this.btnGuardarUsuario.TabIndex = 14;
+            this.btnGuardarUsuario.Text = "Guardar";
+            // 
+            // btnDesactivarUsuario
+            // 
+            this.btnDesactivarUsuario.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnDesactivarUsuario.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnDesactivarUsuario.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnDesactivarUsuario.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnDesactivarUsuario.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDesactivarUsuario.ForeColor = System.Drawing.Color.White;
+            this.btnDesactivarUsuario.Location = new System.Drawing.Point(129, 294);
+            this.btnDesactivarUsuario.Name = "btnDesactivarUsuario";
+            this.btnDesactivarUsuario.Size = new System.Drawing.Size(99, 27);
+            this.btnDesactivarUsuario.TabIndex = 15;
+            this.btnDesactivarUsuario.Text = "Desactivar";
+            // 
+            // guna2HtmlLabel1
+            // 
+            this.guna2HtmlLabel1.AutoSize = false;
+            this.guna2HtmlLabel1.AutoSizeHeightOnly = true;
+            this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(49, 14);
+            this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(153, 47);
+            this.guna2HtmlLabel1.TabIndex = 14;
+            this.guna2HtmlLabel1.Text = "Registra un nuevo usuario";
+            this.guna2HtmlLabel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cmbRol
             // 
@@ -243,21 +293,21 @@
             this.pbPerfil.TabIndex = 10;
             this.pbPerfil.TabStop = false;
             // 
-            // pnlPedidosRecientes
+            // pnlUsuariosRegistrados
             // 
-            this.pnlPedidosRecientes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlPedidosRecientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(153)))), ((int)(((byte)(105)))));
-            this.pnlPedidosRecientes.Controls.Add(this.lblPagina);
-            this.pnlPedidosRecientes.Controls.Add(this.btnAnterior);
-            this.pnlPedidosRecientes.Controls.Add(this.btnSiguiente);
-            this.pnlPedidosRecientes.Controls.Add(this.lblUsuarios);
-            this.pnlPedidosRecientes.Controls.Add(this.dgvUsuariosRegistrados);
-            this.pnlPedidosRecientes.Controls.Add(this.chkEstado);
-            this.pnlPedidosRecientes.Location = new System.Drawing.Point(293, 144);
-            this.pnlPedidosRecientes.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlPedidosRecientes.Name = "pnlPedidosRecientes";
-            this.pnlPedidosRecientes.Size = new System.Drawing.Size(739, 472);
-            this.pnlPedidosRecientes.TabIndex = 8;
+            this.pnlUsuariosRegistrados.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlUsuariosRegistrados.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(153)))), ((int)(((byte)(105)))));
+            this.pnlUsuariosRegistrados.Controls.Add(this.lblPagina);
+            this.pnlUsuariosRegistrados.Controls.Add(this.btnAnterior);
+            this.pnlUsuariosRegistrados.Controls.Add(this.btnSiguiente);
+            this.pnlUsuariosRegistrados.Controls.Add(this.lblUsuarios);
+            this.pnlUsuariosRegistrados.Controls.Add(this.dgvUsuariosRegistrados);
+            this.pnlUsuariosRegistrados.Controls.Add(this.chkEstado);
+            this.pnlUsuariosRegistrados.Location = new System.Drawing.Point(293, 144);
+            this.pnlUsuariosRegistrados.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlUsuariosRegistrados.Name = "pnlUsuariosRegistrados";
+            this.pnlUsuariosRegistrados.Size = new System.Drawing.Size(739, 472);
+            this.pnlUsuariosRegistrados.TabIndex = 8;
             // 
             // lblPagina
             // 
@@ -331,7 +381,7 @@
             // 
             this.lblSubTexto.AutoSize = true;
             this.lblSubTexto.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubTexto.Location = new System.Drawing.Point(76, 77);
+            this.lblSubTexto.Location = new System.Drawing.Point(89, 80);
             this.lblSubTexto.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSubTexto.Name = "lblSubTexto";
             this.lblSubTexto.Size = new System.Drawing.Size(277, 21);
@@ -342,7 +392,7 @@
             // 
             this.lblMensajeInformativoPrincipal.AutoSize = true;
             this.lblMensajeInformativoPrincipal.Font = new System.Drawing.Font("Times New Roman", 30F, System.Drawing.FontStyle.Bold);
-            this.lblMensajeInformativoPrincipal.Location = new System.Drawing.Point(66, 32);
+            this.lblMensajeInformativoPrincipal.Location = new System.Drawing.Point(82, 34);
             this.lblMensajeInformativoPrincipal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMensajeInformativoPrincipal.Name = "lblMensajeInformativoPrincipal";
             this.lblMensajeInformativoPrincipal.Size = new System.Drawing.Size(352, 45);
@@ -363,55 +413,6 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(13, 38);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(58, 59);
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
-            // 
-            // guna2HtmlLabel1
-            // 
-            this.guna2HtmlLabel1.AutoSize = false;
-            this.guna2HtmlLabel1.AutoSizeHeightOnly = true;
-            this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(49, 14);
-            this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(153, 47);
-            this.guna2HtmlLabel1.TabIndex = 14;
-            this.guna2HtmlLabel1.Text = "Registra un nuevo usuario";
-            this.guna2HtmlLabel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnGuardarUsuario
-            // 
-            this.btnGuardarUsuario.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnGuardarUsuario.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnGuardarUsuario.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnGuardarUsuario.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnGuardarUsuario.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnGuardarUsuario.ForeColor = System.Drawing.Color.White;
-            this.btnGuardarUsuario.Location = new System.Drawing.Point(17, 293);
-            this.btnGuardarUsuario.Name = "btnGuardarUsuario";
-            this.btnGuardarUsuario.Size = new System.Drawing.Size(99, 27);
-            this.btnGuardarUsuario.TabIndex = 14;
-            this.btnGuardarUsuario.Text = "Guardar";
-            // 
-            // btnDesactivarUsuario
-            // 
-            this.btnDesactivarUsuario.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnDesactivarUsuario.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnDesactivarUsuario.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnDesactivarUsuario.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnDesactivarUsuario.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnDesactivarUsuario.ForeColor = System.Drawing.Color.White;
-            this.btnDesactivarUsuario.Location = new System.Drawing.Point(129, 294);
-            this.btnDesactivarUsuario.Name = "btnDesactivarUsuario";
-            this.btnDesactivarUsuario.Size = new System.Drawing.Size(99, 27);
-            this.btnDesactivarUsuario.TabIndex = 15;
-            this.btnDesactivarUsuario.Text = "Desactivar";
-            // 
             // frmUsuarios
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -424,17 +425,17 @@
             this.Load += new System.EventHandler(this.frmUsuarios_Load);
             this.pnlContenedor.ResumeLayout(false);
             this.pnlContenedor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlPedidaDeDatos.ResumeLayout(false);
             this.pnlPedidaDeDatos.PerformLayout();
             this.pnlBarraInformativa.ResumeLayout(false);
             this.pnlBarraInformativa.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPerfil)).EndInit();
-            this.pnlPedidosRecientes.ResumeLayout(false);
-            this.pnlPedidosRecientes.PerformLayout();
+            this.pnlUsuariosRegistrados.ResumeLayout(false);
+            this.pnlUsuariosRegistrados.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuariosRegistrados)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -445,7 +446,7 @@
         private System.Windows.Forms.Panel pnlBarraInformativa;
         private System.Windows.Forms.Label lblAdministrador;
         private System.Windows.Forms.PictureBox pbPerfil;
-        private System.Windows.Forms.Panel pnlPedidosRecientes;
+        private System.Windows.Forms.Panel pnlUsuariosRegistrados;
         private System.Windows.Forms.Label lblUsuarios;
         private System.Windows.Forms.DataGridView dgvUsuariosRegistrados;
         private System.Windows.Forms.Label lblSubTexto;
@@ -459,7 +460,6 @@
         private System.Windows.Forms.Label lblCorreoelectronico;
         private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.Label lblNombreUsuario;
-        private System.Windows.Forms.Button btnNuevoUsuario;
         private System.Windows.Forms.ComboBox cmbRol;
         private System.Windows.Forms.CheckBox chkEstado;
         private System.Windows.Forms.Label lblPagina;
@@ -470,5 +470,6 @@
         private Guna.UI2.WinForms.Guna2TileButton btnGuardarUsuario;
         private System.Windows.Forms.PictureBox pictureBox1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private Guna.UI2.WinForms.Guna2TileButton btnNuevoUsuario;
     }
 }

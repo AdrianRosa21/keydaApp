@@ -39,6 +39,12 @@
             this.lblFechaInicio = new System.Windows.Forms.Label();
             this.pnlContenedorPrincipalInventario = new System.Windows.Forms.Panel();
             this.pnlHeader = new System.Windows.Forms.Panel();
+            this.btnConsultarVentas = new Guna.UI2.WinForms.Guna2Button();
+            this.btnConsultar = new Guna.UI2.WinForms.Guna2Button();
+            this.btnConsultarCotizaciones = new Guna.UI2.WinForms.Guna2Button();
+            this.btnExportarReporteClientes = new Guna.UI2.WinForms.Guna2Button();
+            this.btnExportarCotizaciones = new Guna.UI2.WinForms.Guna2Button();
+            this.btnExportarReporteVentas = new Guna.UI2.WinForms.Guna2Button();
             this.pnlBarraCambiosClientes = new System.Windows.Forms.Panel();
             this.pnlBarraCambioVentas = new System.Windows.Forms.Panel();
             this.pnlBarraCambiosCotizaciones = new System.Windows.Forms.Panel();
@@ -89,12 +95,6 @@
             this.pnlCuadroVentas = new System.Windows.Forms.Panel();
             this.dgvReporteClientes = new System.Windows.Forms.DataGridView();
             this.lblDetalleVentas = new System.Windows.Forms.Label();
-            this.btnExportarReporteVentas = new Guna.UI2.WinForms.Guna2Button();
-            this.btnExportarCotizaciones = new Guna.UI2.WinForms.Guna2Button();
-            this.btnExportarReporteClientes = new Guna.UI2.WinForms.Guna2Button();
-            this.btnConsultarCotizaciones = new Guna.UI2.WinForms.Guna2Button();
-            this.btnConsultar = new Guna.UI2.WinForms.Guna2Button();
-            this.btnConsultarVentas = new Guna.UI2.WinForms.Guna2Button();
             this.pnlBarraSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPerfil)).BeginInit();
             this.pnlContenedorPrincipalInventario.SuspendLayout();
@@ -240,12 +240,6 @@
             // 
             // pnlHeader
             // 
-            this.pnlHeader.Controls.Add(this.btnConsultarVentas);
-            this.pnlHeader.Controls.Add(this.btnConsultar);
-            this.pnlHeader.Controls.Add(this.btnConsultarCotizaciones);
-            this.pnlHeader.Controls.Add(this.btnExportarReporteClientes);
-            this.pnlHeader.Controls.Add(this.btnExportarCotizaciones);
-            this.pnlHeader.Controls.Add(this.btnExportarReporteVentas);
             this.pnlHeader.Controls.Add(this.pnlBarraCambiosClientes);
             this.pnlHeader.Controls.Add(this.pnlBarraCambioVentas);
             this.pnlHeader.Controls.Add(this.pnlBarraCambiosCotizaciones);
@@ -262,12 +256,108 @@
             this.pnlHeader.Controls.Add(this.pnlReporteCotizaciones);
             this.pnlHeader.Controls.Add(this.pnlReportesVentas);
             this.pnlHeader.Controls.Add(this.pnlReporteDeClientes);
+            this.pnlHeader.Controls.Add(this.btnConsultar);
+            this.pnlHeader.Controls.Add(this.btnExportarReporteClientes);
+            this.pnlHeader.Controls.Add(this.btnExportarCotizaciones);
+            this.pnlHeader.Controls.Add(this.btnExportarReporteVentas);
+            this.pnlHeader.Controls.Add(this.btnConsultarCotizaciones);
+            this.pnlHeader.Controls.Add(this.btnConsultarVentas);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlHeader.Margin = new System.Windows.Forms.Padding(2);
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Size = new System.Drawing.Size(1102, 627);
             this.pnlHeader.TabIndex = 0;
+            // 
+            // btnConsultarVentas
+            // 
+            this.btnConsultarVentas.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnConsultarVentas.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnConsultarVentas.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnConsultarVentas.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnConsultarVentas.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConsultarVentas.ForeColor = System.Drawing.Color.White;
+            this.btnConsultarVentas.Location = new System.Drawing.Point(735, 102);
+            this.btnConsultarVentas.Name = "btnConsultarVentas";
+            this.btnConsultarVentas.Size = new System.Drawing.Size(118, 29);
+            this.btnConsultarVentas.TabIndex = 25;
+            this.btnConsultarVentas.Text = "Consultar";
+            this.btnConsultarVentas.Click += new System.EventHandler(this.btnConsultarVentas_Click_1);
+            // 
+            // btnConsultar
+            // 
+            this.btnConsultar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnConsultar.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnConsultar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnConsultar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnConsultar.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConsultar.ForeColor = System.Drawing.Color.White;
+            this.btnConsultar.Location = new System.Drawing.Point(735, 102);
+            this.btnConsultar.Name = "btnConsultar";
+            this.btnConsultar.Size = new System.Drawing.Size(118, 29);
+            this.btnConsultar.TabIndex = 24;
+            this.btnConsultar.Text = "Consultar";
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click_1);
+            // 
+            // btnConsultarCotizaciones
+            // 
+            this.btnConsultarCotizaciones.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnConsultarCotizaciones.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnConsultarCotizaciones.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnConsultarCotizaciones.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnConsultarCotizaciones.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConsultarCotizaciones.ForeColor = System.Drawing.Color.White;
+            this.btnConsultarCotizaciones.Location = new System.Drawing.Point(735, 102);
+            this.btnConsultarCotizaciones.Name = "btnConsultarCotizaciones";
+            this.btnConsultarCotizaciones.Size = new System.Drawing.Size(118, 29);
+            this.btnConsultarCotizaciones.TabIndex = 23;
+            this.btnConsultarCotizaciones.Text = "Consultar";
+            this.btnConsultarCotizaciones.Click += new System.EventHandler(this.btnConsultarCotizaciones_Click);
+            // 
+            // btnExportarReporteClientes
+            // 
+            this.btnExportarReporteClientes.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnExportarReporteClientes.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnExportarReporteClientes.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnExportarReporteClientes.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnExportarReporteClientes.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportarReporteClientes.ForeColor = System.Drawing.Color.White;
+            this.btnExportarReporteClientes.Location = new System.Drawing.Point(875, 102);
+            this.btnExportarReporteClientes.Name = "btnExportarReporteClientes";
+            this.btnExportarReporteClientes.Size = new System.Drawing.Size(146, 29);
+            this.btnExportarReporteClientes.TabIndex = 22;
+            this.btnExportarReporteClientes.Text = "Generar PDF";
+            this.btnExportarReporteClientes.Click += new System.EventHandler(this.btnExportarReporteClientes_Click_1);
+            // 
+            // btnExportarCotizaciones
+            // 
+            this.btnExportarCotizaciones.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnExportarCotizaciones.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnExportarCotizaciones.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnExportarCotizaciones.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnExportarCotizaciones.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportarCotizaciones.ForeColor = System.Drawing.Color.White;
+            this.btnExportarCotizaciones.Location = new System.Drawing.Point(874, 102);
+            this.btnExportarCotizaciones.Name = "btnExportarCotizaciones";
+            this.btnExportarCotizaciones.Size = new System.Drawing.Size(146, 29);
+            this.btnExportarCotizaciones.TabIndex = 21;
+            this.btnExportarCotizaciones.Text = "Generar PDF";
+            this.btnExportarCotizaciones.Click += new System.EventHandler(this.btnExportarCotizaciones_Click_1);
+            // 
+            // btnExportarReporteVentas
+            // 
+            this.btnExportarReporteVentas.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnExportarReporteVentas.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnExportarReporteVentas.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnExportarReporteVentas.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnExportarReporteVentas.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportarReporteVentas.ForeColor = System.Drawing.Color.White;
+            this.btnExportarReporteVentas.Location = new System.Drawing.Point(874, 102);
+            this.btnExportarReporteVentas.Name = "btnExportarReporteVentas";
+            this.btnExportarReporteVentas.Size = new System.Drawing.Size(146, 29);
+            this.btnExportarReporteVentas.TabIndex = 20;
+            this.btnExportarReporteVentas.Text = "Generar PDF";
+            this.btnExportarReporteVentas.Click += new System.EventHandler(this.btnExportarReporteVentas_Click_1);
             // 
             // pnlBarraCambiosClientes
             // 
@@ -812,90 +902,6 @@
             this.lblDetalleVentas.Size = new System.Drawing.Size(170, 23);
             this.lblDetalleVentas.TabIndex = 0;
             this.lblDetalleVentas.Text = "Detalle de Clientes";
-            // 
-            // btnExportarReporteVentas
-            // 
-            this.btnExportarReporteVentas.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnExportarReporteVentas.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnExportarReporteVentas.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnExportarReporteVentas.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnExportarReporteVentas.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportarReporteVentas.ForeColor = System.Drawing.Color.White;
-            this.btnExportarReporteVentas.Location = new System.Drawing.Point(874, 102);
-            this.btnExportarReporteVentas.Name = "btnExportarReporteVentas";
-            this.btnExportarReporteVentas.Size = new System.Drawing.Size(146, 29);
-            this.btnExportarReporteVentas.TabIndex = 20;
-            this.btnExportarReporteVentas.Text = "Generar PDF";
-            // 
-            // btnExportarCotizaciones
-            // 
-            this.btnExportarCotizaciones.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnExportarCotizaciones.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnExportarCotizaciones.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnExportarCotizaciones.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnExportarCotizaciones.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportarCotizaciones.ForeColor = System.Drawing.Color.White;
-            this.btnExportarCotizaciones.Location = new System.Drawing.Point(874, 102);
-            this.btnExportarCotizaciones.Name = "btnExportarCotizaciones";
-            this.btnExportarCotizaciones.Size = new System.Drawing.Size(146, 29);
-            this.btnExportarCotizaciones.TabIndex = 21;
-            this.btnExportarCotizaciones.Text = "Generar PDF";
-            // 
-            // btnExportarReporteClientes
-            // 
-            this.btnExportarReporteClientes.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnExportarReporteClientes.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnExportarReporteClientes.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnExportarReporteClientes.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnExportarReporteClientes.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportarReporteClientes.ForeColor = System.Drawing.Color.White;
-            this.btnExportarReporteClientes.Location = new System.Drawing.Point(875, 102);
-            this.btnExportarReporteClientes.Name = "btnExportarReporteClientes";
-            this.btnExportarReporteClientes.Size = new System.Drawing.Size(146, 29);
-            this.btnExportarReporteClientes.TabIndex = 22;
-            this.btnExportarReporteClientes.Text = "Generar PDF";
-            // 
-            // btnConsultarCotizaciones
-            // 
-            this.btnConsultarCotizaciones.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnConsultarCotizaciones.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnConsultarCotizaciones.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnConsultarCotizaciones.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnConsultarCotizaciones.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConsultarCotizaciones.ForeColor = System.Drawing.Color.White;
-            this.btnConsultarCotizaciones.Location = new System.Drawing.Point(735, 102);
-            this.btnConsultarCotizaciones.Name = "btnConsultarCotizaciones";
-            this.btnConsultarCotizaciones.Size = new System.Drawing.Size(118, 29);
-            this.btnConsultarCotizaciones.TabIndex = 23;
-            this.btnConsultarCotizaciones.Text = "Consultar";
-            // 
-            // btnConsultar
-            // 
-            this.btnConsultar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnConsultar.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnConsultar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnConsultar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnConsultar.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConsultar.ForeColor = System.Drawing.Color.White;
-            this.btnConsultar.Location = new System.Drawing.Point(735, 102);
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(118, 29);
-            this.btnConsultar.TabIndex = 24;
-            this.btnConsultar.Text = "Consultar";
-            // 
-            // btnConsultarVentas
-            // 
-            this.btnConsultarVentas.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnConsultarVentas.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnConsultarVentas.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnConsultarVentas.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnConsultarVentas.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConsultarVentas.ForeColor = System.Drawing.Color.White;
-            this.btnConsultarVentas.Location = new System.Drawing.Point(735, 102);
-            this.btnConsultarVentas.Name = "btnConsultarVentas";
-            this.btnConsultarVentas.Size = new System.Drawing.Size(118, 29);
-            this.btnConsultarVentas.TabIndex = 25;
-            this.btnConsultarVentas.Text = "Consultar";
             // 
             // frmReportes
             // 

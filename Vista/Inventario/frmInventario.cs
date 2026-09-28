@@ -15,6 +15,7 @@ namespace Vista.Inventario
         private int paginaActual = 1;
         private int registrosPorPagina = 20;
         private int totalPaginas = 0;
+
         public frmInventario()
         {
             InitializeComponent();
@@ -163,34 +164,7 @@ namespace Vista.Inventario
             };
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //-----------------------------------------------------------------------------------------------------------------------------------------------
 
         private void CargarPaginacion()
         {
@@ -270,7 +244,7 @@ namespace Vista.Inventario
 
             dgvMateriales.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
 
-            dgvMateriales.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 9, FontStyle.Regular);
+            dgvMateriales.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
 
             dgvMateriales.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
@@ -329,26 +303,7 @@ namespace Vista.Inventario
             // Quitar columna de selección de filas
             dgvMateriales.RowHeadersVisible = false;
         }
-        private void txtBuscar_Enter(object sender, EventArgs e)
-        {
-            //Cuando el usuario de enter para escribir, se va a borrar el texto de indicacion
-            // Y el texto ya no sera opaco, sera color negro
-            if (txtBuscar.Text == "Buscar Material...")
-            {
-                txtBuscar.Text = "";
-                txtBuscar.ForeColor = Color.Black;
-            }
-        }
 
-        private void txtBuscar_Leave(object sender, EventArgs e)
-        {
-
-            if (string.IsNullOrWhiteSpace(txtBuscar.Text))
-            {
-                txtBuscar.Text = "Buscar Material...";
-                txtBuscar.ForeColor = Color.Gray;
-            }
-        }
 
         private void MostrarInventario()
         {
@@ -452,6 +407,9 @@ namespace Vista.Inventario
             cbCategorias.DisplayMember = "Nombre_Categoria";
             cbCategorias.ValueMember = "IdCategoria";
             cbCategorias.SelectedIndex = -1;
+            cbCategorias.DropDownStyle = ComboBoxStyle.DropDown;
+            cbCategorias.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbCategorias.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
         //Combo box para mostrar las unidades de medida registradas en la base de datos
@@ -542,10 +500,7 @@ namespace Vista.Inventario
         private string unidadMedidaOriginal = "";
         private string stockOriginal = "";
         private string categoriaOriginal = "";
-        private void dgvInventario_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
         private void btnEditar_Click(object sender, EventArgs e)
         {
             if (idMaterialSeleccionado == 0)
@@ -584,20 +539,34 @@ namespace Vista.Inventario
         {
             if (idMaterialSeleccionado == 0)
             {
-                MessageBox.Show("No hay ningun material seleccionado.");
+                MessageBox.Show("Seleccione un material primero.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            // Verificar si realmente hubo cambios
-            bool huboCambios = txtMaterial.Text != nombreMaterialOriginal || cbUnidadMedida.Text != unidadMedidaOriginal || txtCantidad.Text != stockOriginal ||
-                cbCategorias.Text != categoriaOriginal;
 
-            if (!huboCambios)
+            bool cambioNombre = txtMaterial.Text != nombreMaterialOriginal;
+            bool cambioUnidad = cbUnidadMedida.Text != unidadMedidaOriginal;
+            bool cambioStock = txtCantidad.Text != stockOriginal;
+            bool cambioCategoria = cbCategorias.Text != categoriaOriginal;
+
+            if (!cambioNombre && !cambioUnidad && !cambioStock && !cambioCategoria)
             {
-                MessageBox.Show("No se detectaron cambios en el material.", "Sin cambios",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                MessageBox.Show("No se detectaron cambios en el material.", "Sin cambios", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
+            string cambios = "Se realizaron los siguientes cambios:\n\n";
+
+            if (cambioNombre)
+                cambios += "• Material: " + nombreMaterialOriginal + " → " + txtMaterial.Text + "\n";
+
+            if (cambioUnidad)
+                cambios += "• Unidad de medida: " + unidadMedidaOriginal + " → " + cbUnidadMedida.Text + "\n";
+
+            if (cambioStock)
+                cambios += "• Stock: " + stockOriginal + " → " + txtCantidad.Text + "\n";
+
+            if (cambioCategoria)
+                cambios += "• Categoría: " + categoriaOriginal + " → " + cbCategorias.Text + "\n";
 
             Material material = new Material();
 
@@ -609,7 +578,7 @@ namespace Vista.Inventario
 
             if (material.ActualizarMaterial())
             {
-                MessageBox.Show("Material actualizado correctamente.");
+                MessageBox.Show(cambios, "Material actualizado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 MostrarInventario();
 
@@ -624,6 +593,7 @@ namespace Vista.Inventario
 
                 idMaterialSeleccionado = 0;
             }
+
             CargarEstadisticasInventario();
             LimpiarFormulario();
         }
@@ -678,7 +648,8 @@ namespace Vista.Inventario
         private void txtMaterial_KeyPress(object sender, KeyPressEventArgs e)
         {
             txtMaterial.MaxLength = 100;
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != '-')
             {
                 e.Handled = true;
             }
@@ -691,20 +662,7 @@ namespace Vista.Inventario
                 e.Handled = true;
             }
         }
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txtBuscar.Text == "Buscar Material...")
-                    return;
-                dgvMateriales.DataSource = Material.BuscarMaterial(txtBuscar.Text);
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
 
         //METODO PARA CARGAR LAS ESTADISTICAS
         private void CargarEstadisticasInventario()
@@ -740,6 +698,44 @@ namespace Vista.Inventario
             cbUnidadMedida.SelectedIndex = -1;
 
             txtMaterial.Focus();
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtBuscar.Text == "Buscar...")
+                    return;
+
+                string buscar = txtBuscar.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(buscar))
+                {
+                    paginaActual = 1;
+                    dgvMateriales = null;
+                    MostrarInventario();
+                    return;
+                }
+
+                dtInventario = Material.BuscarMaterial(buscar);
+
+                int totalResultados = dtInventario.Rows.Count;
+
+                totalPaginas = (int)Math.Ceiling(
+                    (double)totalResultados / registrosPorPagina
+                );
+
+                if (totalPaginas == 0)
+                    totalPaginas = 1;
+
+                paginaActual = 1;
+
+                MostrarPagina();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al buscar materiales.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -23,6 +23,11 @@ namespace Vista.Cotizaciones
             ResponsiveHelper.Apply(this);
             ConfigurarPaneles();
 
+            ConfigurarBotonesPrincipales();
+            ConfigurarCampos();
+            ConfigurarRegistrosCotizaciones();
+            ConfigurarBarraBusqueda();
+
             visorPDF = new WebView2
             {
                 Dock = DockStyle.Fill
@@ -38,6 +43,13 @@ namespace Vista.Cotizaciones
         private Guna2Elipse elipsePDFPreview;
         private Guna2Elipse elipseObservaciones;
         private Guna2Elipse elipseRegistrosCotizaciones;
+
+        private Guna2Elipse elipseInformacionCotizacion;
+        private Guna2Elipse elipseTablaCotizaciones;
+
+        private const string TextoBusqueda = "Buscar...";
+        private readonly Color ColorPlaceholder = Color.LightGray;
+        private readonly Color ColorCafe = Color.FromArgb(121, 75, 45);
 
         private void ConfigurarPaneles()
         {
@@ -87,32 +99,204 @@ namespace Vista.Cotizaciones
 
 
 
+        private void ConfigurarBotonesPrincipales()
+        {
+            ConfigurarBotonPrincipal(btnGuardar, Color.FromArgb(112, 153, 82));
+
+            ConfigurarBotonPrincipal(btnGenerarPDF, Color.FromArgb(121, 75, 45));
+
+            ConfigurarBotonPrincipal(btnLimpiar, Color.FromArgb(174, 91, 75));
+        }
+
+        private void ConfigurarBotonPrincipal(Guna.UI2.WinForms.Guna2Button boton, Color color)
+        {
+            boton.FillColor = color;
+            boton.ForeColor = Color.White;
+
+            boton.BorderColor = Color.FromArgb(121, 75, 45);
+            boton.BorderThickness = 1;
+            boton.BorderRadius = 8;
+
+            boton.HoverState.FillColor = Color.FromArgb(
+                Math.Min(color.R + 20, 255),
+                Math.Min(color.G + 20, 255),
+                Math.Min(color.B + 20, 255)
+            );
+
+            boton.HoverState.ForeColor = Color.White;
+            boton.HoverState.BorderColor = Color.FromArgb(121, 75, 45);
+
+            boton.PressedColor = Color.FromArgb(
+                Math.Max(color.R - 25, 0),
+                Math.Max(color.G - 25, 0),
+                Math.Max(color.B - 25, 0)
+            );
+
+            boton.Cursor = Cursors.Hand;
+            btnBuscarCliente.FillColor = Color.FromArgb(166, 126, 91);
+            btnBuscarCliente.ForeColor = Color.White;
+
+            btnBuscarCliente.BorderColor = Color.FromArgb(121, 75, 45);
+            btnBuscarCliente.BorderThickness = 1;
+            btnBuscarCliente.BorderRadius = 8;
+
+            btnBuscarCliente.HoverState.FillColor = Color.FromArgb(190, 150, 115);
+            btnBuscarCliente.HoverState.ForeColor = Color.White;
+            btnBuscarCliente.HoverState.BorderColor = Color.FromArgb(121, 75, 45);
+
+            btnBuscarCliente.PressedColor = Color.FromArgb(135, 95, 65);
+
+            btnBuscarCliente.Cursor = Cursors.Hand;
+
+            btnAgregar.FillColor = Color.FromArgb(112, 153, 82);
+            btnAgregar.ForeColor = Color.White;
+
+            btnAgregar.BorderColor = Color.FromArgb(121, 75, 45);
+            btnAgregar.BorderThickness = 1;
+            btnAgregar.BorderRadius = 8;
+
+            btnAgregar.HoverState.FillColor = Color.FromArgb(135, 175, 100);
+            btnAgregar.HoverState.ForeColor = Color.White;
+            btnAgregar.HoverState.BorderColor = Color.FromArgb(121, 75, 45);
+
+            btnAgregar.PressedColor = Color.FromArgb(90, 130, 65);
+
+            btnAgregar.Cursor = Cursors.Hand;
+        }
+        private void ConfigurarTextBox(Guna.UI2.WinForms.Guna2TextBox txt)
+        {
+            txt.BorderColor = Color.FromArgb(190, 175, 160);
+            txt.BorderThickness = 2;
+            txt.BorderRadius = 6;
+
+            txt.FillColor = Color.White;
+            txt.ForeColor = Color.FromArgb(70, 50, 40);
+
+            txt.FocusedState.BorderColor = Color.FromArgb(121, 75, 45);
+
+            txt.HoverState.BorderColor = Color.FromArgb(166, 126, 91);
+        }
+        private void ConfigurarCampos()
+        {
+            ConfigurarTextBox(txtCliente);
+            ConfigurarTextBox(txtTelefono);
+            ConfigurarTextBox(txtCorreo);
+            ConfigurarTextBox(txtDireccion);
+
+            ConfigurarTextBox(txtProductosCotizacion);
+            ConfigurarTextBox(txtPrecioUnitario);
+
+            ConfigurarTextBox(txtCondicionesPago);
+            ConfigurarTextBox(txtCondicionesEntrega);
+
+            ConfigurarTextBox(txtSubTotal);
+            ConfigurarTextBox(txtIVA);
+            ConfigurarTextBox(txtTotal);
+
+            ConfigurarTextBox(txtAncho);
+            ConfigurarTextBox(txtAlto);
+            ConfigurarTextBox(txtLargo);
+
+        }
+
+        private void ConfigurarRegistrosCotizaciones()
+        {
+            ConfigurarBotonesCotizaciones();
+
+            elipseInformacionCotizacion = new Guna2Elipse
+            {
+                TargetControl = pnlInformacionDelSeleccionado,
+                BorderRadius = 10
+            };
+
+            elipseTablaCotizaciones = new Guna2Elipse
+            {
+                TargetControl = pnlContenedorTabla,
+                BorderRadius = 10
+            };
+        }
+
+        private void ConfigurarBarraBusqueda()
+        {
+            ConfigurarBusqueda(txtBuscar);
+            ConfigurarBusqueda(txtBuscar);
+        }
+
+        private void ConfigurarBusqueda(Guna2TextBox txtBuscar)
+        {
+            txtBuscar.Text = TextoBusqueda;
+            txtBuscar.ForeColor = ColorPlaceholder;
+
+            txtBuscar.BorderRadius = 10;
+            txtBuscar.BorderThickness = 1;
+            txtBuscar.BorderColor = Color.LightGray;
+
+            txtBuscar.FocusedState.BorderColor = ColorCafe;
+
+            txtBuscar.Enter += (s, e) =>
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                {
+                    txtBuscar.Text = "";
+                    txtBuscar.ForeColor = Color.Black;
+                }
+
+                txtBuscar.BorderColor = ColorCafe;
+                txtBuscar.BorderThickness = 2;
+            };
+
+            txtBuscar.Leave += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+                {
+                    txtBuscar.Text = TextoBusqueda;
+                    txtBuscar.ForeColor = ColorPlaceholder;
+                }
+
+                txtBuscar.BorderColor = Color.LightGray;
+                txtBuscar.BorderThickness = 1;
+            };
+        }
 
 
+        private void ConfigurarBotonesCotizaciones()
+        {
+            ConfigurarBotonGuna(btnEditar, Color.FromArgb(121, 75, 45));
 
+            ConfigurarBotonGuna(btnEliminar, Color.FromArgb(174, 91, 75));
 
+            ConfigurarBotonGuna(btnConvertirEnPedido, Color.FromArgb(112, 153, 82));
 
+            ConfigurarBotonGuna(btnLimpiarFiltros, Color.FromArgb(166, 126, 91));
+        }
 
+        private void ConfigurarBotonGuna(Guna.UI2.WinForms.Guna2TileButton boton, Color color)
+        {
+            boton.FillColor = color;
+            boton.ForeColor = Color.White;
 
+            boton.BorderColor = Color.FromArgb(121, 75, 45);
+            boton.BorderThickness = 1;
+            boton.BorderRadius = 8;
 
+            boton.HoverState.FillColor = Color.FromArgb(
+                Math.Min(color.R + 20, 255),
+                Math.Min(color.G + 20, 255),
+                Math.Min(color.B + 20, 255)
+            );
 
+            boton.HoverState.ForeColor = Color.White;
+            boton.HoverState.BorderColor = Color.FromArgb(121, 75, 45);
 
+            boton.PressedColor = Color.FromArgb(
+                Math.Max(color.R - 25, 0),
+                Math.Max(color.G - 25, 0),
+                Math.Max(color.B - 25, 0)
+            );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            boton.Cursor = Cursors.Hand;
+        }
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // VARIABLES PARA LA PAGINACIÓN
         private DataTable dtCotizaciones;
@@ -128,21 +312,7 @@ namespace Vista.Cotizaciones
         private WebView2 visorPDF;
         private string rutaPDFPreview;
 
-        private void btnCotizacionDetalle_Click(object sender, EventArgs e)
-        {
-            pnlNuevaCotizacion.Visible = true;
-            pnlRegistrosCotizaciones.Visible = false;
-            pnlBarraCambio.Visible = true;
-            pnlBarraCambioRegistros.Visible = false;
-        }
 
-        private void btnCotizacionesRegistradas_Click(object sender, EventArgs e)
-        {
-            pnlRegistrosCotizaciones.Visible = true;
-            pnlNuevaCotizacion.Visible = false;
-            pnlBarraCambio.Visible = false;
-            pnlBarraCambioRegistros.Visible = true;
-        }
 
         private void MostrarCotizacionesRegistradas()
         {
@@ -162,11 +332,7 @@ namespace Vista.Cotizaciones
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void ConfigurarTablasCotizaciones()
@@ -298,10 +464,7 @@ namespace Vista.Cotizaciones
 
             int inicio = (paginaActual - 1) * registrosPorPagina;
 
-            int fin = Math.Min(
-                inicio + registrosPorPagina,
-                dtCotizaciones.Rows.Count
-            );
+            int fin = Math.Min(inicio + registrosPorPagina, dtCotizaciones.Rows.Count);
 
             for (int i = inicio; i < fin; i++)
             {
@@ -322,8 +485,7 @@ namespace Vista.Cotizaciones
             ConfigurarTablasCotizaciones();
 
             // Mostrar página actual
-            lblPagina.Text =
-                $"Página {paginaActual} de {totalPaginas}";
+            lblPagina.Text = $"Página {paginaActual} de {totalPaginas}";
 
             // Activar o desactivar botones
             btnAnterior.Enabled = paginaActual > 1;
@@ -382,12 +544,12 @@ namespace Vista.Cotizaciones
             // Cotizaciones registradas
             toolTip1.SetToolTip(btnEditar, "Permite cambiar el estado de la cotización seleccionada.");
             toolTip1.SetToolTip(btnEliminar, "Elimina la cotización seleccionada.");
-            toolTip1.SetToolTip(button1, "Convierte la cotización aprobada seleccionada en un pedido.");
+            toolTip1.SetToolTip(btnConvertirEnPedido, "Convierte la cotización aprobada seleccionada en un pedido.");
 
             // Vista previa
             toolTip1.SetToolTip(pnlPDFPreview, "Muestra una vista previa del PDF de la cotización.");
             toolTip1.SetToolTip(btnLimpiar, "Limpia los campos del formulario para ingresar una nueva cotización.");
-            toolTip1.SetToolTip(button2, "Limpia los filtros de búsqueda y muestra nuevamente todas las cotizaciones registradas.");
+            toolTip1.SetToolTip(btnConvertirEnPedido, "Limpia los filtros de búsqueda y muestra nuevamente todas las cotizaciones registradas.");
         }
 
         private async void frmCotizaciones_Load(object sender, EventArgs e)
@@ -439,8 +601,7 @@ namespace Vista.Cotizaciones
             }
             catch (Exception ex)
             {
-                MessageBox.Show("No se pudo inicializar la vista previa.\n\n" + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No se pudo inicializar la vista previa.\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -452,13 +613,7 @@ namespace Vista.Cotizaciones
                     return;
 
                 // Verificar que haya productos
-                bool hayProductos = dgvDetalleDeCotizacion.Rows
-                    .Cast<DataGridViewRow>()
-                    .Any(row =>
-                        !row.IsNewRow &&
-                        row.Cells["DescripcionMueble"].Value != null &&
-                        !string.IsNullOrWhiteSpace(
-                            row.Cells["DescripcionMueble"].Value.ToString()));
+                bool hayProductos = dgvDetalleDeCotizacion.Rows.Cast<DataGridViewRow>().Any(row => !row.IsNewRow && row.Cells["DescripcionMueble"].Value != null && !string.IsNullOrWhiteSpace(row.Cells["DescripcionMueble"].Value.ToString()));
 
                 if (!hayProductos)
                     return;
@@ -515,28 +670,6 @@ namespace Vista.Cotizaciones
                 MessageBox.Show("No se pudo actualizar la vista previa.\n\n" + ex.ToString(), "Vista previa", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void btnBuscarCliente_Click(object sender, EventArgs e)
-        {
-
-            using (frmBuscarCliente modal = new frmBuscarCliente())
-            {
-                if (modal.ShowDialog() == DialogResult.OK)
-                {
-                    idClienteSeleccionado = modal.IdClienteSeleccionado;
-
-                    txtCliente.Text = modal.NombreClienteSeleccionado;
-                    txtTelefono.Text = modal.TelefonoClienteSeleccionado;
-                    txtCorreo.Text = modal.CorreoClienteSeleccionado;
-                    txtDireccion.Text = modal.DireccionClienteSeleccionado;
-                }
-            }
-
-            if (idClienteSeleccionado == 0)
-            {
-                MessageBox.Show("Selecciona un cliente.");
-                return;
-            }
-        }
 
         private void CalcularTotalCotizacion()
         {
@@ -584,90 +717,6 @@ namespace Vista.Cotizaciones
             txtTotal.Text = "0.00";
         }
 
-        private void btnGuardar_Click_1(object sender, EventArgs e)
-        {
-
-            // Validar cliente
-            if (idClienteSeleccionado == 0)
-            {
-                errorProvider1.SetError(btnBuscarCliente, "Selecciona un cliente.");
-                btnBuscarCliente.Focus();
-                return;
-            }
-
-            // Validar condiciones de pago
-            if (string.IsNullOrWhiteSpace(txtCondicionesPago.Text))
-            {
-                errorProvider1.SetError(txtCondicionesPago, "Ingresa las condiciones de pago.");
-                txtCondicionesPago.Focus();
-                return;
-            }
-
-            // Validar condiciones de entrega
-            if (string.IsNullOrWhiteSpace(txtCondicionesEntrega.Text))
-            {
-                errorProvider1.SetError(txtCondicionesEntrega, "Ingresa las condiciones de entrega.");
-                txtCondicionesEntrega.Focus();
-                return;
-            }
-
-
-            CalcularTotalCotizacion();
-            // Validar total
-            if (total <= 0)
-            {
-                errorProvider1.SetError(txtTotal, "El total de la cotización debe ser mayor que 0.");
-                txtTotal.Focus();
-                return;
-            }
-
-            // Validar estado
-            if (cbEstado.SelectedIndex == -1)
-            {
-                errorProvider1.SetError(cbEstado, "Selecciona el estado de la cotización.");
-                cbEstado.Focus();
-                return;
-            }
-            cbEstado.Enabled = false;
-            string estadoSeleccionado = Convert.ToString(cbEstado.Text);
-
-            DbCotizacion cotizacion = new DbCotizacion(0, dtpFechaCotizacion.Value, idClienteSeleccionado, txtCondicionesPago.Text.Trim(), txtCondicionesEntrega.Text.Trim(), total, estadoSeleccionado);
-
-            int idCotizacion = cotizacion.InsertarCotizacion();
-
-            if (idCotizacion == 0)
-            {
-                MessageBox.Show("No se pudo registrar la cotizaci?n.");
-                return;
-            }
-            idCotizacionGuardada = idCotizacion;
-            // Guardar detalles
-            foreach (DataGridViewRow row in dgvDetalleDeCotizacion.Rows)
-            {
-                if (row.IsNewRow) continue;
-                if (row.Cells["DescripcionMueble"].Value == null) continue;
-
-                ProductosCotizacion prod = new ProductosCotizacion();
-                prod.Idcotizacion1 = idCotizacion;
-                prod.Descripcion_Del_Mueble1 = row.Cells["DescripcionMueble"].Value.ToString();
-                prod.Largo1 = Convert.ToInt32(row.Cells["Largo"].Value);
-                prod.Ancho1 = Convert.ToInt32(row.Cells["Ancho"].Value);
-                prod.Alto1 = Convert.ToInt32(row.Cells["Alto"].Value);
-                prod.Cantidad1 = Convert.ToInt32(row.Cells["Cantidad"].Value);
-                prod.PrecioUnitario1 = Convert.ToDouble(row.Cells["PrecioUnitario"].Value);
-                prod.SubTotal1 = Convert.ToDouble(row.Cells["SubTotal"].Value);
-
-                prod.InsertarProductoCotizacion();
-            }
-
-            MessageBox.Show("Cotización y productos registrados correctamente.\n\n" + "Número de cotización: " + idCotizacion, "Cotización", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            MostrarCotizacionesRegistradas();
-
-
-        }
-
-
         private void ConfigurarDetalleCotizacion()
         {
             dgvDetalleDeCotizacion.Columns.Clear();
@@ -704,185 +753,6 @@ namespace Vista.Cotizaciones
             txtProductosCotizacion.Focus();
         }
 
-        private void btnAgregar_Click_1(object sender, EventArgs e)
-        {
-            // Validar producto
-            if (string.IsNullOrWhiteSpace(txtProductosCotizacion.Text))
-            {
-                errorProvider1.SetError(txtProductosCotizacion, "Ingresa el producto.");
-                txtProductosCotizacion.Focus();
-                return;
-            }
-
-            // Validar cantidad
-            int cantidad = Convert.ToInt32(nudCantidad.Value);
-
-            if (cantidad <= 0)
-            {
-                errorProvider1.SetError(nudCantidad, "La cantidad debe ser mayor que 0.");
-                nudCantidad.Focus();
-                return;
-            }
-
-            // Validar largo
-            // Out significa que si se puede convertir el texto lo guardará en una variable,
-            // ya que por TextBox se reciben string.
-            if (!int.TryParse(txtLargo.Text, out int largo) || largo <= 0)
-            {
-                errorProvider1.SetError(txtLargo, "Ingresa un largo válido.");
-                txtLargo.Focus();
-                return;
-            }
-
-            // Validar ancho
-            if (!int.TryParse(txtAncho.Text, out int ancho) || ancho <= 0)
-            {
-                errorProvider1.SetError(txtAncho, "Ingresa un ancho válido.");
-                txtAncho.Focus();
-                return;
-            }
-
-            // Validar alto
-            if (!int.TryParse(txtAlto.Text, out int alto) || alto <= 0)
-            {
-                errorProvider1.SetError(txtAlto, "Ingresa un alto válido.");
-                txtAlto.Focus();
-                return;
-            }
-
-            // Validar precio
-            if (!decimal.TryParse(txtPrecioUnitario.Text, out decimal precio))
-            {
-                errorProvider1.SetError(txtPrecioUnitario, "Ingresa un precio válido.");
-                txtPrecioUnitario.Focus();
-                return;
-            }
-
-            // Validar que el precio no sea 0
-            if (precio <= 0)
-            {
-                errorProvider1.SetError(txtPrecioUnitario, "El precio debe ser mayor que 0.");
-                txtPrecioUnitario.Focus();
-                return;
-            }
-            decimal subtotal = cantidad * precio;
-
-            dgvDetalleDeCotizacion.Rows.Add(txtProductosCotizacion.Text.Trim(), largo, ancho, alto, cantidad, precio.ToString("0.00"), subtotal.ToString("0.00"));
-
-            CalcularTotalCotizacion();
-
-            // Actualizar vista previa
-            ActualizarVistaPrevia();
-
-            LimpiarProducto();
-        }
-        private void dgvDetalleDeCotizacion_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0 || ((DataGridView)sender).Rows[e.RowIndex].IsNewRow)
-                return;
-
-            int idCotizacion = Convert.ToInt32(dgvDetalleDeCotizacion.Rows[e.RowIndex].Cells["IdCotizacion"].Value);
-
-            dgvDetalleDeCotizacion.DataSource = null;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (dgvCotizacionesRegistradas.CurrentRow != null)
-            {
-                int idCotizacion = Convert.ToInt32(dgvCotizacionesRegistradas.CurrentRow.Cells["IdCotizacion"].Value);
-                string estado = dgvCotizacionesRegistradas.CurrentRow.Cells["Estado"].Value?.ToString();
-
-                if (estado != "Aprobada")
-                {
-                    MessageBox.Show("Solo las cotizaciones Aprobadas pueden convertirse en Pedidos.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                DateTime fechaEntrega = DateTime.Now.AddDays(15);
-                bool exito = DbPedidos.ConvertirCotizacionAPedido(idCotizacion, fechaEntrega);
-                if (exito)
-                {
-                    MessageBox.Show("¡La cotización se ha convertido en Pedido exitosamente!\nFecha estimada de entrega: " + fechaEntrega.ToShortDateString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Por favor, selecciona una cotización de la tabla primero.");
-            }
-        }
-
-        private void dgvCotizacionesRegistradas_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0 || dgvCotizacionesRegistradas.Rows[e.RowIndex].IsNewRow) return;
-            DataGridViewRow row = dgvCotizacionesRegistradas.Rows[e.RowIndex];
-            lblNumeroSelec.Text = row.Cells["IdCotizacion"].Value?.ToString();
-            lblClienteSelec.Text = row.Cells["Cliente"].Value?.ToString();
-            lblEtsado.Text = row.Cells["Estado"].Value?.ToString();
-            lblMostrarTotal.Text = "$" + row.Cells["Total"].Value?.ToString();
-        }
-
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            if (dgvCotizacionesRegistradas.CurrentRow != null)
-            {
-                int idCotizacion = Convert.ToInt32(dgvCotizacionesRegistradas.CurrentRow.Cells["IdCotizacion"].Value);
-                DialogResult dialogResult = MessageBox.Show("¿Estas seguro de que deseas eliminar la cotización #" + idCotizacion + "?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    DbCotizacion cotizacion = new DbCotizacion();
-                    cotizacion.IdCotizacion1 = idCotizacion;
-                    if (cotizacion.EliminarCotizacion())
-                    {
-                        MessageBox.Show("Cotización eliminada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        MostrarCotizacionesRegistradas();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error al eliminar la cotización.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Por favor, selecciona una cotización de la tabla para eliminar.");
-            }
-        }
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            cbEstado.Enabled = false;
-            if (dgvCotizacionesRegistradas.CurrentRow != null)
-            {
-                int idCotizacion = Convert.ToInt32(dgvCotizacionesRegistradas.CurrentRow.Cells["IdCotizacion"].Value);
-                string estadoActual = dgvCotizacionesRegistradas.CurrentRow.Cells["Estado"].Value?.ToString();
-
-                DialogResult result = MessageBox.Show("¿Deseas cambiar el estado de la cotización? #" + idCotizacion + "?\n\nPresiona SI para marcarla como 'Aprobada'.\nPresiona NO para marcarla como 'Rechazada'.\nPresiona CANCELAR para no hacer nada.", "Cambiar Estado",
-                    MessageBoxButtons.YesNoCancel,
-                    MessageBoxIcon.Question);
-
-                string nuevoEstado = "";
-                if (result == DialogResult.Yes) nuevoEstado = "Aprobada";
-                else if (result == DialogResult.No) nuevoEstado = "Rechazada";
-                else return;
-
-                DbCotizacion cot = new DbCotizacion();
-                cot.IdCotizacion1 = idCotizacion;
-
-                if (cot.ActualizarEstado(nuevoEstado))
-                {
-                    MessageBox.Show("El estado se actualizó exitosamente a: " + nuevoEstado, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    MostrarCotizacionesRegistradas();
-                }
-                else
-                {
-                    MessageBox.Show("Ocurrió un error al actualizar el estado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Por favor selecciona una cotización primero.");
-            }
-        }
         //Metodo para validar que no se pueda ni copiar ni pegar en los formularios
         private void DesactivarCopiarPegar(Control control)
         {
@@ -900,78 +770,122 @@ namespace Vista.Cotizaciones
             }
         }
 
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        private void btnBuscarCliente_Click_2(object sender, EventArgs e)
         {
-            try
+            using (frmBuscarCliente modal = new frmBuscarCliente())
             {
-                if (txtBuscar.Text == "Buscar por código de cotización...")
+                if (modal.ShowDialog() == DialogResult.OK)
                 {
-                    return;
+                    idClienteSeleccionado = modal.IdClienteSeleccionado;
+
+                    txtCliente.Text = modal.NombreClienteSeleccionado;
+                    txtTelefono.Text = modal.TelefonoClienteSeleccionado;
+                    txtCorreo.Text = modal.CorreoClienteSeleccionado;
+                    txtDireccion.Text = modal.DireccionClienteSeleccionado;
                 }
-
-                string buscar = txtBuscar.Text.Trim();
-
-                // Si la búsqueda está vacía,
-                // mostrar nuevamente todas las cotizaciones
-                if (string.IsNullOrWhiteSpace(buscar))
-                {
-                    MostrarCotizacionesRegistradas();
-                    return;
-                }
-
-                // Buscar las cotizaciones
-                dtCotizaciones = DbCotizacion.BuscarCotizacion(buscar);
-
-                // Volver a la primera página
-                paginaActual = 1;
-
-                // Calcular páginas
-                CalcularPaginasCotizaciones();
-
-                // Mostrar resultados paginados
-                MostrarPaginaCotizaciones();
             }
-            catch (Exception ex)
+
+            if (idClienteSeleccionado == 0)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Selecciona un cliente.");
+                return;
             }
         }
 
-        private void txtBuscar_Enter(object sender, EventArgs e)
+        private void txtPrecioUnitario_KeyPress_1(object sender, KeyPressEventArgs e)
         {
-
-            try
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
-                if (txtBuscar.Text == "Buscar por código de cotización...")
-                {
-                    txtBuscar.Text = "";
-                    txtBuscar.ForeColor = Color.Black;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Handled = true;
             }
 
-        }
-
-        private void txtBuscar_Leave(object sender, EventArgs e)
-        {
-            try
+            // Permitir solamente un punto decimal
+            if (e.KeyChar == '.' && txtPrecioUnitario.Text.Contains("."))
             {
-                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
-                {
-                    txtBuscar.Text = "Buscar por código de cotización...";
-                    txtBuscar.ForeColor = Color.Gray;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Handled = true;
             }
         }
 
-        private void btnGenerarPDF_Click(object sender, EventArgs e)
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            // Validar producto
+            if (string.IsNullOrWhiteSpace(txtProductosCotizacion.Text))
+            {
+                errorProvider1.SetError(txtProductosCotizacion, "Ingresa el producto.");
+                MessageBox.Show("Ingresa el producto.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtProductosCotizacion.Focus();
+                return;
+            }
+
+            // Validar cantidad
+            int cantidad = Convert.ToInt32(nudCantidad.Value);
+
+            if (cantidad <= 0)
+            {
+                errorProvider1.SetError(nudCantidad, "La cantidad debe ser mayor que 0.");
+                MessageBox.Show("La cantidad debe ser mayor que 0.", "Cantidad inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                nudCantidad.Focus();
+                return;
+            }
+
+            // Validar largo
+            if (!int.TryParse(txtLargo.Text, out int largo) || largo <= 0)
+            {
+                errorProvider1.SetError(txtLargo, "Ingresa un largo válido.");
+                MessageBox.Show("Ingresa un largo válido.", "Largo inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtLargo.Focus();
+                return;
+            }
+
+            // Validar ancho
+            if (!int.TryParse(txtAncho.Text, out int ancho) || ancho <= 0)
+            {
+                errorProvider1.SetError(txtAncho, "Ingresa un ancho válido.");
+                MessageBox.Show("Ingresa un ancho válido.", "Ancho inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAncho.Focus();
+                return;
+            }
+
+            // Validar alto
+            if (!int.TryParse(txtAlto.Text, out int alto) || alto <= 0)
+            {
+                errorProvider1.SetError(txtAlto, "Ingresa un alto válido.");
+                MessageBox.Show("Ingresa un alto válido.", "Alto inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAlto.Focus();
+                return;
+            }
+
+            // Validar precio
+            if (!decimal.TryParse(txtPrecioUnitario.Text, out decimal precio))
+            {
+                errorProvider1.SetError(txtPrecioUnitario, "Ingresa un precio válido.");
+                MessageBox.Show("Ingresa un precio válido.", "Precio inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPrecioUnitario.Focus();
+                return;
+            }
+
+            // Validar que el precio no sea 0
+            if (precio <= 0)
+            {
+                errorProvider1.SetError(txtPrecioUnitario, "El precio debe ser mayor que 0.");
+                MessageBox.Show("El precio debe ser mayor que 0.", "Precio inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPrecioUnitario.Focus();
+                return;
+            }
+
+            decimal subtotal = cantidad * precio;
+
+            dgvDetalleDeCotizacion.Rows.Add(txtProductosCotizacion.Text.Trim(), largo, ancho, alto, cantidad, precio.ToString("0.00"), subtotal.ToString("0.00"));
+
+            CalcularTotalCotizacion();
+
+            // Actualizar vista previa
+            ActualizarVistaPrevia();
+
+            LimpiarProducto();
+        }
+
+        private void btnGenerarPDF_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -1073,7 +987,255 @@ namespace Vista.Cotizaciones
             }
         }
 
-        private void btnAnterior_Click(object sender, EventArgs e)
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            // Validar cliente
+            if (idClienteSeleccionado == 0)
+            {
+                errorProvider1.SetError(btnBuscarCliente, "Selecciona un cliente.");
+                MessageBox.Show("Selecciona un cliente.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                btnBuscarCliente.Focus();
+                return;
+            }
+
+            // Validar condiciones de pago
+            if (string.IsNullOrWhiteSpace(txtCondicionesPago.Text))
+            {
+                errorProvider1.SetError(txtCondicionesPago, "Ingresa las condiciones de pago.");
+                MessageBox.Show("Ingresa las condiciones de pago.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCondicionesPago.Focus();
+                return;
+            }
+
+            // Validar condiciones de entrega
+            if (string.IsNullOrWhiteSpace(txtCondicionesEntrega.Text))
+            {
+                errorProvider1.SetError(txtCondicionesEntrega, "Ingresa las condiciones de entrega.");
+                MessageBox.Show("Ingresa las condiciones de entrega.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCondicionesEntrega.Focus();
+                return;
+            }
+
+            CalcularTotalCotizacion();
+
+            // Validar total
+            if (total <= 0)
+            {
+                errorProvider1.SetError(txtTotal, "El total de la cotización debe ser mayor que 0.");
+                MessageBox.Show("El total de la cotización debe ser mayor que 0.", "Total inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTotal.Focus();
+                return;
+            }
+
+            // Validar estado
+            if (cbEstado.SelectedIndex == -1)
+            {
+                errorProvider1.SetError(cbEstado, "Selecciona el estado de la cotización.");
+                MessageBox.Show("Selecciona el estado de la cotización.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cbEstado.Focus();
+                return;
+            }
+
+            cbEstado.Enabled = false;
+            string estadoSeleccionado = Convert.ToString(cbEstado.Text);
+
+            DbCotizacion cotizacion = new DbCotizacion(0, dtpFechaCotizacion.Value, idClienteSeleccionado, txtCondicionesPago.Text.Trim(), txtCondicionesEntrega.Text.Trim(), total, estadoSeleccionado);
+
+            int idCotizacion = cotizacion.InsertarCotizacion();
+
+            if (idCotizacion == 0)
+            {
+                MessageBox.Show("No se pudo registrar la cotización.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            idCotizacionGuardada = idCotizacion;
+
+            // Guardar detalles
+            foreach (DataGridViewRow row in dgvDetalleDeCotizacion.Rows)
+            {
+                if (row.IsNewRow) continue;
+                if (row.Cells["DescripcionMueble"].Value == null) continue;
+
+                ProductosCotizacion prod = new ProductosCotizacion();
+                prod.Idcotizacion1 = idCotizacion;
+                prod.Descripcion_Del_Mueble1 = row.Cells["DescripcionMueble"].Value.ToString();
+                prod.Largo1 = Convert.ToInt32(row.Cells["Largo"].Value);
+                prod.Ancho1 = Convert.ToInt32(row.Cells["Ancho"].Value);
+                prod.Alto1 = Convert.ToInt32(row.Cells["Alto"].Value);
+                prod.Cantidad1 = Convert.ToInt32(row.Cells["Cantidad"].Value);
+                prod.PrecioUnitario1 = Convert.ToDouble(row.Cells["PrecioUnitario"].Value);
+                prod.SubTotal1 = Convert.ToDouble(row.Cells["SubTotal"].Value);
+
+                prod.InsertarProductoCotizacion();
+            }
+
+            MessageBox.Show("Cotización y productos registrados correctamente.\n\nNúmero de cotización: " + idCotizacion, "Cotización", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            MostrarCotizacionesRegistradas();
+        }
+
+        private void btnLimpiar_Click_1(object sender, EventArgs e)
+        {
+            LimpiarFormulario();
+            LimpiarProducto();
+        }
+
+        private void dgvDetalleDeCotizacion_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || ((DataGridView)sender).Rows[e.RowIndex].IsNewRow)
+                return;
+
+            int idCotizacion = Convert.ToInt32(dgvDetalleDeCotizacion.Rows[e.RowIndex].Cells["IdCotizacion"].Value);
+
+            dgvDetalleDeCotizacion.DataSource = null;
+        }
+
+        private void btnEditar_Click_1(object sender, EventArgs e)
+        {
+            cbEstado.Enabled = false;
+            if (dgvCotizacionesRegistradas.CurrentRow != null)
+            {
+                int idCotizacion = Convert.ToInt32(dgvCotizacionesRegistradas.CurrentRow.Cells["IdCotizacion"].Value);
+                string estadoActual = dgvCotizacionesRegistradas.CurrentRow.Cells["Estado"].Value?.ToString();
+
+                DialogResult result = MessageBox.Show("¿Deseas cambiar el estado de la cotización? #" + idCotizacion + "?\n\nPresiona SI para marcarla como 'Aprobada'.\nPresiona NO para marcarla como 'Rechazada'.\nPresiona CANCELAR para no hacer nada.", "Cambiar Estado",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question);
+
+                string nuevoEstado = "";
+                if (result == DialogResult.Yes) nuevoEstado = "Aprobada";
+                else if (result == DialogResult.No) nuevoEstado = "Rechazada";
+                else return;
+
+                DbCotizacion cot = new DbCotizacion();
+                cot.IdCotizacion1 = idCotizacion;
+
+                if (cot.ActualizarEstado(nuevoEstado))
+                {
+                    MessageBox.Show("El estado se actualizó exitosamente a: " + nuevoEstado, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MostrarCotizacionesRegistradas();
+                }
+                else
+                {
+                    MessageBox.Show("Ocurrió un error al actualizar el estado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor selecciona una cotización primero.");
+            }
+        }
+
+        private void btnConvertirEnPedido_Click(object sender, EventArgs e)
+        {
+            if (dgvCotizacionesRegistradas.CurrentRow != null)
+            {
+                int idCotizacion = Convert.ToInt32(dgvCotizacionesRegistradas.CurrentRow.Cells["IdCotizacion"].Value);
+                string estado = dgvCotizacionesRegistradas.CurrentRow.Cells["Estado"].Value?.ToString();
+
+                if (estado != "Aprobada")
+                {
+                    MessageBox.Show("Solo las cotizaciones Aprobadas pueden convertirse en Pedidos.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                DateTime fechaEntrega = DateTime.Now.AddDays(15);
+                bool exito = DbPedidos.ConvertirCotizacionAPedido(idCotizacion, fechaEntrega);
+                if (exito)
+                {
+                    MessageBox.Show("¡La cotización se ha convertido en Pedido exitosamente!\nFecha estimada de entrega: " + fechaEntrega.ToShortDateString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecciona una cotización de la tabla primero.");
+            }
+        }
+
+        private void btnEliminar_Click_1(object sender, EventArgs e)
+        {
+            if (dgvCotizacionesRegistradas.CurrentRow != null)
+            {
+                int idCotizacion = Convert.ToInt32(dgvCotizacionesRegistradas.CurrentRow.Cells["IdCotizacion"].Value);
+                DialogResult dialogResult = MessageBox.Show("¿Estas seguro de que deseas eliminar la cotización #" + idCotizacion + "?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    DbCotizacion cotizacion = new DbCotizacion();
+                    cotizacion.IdCotizacion1 = idCotizacion;
+                    if (cotizacion.EliminarCotizacion())
+                    {
+                        MessageBox.Show("Cotización eliminada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MostrarCotizacionesRegistradas();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al eliminar la cotización.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecciona una cotización de la tabla para eliminar.");
+            }
+        }
+
+        private void btnLimpiarFiltros_Click(object sender, EventArgs e)
+        {
+
+            txtBuscar.Text = TextoBusqueda;
+            paginaActual = 1;
+            dtCotizaciones = null;
+            MostrarCotizacionesRegistradas();
+        }
+
+        private void dgvCotizacionesRegistradas_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || dgvCotizacionesRegistradas.Rows[e.RowIndex].IsNewRow) return;
+            DataGridViewRow row = dgvCotizacionesRegistradas.Rows[e.RowIndex];
+            lblNumeroSelec.Text = row.Cells["IdCotizacion"].Value?.ToString();
+            lblClienteSelec.Text = row.Cells["Cliente"].Value?.ToString();
+            lblEtsado.Text = row.Cells["Estado"].Value?.ToString();
+            lblMostrarTotal.Text = "$" + row.Cells["Total"].Value?.ToString();
+        }
+
+        private void txtBuscar_TextChanged_1(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                    return;
+
+                string buscar = txtBuscar.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(buscar))
+                {
+                    paginaActual = 1;
+                    dtCotizaciones = null;
+                    MostrarCotizacionesRegistradas();
+                    return;
+                }
+
+                dtCotizaciones = DbCotizacion.BuscarCotizacion(buscar);
+
+                int totalResultados = dtCotizaciones.Rows.Count;
+
+                totalPaginas = (int)Math.Ceiling((double)totalResultados / registrosPorPagina);
+
+                if (totalPaginas == 0)
+                    totalPaginas = 1;
+
+                paginaActual = 1;
+
+                MostrarPaginaCotizaciones();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al buscar cotizaciones.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnAnterior_Click_1(object sender, EventArgs e)
         {
             if (paginaActual > 1)
             {
@@ -1082,7 +1244,7 @@ namespace Vista.Cotizaciones
             }
         }
 
-        private void btnSiguiente_Click(object sender, EventArgs e)
+        private void btnSiguiente_Click_1(object sender, EventArgs e)
         {
             if (paginaActual < totalPaginas)
             {
@@ -1091,7 +1253,7 @@ namespace Vista.Cotizaciones
             }
         }
 
-        private void dgvCotizacionesRegistradas_SelectionChanged(object sender, EventArgs e)
+        private void dgvCotizacionesRegistradas_SelectionChanged_1(object sender, EventArgs e)
         {
             try
             {
@@ -1119,18 +1281,21 @@ namespace Vista.Cotizaciones
                 MessageBox.Show("Error al cargar la cotización seleccionada: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void txtPrecioUnitario_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
-            {
-                e.Handled = true;
-            }
 
-            // Permitir solamente un punto decimal
-            if (e.KeyChar == '.' && txtPrecioUnitario.Text.Contains("."))
-            {
-                e.Handled = true;
-            }
+        private void btnCotizacionesRegistradas_Click_1(object sender, EventArgs e)
+        {
+            pnlRegistrosCotizaciones.Visible = true;
+            pnlNuevaCotizacion.Visible = false;
+            pnlBarraCambio.Visible = false;
+            pnlBarraCambioRegistros.Visible = true;
+        }
+
+        private void btnCotizacionDetalle_Click(object sender, EventArgs e)
+        {
+            pnlNuevaCotizacion.Visible = true;
+            pnlRegistrosCotizaciones.Visible = false;
+            pnlBarraCambio.Visible = true;
+            pnlBarraCambioRegistros.Visible = false;
         }
     }
 }

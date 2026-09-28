@@ -19,6 +19,7 @@ namespace Vista.Facturación
 
             ConfigurarPaneles();
             ConfigurarBotonesFactura();
+            ConfigurarBarraBusqueda();
         }
 
         private Guna2Elipse elipseDatosVenta;
@@ -27,6 +28,11 @@ namespace Vista.Facturación
         private Guna2Elipse elipseDetalleProductos;
         private Guna2Elipse elipseResumenPago;
         private Guna2Elipse elipseObservaciones;
+
+
+        private const string TextoBusqueda = "Buscar por número de factura...";
+        private readonly Color ColorPlaceholder = Color.LightGray;
+        private readonly Color ColorCafe = Color.FromArgb(121, 75, 45);
 
         private void ConfigurarPaneles()
         {
@@ -67,6 +73,8 @@ namespace Vista.Facturación
             };
         }
 
+
+
         private void ConfigurarBotonesFactura()
         {
             ConfigurarBotonFactura(btnGuardarFactura, Color.FromArgb(121, 75, 45));
@@ -74,6 +82,8 @@ namespace Vista.Facturación
             ConfigurarBotonFactura(btnGenerarPDF, Color.FromArgb(112, 153, 82));
 
             ConfigurarBotonFactura(btnLimpiarFactura, Color.FromArgb(174, 91, 75));
+
+            ConfigurarBotonFactura(btnLimpiarFiltros, Color.FromArgb(121, 75, 45));
         }
 
         private void ConfigurarBotonFactura(Guna.UI2.WinForms.Guna2Button boton, Color color)
@@ -103,31 +113,48 @@ namespace Vista.Facturación
             boton.Cursor = Cursors.Hand;
         }
 
+        private void ConfigurarBarraBusqueda()
+        {
+            ConfigurarBusqueda(txtBuscar);
 
+        }
+        private void ConfigurarBusqueda(Guna2TextBox txtBuscar)
+        {
+            txtBuscar.Text = TextoBusqueda;
+            txtBuscar.ForeColor = ColorPlaceholder;
 
+            txtBuscar.BorderRadius = 10;
+            txtBuscar.BorderThickness = 1;
+            txtBuscar.BorderColor = Color.LightGray;
 
+            txtBuscar.FocusedState.BorderColor = ColorCafe;
 
+            txtBuscar.Enter += (s, e) =>
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                {
+                    txtBuscar.Text = "";
+                    txtBuscar.ForeColor = Color.Black;
+                }
 
+                txtBuscar.BorderColor = ColorCafe;
+                txtBuscar.BorderThickness = 2;
+            };
 
+            txtBuscar.Leave += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+                {
+                    txtBuscar.Text = TextoBusqueda;
+                    txtBuscar.ForeColor = ColorPlaceholder;
+                }
 
+                txtBuscar.BorderColor = Color.LightGray;
+                txtBuscar.BorderThickness = 1;
+            };
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //.---------------------------------------------------------------------------------------------------------------------------------------------------
         // VARIABLES PARA LA PAGINACIÓN
         private DataTable dtFacturas;
         private int paginaActual = 1;
@@ -200,7 +227,7 @@ namespace Vista.Facturación
             // Búsqueda de facturas
             toolTip1.SetToolTip(txtBuscar, "Busca una factura por su número.");
 
-            toolTip1.SetToolTip(btnLimpiar, "Limpia el buscador y muestra nuevamente todas las facturas.");
+            toolTip1.SetToolTip(btnLimpiarFiltros, "Limpia el buscador y muestra nuevamente todas las facturas.");
 
             // Registro de facturas
             toolTip1.SetToolTip(dgvFacturasRegistradas, "Muestra las facturas registradas. Haz doble clic en una factura para editarla.");
@@ -209,9 +236,7 @@ namespace Vista.Facturación
         //---------------------- CONFIGURAR TABLAS DE FACTURACIÓN ----------------------------------------------//
         private void ConfigurarTablasFacturacion()
         {
-            // =========================
             // TABLA DE FACTURAS
-            // =========================
 
             // Encabezado
             dgvFacturasRegistradas.EnableHeadersVisualStyles = false;
@@ -220,7 +245,7 @@ namespace Vista.Facturación
 
             dgvFacturasRegistradas.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
 
-            dgvFacturasRegistradas.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Times New Roman", 9, System.Drawing.FontStyle.Regular);
+            dgvFacturasRegistradas.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Regular);
 
             dgvFacturasRegistradas.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
@@ -283,7 +308,7 @@ namespace Vista.Facturación
 
             dgvDetalleVenta.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
 
-            dgvDetalleVenta.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Times New Roman", 9, System.Drawing.FontStyle.Regular);
+            dgvDetalleVenta.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Regular);
 
             dgvDetalleVenta.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
@@ -412,7 +437,6 @@ namespace Vista.Facturación
             DataTable dtPagina = dtFacturas.Clone();
 
             int inicio = (paginaActual - 1) * registrosPorPagina;
-
             int fin = Math.Min(inicio + registrosPorPagina, dtFacturas.Rows.Count);
 
             for (int i = inicio; i < fin; i++)
@@ -420,21 +444,19 @@ namespace Vista.Facturación
                 dtPagina.ImportRow(dtFacturas.Rows[i]);
             }
 
-            // Mostrar únicamente los registros de la página actual
             dgvFacturasRegistradas.DataSource = null;
             dgvFacturasRegistradas.DataSource = dtPagina;
 
-            // Configurar encabezados
-            dgvFacturasRegistradas.Columns["IdFactura"].HeaderText = "N° de Factura";
-            dgvFacturasRegistradas.Columns["Fecha"].HeaderText = "Fecha de emisión";
+            if (dgvFacturasRegistradas.Columns.Contains("IdFactura"))
+                dgvFacturasRegistradas.Columns["IdFactura"].HeaderText = "N° de Factura";
 
-            // CONFIGURAR DISEÑO DE LA TABLA
+            if (dgvFacturasRegistradas.Columns.Contains("Fecha"))
+                dgvFacturasRegistradas.Columns["Fecha"].HeaderText = "Fecha de emisión";
+
             ConfigurarTablasFacturacion();
 
-            // Mostrar página actual
             lblPagina.Text = $"Página {paginaActual} de {totalPaginas}";
 
-            // Activar o desactivar botones
             btnAnterior.Enabled = paginaActual > 1;
             btnSiguiente.Enabled = paginaActual < totalPaginas;
         }
@@ -459,11 +481,6 @@ namespace Vista.Facturación
             pnlBarraCambioRegistros.Visible = true;
             pnlContenedorDeCotizacionNueva.Visible = false;
             pnlRegistroCotizacion.Visible = true;
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void DesactivarCopiarPegar(Control control)
@@ -535,8 +552,6 @@ namespace Vista.Facturación
 
             // Mostrar cantidad en la pestaña verde
             lblTotalDeProductos.Text = cantidadProductos.ToString();
-
-
         }
 
         private void CalcularTotales()
@@ -634,39 +649,7 @@ namespace Vista.Facturación
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (txtBuscar.Text == "Buscar por número de factura...")
-                {
-                    return;
-                }
 
-                string buscar = txtBuscar.Text.Trim();
-
-                // Si la búsqueda está vacía,
-                // mostrar nuevamente todas las facturas
-                if (string.IsNullOrWhiteSpace(buscar))
-                {
-                    MostrarRegistrosFacturas();
-                    return;
-                }
-
-                // Buscar las facturas
-                dtFacturas = DbFactura.BuscarFacturas(buscar);
-
-                // Volver a la primera página
-                paginaActual = 1;
-
-                // Calcular páginas
-                CalcularPaginasFacturas();
-
-                // Mostrar resultados paginados
-                MostrarPaginaFacturas();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void txtBuscar_Leave(object sender, EventArgs e)
@@ -906,6 +889,42 @@ namespace Vista.Facturación
             {
                 paginaActual++;
                 MostrarPaginaFacturas();
+            }
+        }
+
+        private void txtBuscar_TextChanged_1(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                    return;
+
+                string buscar = txtBuscar.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(buscar))
+                {
+                    paginaActual = 1;
+                    dtFacturas = null;
+                    MostrarRegistrosFacturas();
+                    return;
+                }
+
+                dtFacturas = DbFactura.BuscarFacturas(buscar);
+
+                int totalResultados = dtFacturas.Rows.Count;
+
+                totalPaginas = (int)Math.Ceiling((double)totalResultados / registrosPorPagina);
+
+                if (totalPaginas == 0)
+                    totalPaginas = 1;
+
+                paginaActual = 1;
+
+                MostrarPaginaFacturas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al buscar facturas.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
