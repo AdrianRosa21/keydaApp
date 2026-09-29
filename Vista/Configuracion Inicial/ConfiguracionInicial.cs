@@ -19,7 +19,12 @@ namespace Vista.Configuracion_Inicial
         {
             frmConfiguracionparte2 frm = new frmConfiguracionparte2();
             frm.Show();
-            this.Hide();
+
+        }
+
+        private void guna2PictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

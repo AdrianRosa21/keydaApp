@@ -39,6 +39,8 @@
             this.lblNombreUsuario = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.lblCorreo = new System.Windows.Forms.Label();
+            this.txtCorreo = new System.Windows.Forms.TextBox();
             this.chkAceptarCondiciones = new System.Windows.Forms.CheckBox();
             this.button5 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,8 +54,6 @@
             this.lblCrear = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtCorreo = new System.Windows.Forms.TextBox();
-            this.lblCorreo = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.flpBotones.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -164,6 +164,26 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(632, 328);
             this.panel3.TabIndex = 16;
+            // 
+            // lblCorreo
+            // 
+            this.lblCorreo.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.lblCorreo.Location = new System.Drawing.Point(24, 238);
+            this.lblCorreo.Name = "lblCorreo";
+            this.lblCorreo.Size = new System.Drawing.Size(62, 22);
+            this.lblCorreo.TabIndex = 23;
+            this.lblCorreo.Text = "Correo:";
+            this.lblCorreo.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtCorreo
+            // 
+            this.txtCorreo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtCorreo.Location = new System.Drawing.Point(28, 263);
+            this.txtCorreo.Multiline = true;
+            this.txtCorreo.Name = "txtCorreo";
+            this.txtCorreo.Size = new System.Drawing.Size(551, 20);
+            this.txtCorreo.TabIndex = 22;
+            this.txtCorreo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCorreo_KeyPress);
             // 
             // chkAceptarCondiciones
             // 
@@ -305,25 +325,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // txtCorreo
-            // 
-            this.txtCorreo.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtCorreo.Location = new System.Drawing.Point(28, 263);
-            this.txtCorreo.Multiline = true;
-            this.txtCorreo.Name = "txtCorreo";
-            this.txtCorreo.Size = new System.Drawing.Size(551, 20);
-            this.txtCorreo.TabIndex = 22;
-            // 
-            // lblCorreo
-            // 
-            this.lblCorreo.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.lblCorreo.Location = new System.Drawing.Point(24, 238);
-            this.lblCorreo.Name = "lblCorreo";
-            this.lblCorreo.Size = new System.Drawing.Size(62, 22);
-            this.lblCorreo.TabIndex = 23;
-            this.lblCorreo.Text = "Correo:";
-            this.lblCorreo.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // ConfiguracionParte3
             // 

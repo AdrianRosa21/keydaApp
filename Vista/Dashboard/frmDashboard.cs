@@ -152,7 +152,6 @@ namespace Vista.Dashboard
             toolTip1.SetToolTip(btnUsuarios, "Gestión de usuarios");
             toolTip1.SetToolTip(btnConfiguracion, "Configuración de la empresa");
             toolTip1.SetToolTip(btnMinimizar, "Minimizar");
-            toolTip1.SetToolTip(btnSalir, "Salir");
             toolTip1.SetToolTip(btnMaximizar, "Maximizar");
 
         }

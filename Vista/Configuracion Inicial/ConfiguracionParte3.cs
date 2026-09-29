@@ -19,6 +19,20 @@ namespace Vista.Configuracion_Inicial
 
         private void button6_Click(object sender, EventArgs e)
         {
+            string correo = txtCorreo.Text;
+            if (string.IsNullOrWhiteSpace(correo))
+            {
+                MessageBox.Show("Ingrese un correo electrónico.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCorreo.Focus();
+                return;
+            }
+
+            if (!ValidarCorreo(correo))
+            {
+                MessageBox.Show("Ingrese un correo electrónico válido.", "Correo inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCorreo.Focus();
+                return;
+            }
             // Verifica que se haya escrito el nombre.
             if (string.IsNullOrWhiteSpace(txtNombreAdministrador.Text))
             {
@@ -83,17 +97,30 @@ namespace Vista.Configuracion_Inicial
             // Si el administrador se creó correctamente...
             if (creado)
             {
-                MessageBox.Show("La cuenta de administrador se creó correctamente.\n\nAhora puede iniciar sesión.", "Configuración completada",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("La cuenta de administrador se creó correctamente.\n\nAhora puede iniciar sesión.", "Configuración completada", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Oculta este formulario.
-                this.Hide();
+
 
                 ConfiguracionUltimaParte frm = new ConfiguracionUltimaParte();
                 frm.ShowDialog();
+                Hide();
 
             }
         }
+        private bool ValidarCorreo(string correo)
+        {
+            try
+            {
+                System.Net.Mail.MailAddress correoValidado = new System.Net.Mail.MailAddress(correo);
+
+                return correoValidado.Address == correo;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
 
         private void ConfiguracionParte3_Load(object sender, EventArgs e)
         {
@@ -102,6 +129,11 @@ namespace Vista.Configuracion_Inicial
 
             // Oculta la confirmación de contraseña mostrando puntos.
             txtConfirmarContrasena.UseSystemPasswordChar = true;
+        }
+
+        private void txtCorreo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
         }
     }
 }

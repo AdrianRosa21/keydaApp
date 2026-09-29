@@ -47,10 +47,6 @@ namespace Vista.Login
             btnIngresar.Cursor = Cursors.Hand;
         }
 
-        private void btnCerrarClientes_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
 
         private void ConfigurarTooltips()
         {
@@ -73,7 +69,6 @@ namespace Vista.Login
 
             toolTip1.SetToolTip(btnRecuperarContrasena, "Permite recuperar su contraseña.");
 
-            toolTip1.SetToolTip(btnCerrarClientes, "Cierra la aplicación.");
         }
         private void IniciarSesion()
         {
@@ -230,6 +225,11 @@ namespace Vista.Login
         private void btnIngresar_Click(object sender, EventArgs e)
         {
             IniciarSesion();
+        }
+
+        private void guna2TileButton1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 

@@ -25,7 +25,7 @@ namespace Vista.DashboardSecretario
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void btnMinimizar_Click(object sender, EventArgs e)
@@ -77,7 +77,6 @@ namespace Vista.DashboardSecretario
         }
 
 
-
         private void subPanel(bool estado)
         {
             pnlSubInventario.Visible = estado;
@@ -96,6 +95,20 @@ namespace Vista.DashboardSecretario
             subPanel(false);
 
             AbrirFormulario(new frmInicioSecretario());
+
+            toolTip1.SetToolTip(btnClientes, "Ver clientes registrados");
+            toolTip1.SetToolTip(btnVentas, "Consultar ventas");
+            toolTip1.SetToolTip(btnPedidos, "Ver pedidos registrados");
+            toolTip1.SetToolTip(btnCotizaciones, "Gestionar cotizaciones");
+            toolTip1.SetToolTip(btnProduccion, "Ver Produccion de los pedidos");
+            toolTip1.SetToolTip(btnInventario, "Ver Materiales del inventario");
+            toolTip1.SetToolTip(btnReportes, "Consulta informacion y genera PDF");
+            toolTip1.SetToolTip(btnProveedores, "Ver Proveedores registrados");
+            toolTip1.SetToolTip(btnCategorias, "Categorias del inventario");
+            toolTip1.SetToolTip(btnCerrarSesion, "Cierra sesión");
+            toolTip1.SetToolTip(btnAyuda, "Ayuda del sistema");
+            toolTip1.SetToolTip(btnMinimizar, "Minimizar");
+            toolTip1.SetToolTip(btnSalir, "Maximizar");
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)

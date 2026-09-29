@@ -74,7 +74,6 @@ namespace Vista.Dashboard
             this.btnAgrupar = new System.Windows.Forms.Button();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.btnMinimizar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -695,8 +694,7 @@ namespace Vista.Dashboard
             // 
             // tableBononessuperiores
             // 
-            this.tableBononessuperiores.ColumnCount = 5;
-            this.tableBononessuperiores.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableBononessuperiores.ColumnCount = 4;
             this.tableBononessuperiores.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableBononessuperiores.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableBononessuperiores.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -705,7 +703,6 @@ namespace Vista.Dashboard
             this.tableBononessuperiores.Controls.Add(this.btnAgrupar, 2, 0);
             this.tableBononessuperiores.Controls.Add(this.btnCerrarSesion, 0, 0);
             this.tableBononessuperiores.Controls.Add(this.btnMinimizar, 1, 0);
-            this.tableBononessuperiores.Controls.Add(this.btnSalir, 4, 0);
             this.tableBononessuperiores.Dock = System.Windows.Forms.DockStyle.Right;
             this.tableBononessuperiores.Location = new System.Drawing.Point(1037, 0);
             this.tableBononessuperiores.Name = "tableBononessuperiores";
@@ -718,9 +715,9 @@ namespace Vista.Dashboard
             // 
             this.btnMaximizar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnMaximizar.Image = global::Vista.Properties.Resources.nueva_ventana;
-            this.btnMaximizar.Location = new System.Drawing.Point(138, 3);
+            this.btnMaximizar.Location = new System.Drawing.Point(174, 3);
             this.btnMaximizar.Name = "btnMaximizar";
-            this.btnMaximizar.Size = new System.Drawing.Size(39, 30);
+            this.btnMaximizar.Size = new System.Drawing.Size(51, 30);
             this.btnMaximizar.TabIndex = 5;
             this.btnMaximizar.UseVisualStyleBackColor = true;
             this.btnMaximizar.Click += new System.EventHandler(this.btnMaximizar_Click);
@@ -729,9 +726,9 @@ namespace Vista.Dashboard
             // 
             this.btnAgrupar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAgrupar.Image = global::Vista.Properties.Resources.Ventana16px;
-            this.btnAgrupar.Location = new System.Drawing.Point(93, 3);
+            this.btnAgrupar.Location = new System.Drawing.Point(117, 3);
             this.btnAgrupar.Name = "btnAgrupar";
-            this.btnAgrupar.Size = new System.Drawing.Size(39, 30);
+            this.btnAgrupar.Size = new System.Drawing.Size(51, 30);
             this.btnAgrupar.TabIndex = 3;
             this.btnAgrupar.UseVisualStyleBackColor = true;
             this.btnAgrupar.Click += new System.EventHandler(this.btnAgrupar_Click);
@@ -742,7 +739,7 @@ namespace Vista.Dashboard
             this.btnCerrarSesion.Image = global::Vista.Properties.Resources.CerrarSesión16px;
             this.btnCerrarSesion.Location = new System.Drawing.Point(3, 3);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
-            this.btnCerrarSesion.Size = new System.Drawing.Size(39, 30);
+            this.btnCerrarSesion.Size = new System.Drawing.Size(51, 30);
             this.btnCerrarSesion.TabIndex = 2;
             this.btnCerrarSesion.UseVisualStyleBackColor = true;
             this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
@@ -751,23 +748,12 @@ namespace Vista.Dashboard
             // 
             this.btnMinimizar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnMinimizar.Image = global::Vista.Properties.Resources.Minimizar16px;
-            this.btnMinimizar.Location = new System.Drawing.Point(48, 3);
+            this.btnMinimizar.Location = new System.Drawing.Point(60, 3);
             this.btnMinimizar.Name = "btnMinimizar";
-            this.btnMinimizar.Size = new System.Drawing.Size(39, 30);
+            this.btnMinimizar.Size = new System.Drawing.Size(51, 30);
             this.btnMinimizar.TabIndex = 0;
             this.btnMinimizar.UseVisualStyleBackColor = true;
             this.btnMinimizar.Click += new System.EventHandler(this.btnMinimizar_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSalir.Image = global::Vista.Properties.Resources.Cerrar16px;
-            this.btnSalir.Location = new System.Drawing.Point(183, 3);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(42, 30);
-            this.btnSalir.TabIndex = 4;
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // label2
             // 
@@ -871,7 +857,6 @@ namespace Vista.Dashboard
         private System.Windows.Forms.Panel pnlBarraSuperior;
         private System.Windows.Forms.TableLayoutPanel tableBononessuperiores;
         private System.Windows.Forms.Button btnMinimizar;
-        private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnAgrupar;
         private System.Windows.Forms.Button btnCerrarSesion;
         private System.Windows.Forms.Button btnInicio;

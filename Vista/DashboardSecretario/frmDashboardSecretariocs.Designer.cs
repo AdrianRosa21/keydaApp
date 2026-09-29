@@ -28,6 +28,7 @@ namespace Vista.DashboardSecretario
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlBotones = new System.Windows.Forms.Panel();
             this.btnAyuda = new System.Windows.Forms.Button();
@@ -72,6 +73,7 @@ namespace Vista.DashboardSecretario
             this.btnMinimizar = new System.Windows.Forms.Button();
             this.pnlBarraSuperior = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.pnlBotones.SuspendLayout();
             this.pnlCotizaciones.SuspendLayout();
             this.pnlFacturacion.SuspendLayout();
@@ -647,7 +649,7 @@ namespace Vista.DashboardSecretario
             // btnSalir
             // 
             this.btnSalir.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSalir.Image = global::Vista.Properties.Resources.Cerrar16px;
+            this.btnSalir.Image = global::Vista.Properties.Resources.nueva_ventana;
             this.btnSalir.Location = new System.Drawing.Point(174, 3);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(51, 30);
@@ -796,5 +798,6 @@ namespace Vista.DashboardSecretario
         private System.Windows.Forms.Panel pnlBarraSuperior;
         private System.Windows.Forms.Button btnCategorias;
         private System.Windows.Forms.Button btnAyuda;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

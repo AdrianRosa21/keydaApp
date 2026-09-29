@@ -73,6 +73,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(180, 549);
             this.panel1.TabIndex = 5;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // flpBotones
             // 
@@ -164,7 +165,7 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.label1.Location = new System.Drawing.Point(266, 55);
+            this.label1.Location = new System.Drawing.Point(266, 73);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(287, 22);
             this.label1.TabIndex = 7;
@@ -174,7 +175,7 @@
             // lblBienvenida
             // 
             this.lblBienvenida.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
-            this.lblBienvenida.Location = new System.Drawing.Point(265, 21);
+            this.lblBienvenida.Location = new System.Drawing.Point(265, 39);
             this.lblBienvenida.Name = "lblBienvenida";
             this.lblBienvenida.Size = new System.Drawing.Size(319, 34);
             this.lblBienvenida.TabIndex = 6;
@@ -195,7 +196,7 @@
             this.panel3.Controls.Add(this.lblTelefono);
             this.panel3.Controls.Add(this.txtNombreEmpresa);
             this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(233, 99);
+            this.panel3.Location = new System.Drawing.Point(233, 117);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(632, 296);
             this.panel3.TabIndex = 10;
@@ -330,7 +331,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Vista.Properties.Resources.logistica__1_;
-            this.pictureBox1.Location = new System.Drawing.Point(196, 25);
+            this.pictureBox1.Location = new System.Drawing.Point(196, 43);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(73, 52);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;

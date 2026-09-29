@@ -243,6 +243,16 @@ namespace Vista.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ChatGPT_Image_28_sept_2026__09_40_00_p_m_ {
+            get {
+                object obj = ResourceManager.GetObject("ChatGPT Image 28 sept 2026, 09_40_00 p.m.", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Cliente_activo {
             get {
                 object obj = ResourceManager.GetObject("Cliente activo", resourceCulture);
@@ -366,6 +376,16 @@ namespace Vista.Properties {
         internal static System.Drawing.Bitmap comprobado__1_ {
             get {
                 object obj = ResourceManager.GetObject("comprobado (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Configuracion_imagen {
+            get {
+                object obj = ResourceManager.GetObject("Configuracion imagen", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -787,6 +807,16 @@ namespace Vista.Properties {
             get {
                 object obj = ResourceManager.GetObject("logo_muebles_keyda", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Logo1 {
+            get {
+                object obj = ResourceManager.GetObject("Logo1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

@@ -19,6 +19,7 @@ namespace Vista.Configuracion_Inicial
         {
             ConfiguracionInicial frm = new ConfiguracionInicial();
             frm.ShowDialog();
+            this.Hide();
         }
 
 
@@ -57,8 +58,7 @@ namespace Vista.Configuracion_Inicial
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("ERR-IMG-001: El archivo seleccionado no es una imagen válida.", "Error de imagen",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("ERR-IMG-001: El archivo seleccionado no es una imagen válida.", "Error de imagen", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     rutaLogo = "";
                 }
@@ -135,20 +135,17 @@ namespace Vista.Configuracion_Inicial
 
                 global::Modelo.Properties.Settings.Default.Save();
 
-                MessageBox.Show("La configuración se guardó correctamente.", "Configuración",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("La configuración se guardó correctamente.", "Configuración", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Abrir siguiente formulario
                 ConfiguracionParte3 frm = new ConfiguracionParte3();
-
                 frm.Show();
+                Hide();
 
-                this.Hide();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error al guardar la configuración:\n\n" + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ocurrió un error al guardar la configuración:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -284,6 +281,11 @@ namespace Vista.Configuracion_Inicial
                 txtTelefono.Text = telefono;
                 txtTelefono.SelectionStart = txtTelefono.Text.Length;
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 

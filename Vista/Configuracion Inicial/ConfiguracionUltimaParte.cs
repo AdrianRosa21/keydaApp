@@ -17,11 +17,11 @@ namespace Vista.Configuracion_Inicial
 
         private void btnInicioLogin_Click(object sender, EventArgs e)
         {
-            this.Hide();
+
             frmLogin frm = new frmLogin();
 
             frm.ShowDialog();
-
+            this.Close();
         }
 
         private void lblAAdministrador_Click(object sender, EventArgs e)
@@ -32,40 +32,29 @@ namespace Vista.Configuracion_Inicial
         private void CargarInformacionEmpresa()
         {
             // INFORMACIÓN DE LA EMPRESA
-            // ==========================================
 
-            lblNombreEmpresa.Text =
-                Modelo.Properties.Settings.Default.NombreEmpresa;
+            lblNombreEmpresa.Text = Modelo.Properties.Settings.Default.NombreEmpresa;
 
-            lblTelefonoEmpresa.Text =
-                "Tel: " +
-                Modelo.Properties.Settings.Default.TelefonoEmpresa;
+            lblTelefonoEmpresa.Text = "Tel: " + Modelo.Properties.Settings.Default.TelefonoEmpresa;
 
-            lblCorreoEmpresa.Text =
-                Modelo.Properties.Settings.Default.CorreoEmpresa;
+            lblCorreoEmpresa.Text = Modelo.Properties.Settings.Default.CorreoEmpresa;
 
-            lblDireccionEmpresa.Text =
-                Modelo.Properties.Settings.Default.DireccionEmpresa;
+            lblDireccionEmpresa.Text = Modelo.Properties.Settings.Default.DireccionEmpresa;
 
 
-            // ==========================================
             // LOGO
-            // ==========================================
 
-            string rutaLogo =
-                Modelo.Properties.Settings.Default.LogoEmpresa;
+            string rutaLogo = Modelo.Properties.Settings.Default.LogoEmpresa;
 
             if (!string.IsNullOrWhiteSpace(rutaLogo) &&
                 File.Exists(rutaLogo))
             {
                 using (Image imagenOriginal = Image.FromFile(rutaLogo))
                 {
-                    picLogoEmpresa.Image =
-                        new Bitmap(imagenOriginal);
+                    picLogoEmpresa.Image = new Bitmap(imagenOriginal);
                 }
 
-                picLogoEmpresa.SizeMode =
-                    PictureBoxSizeMode.Zoom;
+                picLogoEmpresa.SizeMode = PictureBoxSizeMode.Zoom;
             }
         }
 
@@ -77,21 +66,12 @@ namespace Vista.Configuracion_Inicial
                 {
                     if (conexion == null)
                     {
-                        MessageBox.Show(
-                            "ERR-ADM-001: No se pudo establecer conexión con la base de datos.",
-                            "Error de conexión",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error
-                        );
+                        MessageBox.Show("ERR-ADM-001: No se pudo establecer conexión con la base de datos.", "Error de conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         return;
                     }
 
-                    string consulta = @"
-                SELECT TOP 1
-                    Nombre,
-                    Usuario
-                FROM Usuario
+                    string consulta = @"SELECT TOP 1 Nombre, Usuario FROM Usuario
                 WHERE Estado = 1
                 ORDER BY IdUsuario DESC";
 
@@ -103,22 +83,14 @@ namespace Vista.Configuracion_Inicial
                             {
                                 if (lector.Read())
                                 {
-                                    lblNombreAdmin.Text =
-                                        lector["Nombre"].ToString();
+                                    lblNombreAdmin.Text = lector["Nombre"].ToString();
 
-                                    lblUsuarioAdmin.Text =
-                                        lector["Usuario"].ToString();
+                                    lblUsuarioAdmin.Text = lector["Usuario"].ToString();
 
                                 }
                                 else
                                 {
-                                    MessageBox.Show(
-                                        "ERR-ADM-003: No se encontró ningún administrador registrado.",
-                                        "Administrador no encontrado",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Warning
-                                    );
-
+                                    MessageBox.Show("ERR-ADM-003: No se encontró ningún administrador registrado.", "Administrador no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     lblNombreAdmin.Text = "No registrado";
                                     lblUsuarioAdmin.Text = "No registrado";
                                 }
@@ -127,23 +99,13 @@ namespace Vista.Configuracion_Inicial
                     }
                     catch (SqlException)
                     {
-                        MessageBox.Show(
-                            "ERR-ADM-002: Ocurrió un error al consultar la información del administrador.",
-                            "Error de consulta",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error
-                        );
+                        MessageBox.Show("ERR-ADM-002: Ocurrió un error al consultar la información del administrador.", "Error de consulta", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show(
-                    "ERR-ADM-004: Ocurrió un error inesperado al cargar la información del administrador.",
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
+                MessageBox.Show("ERR-ADM-004: Ocurrió un error inesperado al cargar la información del administrador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void ConfiguracionUltimaParte_Load(object sender, EventArgs e)
