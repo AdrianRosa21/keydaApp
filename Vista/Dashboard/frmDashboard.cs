@@ -148,7 +148,9 @@ namespace Vista.Dashboard
             toolTip1.SetToolTip(btnCompras, "Registra y administra las compras");
             toolTip1.SetToolTip(btnCategorias, "Categorias del inventario");
             toolTip1.SetToolTip(btnCerrarSesion, "Cierra sesión");
-            toolTip1.SetToolTip(btnAgrupar, "Agupar");
+            toolTip1.SetToolTip(btnAyuda, "Ayuda del sistema");
+            toolTip1.SetToolTip(btnUsuarios, "Gestión de usuarios");
+            toolTip1.SetToolTip(btnConfiguracion, "Configuración de la empresa");
             toolTip1.SetToolTip(btnMinimizar, "Minimizar");
             toolTip1.SetToolTip(btnSalir, "Salir");
             toolTip1.SetToolTip(btnMaximizar, "Maximizar");

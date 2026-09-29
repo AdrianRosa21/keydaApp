@@ -1067,6 +1067,36 @@ namespace Vista.Compras
                 MessageBox.Show("Ocurrió un error al buscar compras.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void cbProveedor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+        }
+
+        private void dtpFechaDeCompra_ValueChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+        }
+
+        private void cbMaterial_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+        }
+
+        private void nudCantidad_ValueChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+        }
+
+        private void txtPrecioUnitario_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+        }
     }
 }
 

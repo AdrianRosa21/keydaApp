@@ -46,13 +46,6 @@ namespace Vista.Facturación
             this.lblMensajeInformativoPrincipalFacturacion = new System.Windows.Forms.Label();
             this.btnRegistrosfacturas = new System.Windows.Forms.Button();
             this.btnNuevaFactura = new System.Windows.Forms.Button();
-            this.pnlRegistroCotizacion = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.pnlContenedorTabla = new System.Windows.Forms.Panel();
-            this.lblPagina = new System.Windows.Forms.Label();
-            this.btnAnterior = new System.Windows.Forms.Button();
-            this.btnSiguiente = new System.Windows.Forms.Button();
-            this.dgvFacturasRegistradas = new System.Windows.Forms.DataGridView();
             this.pnlContenedorDeCotizacionNueva = new System.Windows.Forms.Panel();
             this.btnLimpiarFactura = new Guna.UI2.WinForms.Guna2Button();
             this.btnGuardarFactura = new Guna.UI2.WinForms.Guna2Button();
@@ -110,18 +103,21 @@ namespace Vista.Facturación
             this.txtSubTotal = new System.Windows.Forms.TextBox();
             this.lblIvaFactura = new System.Windows.Forms.Label();
             this.lblTotalFactura = new System.Windows.Forms.Label();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
+            this.pnlRegistroCotizacion = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.btnLimpiarFiltros = new Guna.UI2.WinForms.Guna2Button();
+            this.txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
+            this.pnlContenedorTabla = new System.Windows.Forms.Panel();
+            this.lblPagina = new System.Windows.Forms.Label();
+            this.btnAnterior = new System.Windows.Forms.Button();
+            this.btnSiguiente = new System.Windows.Forms.Button();
+            this.dgvFacturasRegistradas = new System.Windows.Forms.DataGridView();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlContenedorPrincipalFacturacion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.pnlBarraSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPerfil)).BeginInit();
-            this.pnlRegistroCotizacion.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.pnlContenedorTabla.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFacturasRegistradas)).BeginInit();
             this.pnlContenedorDeCotizacionNueva.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -134,6 +130,10 @@ namespace Vista.Facturación
             this.pnlResumenDePagoFactura.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            this.pnlRegistroCotizacion.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.pnlContenedorTabla.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFacturasRegistradas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -148,8 +148,8 @@ namespace Vista.Facturación
             this.pnlContenedorPrincipalFacturacion.Controls.Add(this.lblMensajeInformativoPrincipalFacturacion);
             this.pnlContenedorPrincipalFacturacion.Controls.Add(this.btnRegistrosfacturas);
             this.pnlContenedorPrincipalFacturacion.Controls.Add(this.btnNuevaFactura);
-            this.pnlContenedorPrincipalFacturacion.Controls.Add(this.pnlRegistroCotizacion);
             this.pnlContenedorPrincipalFacturacion.Controls.Add(this.pnlContenedorDeCotizacionNueva);
+            this.pnlContenedorPrincipalFacturacion.Controls.Add(this.pnlRegistroCotizacion);
             this.pnlContenedorPrincipalFacturacion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContenedorPrincipalFacturacion.Location = new System.Drawing.Point(0, 0);
             this.pnlContenedorPrincipalFacturacion.Margin = new System.Windows.Forms.Padding(2);
@@ -277,112 +277,6 @@ namespace Vista.Facturación
             this.btnNuevaFactura.UseVisualStyleBackColor = false;
             this.btnNuevaFactura.Click += new System.EventHandler(this.btnNuevaFactura_Click);
             // 
-            // pnlRegistroCotizacion
-            // 
-            this.pnlRegistroCotizacion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlRegistroCotizacion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(221)))), ((int)(((byte)(175)))));
-            this.pnlRegistroCotizacion.Controls.Add(this.panel2);
-            this.pnlRegistroCotizacion.Controls.Add(this.pnlContenedorTabla);
-            this.pnlRegistroCotizacion.Location = new System.Drawing.Point(0, 135);
-            this.pnlRegistroCotizacion.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlRegistroCotizacion.Name = "pnlRegistroCotizacion";
-            this.pnlRegistroCotizacion.Size = new System.Drawing.Size(1102, 492);
-            this.pnlRegistroCotizacion.TabIndex = 55;
-            this.pnlRegistroCotizacion.Visible = false;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.panel2.Controls.Add(this.btnLimpiarFiltros);
-            this.panel2.Controls.Add(this.txtBuscar);
-            this.panel2.Location = new System.Drawing.Point(24, 11);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(999, 57);
-            this.panel2.TabIndex = 32;
-            // 
-            // pnlContenedorTabla
-            // 
-            this.pnlContenedorTabla.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlContenedorTabla.BackColor = System.Drawing.Color.White;
-            this.pnlContenedorTabla.Controls.Add(this.lblPagina);
-            this.pnlContenedorTabla.Controls.Add(this.btnAnterior);
-            this.pnlContenedorTabla.Controls.Add(this.btnSiguiente);
-            this.pnlContenedorTabla.Controls.Add(this.dgvFacturasRegistradas);
-            this.pnlContenedorTabla.Location = new System.Drawing.Point(24, 77);
-            this.pnlContenedorTabla.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlContenedorTabla.Name = "pnlContenedorTabla";
-            this.pnlContenedorTabla.Size = new System.Drawing.Size(1047, 406);
-            this.pnlContenedorTabla.TabIndex = 3;
-            // 
-            // lblPagina
-            // 
-            this.lblPagina.AutoSize = true;
-            this.lblPagina.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPagina.ForeColor = System.Drawing.Color.Black;
-            this.lblPagina.Location = new System.Drawing.Point(919, 381);
-            this.lblPagina.Name = "lblPagina";
-            this.lblPagina.Size = new System.Drawing.Size(39, 13);
-            this.lblPagina.TabIndex = 41;
-            this.lblPagina.Text = "label1";
-            // 
-            // btnAnterior
-            // 
-            this.btnAnterior.FlatAppearance.BorderSize = 0;
-            this.btnAnterior.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAnterior.Image = global::Vista.Properties.Resources.hacia_atras_negro2;
-            this.btnAnterior.Location = new System.Drawing.Point(882, 374);
-            this.btnAnterior.Name = "btnAnterior";
-            this.btnAnterior.Size = new System.Drawing.Size(30, 23);
-            this.btnAnterior.TabIndex = 40;
-            this.btnAnterior.UseVisualStyleBackColor = true;
-            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
-            // 
-            // btnSiguiente
-            // 
-            this.btnSiguiente.FlatAppearance.BorderSize = 0;
-            this.btnSiguiente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSiguiente.Image = global::Vista.Properties.Resources.hacia_adelante_negro;
-            this.btnSiguiente.Location = new System.Drawing.Point(1006, 374);
-            this.btnSiguiente.Name = "btnSiguiente";
-            this.btnSiguiente.Size = new System.Drawing.Size(30, 23);
-            this.btnSiguiente.TabIndex = 39;
-            this.btnSiguiente.UseVisualStyleBackColor = true;
-            this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
-            // 
-            // dgvFacturasRegistradas
-            // 
-            this.dgvFacturasRegistradas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvFacturasRegistradas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvFacturasRegistradas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvFacturasRegistradas.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFacturasRegistradas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvFacturasRegistradas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFacturasRegistradas.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvFacturasRegistradas.Location = new System.Drawing.Point(10, 15);
-            this.dgvFacturasRegistradas.Name = "dgvFacturasRegistradas";
-            this.dgvFacturasRegistradas.Size = new System.Drawing.Size(1026, 354);
-            this.dgvFacturasRegistradas.TabIndex = 34;
-            this.dgvFacturasRegistradas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFacturasRegistradas_CellDoubleClick);
-            // 
             // pnlContenedorDeCotizacionNueva
             // 
             this.pnlContenedorDeCotizacionNueva.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -413,6 +307,7 @@ namespace Vista.Facturación
             this.btnLimpiarFactura.Size = new System.Drawing.Size(223, 24);
             this.btnLimpiarFactura.TabIndex = 44;
             this.btnLimpiarFactura.Text = "Cancelar factura";
+            this.btnLimpiarFactura.Click += new System.EventHandler(this.btnLimpiarFactura_Click_1);
             // 
             // btnGuardarFactura
             // 
@@ -427,6 +322,7 @@ namespace Vista.Facturación
             this.btnGuardarFactura.Size = new System.Drawing.Size(223, 24);
             this.btnGuardarFactura.TabIndex = 43;
             this.btnGuardarFactura.Text = "Guardar Factura";
+            this.btnGuardarFactura.Click += new System.EventHandler(this.btnGuardarFactura_Click_1);
             // 
             // panel4
             // 
@@ -457,6 +353,7 @@ namespace Vista.Facturación
             this.btnGenerarPDF.Size = new System.Drawing.Size(164, 34);
             this.btnGenerarPDF.TabIndex = 37;
             this.btnGenerarPDF.Text = "Generar PDF";
+            this.btnGenerarPDF.Click += new System.EventHandler(this.btnGenerarPDF_Click_1);
             // 
             // txtObservaciones
             // 
@@ -755,6 +652,7 @@ namespace Vista.Facturación
             this.dtpFechaVencimiento.Size = new System.Drawing.Size(160, 23);
             this.dtpFechaVencimiento.TabIndex = 28;
             this.dtpFechaVencimiento.Value = new System.DateTime(2026, 9, 11, 0, 0, 0, 0);
+            this.dtpFechaVencimiento.ValueChanged += new System.EventHandler(this.dtpFechaVencimiento_ValueChanged);
             // 
             // lblNFactura
             // 
@@ -774,6 +672,7 @@ namespace Vista.Facturación
             this.txtNumeroFactura.Location = new System.Drawing.Point(101, 45);
             this.txtNumeroFactura.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumeroFactura.Name = "txtNumeroFactura";
+            this.txtNumeroFactura.ReadOnly = true;
             this.txtNumeroFactura.Size = new System.Drawing.Size(216, 19);
             this.txtNumeroFactura.TabIndex = 24;
             // 
@@ -787,6 +686,7 @@ namespace Vista.Facturación
             this.dtFechaDatosGeneralesFactura.Size = new System.Drawing.Size(179, 23);
             this.dtFechaDatosGeneralesFactura.TabIndex = 21;
             this.dtFechaDatosGeneralesFactura.Value = new System.DateTime(2026, 9, 11, 0, 0, 0, 0);
+            this.dtFechaDatosGeneralesFactura.ValueChanged += new System.EventHandler(this.dtFechaDatosGeneralesFactura_ValueChanged);
             // 
             // lblFechaVencimiento
             // 
@@ -864,23 +764,23 @@ namespace Vista.Facturación
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDetalleVenta.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDetalleVenta.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDetalleVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetalleVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDetalleVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDetalleVenta.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDetalleVenta.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDetalleVenta.Location = new System.Drawing.Point(9, 42);
             this.dgvDetalleVenta.Name = "dgvDetalleVenta";
             this.dgvDetalleVenta.Size = new System.Drawing.Size(708, 102);
@@ -1064,9 +964,44 @@ namespace Vista.Facturación
             this.lblTotalFactura.TabIndex = 1;
             this.lblTotalFactura.Text = "Total:";
             // 
-            // errorProvider1
+            // pnlRegistroCotizacion
             // 
-            this.errorProvider1.ContainerControl = this;
+            this.pnlRegistroCotizacion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlRegistroCotizacion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(221)))), ((int)(((byte)(175)))));
+            this.pnlRegistroCotizacion.Controls.Add(this.panel2);
+            this.pnlRegistroCotizacion.Controls.Add(this.pnlContenedorTabla);
+            this.pnlRegistroCotizacion.Location = new System.Drawing.Point(0, 135);
+            this.pnlRegistroCotizacion.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlRegistroCotizacion.Name = "pnlRegistroCotizacion";
+            this.pnlRegistroCotizacion.Size = new System.Drawing.Size(1102, 492);
+            this.pnlRegistroCotizacion.TabIndex = 55;
+            this.pnlRegistroCotizacion.Visible = false;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.panel2.Controls.Add(this.btnLimpiarFiltros);
+            this.panel2.Controls.Add(this.txtBuscar);
+            this.panel2.Location = new System.Drawing.Point(24, 11);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(999, 57);
+            this.panel2.TabIndex = 32;
+            // 
+            // btnLimpiarFiltros
+            // 
+            this.btnLimpiarFiltros.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnLimpiarFiltros.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnLimpiarFiltros.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnLimpiarFiltros.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnLimpiarFiltros.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold);
+            this.btnLimpiarFiltros.ForeColor = System.Drawing.Color.White;
+            this.btnLimpiarFiltros.Location = new System.Drawing.Point(620, 15);
+            this.btnLimpiarFiltros.Name = "btnLimpiarFiltros";
+            this.btnLimpiarFiltros.Size = new System.Drawing.Size(226, 26);
+            this.btnLimpiarFiltros.TabIndex = 13;
+            this.btnLimpiarFiltros.Text = "Limpiar filtros";
+            this.btnLimpiarFiltros.Click += new System.EventHandler(this.btnLimpiarFiltros_Click);
             // 
             // txtBuscar
             // 
@@ -1088,19 +1023,91 @@ namespace Vista.Facturación
             this.txtBuscar.TabIndex = 12;
             this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged_1);
             // 
-            // btnLimpiarFiltros
+            // pnlContenedorTabla
             // 
-            this.btnLimpiarFiltros.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnLimpiarFiltros.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnLimpiarFiltros.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnLimpiarFiltros.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnLimpiarFiltros.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold);
-            this.btnLimpiarFiltros.ForeColor = System.Drawing.Color.White;
-            this.btnLimpiarFiltros.Location = new System.Drawing.Point(620, 15);
-            this.btnLimpiarFiltros.Name = "btnLimpiarFiltros";
-            this.btnLimpiarFiltros.Size = new System.Drawing.Size(226, 26);
-            this.btnLimpiarFiltros.TabIndex = 13;
-            this.btnLimpiarFiltros.Text = "Limpiar filtros";
+            this.pnlContenedorTabla.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlContenedorTabla.BackColor = System.Drawing.Color.White;
+            this.pnlContenedorTabla.Controls.Add(this.lblPagina);
+            this.pnlContenedorTabla.Controls.Add(this.btnAnterior);
+            this.pnlContenedorTabla.Controls.Add(this.btnSiguiente);
+            this.pnlContenedorTabla.Controls.Add(this.dgvFacturasRegistradas);
+            this.pnlContenedorTabla.Location = new System.Drawing.Point(24, 77);
+            this.pnlContenedorTabla.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlContenedorTabla.Name = "pnlContenedorTabla";
+            this.pnlContenedorTabla.Size = new System.Drawing.Size(1047, 406);
+            this.pnlContenedorTabla.TabIndex = 3;
+            // 
+            // lblPagina
+            // 
+            this.lblPagina.AutoSize = true;
+            this.lblPagina.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPagina.ForeColor = System.Drawing.Color.Black;
+            this.lblPagina.Location = new System.Drawing.Point(919, 381);
+            this.lblPagina.Name = "lblPagina";
+            this.lblPagina.Size = new System.Drawing.Size(39, 13);
+            this.lblPagina.TabIndex = 41;
+            this.lblPagina.Text = "label1";
+            // 
+            // btnAnterior
+            // 
+            this.btnAnterior.FlatAppearance.BorderSize = 0;
+            this.btnAnterior.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAnterior.Image = global::Vista.Properties.Resources.hacia_atras_negro2;
+            this.btnAnterior.Location = new System.Drawing.Point(882, 374);
+            this.btnAnterior.Name = "btnAnterior";
+            this.btnAnterior.Size = new System.Drawing.Size(30, 23);
+            this.btnAnterior.TabIndex = 40;
+            this.btnAnterior.UseVisualStyleBackColor = true;
+            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
+            // 
+            // btnSiguiente
+            // 
+            this.btnSiguiente.FlatAppearance.BorderSize = 0;
+            this.btnSiguiente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSiguiente.Image = global::Vista.Properties.Resources.hacia_adelante_negro;
+            this.btnSiguiente.Location = new System.Drawing.Point(1006, 374);
+            this.btnSiguiente.Name = "btnSiguiente";
+            this.btnSiguiente.Size = new System.Drawing.Size(30, 23);
+            this.btnSiguiente.TabIndex = 39;
+            this.btnSiguiente.UseVisualStyleBackColor = true;
+            this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
+            // 
+            // dgvFacturasRegistradas
+            // 
+            this.dgvFacturasRegistradas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvFacturasRegistradas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvFacturasRegistradas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvFacturasRegistradas.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFacturasRegistradas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvFacturasRegistradas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFacturasRegistradas.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvFacturasRegistradas.Location = new System.Drawing.Point(10, 15);
+            this.dgvFacturasRegistradas.Name = "dgvFacturasRegistradas";
+            this.dgvFacturasRegistradas.Size = new System.Drawing.Size(1026, 354);
+            this.dgvFacturasRegistradas.TabIndex = 34;
+            this.dgvFacturasRegistradas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFacturasRegistradas_CellDoubleClick);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // frmFacturacion
             // 
@@ -1123,11 +1130,6 @@ namespace Vista.Facturación
             this.pnlBarraSuperior.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPerfil)).EndInit();
-            this.pnlRegistroCotizacion.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.pnlContenedorTabla.ResumeLayout(false);
-            this.pnlContenedorTabla.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFacturasRegistradas)).EndInit();
             this.pnlContenedorDeCotizacionNueva.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
@@ -1146,6 +1148,11 @@ namespace Vista.Facturación
             this.pnlResumenDePagoFactura.PerformLayout();
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            this.pnlRegistroCotizacion.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.pnlContenedorTabla.ResumeLayout(false);
+            this.pnlContenedorTabla.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFacturasRegistradas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 

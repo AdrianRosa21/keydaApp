@@ -1,3 +1,4 @@
+using Guna.UI2.WinForms;
 using Modelo.Entidades;
 using System;
 using System.Data;
@@ -10,6 +11,15 @@ namespace Vista.Produccion_Secretario
 {
     public partial class frmProduccionSecretario : Form
     {
+        public frmProduccionSecretario()
+        {
+            InitializeComponent();
+            ResponsiveHelper.Apply(this);
+            ConfigurarTablaProduccion();
+            ConfigurarBarraBusqueda();
+        }
+
+
         // DATOS PARA LA PAGINACIÓN
         private int registrosPorPagina = 10;
         private int paginaActual = 1;
@@ -18,11 +28,48 @@ namespace Vista.Produccion_Secretario
 
         private DataTable dtProduccion;
         private DataTable dtProduccionFiltrada;
-        public frmProduccionSecretario()
+        private const string TextoBusqueda = "Buscar por código o nombre de cliente...";
+        private readonly Color ColorPlaceholder = Color.LightGray;
+        private readonly Color ColorCafe = Color.FromArgb(121, 75, 45);
+        private void ConfigurarBarraBusqueda()
         {
-            InitializeComponent();
-            ResponsiveHelper.Apply(this);
-            ConfigurarTablaProduccion();
+            ConfigurarBusqueda(txtBuscar);
+
+        }
+        private void ConfigurarBusqueda(Guna2TextBox txtBuscar)
+        {
+            txtBuscar.Text = TextoBusqueda;
+            txtBuscar.ForeColor = ColorPlaceholder;
+
+            txtBuscar.BorderRadius = 10;
+            txtBuscar.BorderThickness = 1;
+            txtBuscar.BorderColor = Color.LightGray;
+
+            txtBuscar.FocusedState.BorderColor = ColorCafe;
+
+            txtBuscar.Enter += (s, e) =>
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                {
+                    txtBuscar.Text = "";
+                    txtBuscar.ForeColor = Color.Black;
+                }
+
+                txtBuscar.BorderColor = ColorCafe;
+                txtBuscar.BorderThickness = 2;
+            };
+
+            txtBuscar.Leave += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+                {
+                    txtBuscar.Text = TextoBusqueda;
+                    txtBuscar.ForeColor = ColorPlaceholder;
+                }
+
+                txtBuscar.BorderColor = Color.LightGray;
+                txtBuscar.BorderThickness = 1;
+            };
         }
         // CONFIGURAR TOOLTIPS
         private void ConfigurarTooltips()
@@ -447,30 +494,7 @@ namespace Vista.Produccion_Secretario
         }
         //_---------------------------------------------------------------------------------------
         // BUSCAR PRODUCCIÓN
-        // Quita el texto de indicación
-        private void txtBuscar_Enter(object sender, EventArgs e)
-        {
-            //Cuando el usuario de enter para escribir, se va a borrar el texto de indicacion
-            // Y el texto ya no sera opaco, sera color negro
-            if (txtBuscar.Text == "Buscar por código o nombre de cliente...")
-            {
-                txtBuscar.Text = "";
-                txtBuscar.ForeColor = Color.Black;
 
-            }
-        }
-        // Vuelve a mostrar el texto de indicación
-        private void txtBuscar_Leave(object sender, EventArgs e)
-        {
-
-            if (string.IsNullOrWhiteSpace(txtBuscar.Text))
-            {
-                txtBuscar.Text =
-                    "Buscar por código o nombre de cliente...";
-
-                txtBuscar.ForeColor = Color.Gray;
-            }
-        }
 
         // Ejecuta el filtro cuando cambia el estado
         private void cbEstados_SelectedIndexChanged(object sender, EventArgs e)
@@ -481,7 +505,7 @@ namespace Vista.Produccion_Secretario
             FiltrarTabla();
         }
         // Ejecuta el filtro cuando cambia el texto
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        private void txtBuscar_TextChanged_1(object sender, EventArgs e)
         {
             if (txtBuscar.Text != "Buscar por código o nombre de cliente...")
             {

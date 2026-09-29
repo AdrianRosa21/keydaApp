@@ -781,6 +781,16 @@ namespace Vista.Properties {
         }
         
         /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Byte[].
+        /// </summary>
+        internal static byte[] logo_muebles_keyda {
+            get {
+                object obj = ResourceManager.GetObject("logo_muebles_keyda", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap LogoPNG {
@@ -1016,6 +1026,16 @@ namespace Vista.Properties {
         internal static System.Drawing.Bitmap pregunta {
             get {
                 object obj = ResourceManager.GetObject("pregunta", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap produccion {
+            get {
+                object obj = ResourceManager.GetObject("produccion", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

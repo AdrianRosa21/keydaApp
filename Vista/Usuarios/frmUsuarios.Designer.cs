@@ -100,6 +100,7 @@
             this.btnNuevoUsuario.Size = new System.Drawing.Size(241, 29);
             this.btnNuevoUsuario.TabIndex = 30;
             this.btnNuevoUsuario.Text = "Nuevo Usuario";
+            this.btnNuevoUsuario.Click += new System.EventHandler(this.btnNuevoUsuario_Click);
             // 
             // pictureBox1
             // 
@@ -144,8 +145,9 @@
             this.btnGuardarUsuario.Location = new System.Drawing.Point(17, 293);
             this.btnGuardarUsuario.Name = "btnGuardarUsuario";
             this.btnGuardarUsuario.Size = new System.Drawing.Size(99, 27);
-            this.btnGuardarUsuario.TabIndex = 14;
+            this.btnGuardarUsuario.TabIndex = 5;
             this.btnGuardarUsuario.Text = "Guardar";
+            this.btnGuardarUsuario.Click += new System.EventHandler(this.btnGuardarUsuario_Click_1);
             // 
             // btnDesactivarUsuario
             // 
@@ -160,6 +162,7 @@
             this.btnDesactivarUsuario.Size = new System.Drawing.Size(99, 27);
             this.btnDesactivarUsuario.TabIndex = 15;
             this.btnDesactivarUsuario.Text = "Desactivar";
+            this.btnDesactivarUsuario.Click += new System.EventHandler(this.btnDesactivarUsuario_Click_1);
             // 
             // guna2HtmlLabel1
             // 
@@ -183,7 +186,8 @@
             this.cmbRol.Location = new System.Drawing.Point(20, 251);
             this.cmbRol.Name = "cmbRol";
             this.cmbRol.Size = new System.Drawing.Size(191, 21);
-            this.cmbRol.TabIndex = 2;
+            this.cmbRol.TabIndex = 4;
+            this.cmbRol.SelectedIndexChanged += new System.EventHandler(this.cmbRol_SelectedIndexChanged);
             // 
             // txtContrasena
             // 
@@ -193,7 +197,8 @@
             this.txtContrasena.Margin = new System.Windows.Forms.Padding(2);
             this.txtContrasena.Name = "txtContrasena";
             this.txtContrasena.Size = new System.Drawing.Size(191, 19);
-            this.txtContrasena.TabIndex = 29;
+            this.txtContrasena.TabIndex = 3;
+            this.txtContrasena.TextChanged += new System.EventHandler(this.txtContrasena_TextChanged);
             // 
             // lblClave
             // 
@@ -225,7 +230,8 @@
             this.txtCorreo.Margin = new System.Windows.Forms.Padding(2);
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(191, 19);
-            this.txtCorreo.TabIndex = 4;
+            this.txtCorreo.TabIndex = 2;
+            this.txtCorreo.TextChanged += new System.EventHandler(this.txtCorreo_TextChanged);
             // 
             // lblCorreoelectronico
             // 
@@ -246,7 +252,8 @@
             this.txtUsuario.Margin = new System.Windows.Forms.Padding(2);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(191, 19);
-            this.txtUsuario.TabIndex = 2;
+            this.txtUsuario.TabIndex = 1;
+            this.txtUsuario.TextChanged += new System.EventHandler(this.txtUsuario_TextChanged);
             // 
             // lblNombreUsuario
             // 

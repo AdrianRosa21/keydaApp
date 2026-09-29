@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlPrincipalCompras = new System.Windows.Forms.Panel();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
@@ -60,13 +60,13 @@
             this.lblSubTexto = new System.Windows.Forms.Label();
             this.lblMensajeInformativoPrincipal = new System.Windows.Forms.Label();
             this.pnlDetalleCompra = new System.Windows.Forms.Panel();
-            this.btnGuardar = new Guna.UI2.WinForms.Guna2Button();
             this.btnActualizarCompra = new Guna.UI2.WinForms.Guna2Button();
             this.btnCancelar = new Guna.UI2.WinForms.Guna2Button();
             this.txtTotalCompra = new System.Windows.Forms.TextBox();
             this.lblTotalCompra = new System.Windows.Forms.Label();
             this.lblDetallesCompra = new System.Windows.Forms.Label();
             this.dgvDetalleCompras = new System.Windows.Forms.DataGridView();
+            this.btnGuardar = new Guna.UI2.WinForms.Guna2Button();
             this.pblSuperior = new System.Windows.Forms.Panel();
             this.lblAdministrador = new System.Windows.Forms.Label();
             this.pbPerfil = new System.Windows.Forms.PictureBox();
@@ -216,14 +216,14 @@
             this.dgvHistorialCompras.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvHistorialCompras.BackgroundColor = System.Drawing.Color.White;
             this.dgvHistorialCompras.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.PeachPuff;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvHistorialCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.PeachPuff;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvHistorialCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvHistorialCompras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvHistorialCompras.GridColor = System.Drawing.Color.Black;
             this.dgvHistorialCompras.Location = new System.Drawing.Point(8, 43);
@@ -323,6 +323,7 @@
             this.nudCantidad.Name = "nudCantidad";
             this.nudCantidad.Size = new System.Drawing.Size(212, 20);
             this.nudCantidad.TabIndex = 25;
+            this.nudCantidad.ValueChanged += new System.EventHandler(this.nudCantidad_ValueChanged);
             // 
             // cbProveedor
             // 
@@ -332,6 +333,7 @@
             this.cbProveedor.Name = "cbProveedor";
             this.cbProveedor.Size = new System.Drawing.Size(212, 23);
             this.cbProveedor.TabIndex = 24;
+            this.cbProveedor.SelectedIndexChanged += new System.EventHandler(this.cbProveedor_SelectedIndexChanged);
             // 
             // cbMaterial
             // 
@@ -341,6 +343,7 @@
             this.cbMaterial.Name = "cbMaterial";
             this.cbMaterial.Size = new System.Drawing.Size(214, 23);
             this.cbMaterial.TabIndex = 23;
+            this.cbMaterial.SelectedIndexChanged += new System.EventHandler(this.cbMaterial_SelectedIndexChanged);
             // 
             // txtPrecioUnitario
             // 
@@ -349,6 +352,7 @@
             this.txtPrecioUnitario.Name = "txtPrecioUnitario";
             this.txtPrecioUnitario.Size = new System.Drawing.Size(208, 20);
             this.txtPrecioUnitario.TabIndex = 21;
+            this.txtPrecioUnitario.TextChanged += new System.EventHandler(this.txtPrecioUnitario_TextChanged);
             this.txtPrecioUnitario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecioUnitario_KeyPress);
             // 
             // lblPrecioUnitario
@@ -372,6 +376,7 @@
             this.dtpFechaDeCompra.Size = new System.Drawing.Size(205, 23);
             this.dtpFechaDeCompra.TabIndex = 19;
             this.dtpFechaDeCompra.Value = new System.DateTime(2026, 8, 26, 0, 0, 0, 0);
+            this.dtpFechaDeCompra.ValueChanged += new System.EventHandler(this.dtpFechaDeCompra_ValueChanged);
             // 
             // lblFechaCompra
             // 
@@ -459,21 +464,6 @@
             this.pnlDetalleCompra.Size = new System.Drawing.Size(771, 242);
             this.pnlDetalleCompra.TabIndex = 3;
             // 
-            // btnGuardar
-            // 
-            this.btnGuardar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnGuardar.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnGuardar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnGuardar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnGuardar.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnGuardar.ForeColor = System.Drawing.Color.White;
-            this.btnGuardar.Location = new System.Drawing.Point(454, 206);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(174, 26);
-            this.btnGuardar.TabIndex = 7;
-            this.btnGuardar.Text = "Guardar compra";
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click_1);
-            // 
             // btnActualizarCompra
             // 
             this.btnActualizarCompra.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -550,14 +540,14 @@
             this.dgvDetalleCompras.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDetalleCompras.BackgroundColor = System.Drawing.Color.White;
             this.dgvDetalleCompras.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.PeachPuff;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDetalleCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.PeachPuff;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetalleCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvDetalleCompras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvDetalleCompras.GridColor = System.Drawing.Color.Black;
             this.dgvDetalleCompras.Location = new System.Drawing.Point(8, 48);
@@ -567,6 +557,21 @@
             this.dgvDetalleCompras.TabIndex = 0;
             this.dgvDetalleCompras.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalleCompras_CellContentClick);
             this.dgvDetalleCompras.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalleCompras_CellDoubleClick);
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardar.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnGuardar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnGuardar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnGuardar.ForeColor = System.Drawing.Color.White;
+            this.btnGuardar.Location = new System.Drawing.Point(454, 206);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(174, 26);
+            this.btnGuardar.TabIndex = 7;
+            this.btnGuardar.Text = "Guardar compra";
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click_1);
             // 
             // pblSuperior
             // 

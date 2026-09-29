@@ -1,14 +1,6 @@
-using Vista.Responsive;
 using System;
-using Modelo.Entidades;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Vista.Ayuda;
 using Vista.Categorias_Inventario_Empleado;
 using Vista.Clientes_Secretario;
 using Vista.Dashboard;
@@ -17,6 +9,7 @@ using Vista.Iventario_Secretario;
 using Vista.Login;
 using Vista.Pedidos_Secretario;
 using Vista.Produccion_Secretario;
+using Vista.Responsive;
 
 namespace Vista.DashboardSecretario
 {
@@ -37,7 +30,7 @@ namespace Vista.DashboardSecretario
 
         private void btnMinimizar_Click(object sender, EventArgs e)
         {
-            this.WindowState=FormWindowState.Minimized;
+            this.WindowState = FormWindowState.Minimized;
         }
         private void AbrirFormulario(Form formulario)
         {
@@ -82,7 +75,7 @@ namespace Vista.DashboardSecretario
         {
             AbrirFormulario(new frmCategoriasInventarioSecretario());
         }
-        
+
 
 
         private void subPanel(bool estado)
@@ -122,6 +115,11 @@ namespace Vista.DashboardSecretario
             {
                 this.WindowState = FormWindowState.Normal;
             }
+        }
+
+        private void btnAyuda_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(new frmAyuda());
         }
     }
 }

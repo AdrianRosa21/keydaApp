@@ -712,7 +712,7 @@ namespace Vista.Inventario
                 if (string.IsNullOrWhiteSpace(buscar))
                 {
                     paginaActual = 1;
-                    dgvMateriales = null;
+                    dtInventario = null;
                     MostrarInventario();
                     return;
                 }
@@ -736,6 +736,30 @@ namespace Vista.Inventario
             {
                 MessageBox.Show("Ocurrió un error al buscar materiales.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void txtMaterial_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+        }
+
+        private void cbCategorias_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+        }
+
+        private void txtCantidad_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+        }
+
+        private void cbUnidadMedida_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
         }
     }
 }

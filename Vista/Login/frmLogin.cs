@@ -20,6 +20,7 @@ namespace Vista.Login
             ResponsiveHelper.Apply(this);
             ConfigurarTooltips();
             ConfigurarBotonIngresar();
+
         }
 
 

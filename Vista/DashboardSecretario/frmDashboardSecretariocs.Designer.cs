@@ -30,6 +30,7 @@ namespace Vista.DashboardSecretario
         {
             this.label2 = new System.Windows.Forms.Label();
             this.pnlBotones = new System.Windows.Forms.Panel();
+            this.btnAyuda = new System.Windows.Forms.Button();
             this.pnlCotizaciones = new System.Windows.Forms.Panel();
             this.btnCotizaciones = new System.Windows.Forms.Button();
             this.pnlFacturacion = new System.Windows.Forms.Panel();
@@ -106,6 +107,7 @@ namespace Vista.DashboardSecretario
             // 
             // pnlBotones
             // 
+            this.pnlBotones.Controls.Add(this.btnAyuda);
             this.pnlBotones.Controls.Add(this.pnlCotizaciones);
             this.pnlBotones.Controls.Add(this.pnlFacturacion);
             this.pnlBotones.Controls.Add(this.pnlProveedores);
@@ -124,6 +126,26 @@ namespace Vista.DashboardSecretario
             this.pnlBotones.Padding = new System.Windows.Forms.Padding(3, 13, 3, 3);
             this.pnlBotones.Size = new System.Drawing.Size(127, 498);
             this.pnlBotones.TabIndex = 1;
+            // 
+            // btnAyuda
+            // 
+            this.btnAyuda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(166)))));
+            this.btnAyuda.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAyuda.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(221)))), ((int)(((byte)(175)))));
+            this.btnAyuda.FlatAppearance.BorderSize = 4;
+            this.btnAyuda.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(153)))), ((int)(((byte)(105)))));
+            this.btnAyuda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(153)))), ((int)(((byte)(105)))));
+            this.btnAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAyuda.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAyuda.Location = new System.Drawing.Point(3, 404);
+            this.btnAyuda.Margin = new System.Windows.Forms.Padding(0);
+            this.btnAyuda.Name = "btnAyuda";
+            this.btnAyuda.Size = new System.Drawing.Size(121, 35);
+            this.btnAyuda.TabIndex = 3;
+            this.btnAyuda.Text = "Ayuda";
+            this.btnAyuda.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAyuda.UseVisualStyleBackColor = false;
+            this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
             // 
             // pnlCotizaciones
             // 
@@ -773,5 +795,6 @@ namespace Vista.DashboardSecretario
         private System.Windows.Forms.TableLayoutPanel tableBononessuperiores;
         private System.Windows.Forms.Panel pnlBarraSuperior;
         private System.Windows.Forms.Button btnCategorias;
+        private System.Windows.Forms.Button btnAyuda;
     }
 }

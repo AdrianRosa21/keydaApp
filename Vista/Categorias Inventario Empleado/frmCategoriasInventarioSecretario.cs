@@ -1,3 +1,4 @@
+using Guna.UI2.WinForms;
 using Modelo.Entidades;
 using System;
 using System.Data;
@@ -21,6 +22,50 @@ namespace Vista.Categorias_Inventario_Empleado
         private int registrosPorPagina = 10;
         private int totalPaginas = 0;
 
+        private const string TextoBusqueda = "Buscar...";
+        private readonly Color ColorPlaceholder = Color.LightGray;
+        private readonly Color ColorCafe = Color.FromArgb(121, 75, 45);
+
+        private void ConfigurarBarraBusqueda()
+        {
+            ConfigurarBusqueda(txtBuscarCategoria);
+
+        }
+        private void ConfigurarBusqueda(Guna2TextBox txtBuscar)
+        {
+            txtBuscar.Text = TextoBusqueda;
+            txtBuscar.ForeColor = ColorPlaceholder;
+
+            txtBuscar.BorderRadius = 10;
+            txtBuscar.BorderThickness = 1;
+            txtBuscar.BorderColor = Color.LightGray;
+
+            txtBuscar.FocusedState.BorderColor = ColorCafe;
+
+            txtBuscar.Enter += (s, e) =>
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                {
+                    txtBuscar.Text = "";
+                    txtBuscar.ForeColor = Color.Black;
+                }
+
+                txtBuscar.BorderColor = ColorCafe;
+                txtBuscar.BorderThickness = 2;
+            };
+
+            txtBuscar.Leave += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+                {
+                    txtBuscar.Text = TextoBusqueda;
+                    txtBuscar.ForeColor = ColorPlaceholder;
+                }
+
+                txtBuscar.BorderColor = Color.LightGray;
+                txtBuscar.BorderThickness = 1;
+            };
+        }
         // CARGA INICIAL DEL FORMULARIO
         private void frmCategoriasInventarioSecretario_Load(object sender, EventArgs e)
         {
@@ -36,6 +81,7 @@ namespace Vista.Categorias_Inventario_Empleado
                 // Configuración inicial de la tabla
                 ConfigurarColumnas();
                 ConfigurarTablaCategorias();
+                ConfigurarBarraBusqueda();
             }
             catch (Exception ex)
             {
@@ -56,7 +102,6 @@ namespace Vista.Categorias_Inventario_Empleado
 
             // Buscador
             toolTip.SetToolTip(txtBuscarCategoria, "Ingrese el nombre de una categoría para buscarla.");
-            toolTip.SetToolTip(btnBuscar, "Busca la categoría ingresada.");
 
             // Paginación
             toolTip.SetToolTip(btnAnterior, "Muestra la página anterior.");
@@ -260,84 +305,41 @@ namespace Vista.Categorias_Inventario_Empleado
 
         //--------------------------------------------------------------------------
         //BUSQUEDA
-
-        private void txtBuscarCategoria_Enter(object sender, EventArgs e)
-        {
-            //Cuando el usuario de enter para escribir, se va a borrar el texto de indicacion
-            // Y el texto ya no sera opaco, sera color negro
-            if (txtBuscarCategoria.Text == "Buscar Categoría...")
-            {
-                txtBuscarCategoria.Text = "";
-                txtBuscarCategoria.ForeColor = Color.Black;
-
-            }
-        }
-
-        private void txtBuscarCategoria_Leave(object sender, EventArgs e)
-        {
-            // Vuelve a mostrar el texto de indicación
-            if (string.IsNullOrWhiteSpace(txtBuscarCategoria.Text))
-            {
-                txtBuscarCategoria.Text = "Buscar Categoría...";
-                txtBuscarCategoria.ForeColor = Color.Gray;
-            }
-        }
-        // Realiza la búsqueda de categorías
-
-        private void btnBuscar_Click(object sender, EventArgs e)
+        private void txtBuscarCategoria_TextChanged_1(object sender, EventArgs e)
         {
             try
             {
-                if (txtBuscarCategoria.Text == "Buscar Categoría...")
-                {
+                if (txtBuscarCategoria.Text == TextoBusqueda)
                     return;
-                }
 
-                string textoBusqueda =
-                    txtBuscarCategoria.Text.Trim();
+                string buscar = txtBuscarCategoria.Text.Trim();
 
-                if (string.IsNullOrWhiteSpace(textoBusqueda))
+                if (string.IsNullOrWhiteSpace(buscar))
                 {
+                    paginaActual = 1;
+                    dtCategorias = null;
                     MostrarCategorias();
                     return;
                 }
 
-                dtCategorias = Categorias.Buscar(textoBusqueda);
+                dtCategorias = Categorias.Buscar(buscar);
+
+                int totalResultados = dtCategorias.Rows.Count;
+
+                totalPaginas = (int)Math.Ceiling((double)totalResultados / registrosPorPagina);
+
+                if (totalPaginas == 0)
+                    totalPaginas = 1;
 
                 paginaActual = 1;
 
-                CalcularPaginasCategorias();
-
                 MostrarPaginaCategorias();
-
-                ConfigurarColumnas();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al buscar la categoría: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
-        // Actualiza la tabla cuando se borra el texto de búsqueda
-
-        private void txtBuscarCategoria_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(
-                    txtBuscarCategoria.Text))
-                {
-                    MostrarCategorias();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al actualizar la búsqueda: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ocurrió un error al buscar categorías.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         //-------------------------------------------------------------
 
         // ESTADÍSTICAS
@@ -372,5 +374,7 @@ namespace Vista.Categorias_Inventario_Empleado
                 MostrarPaginaCategorias();
             }
         }
+
+
     }
 }

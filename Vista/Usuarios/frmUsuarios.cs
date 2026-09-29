@@ -57,29 +57,7 @@ namespace Vista.Usuarios
             boton.Cursor = Cursors.Hand;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         private void ConfigurarTooltips()
         {
             ToolTip toolTip1 = new ToolTip
@@ -106,7 +84,7 @@ namespace Vista.Usuarios
             dgvUsuariosRegistrados.EnableHeadersVisualStyles = false;
             dgvUsuariosRegistrados.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
             dgvUsuariosRegistrados.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvUsuariosRegistrados.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 9, FontStyle.Regular);
+            dgvUsuariosRegistrados.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
             dgvUsuariosRegistrados.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvUsuariosRegistrados.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
             dgvUsuariosRegistrados.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
@@ -223,7 +201,7 @@ namespace Vista.Usuarios
         }
 
         // BOTÓN GUARDAR
-        private void btnGuardarUsuario_Click(object sender, EventArgs e)
+        private void btnGuardarUsuario_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -236,7 +214,7 @@ namespace Vista.Usuarios
         }
 
         // DESACTIVAR USUARIO
-        private void btnDesactivarUsuario_Click(object sender, EventArgs e)
+        private void btnDesactivarUsuario_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -277,6 +255,7 @@ namespace Vista.Usuarios
                 MessageBox.Show("Error inesperado al desactivar el usuario: " + ex.Message, "Error inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         // MOSTRAR USUARIOS
         private void MostrarUsuarios()
         {
@@ -393,9 +372,7 @@ namespace Vista.Usuarios
 
 
         // DOBLE CLIC EN UN USUARIO
-        private void dgvUsuariosRegistrados_CellDoubleClick(
-            object sender,
-            DataGridViewCellEventArgs e)
+        private void dgvUsuariosRegistrados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -449,7 +426,6 @@ namespace Vista.Usuarios
             txtUsuario.Focus();
         }
 
-
         // LIMPIAR FORMULARIO
         private void LimpiarFormulario()
         {
@@ -495,6 +471,31 @@ namespace Vista.Usuarios
                 picLogo.Image = null;
             }
         }
+
+        private void txtUsuario_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+        }
+
+        private void txtCorreo_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+        }
+
+        private void txtContrasena_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+        }
+
+        private void cmbRol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+        }
+
 
     }
 }

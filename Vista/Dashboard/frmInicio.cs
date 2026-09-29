@@ -31,7 +31,7 @@ namespace Vista.Dashboard
         {
             elipseVentas = new Guna2Elipse
             {
-                TargetControl = panel1,
+                TargetControl = pnlVentasMes,
                 BorderRadius = 12
             };
 
@@ -43,21 +43,21 @@ namespace Vista.Dashboard
 
             elipseClientes = new Guna2Elipse
             {
-                TargetControl = pnlClientesRegistrados,
+                TargetControl = pnlCotizacionesRegistradas,
                 BorderRadius = 12
             };
 
             elipsePedidos = new Guna2Elipse
             {
-                TargetControl = pnlpPedidosActivos,
+                TargetControl = pnlpClientesRegistrados,
                 BorderRadius = 12
             };
 
             // HOVER
-            ConfigurarHoverTarjeta(panel1);
+            ConfigurarHoverTarjeta(pnlVentasMes);
             ConfigurarHoverTarjeta(pnlProductosInventario);
-            ConfigurarHoverTarjeta(pnlClientesRegistrados);
-            ConfigurarHoverTarjeta(pnlpPedidosActivos);
+            ConfigurarHoverTarjeta(pnlCotizacionesRegistradas);
+            ConfigurarHoverTarjeta(pnlpClientesRegistrados);
         }
         private void ConfigurarHoverTarjeta(Control tarjeta)
         {
@@ -72,61 +72,52 @@ namespace Vista.Dashboard
             Control control = sender as Control;
 
             while (control != null &&
-                   control != panel1 &&
+                   control != pnlVentasMes &&
                    control != pnlProductosInventario &&
-                   control != pnlClientesRegistrados &&
-                   control != pnlpPedidosActivos)
+                   control != pnlCotizacionesRegistradas &&
+                   control != pnlpClientesRegistrados)
             {
                 control = control.Parent;
             }
 
-            if (control == panel1)
-                control.BackColor = Color.FromArgb(235, 135, 95);
+            if (control == pnlVentasMes)
+                control.BackColor = Color.FromArgb(255, 165, 125); // Naranja, mismo tono
+
+            else if (control == pnlCotizacionesRegistradas)
+                control.BackColor = Color.FromArgb(155, 118, 220); // Morado, mismo tono
 
             else if (control == pnlProductosInventario)
-                control.BackColor = Color.FromArgb(125, 140, 215);
+                control.BackColor = Color.FromArgb(135, 150, 225); // Azul, mismo tono
 
-            else if (control == pnlClientesRegistrados)
-                control.BackColor = Color.FromArgb(135, 210, 115);
-
-            else if (control == pnlpPedidosActivos)
-                control.BackColor = Color.FromArgb(125, 88, 190);
+            else if (control == pnlpClientesRegistrados)
+                control.BackColor = Color.FromArgb(165, 235, 145); // Verde, mismo tono
         }
+
         private void Tarjeta_MouseLeave(object sender, EventArgs e)
         {
             Control control = sender as Control;
 
             while (control != null &&
-                   control != panel1 &&
+                   control != pnlVentasMes &&
                    control != pnlProductosInventario &&
-                   control != pnlClientesRegistrados &&
-                   control != pnlpPedidosActivos)
+                   control != pnlCotizacionesRegistradas &&
+                   control != pnlpClientesRegistrados)
             {
                 control = control.Parent;
             }
 
-            if (control == panel1)
-                control.BackColor = Color.FromArgb(255, 155, 115);
+            if (control == pnlVentasMes)
+                control.BackColor = Color.FromArgb(255, 155, 115); // ORIGINAL
+
+            else if (control == pnlCotizacionesRegistradas)
+                control.BackColor = Color.FromArgb(145, 108, 210); // ORIGINAL
 
             else if (control == pnlProductosInventario)
-                control.BackColor = Color.FromArgb(145, 160, 235);
+                control.BackColor = Color.FromArgb(125, 140, 215); // ORIGINAL
 
-            else if (control == pnlClientesRegistrados)
-                control.BackColor = Color.FromArgb(155, 230, 135);
-
-            else if (control == pnlpPedidosActivos)
-                control.BackColor = Color.FromArgb(145, 108, 210);
+            else if (control == pnlpClientesRegistrados)
+                control.BackColor = Color.FromArgb(155, 230, 135); // ORIGINAL
         }
-
-
-
-
-
-
-
-
-
-
         private void CargarLogoEmpresa()
         {
             try

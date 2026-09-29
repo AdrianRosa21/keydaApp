@@ -24,6 +24,8 @@ namespace Vista.Producción
             txtCodigoProduccion.Enabled = false;
             txtMuebleRealizar.Enabled = false;
 
+            dtpFechaEntrega.Value = DateTime.Today;
+
             //Navegacion con la tecla TAB
             dtpFechaEntrega.TabIndex = 1;
             nudProgreso.TabIndex = 2;

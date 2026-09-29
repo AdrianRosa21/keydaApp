@@ -1,3 +1,4 @@
+using Guna.UI2.WinForms;
 using Modelo.Entidades;
 using System;
 using System.Data;
@@ -9,6 +10,14 @@ namespace Vista.Iventario_Secretario
 {
     public partial class frmInventarioSecretario : Form
     {
+        public frmInventarioSecretario()
+        {
+            InitializeComponent();
+            ResponsiveHelper.Apply(this);
+            ConfigurarTablaInventario();
+            ConfigurarBarraBusqueda();
+        }
+
         // CANTIDAD DE REGISTROS POR PÁGINA
         private int registrosPorPagina = 10;
 
@@ -32,12 +41,51 @@ namespace Vista.Iventario_Secretario
         private string unidadMedidaOriginal = "";
         private string stockOriginal = "";
         private string categoriaOriginal = "";
-        public frmInventarioSecretario()
+        private const string TextoBusqueda = "Buscar...";
+        private readonly Color ColorPlaceholder = Color.LightGray;
+        private readonly Color ColorCafe = Color.FromArgb(121, 75, 45);
+        private void ConfigurarBarraBusqueda()
         {
-            InitializeComponent();
-            ResponsiveHelper.Apply(this);
-            ConfigurarTablaInventario();
+            ConfigurarBusqueda(txtBuscar);
+
         }
+        private void ConfigurarBusqueda(Guna2TextBox txtBuscar)
+        {
+            txtBuscar.Text = TextoBusqueda;
+            txtBuscar.ForeColor = ColorPlaceholder;
+
+            txtBuscar.BorderRadius = 10;
+            txtBuscar.BorderThickness = 1;
+            txtBuscar.BorderColor = Color.LightGray;
+
+            txtBuscar.FocusedState.BorderColor = ColorCafe;
+
+            txtBuscar.Enter += (s, e) =>
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                {
+                    txtBuscar.Text = "";
+                    txtBuscar.ForeColor = Color.Black;
+                }
+
+                txtBuscar.BorderColor = ColorCafe;
+                txtBuscar.BorderThickness = 2;
+            };
+
+            txtBuscar.Leave += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+                {
+                    txtBuscar.Text = TextoBusqueda;
+                    txtBuscar.ForeColor = ColorPlaceholder;
+                }
+
+                txtBuscar.BorderColor = Color.LightGray;
+                txtBuscar.BorderThickness = 1;
+            };
+        }
+
+
 
         //----------------------------------------------------------------------
         // CONFIGURAR TABLA DE INVENTARIO
@@ -55,19 +103,15 @@ namespace Vista.Iventario_Secretario
 
             dgvMateriales.MultiSelect = false;
 
-            dgvMateriales.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
+            dgvMateriales.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             dgvMateriales.RowHeadersVisible = false;
 
-            dgvMateriales.BorderStyle =
-                BorderStyle.None;
+            dgvMateriales.BorderStyle = BorderStyle.None;
 
-            dgvMateriales.BackgroundColor =
-                Color.White;
+            dgvMateriales.BackgroundColor = Color.White;
 
-            dgvMateriales.CellBorderStyle =
-                DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvMateriales.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
 
             dgvMateriales.GridColor = Color.FromArgb(225, 225, 225);
 
@@ -554,6 +598,7 @@ namespace Vista.Iventario_Secretario
         {
             if (idMaterialSeleccionado == 0)
             {
+                errorProvider1.SetError(dgvMateriales, "Seleccione un material primero.");
                 MessageBox.Show("Seleccione un material primero.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -565,10 +610,12 @@ namespace Vista.Iventario_Secretario
 
             if (!cambioNombre && !cambioUnidad && !cambioStock && !cambioCategoria)
             {
+                errorProvider1.SetError(txtMaterial, "No se detectaron cambios en el material.");
                 MessageBox.Show("No se detectaron cambios en el material.", "Sin cambios", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
+            errorProvider1.Clear();
             string cambios = "Se realizaron los siguientes cambios:\n\n";
 
             if (cambioNombre)
@@ -614,79 +661,44 @@ namespace Vista.Iventario_Secretario
         }
         //------------------------------------------------------------------------
         //METODO DE BUSQUEDA
-        // Quita el texto de indicación del buscador
-        private void txtBuscar_Enter(object sender, EventArgs e)
-        {
-            //Cuando el usuario de enter para escribir, se va a borrar el texto de indicacion
-            // Y el texto ya no sera opaco, sera color negro
-            if (txtBuscar.Text == "Buscar Material...")
-            {
-                txtBuscar.Text = "";
-                txtBuscar.ForeColor = Color.Black;
-
-            }
-        }
-        // Vuelve a mostrar el texto de indicación
-        private void txtBuscar_Leave(object sender, EventArgs e)
-        {
-            txtBuscar.Text = "Buscar Material...";
-            txtBuscar.ForeColor = Color.Gray;
-        }
-        // Busca materiales mientras se escribe
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        private void txtBuscar_TextChanged_1(object sender, EventArgs e)
         {
             try
             {
-                // No realiza la búsqueda si está el texto de indicación
-                if (txtBuscar.Text == "Buscar Material...")
-                {
+                if (txtBuscar.Text == TextoBusqueda)
                     return;
-                }
 
                 string buscar = txtBuscar.Text.Trim();
 
                 if (string.IsNullOrWhiteSpace(buscar))
                 {
                     paginaActual = 1;
-
                     dtInventarioBusqueda = null;
-
                     MostrarInventario();
-
                     return;
                 }
 
-
-                // Obtiene todos los resultados encontrados
                 dtInventarioBusqueda = Material.BuscarMaterial(buscar);
 
+                int totalResultados = dtInventarioBusqueda.Rows.Count;
 
-                // Calcula el total de resultados
-                totalRegistros = dtInventarioBusqueda.Rows.Count;
-
-
-                // Calcula las páginas
-                totalPaginas = (int)Math.Ceiling((double)totalRegistros / registrosPorPagina);
-
+                totalPaginas = (int)Math.Ceiling(
+                    (double)totalResultados / registrosPorPagina
+                );
 
                 if (totalPaginas == 0)
-                {
                     totalPaginas = 1;
-                }
 
-
-                // Regresa a la primera página
                 paginaActual = 1;
 
-
-                // Muestra la página
                 MostrarPaginaBusquedaInventario();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al buscar el material: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ocurrió un error al buscar materiales.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         //----------------------------------------------------------------------
         // MOSTRAR PÁGINA DE RESULTADOS DE BÚSQUEDA
@@ -843,6 +855,8 @@ namespace Vista.Iventario_Secretario
                 }
             }
         }
+
+
     }
 
 }

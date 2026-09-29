@@ -118,9 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="hacia-adelante negro2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hacia-adelante negro2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="error" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -169,14 +166,14 @@
   <data name="pencil_7596595" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pencil_7596595.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Minimizar16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Minimizar16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="money_16099571" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\money_16099571.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="flecha-correcta (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\flecha-correcta (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="controlar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\controlar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="hacia-adelante negro1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hacia-adelante negro1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -205,17 +202,14 @@
   <data name="basura2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\basura2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="gestion-de-proyectos" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\gestion-de-proyectos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="zoom_561117" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zoom_561117.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Clientes Registrados128px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Clientes Registrados128px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="logistica" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logistica.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Trabajo cancelado" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trabajo cancelado.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="material si disponible" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\material si disponible.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="contrato" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\contrato.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -244,11 +238,11 @@
   <data name="user_456283" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\user_456283.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="documentos" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\documentos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="hacia-atras negro2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hacia-atras negro2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Facturas emitidas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Facturas emitidas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Cerrar128px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Cerrar128px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -280,17 +274,26 @@
   <data name="Captura Para tutorial cotizacion" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Captura Para tutorial cotizacion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Producción16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Producción16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Productos mas vendidos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Productos mas vendidos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Clientes16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Clientes16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="retroceder1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\retroceder1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="segmento-de-clientes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\segmento-de-clientes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cliente inactivo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Cliente inactivo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Clientes Registrados128px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Clientes Registrados128px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="galeria-de-imagenes (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\galeria-de-imagenes (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Trabajo finalizado" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Trabajo finalizado.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="exit_787267" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\exit_787267.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -303,6 +306,9 @@
   </data>
   <data name="documento1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\documento1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cerrar16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Cerrar16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Logo de la empresa png" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Logo de la empresa png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -337,9 +343,6 @@
   <data name="LoginFondo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LoginFondo.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Proveedores16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Proveedores16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Cliente activo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Cliente activo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -352,8 +355,8 @@
   <data name="Cliente nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Cliente nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="material si disponible" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\material si disponible.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="gestion-de-proyectos" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gestion-de-proyectos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="mas" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -382,11 +385,14 @@
   <data name="lupa" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lupa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="basura1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\basura1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="curriculum" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\curriculum.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="basura1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\basura1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="documentos" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\documentos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="atras (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\atras (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -397,14 +403,14 @@
   <data name="proveedor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\proveedor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="retroceder1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\retroceder1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="hacia-adelante negro2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hacia-adelante negro2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="productos totales" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\productos totales.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Cliente inactivo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Cliente inactivo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Producción16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Producción16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Ventana16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Ventana16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -424,8 +430,8 @@
   <data name="Producto en proceso" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Producto en proceso.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Trabajo finalizado" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trabajo finalizado.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="controlar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\controlar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="material no disponible" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\material no disponible.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -448,26 +454,23 @@
   <data name="pregunta" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pregunta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="youtube" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\youtube.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Trabajo cancelado" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Trabajo cancelado.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Clientes Registrados64px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Clientes Registrados64px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Cerrar16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Cerrar16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="mueble keyda" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mueble keyda.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Proveedores16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Proveedores16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="hacia-atras negro1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hacia-atras negro1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Minimizar16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Minimizar16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Clientes16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Clientes16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="logistica" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\logistica.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="mueble keyda" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mueble keyda.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bienvenido-de-nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bienvenido-de-nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -481,13 +484,16 @@
   <data name="hacia-adelante negro" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hacia-adelante negro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Facturas emitidas" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Facturas emitidas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="youtube" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\youtube.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="agregar-usuario" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\agregar-usuario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="segmento-de-clientes" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\segmento-de-clientes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="produccion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\produccion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo_muebles_keyda" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo_muebles_keyda.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

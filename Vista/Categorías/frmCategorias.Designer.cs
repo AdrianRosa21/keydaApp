@@ -55,12 +55,12 @@
             this.lblDetalleCategoria = new System.Windows.Forms.Label();
             this.lblMensajeInformativoPrincipal = new System.Windows.Forms.Label();
             this.pnlPedidaDeDatos = new System.Windows.Forms.Panel();
-            this.btnGuardar = new Guna.UI2.WinForms.Guna2Button();
             this.btnGuardarCambios = new Guna.UI2.WinForms.Guna2Button();
             this.btnEditar = new Guna.UI2.WinForms.Guna2Button();
             this.btnNueva = new System.Windows.Forms.Button();
             this.cbEstado = new System.Windows.Forms.ComboBox();
             this.lblCategoria = new System.Windows.Forms.Label();
+            this.btnGuardar = new Guna.UI2.WinForms.Guna2Button();
             this.pnlContenedorPrincipalInventario = new System.Windows.Forms.Panel();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -101,11 +101,12 @@
             // lblCategoriasInactivas
             // 
             this.lblCategoriasInactivas.AutoSize = true;
-            this.lblCategoriasInactivas.Location = new System.Drawing.Point(117, 56);
+            this.lblCategoriasInactivas.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCategoriasInactivas.Location = new System.Drawing.Point(102, 43);
             this.lblCategoriasInactivas.Name = "lblCategoriasInactivas";
-            this.lblCategoriasInactivas.Size = new System.Drawing.Size(35, 13);
+            this.lblCategoriasInactivas.Size = new System.Drawing.Size(18, 25);
             this.lblCategoriasInactivas.TabIndex = 4;
-            this.lblCategoriasInactivas.Text = "label1";
+            this.lblCategoriasInactivas.Text = "l";
             // 
             // pictureBox3
             // 
@@ -142,11 +143,12 @@
             // lblCategoriasActivas
             // 
             this.lblCategoriasActivas.AutoSize = true;
-            this.lblCategoriasActivas.Location = new System.Drawing.Point(122, 52);
+            this.lblCategoriasActivas.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCategoriasActivas.Location = new System.Drawing.Point(121, 40);
             this.lblCategoriasActivas.Name = "lblCategoriasActivas";
-            this.lblCategoriasActivas.Size = new System.Drawing.Size(35, 13);
+            this.lblCategoriasActivas.Size = new System.Drawing.Size(19, 25);
             this.lblCategoriasActivas.TabIndex = 5;
-            this.lblCategoriasActivas.Text = "label2";
+            this.lblCategoriasActivas.Text = ".";
             // 
             // pbActivas
             // 
@@ -252,6 +254,7 @@
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(193, 62);
             this.txtDescripcion.TabIndex = 17;
+            this.txtDescripcion.TextChanged += new System.EventHandler(this.txtDescripcion_TextChanged);
             this.txtDescripcion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDescripcion_KeyPress);
             // 
             // lblDescripcion
@@ -280,11 +283,12 @@
             // lblCategoriasRegistradas
             // 
             this.lblCategoriasRegistradas.AutoSize = true;
-            this.lblCategoriasRegistradas.Location = new System.Drawing.Point(115, 47);
+            this.lblCategoriasRegistradas.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCategoriasRegistradas.Location = new System.Drawing.Point(124, 42);
             this.lblCategoriasRegistradas.Name = "lblCategoriasRegistradas";
-            this.lblCategoriasRegistradas.Size = new System.Drawing.Size(35, 13);
+            this.lblCategoriasRegistradas.Size = new System.Drawing.Size(19, 25);
             this.lblCategoriasRegistradas.TabIndex = 6;
-            this.lblCategoriasRegistradas.Text = "label3";
+            this.lblCategoriasRegistradas.Text = ".";
             // 
             // pbTotalCategorias
             // 
@@ -326,6 +330,7 @@
             this.txtCategoria.Name = "txtCategoria";
             this.txtCategoria.Size = new System.Drawing.Size(193, 19);
             this.txtCategoria.TabIndex = 2;
+            this.txtCategoria.TextChanged += new System.EventHandler(this.txtCategoria_TextChanged);
             this.txtCategoria.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCategoria_KeyPress);
             // 
             // lblEstado
@@ -383,21 +388,6 @@
             this.pnlPedidaDeDatos.Size = new System.Drawing.Size(235, 421);
             this.pnlPedidaDeDatos.TabIndex = 2;
             // 
-            // btnGuardar
-            // 
-            this.btnGuardar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnGuardar.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnGuardar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnGuardar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnGuardar.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar.ForeColor = System.Drawing.Color.White;
-            this.btnGuardar.Location = new System.Drawing.Point(127, 357);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(87, 35);
-            this.btnGuardar.TabIndex = 23;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click_1);
-            // 
             // btnGuardarCambios
             // 
             this.btnGuardarCambios.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -451,6 +441,7 @@
             this.cbEstado.Name = "cbEstado";
             this.cbEstado.Size = new System.Drawing.Size(194, 27);
             this.cbEstado.TabIndex = 18;
+            this.cbEstado.SelectedIndexChanged += new System.EventHandler(this.cbEstado_SelectedIndexChanged);
             // 
             // lblCategoria
             // 
@@ -462,6 +453,21 @@
             this.lblCategoria.Size = new System.Drawing.Size(71, 19);
             this.lblCategoria.TabIndex = 3;
             this.lblCategoria.Text = "Categoría:";
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardar.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnGuardar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnGuardar.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardar.ForeColor = System.Drawing.Color.White;
+            this.btnGuardar.Location = new System.Drawing.Point(127, 357);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(87, 35);
+            this.btnGuardar.TabIndex = 23;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click_1);
             // 
             // pnlContenedorPrincipalInventario
             // 

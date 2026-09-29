@@ -1,3 +1,4 @@
+using Guna.UI2.WinForms;
 using Modelo.Entidades;
 using System;
 using System.Data;
@@ -17,6 +18,7 @@ namespace Vista.Clientes_Secretario
             InitializeComponent();
             ResponsiveHelper.Apply(this);
             ConfigurarTablasClientes();
+            ConfigurarBarraBusqueda();
         }
 
 
@@ -57,87 +59,88 @@ namespace Vista.Clientes_Secretario
 
         private bool modoEdicion = false;
 
+        private const string TextoBusqueda = "Buscar...";
+        private readonly Color ColorPlaceholder = Color.LightGray;
+        private readonly Color ColorCafe = Color.FromArgb(121, 75, 45);
+
+        private void ConfigurarBarraBusqueda()
+        {
+            ConfigurarBusqueda(txtBuscarIndividual);
+            ConfigurarBusqueda(txtBuscarCorporativo);
+        }
+
+        private void ConfigurarBusqueda(Guna2TextBox txtBuscar)
+        {
+            txtBuscar.Text = TextoBusqueda;
+            txtBuscar.ForeColor = ColorPlaceholder;
+
+            txtBuscar.BorderRadius = 10;
+            txtBuscar.BorderThickness = 1;
+            txtBuscar.BorderColor = Color.LightGray;
+
+            txtBuscar.FocusedState.BorderColor = ColorCafe;
+
+            txtBuscar.Enter += (s, e) =>
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                {
+                    txtBuscar.Text = "";
+                    txtBuscar.ForeColor = Color.Black;
+                }
+
+                txtBuscar.BorderColor = ColorCafe;
+                txtBuscar.BorderThickness = 2;
+            };
+
+            txtBuscar.Leave += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+                {
+                    txtBuscar.Text = TextoBusqueda;
+                    txtBuscar.ForeColor = ColorPlaceholder;
+                }
+
+                txtBuscar.BorderColor = Color.LightGray;
+                txtBuscar.BorderThickness = 1;
+            };
+        }
+
 
         // MOSTRAR CLIENTES INDIVIDUALES
         private void MostrarClientesIndividuales()
         {
-            int registrosSaltar =
-        (paginaActualIndividual - 1) *
-        registrosPorPagina;
+            int registrosSaltar = (paginaActualIndividual - 1) * registrosPorPagina;
+            dgvClientesIndividuales.DataSource = DbCliente.CargarIndividuales(registrosSaltar, registrosPorPagina);
+            totalRegistrosIndividual = DbCliente.ObtenerTotalIndividuales();
+            totalPaginasIndividual = (int)Math.Ceiling((double)totalRegistrosIndividual / registrosPorPagina);
 
-            dgvClientesIndividuales.DataSource =
-                DbCliente.CargarIndividuales(
-                    registrosSaltar,
-                    registrosPorPagina);
+            if (totalPaginasIndividual == 0) totalPaginasIndividual = 1;
+            if (paginaActualIndividual > totalPaginasIndividual) paginaActualIndividual = totalPaginasIndividual;
 
-            totalRegistrosIndividual =
-                DbCliente.ObtenerTotalIndividuales();
-
-            totalPaginasIndividual =
-                (int)Math.Ceiling(
-                    (double)totalRegistrosIndividual /
-                    registrosPorPagina);
-
-            if (totalPaginasIndividual == 0)
-            {
-                totalPaginasIndividual = 1;
-            }
-
-            if (paginaActualIndividual > totalPaginasIndividual)
-            {
-                paginaActualIndividual =
-                    totalPaginasIndividual;
-            }
-
-            lblPagina.Text =
-                $"Página {paginaActualIndividual} de {totalPaginasIndividual}";
-
-            btnAnterior.Enabled =
-                paginaActualIndividual > 1;
-
-            btnSiguiente.Enabled =
-                paginaActualIndividual < totalPaginasIndividual;
+            lblPagina.Text = $"Página {paginaActualIndividual} de {totalPaginasIndividual}";
+            btnAnterior.Enabled = paginaActualIndividual > 1;
+            btnSiguiente.Enabled = paginaActualIndividual < totalPaginasIndividual;
 
             FormatearTablaIndividuales();
-
             ActualizarEstadisticas();
         }
 
         // MOSTRAR CLIENTES CORPORATIVOS
         private void MostrarClientesCorporativos()
         {
-            int registrosSaltar =
-                (paginaActual - 1) *
-                registrosPorPagina;
-
-            dgvClientesCorporativos.DataSource =
-                DbCliente.CargarCorporativos(
-                    registrosSaltar,
-                    registrosPorPagina);
-
-            totalRegistros =
-                DbCliente.ObtenerTotalCorporativos();
-
+            int registrosSaltar = (paginaActual - 1) * registrosPorPagina;
+            dgvClientesCorporativos.DataSource = DbCliente.CargarCorporativos(registrosSaltar, registrosPorPagina);
+            totalRegistros = DbCliente.ObtenerTotalCorporativos();
             totalPaginas = (int)Math.Ceiling((double)totalRegistros / registrosPorPagina);
 
-            if (totalPaginas == 0)
-            {
-                totalPaginas = 1;
-            }
-
-            if (paginaActual > totalPaginas)
-            {
-                paginaActual = totalPaginas;
-            }
+            if (totalPaginas == 0) totalPaginas = 1;
+            if (paginaActual > totalPaginas) paginaActual = totalPaginas;
 
             lblPaginaC.Text = $"Página {paginaActual} de {totalPaginas}";
-
             btnAtrasC.Enabled = paginaActual > 1;
-
             btnSiguienteC.Enabled = paginaActual < totalPaginas;
 
             FormatearTablaCorporativos();
-
             ActualizarEstadisticas();
         }
         //----------------------------------------------------------------------
@@ -195,151 +198,42 @@ namespace Vista.Clientes_Secretario
 
             //---------------------------------------------------------------------- 
             // ENCABEZADO
+            tabla.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(121, 78, 48),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(121, 78, 48),
+                SelectionForeColor = Color.White,
+                Padding = new Padding(5)
+            };
 
-            tabla.ColumnHeadersDefaultCellStyle =
-                new DataGridViewCellStyle
-                {
-                    BackColor =
-                        Color.FromArgb(
-                            121,
-                            78,
-                            48
-                        ),
-
-                    ForeColor =
-                        Color.White,
-
-                    Font =
-                        new Font(
-                            "Segoe UI",
-                            10,
-                            FontStyle.Bold
-                        ),
-
-                    Alignment =
-                        DataGridViewContentAlignment.MiddleCenter,
-
-                    SelectionBackColor =
-                        Color.FromArgb(
-                            121,
-                            78,
-                            48
-                        ),
-
-                    SelectionForeColor =
-                        Color.White,
-
-                    Padding =
-                        new Padding(
-                            5
-                        )
-                };
-
-
-            //---------------------------------------------------------------------- 
             // FILAS
+            tabla.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.White,
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35),
+                Padding = new Padding(5)
+            };
 
-            tabla.DefaultCellStyle =
-                new DataGridViewCellStyle
-                {
-                    BackColor =
-                        Color.White,
-
-                    ForeColor =
-                        Color.FromArgb(
-                            55,
-                            55,
-                            55
-                        ),
-
-                    Font =
-                        new Font(
-                            "Segoe UI",
-                            10
-                        ),
-
-                    Alignment =
-                        DataGridViewContentAlignment.MiddleCenter,
-
-                    SelectionBackColor =
-                        Color.FromArgb(
-                            238,
-                            215,
-                            185
-                        ),
-
-                    SelectionForeColor =
-                        Color.FromArgb(
-                            60,
-                            45,
-                            35
-                        ),
-
-                    Padding =
-                        new Padding(
-                            5
-                        )
-                };
-
-
-            //---------------------------------------------------------------------- 
             // FILAS ALTERNADAS
+            tabla.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(250, 246, 240),
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35)
+            };
 
-            tabla.AlternatingRowsDefaultCellStyle =
-                new DataGridViewCellStyle
-                {
-                    BackColor =
-                        Color.FromArgb(
-                            250,
-                            246,
-                            240
-                        ),
-
-                    ForeColor =
-                        Color.FromArgb(
-                            55,
-                            55,
-                            55
-                        ),
-
-                    Font =
-                        new Font(
-                            "Segoe UI",
-                            10
-                        ),
-
-                    SelectionBackColor =
-                        Color.FromArgb(
-                            238,
-                            215,
-                            185
-                        ),
-
-                    SelectionForeColor =
-                        Color.FromArgb(
-                            60,
-                            45,
-                            35
-                        )
-                };
-
-
-            //---------------------------------------------------------------------- 
             // FILA SELECCIONADA
-
-            tabla.RowsDefaultCellStyle.SelectionBackColor =
-                Color.FromArgb(
-                    238,
-                    215,
-                    185
-                );
-
-            tabla.RowsDefaultCellStyle.SelectionForeColor =
-                Color.FromArgb(
-                    60,
-                    45,
-                    35
-                );
+            tabla.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+            tabla.RowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
         }
         //----------------------------------------------------------------------
         // FORMATEAR TABLA DE CLIENTES INDIVIDUALES
@@ -588,26 +482,17 @@ namespace Vista.Clientes_Secretario
         //---------------------------------------------------------------------
         //CONFIGURACION DE PAGINACION DE LOS DATA GRID
 
+        //BOTON DE SIGUIENTE CLIENTES INDIVIDUALES
+        private void btnSiguiente_Click_1(object sender, EventArgs e)
+        {
+            if (paginaActualIndividual < totalPaginasIndividual)
+            {
+                paginaActualIndividual++;
+
+                MostrarClientesIndividuales();
+            }
+        }
         //BOTON DE ANTERIOR CLIENTES INDIVIDUALES
-        private void btnAnterior_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
-        //BOTON DE ANTERIOR CLIENTES CORPORATIVOS
-        private void btnSiguiente_Click(object sender, EventArgs e)
-        {
-
-        }
-        // PÁGINA ANTERIOR CLIENTES CORPORATIVOS
-        private void btnAtrasC_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
-
         private void btnAnterior_Click_1(object sender, EventArgs e)
         {
             if (paginaActualIndividual > 1)
@@ -618,17 +503,8 @@ namespace Vista.Clientes_Secretario
             }
         }
 
-        private void btnSiguiente_Click_1(object sender, EventArgs e)
-        {
-            if (paginaActualIndividual < totalPaginasIndividual)
-            {
-                paginaActualIndividual++;
 
-                MostrarClientesIndividuales();
-            }
-        }
-        // PÁGINA SIGUIENTE CLIENTES CORPORATIVOS
-
+        // PÁGINA ANTERIOR CLIENTES CORPORATIVOS
         private void btnAtrasC_Click_1(object sender, EventArgs e)
         {
             if (paginaActual > 1)
@@ -639,6 +515,7 @@ namespace Vista.Clientes_Secretario
             }
         }
 
+        // PÁGINA SIGUIENTE CLIENTES CORPORATIVOS
         private void btnSiguienteC_Click_1(object sender, EventArgs e)
         {
 
@@ -651,12 +528,10 @@ namespace Vista.Clientes_Secretario
 
         }
 
-
         //----------------------------------------------------------------------
         // ACTUALIZAR LAS ESTADISTICAS DE LOS CLIENTES
         private void ActualizarEstadisticas()
         {
-
             try
             {
                 lblTotalClientes.Text = DbCliente.ContarClientesTotales().ToString();
@@ -719,13 +594,13 @@ namespace Vista.Clientes_Secretario
 
         private bool ValidarCampos()
         {
-
             // Validar que haya seleccionado un tipo de cliente
             if (!modoEdicion)
             {
                 if (cbTipoCliente.SelectedIndex == -1)
                 {
                     errorProvider1.SetError(cbTipoCliente, "Seleccione un tipo de cliente.");
+                    MessageBox.Show("Seleccione un tipo de cliente.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cbTipoCliente.Focus();
                     return false;
                 }
@@ -737,6 +612,7 @@ namespace Vista.Clientes_Secretario
                 if (string.IsNullOrWhiteSpace(txtNombres.Text))
                 {
                     errorProvider1.SetError(txtNombres, "Debe ingresar el nombre del cliente.");
+                    MessageBox.Show("Debe ingresar el nombre del cliente.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtNombres.Focus();
                     return false;
                 }
@@ -744,13 +620,15 @@ namespace Vista.Clientes_Secretario
                 if (string.IsNullOrWhiteSpace(txtApellidos.Text))
                 {
                     errorProvider1.SetError(txtApellidos, "Debe ingresar los apellidos del cliente.");
+                    MessageBox.Show("Debe ingresar los apellidos del cliente.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtApellidos.Focus();
                     return false;
                 }
 
                 if (string.IsNullOrWhiteSpace(txtDUI.Text))
                 {
-                    errorProvider1.SetError(txtDUI, "Debe ingresar el DUI del ciente.");
+                    errorProvider1.SetError(txtDUI, "Debe ingresar el DUI del cliente.");
+                    MessageBox.Show("Debe ingresar el DUI del cliente.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtDUI.Focus();
                     return false;
                 }
@@ -758,13 +636,15 @@ namespace Vista.Clientes_Secretario
                 if (string.IsNullOrWhiteSpace(txtTelefono.Text))
                 {
                     errorProvider1.SetError(txtTelefono, "Debe ingresar el teléfono del cliente.");
+                    MessageBox.Show("Debe ingresar el teléfono del cliente.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtTelefono.Focus();
                     return false;
                 }
 
                 if (string.IsNullOrWhiteSpace(txtCorreo.Text))
                 {
-                    errorProvider1.SetError(txtCorreo, "Debe ingresar el Correo del cliente.");
+                    errorProvider1.SetError(txtCorreo, "Debe ingresar el correo del cliente.");
+                    MessageBox.Show("Debe ingresar el correo del cliente.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtCorreo.Focus();
                     return false;
                 }
@@ -772,6 +652,7 @@ namespace Vista.Clientes_Secretario
                 if (string.IsNullOrWhiteSpace(txtDireccion.Text))
                 {
                     errorProvider1.SetError(txtDireccion, "Debe ingresar la dirección del cliente.");
+                    MessageBox.Show("Debe ingresar la dirección del cliente.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtDireccion.Focus();
                     return false;
                 }
@@ -783,6 +664,7 @@ namespace Vista.Clientes_Secretario
                 if (string.IsNullOrWhiteSpace(txtNombreEmpresa.Text))
                 {
                     errorProvider1.SetError(txtNombreEmpresa, "Debe ingresar el nombre de la empresa.");
+                    MessageBox.Show("Debe ingresar el nombre de la empresa.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtNombreEmpresa.Focus();
                     return false;
                 }
@@ -790,6 +672,7 @@ namespace Vista.Clientes_Secretario
                 if (string.IsNullOrWhiteSpace(txtNombreEncargado.Text))
                 {
                     errorProvider1.SetError(txtNombreEncargado, "Debe ingresar el nombre del encargado.");
+                    MessageBox.Show("Debe ingresar el nombre del encargado.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtNombreEncargado.Focus();
                     return false;
                 }
@@ -797,6 +680,7 @@ namespace Vista.Clientes_Secretario
                 if (string.IsNullOrWhiteSpace(txtNIT.Text))
                 {
                     errorProvider1.SetError(txtNIT, "Debe ingresar el documento de la empresa.");
+                    MessageBox.Show("Debe ingresar el documento de la empresa.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtNIT.Focus();
                     return false;
                 }
@@ -804,13 +688,15 @@ namespace Vista.Clientes_Secretario
                 if (string.IsNullOrWhiteSpace(txtTelefono.Text))
                 {
                     errorProvider1.SetError(txtTelefono, "Debe ingresar el teléfono.");
+                    MessageBox.Show("Debe ingresar el teléfono.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtTelefono.Focus();
                     return false;
                 }
 
                 if (string.IsNullOrWhiteSpace(txtCorreo.Text))
                 {
-                    errorProvider1.SetError(txtCorreo, "Debe ingresar el Correo.");
+                    errorProvider1.SetError(txtCorreo, "Debe ingresar el correo.");
+                    MessageBox.Show("Debe ingresar el correo.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtCorreo.Focus();
                     return false;
                 }
@@ -818,6 +704,7 @@ namespace Vista.Clientes_Secretario
                 if (string.IsNullOrWhiteSpace(txtDireccion.Text))
                 {
                     errorProvider1.SetError(txtDireccion, "Debe ingresar la dirección de la empresa.");
+                    MessageBox.Show("Debe ingresar la dirección de la empresa.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtDireccion.Focus();
                     return false;
                 }
@@ -848,8 +735,6 @@ namespace Vista.Clientes_Secretario
                 return false;
             }
         }
-
-
 
         // DESACTIVAR COPIAR Y PEGAR
 
@@ -900,7 +785,6 @@ namespace Vista.Clientes_Secretario
                 e.Handled = true;
             }
         }
-
         private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Solo permite números y borrar
@@ -995,6 +879,7 @@ namespace Vista.Clientes_Secretario
             //Barra de busqueda
             txtBuscarCorporativo.Visible = false;
             txtBuscarIndividual.Visible = true;
+            LimpiarFormularioCliente();
         }
 
         private void btnClienteCorporativo_Click(object sender, EventArgs e)
@@ -1010,6 +895,7 @@ namespace Vista.Clientes_Secretario
             //Barra de busqueda
             txtBuscarCorporativo.Visible = true;
             txtBuscarIndividual.Visible = false;
+            LimpiarFormularioCliente();
         }
         //---------------------------------------------------------------------------------------------
         // CONFIGURAR TOOLTIPS
@@ -1032,6 +918,10 @@ namespace Vista.Clientes_Secretario
 
             toolTip1.SetToolTip(txtNombres, "Ingrese el nombre del cliente.");
 
+            toolTip1.SetToolTip(txtNombreEmpresa, "Ingrese el nombre de la empresa.");
+
+            toolTip1.SetToolTip(txtNombreEncargado, "Ingrese el nombre del responsable de la empresa.");
+
             toolTip1.SetToolTip(txtApellidos, "Ingrese los apellidos del cliente.");
 
             toolTip1.SetToolTip(txtDUI, "Ingrese el DUI del cliente en formato 00000000-0.");
@@ -1041,8 +931,6 @@ namespace Vista.Clientes_Secretario
             toolTip1.SetToolTip(txtCorreo, "Ingrese el correo electrónico del cliente.");
 
             toolTip1.SetToolTip(txtDireccion, "Ingrese la dirección del cliente.");
-
-            toolTip1.SetToolTip(btnNuevoCliente, "Limpia los campos para registrar un nuevo cliente.");
 
             toolTip1.SetToolTip(btnGuardarCorporativo, "Guarda los datos del cliente corporativo.");
 
@@ -1071,8 +959,7 @@ namespace Vista.Clientes_Secretario
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error al cargar el formulario.\n" + ex.Message, "Error", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show("Ocurrió un error al cargar el formulario.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         //-----------------------------------------------------------------------------------------------
@@ -1149,25 +1036,33 @@ namespace Vista.Clientes_Secretario
                 return;
             }
 
+            errorProvider1.Clear();
+
             if (txtDUI.Text.Length != 10 || txtDUI.Text[8] != '-')
             {
-                MessageBox.Show("El DUI debe tener el formato 12345678-9.");
+                errorProvider1.SetError(txtDUI, "El DUI debe tener el formato 12345678-9.");
+                MessageBox.Show("El DUI debe tener el formato 12345678-9.", "DUI inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDUI.Focus();
                 return;
             }
 
             if (txtTelefono.Text.Length != 9 || txtTelefono.Text[4] != '-')
             {
-                MessageBox.Show("El teléfono debe tener el formato 1234-5678.");
+                errorProvider1.SetError(txtTelefono, "El teléfono debe tener el formato 1234-5678.");
+                MessageBox.Show("El teléfono debe tener el formato 1234-5678.", "Teléfono inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTelefono.Focus();
                 return;
             }
 
-            //Validar Correo
             if (string.IsNullOrWhiteSpace(txtCorreo.Text))
             {
-                MessageBox.Show("El correo es obligatorio.");
+                errorProvider1.SetError(txtCorreo, "El correo es obligatorio.");
+                MessageBox.Show("El correo es obligatorio.", "Campo obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCorreo.Focus();
                 return;
             }
+
+            errorProvider1.Clear();
 
             try
             {
@@ -1213,19 +1108,22 @@ namespace Vista.Clientes_Secretario
             if (!ValidarCampos())
                 return;
 
+            errorProvider1.Clear();
+
             // Validar NIT
-            if (txtNIT.Text.Length != 18)
+            if (txtNIT.Text.Length != 17)
             {
-                MessageBox.Show("El NIT debe tener el formato 1717-202011-102-0.");
+                errorProvider1.SetError(txtNIT, "El NIT debe tener el formato 1717-202011-102-0.");
+                MessageBox.Show("El NIT debe tener el formato 1717-202011-102-0.", "NIT inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtNIT.Focus();
                 return;
             }
 
             // Validar teléfono
-            if (txtTelefono.Text.Length != 9 ||
-                txtTelefono.Text[4] != '-')
+            if (txtTelefono.Text.Length != 9 || txtTelefono.Text[4] != '-')
             {
-                MessageBox.Show("El teléfono debe tener el formato 1234-5678.");
+                errorProvider1.SetError(txtTelefono, "El teléfono debe tener el formato 1234-5678.");
+                MessageBox.Show("El teléfono debe tener el formato 1234-5678.", "Teléfono inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtTelefono.Focus();
                 return;
             }
@@ -1234,6 +1132,7 @@ namespace Vista.Clientes_Secretario
             if (!ValidarCorreo())
                 return;
 
+            errorProvider1.Clear();
             try
             {
                 // Crear un objeto con los datos del cliente
@@ -1251,12 +1150,7 @@ namespace Vista.Clientes_Secretario
 
                 if (cliente.InsertarClienteCorporativo())
                 {
-                    MessageBox.Show(
-                        "Cliente corporativo registrado correctamente.",
-                        "Registro exitoso",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
-                    );
+                    MessageBox.Show("Cliente corporativo registrado correctamente.", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     paginaActual = 1;
                     dtCorporativosBusqueda = null;
@@ -1279,12 +1173,10 @@ namespace Vista.Clientes_Secretario
             try
             {
                 // Revisar que se haya seleccionado una fila válida
-                if (e.RowIndex < 0 ||
-                    dgvClientesCorporativos.Rows[e.RowIndex].IsNewRow)
+                if (e.RowIndex < 0 || dgvClientesCorporativos.Rows[e.RowIndex].IsNewRow)
                     return;
 
-                DataGridViewRow fila =
-                    dgvClientesCorporativos.Rows[e.RowIndex];
+                DataGridViewRow fila = dgvClientesCorporativos.Rows[e.RowIndex];
 
                 // Obtener el ID del cliente
                 idClienteSeleccionado = Convert.ToInt32(fila.Cells["IdCliente"].Value);
@@ -1292,26 +1184,19 @@ namespace Vista.Clientes_Secretario
                 tipoClienteSeleccionado = 1;
 
                 // Guardar los datos originales
-                identificador1Original =
-                    fila.Cells["Nombre_De_Empresa"].Value?.ToString() ?? "";
+                identificador1Original = fila.Cells["Nombre_De_Empresa"].Value?.ToString() ?? "";
 
-                identificador2Original =
-                    fila.Cells["Nombre_Del_Encargado"].Value?.ToString() ?? "";
+                identificador2Original = fila.Cells["Nombre_Del_Encargado"].Value?.ToString() ?? "";
 
-                documentoOriginal =
-                    fila.Cells["NIT"].Value?.ToString() ?? "";
+                documentoOriginal = fila.Cells["NIT"].Value?.ToString() ?? "";
 
-                telefonoOriginal =
-                    fila.Cells["Telefono"].Value?.ToString() ?? "";
+                telefonoOriginal = fila.Cells["Telefono"].Value?.ToString() ?? "";
 
-                correoOriginal =
-                    fila.Cells["Correo"].Value?.ToString() ?? "";
+                correoOriginal = fila.Cells["Correo"].Value?.ToString() ?? "";
 
-                direccionOriginal =
-                    fila.Cells["Direccion"].Value?.ToString() ?? "";
+                direccionOriginal = fila.Cells["Direccion"].Value?.ToString() ?? "";
 
-                estadoOriginal =
-                    fila.Cells["Estado"].Value?.ToString() ?? "";
+                estadoOriginal = fila.Cells["Estado"].Value?.ToString() ?? "";
 
                 // Mostrar los datos en el formulario
                 txtNombreEmpresa.Text = identificador1Original;
@@ -1329,6 +1214,7 @@ namespace Vista.Clientes_Secretario
                 btnGuardarCorporativo.Visible = false;
                 btnGuardarIndividual.Visible = false;
 
+
                 // Mostrar datos de empresa
                 gbDatosEmpresa.Visible = true;
                 gbPersonaNatural.Visible = false;
@@ -1339,15 +1225,9 @@ namespace Vista.Clientes_Secretario
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Ocurrió un error al seleccionar el cliente.\n" + ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
+                MessageBox.Show("Ocurrió un error al seleccionar el cliente.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         //----------------------------------------------------------------
         //LIMPIAR FORMULARIO
@@ -1392,55 +1272,7 @@ namespace Vista.Clientes_Secretario
             }
         }
         //------------------------------------------------------------------------
-
-        //BUSCAR CLIENTES
-
-        private void txtBuscarCorporativo_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txtBuscarCorporativo.Text == "Buscar Cliente...")
-                    return;
-
-                string buscar =
-                    txtBuscarCorporativo.Text.Trim();
-
-                if (string.IsNullOrWhiteSpace(buscar))
-                {
-                    paginaActual = 1;
-
-                    dtCorporativosBusqueda = null;
-
-                    MostrarClientesCorporativos();
-
-                    return;
-                }
-
-                dtCorporativosBusqueda =
-                    DbCliente.BuscarClienteCorporativo(buscar);
-
-                int totalResultados =
-                    dtCorporativosBusqueda.Rows.Count;
-
-                totalPaginas =
-                    (int)Math.Ceiling(
-                        (double)totalResultados /
-                        registrosPorPagina);
-
-                if (totalPaginas == 0)
-                {
-                    totalPaginas = 1;
-                }
-
-                paginaActual = 1;
-
-                MostrarPaginaCorporativosBusqueda();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        //PAGINACION DE LAS TABLAS
         private void MostrarPaginaCorporativosBusqueda()
         {
             try
@@ -1448,21 +1280,16 @@ namespace Vista.Clientes_Secretario
                 if (dtCorporativosBusqueda == null)
                     return;
 
-                DataTable dtPagina =
-                    dtCorporativosBusqueda.Clone();
+                DataTable dtPagina = dtCorporativosBusqueda.Clone();
 
                 int inicio =
                     (paginaActual - 1) * registrosPorPagina;
 
-                int fin =
-                    Math.Min(
-                        inicio + registrosPorPagina,
-                        dtCorporativosBusqueda.Rows.Count);
+                int fin = Math.Min(inicio + registrosPorPagina, dtCorporativosBusqueda.Rows.Count);
 
                 for (int i = inicio; i < fin; i++)
                 {
-                    dtPagina.ImportRow(
-                        dtCorporativosBusqueda.Rows[i]);
+                    dtPagina.ImportRow(dtCorporativosBusqueda.Rows[i]);
                 }
 
                 dgvClientesCorporativos.DataSource = null;
@@ -1470,90 +1297,15 @@ namespace Vista.Clientes_Secretario
 
                 FormatearTablaCorporativos();
 
-                lblPaginaC.Text =
-                    $"Página {paginaActual} de {totalPaginas}";
+                lblPaginaC.Text = $"Página {paginaActual} de {totalPaginas}";
 
-                btnAtrasC.Enabled =
-                    paginaActual > 1;
+                btnAtrasC.Enabled = paginaActual > 1;
 
-                btnSiguienteC.Enabled =
-                    paginaActual < totalPaginas;
+                btnSiguienteC.Enabled = paginaActual < totalPaginas;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Ocurrió un error al mostrar los clientes.\n" + ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-            }
-        }
-
-        private void txtBuscarCorporativo_Leave(object sender, EventArgs e)
-        {
-            txtBuscarCorporativo.Text = "Buscar Cliente...";
-            txtBuscarCorporativo.ForeColor = Color.Gray;
-        }
-
-        private void txtBuscarCorporativo_Enter(object sender, EventArgs e)
-        {
-            //Cuando el usuario de enter para escribir, se va a borrar el texto de indicacion
-            // Y el texto ya no sera opaco, sera color negro
-            if (txtBuscarCorporativo.Text == "Buscar Cliente...")
-            {
-                txtBuscarCorporativo.Text = "";
-                txtBuscarCorporativo.ForeColor = Color.Black;
-
-            }
-        }
-
-        private void txtBuscarIndividual_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txtBuscarIndividual.Text == "Buscar Cliente...")
-                    return;
-
-                string buscar =
-                    txtBuscarIndividual.Text.Trim();
-
-                if (string.IsNullOrWhiteSpace(buscar))
-                {
-                    paginaActualIndividual = 1;
-
-                    dtIndividualesBusqueda = null;
-
-                    MostrarClientesIndividuales();
-
-                    return;
-                }
-
-                dtIndividualesBusqueda =
-                    DbCliente.BuscarClienteIndividual(buscar);
-
-                int totalResultados =
-                    dtIndividualesBusqueda.Rows.Count;
-
-                totalPaginasIndividual =
-                    (int)Math.Ceiling(
-                        (double)totalResultados /
-                        registrosPorPagina);
-
-                if (totalPaginasIndividual == 0)
-                {
-                    totalPaginasIndividual = 1;
-                }
-
-                paginaActualIndividual = 1;
-
-                MostrarPaginaIndividualesBusqueda();
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Ocurrió un error al mostrar los clientes.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1564,21 +1316,15 @@ namespace Vista.Clientes_Secretario
                 if (dtIndividualesBusqueda == null)
                     return;
 
-                DataTable dtPagina =
-                    dtIndividualesBusqueda.Clone();
+                DataTable dtPagina = dtIndividualesBusqueda.Clone();
 
-                int inicio =
-                    (paginaActualIndividual - 1) * registrosPorPagina;
+                int inicio = (paginaActualIndividual - 1) * registrosPorPagina;
 
-                int fin =
-                    Math.Min(
-                        inicio + registrosPorPagina,
-                        dtIndividualesBusqueda.Rows.Count);
+                int fin = Math.Min(inicio + registrosPorPagina, dtIndividualesBusqueda.Rows.Count);
 
                 for (int i = inicio; i < fin; i++)
                 {
-                    dtPagina.ImportRow(
-                        dtIndividualesBusqueda.Rows[i]);
+                    dtPagina.ImportRow(dtIndividualesBusqueda.Rows[i]);
                 }
 
                 dgvClientesIndividuales.DataSource = null;
@@ -1586,57 +1332,21 @@ namespace Vista.Clientes_Secretario
 
                 FormatearTablaIndividuales();
 
-                lblPagina.Text =
-                    $"Página {paginaActualIndividual} de {totalPaginasIndividual}";
+                lblPagina.Text = $"Página {paginaActualIndividual} de {totalPaginasIndividual}";
 
-                btnAnterior.Enabled =
-                    paginaActualIndividual > 1;
+                btnAnterior.Enabled = paginaActualIndividual > 1;
 
-                btnSiguiente.Enabled =
-                    paginaActualIndividual < totalPaginasIndividual;
+                btnSiguiente.Enabled = paginaActualIndividual < totalPaginasIndividual;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Ocurrió un error al mostrar los clientes.\n" + ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-            }
-
-
-        }
-
-        private void txtBuscarIndividual_Leave(object sender, EventArgs e)
-        {
-            txtBuscarIndividual.Text = "Buscar Cliente...";
-            txtBuscarIndividual.ForeColor = Color.Gray;
-        }
-
-        private void txtBuscarIndividual_Enter(object sender, EventArgs e)
-        {
-            //Cuando el usuario de enter para escribir, se va a borrar el texto de indicacion
-            // Y el texto ya no sera opaco, sera color negro
-            if (txtBuscarIndividual.Text == "Buscar Cliente...")
-            {
-                txtBuscarIndividual.Text = "";
-                txtBuscarIndividual.ForeColor = Color.Black;
-
+                MessageBox.Show("Ocurrió un error al mostrar los clientes.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         //-----------------------------------------------------------------------------------
-
-        //BOTON DE NUEVO CLIENTE
-
-        private void btnNuevoCliente_Click(object sender, EventArgs e)
-        {
-            LimpiarFormularioCliente();
-            dgvClientesCorporativos.ClearSelection();
-            dgvClientesCorporativos.CurrentCell = null;
-        }
-
+        //VALIDACIONES
         private void txtNIT_TextChanged(object sender, EventArgs e)
         {
             string nit = txtNIT.Text.Replace("-", "");
@@ -1660,6 +1370,140 @@ namespace Vista.Clientes_Secretario
 
             txtNIT.Text = resultado;
             txtNIT.SelectionStart = txtNIT.Text.Length;
+        }
+        //--------------------------------------------------------------------------------------------------
+        //BUSQUEDA DE CLIENTES
+        private void txtBuscarIndividual_TextChanged_1(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtBuscarIndividual.Text == TextoBusqueda)
+                    return;
+
+                string buscar = txtBuscarIndividual.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(buscar))
+                {
+                    paginaActualIndividual = 1;
+                    dtIndividualesBusqueda = null;
+                    MostrarClientesIndividuales();
+                    return;
+                }
+
+                dtIndividualesBusqueda = DbCliente.BuscarClienteIndividual(buscar);
+
+                int totalResultados = dtIndividualesBusqueda.Rows.Count;
+
+                totalPaginasIndividual = (int)Math.Ceiling((double)totalResultados / registrosPorPagina);
+
+                if (totalPaginasIndividual == 0)
+                    totalPaginasIndividual = 1;
+
+                paginaActualIndividual = 1;
+
+                MostrarPaginaIndividualesBusqueda();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al buscar clientes.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtBuscarCorporativo_TextChanged_1(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtBuscarCorporativo.Text == TextoBusqueda)
+                    return;
+
+                string buscar = txtBuscarCorporativo.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(buscar))
+                {
+                    paginaActual = 1;
+                    dtCorporativosBusqueda = null;
+                    MostrarClientesCorporativos();
+                    return;
+                }
+
+                dtCorporativosBusqueda = DbCliente.BuscarClienteCorporativo(buscar);
+
+                int totalResultados = dtCorporativosBusqueda.Rows.Count;
+
+                totalPaginas = (int)Math.Ceiling((double)totalResultados / registrosPorPagina);
+
+                if (totalPaginas == 0)
+                    totalPaginas = 1;
+
+                paginaActual = 1;
+
+                MostrarPaginaCorporativosBusqueda();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al buscar clientes.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dgvClientesIndividuales_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                // Revisar que se haya seleccionado una fila válida
+                if (e.RowIndex < 0 || dgvClientesIndividuales.Rows[e.RowIndex].IsNewRow)
+                    return;
+
+                DataGridViewRow fila = dgvClientesIndividuales.Rows[e.RowIndex];
+
+                // Obtener el ID del cliente
+                idClienteSeleccionado = Convert.ToInt32(fila.Cells["IdCliente"].Value);
+
+                tipoClienteSeleccionado = 2;
+
+                // Guardar los datos originales
+                identificador1Original = fila.Cells[1].Value?.ToString() ?? "";
+
+                identificador2Original = fila.Cells[2].Value?.ToString() ?? "";
+
+                documentoOriginal = fila.Cells[3].Value?.ToString() ?? "";
+
+                telefonoOriginal = fila.Cells[4].Value?.ToString() ?? "";
+
+                correoOriginal = fila.Cells[5].Value?.ToString() ?? "";
+
+                direccionOriginal = fila.Cells[6].Value?.ToString() ?? "";
+
+                estadoOriginal = fila.Cells[7].Value?.ToString() ?? "";
+
+                // Mostrar los datos en el formulario
+                txtNombres.Text = identificador1Original;
+                txtApellidos.Text = identificador2Original;
+                txtDUI.Text = documentoOriginal;
+                txtTelefono.Text = telefonoOriginal;
+                txtCorreo.Text = correoOriginal;
+                txtDireccion.Text = direccionOriginal;
+
+                // Bloquear campos hasta presionar Editar
+                BloquearCampos();
+
+                modoEdicion = false;
+
+                // Mostrar botones
+                btnGuardarIndividual.Visible = false;
+
+
+                // Mostrar datos de persona natural
+                gbDatosEmpresa.Visible = false;
+                gbPersonaNatural.Visible = true;
+
+                // Mostrar tabla individual
+                pnlRegistroClienteIndividual.Visible = true;
+                pnlRegistroClienteCorporativo.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al seleccionar el cliente.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

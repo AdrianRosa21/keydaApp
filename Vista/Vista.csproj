@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo_muebles_keyda.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BCrypt-Net-Next, Version=4.2.0.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
       <HintPath>..\packages\BCrypt.Net-Next.4.2.0\lib\net472\BCrypt-Net-Next.dll</HintPath>
@@ -261,12 +264,6 @@
     <Compile Include="Pedidos\frmPedidos.Designer.cs">
       <DependentUpon>frmPedidos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Produccion Secretario\frmEditarProduccionSecretario.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Produccion Secretario\frmEditarProduccionSecretario.Designer.cs">
-      <DependentUpon>frmEditarProduccionSecretario.cs</DependentUpon>
-    </Compile>
     <Compile Include="Produccion Secretario\frmProduccionSecretario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -408,9 +405,6 @@
     <EmbeddedResource Include="Pedidos\frmPedidos.resx">
       <DependentUpon>frmPedidos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Produccion Secretario\frmEditarProduccionSecretario.resx">
-      <DependentUpon>frmEditarProduccionSecretario.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Produccion Secretario\frmProduccionSecretario.resx">
       <DependentUpon>frmProduccionSecretario.cs</DependentUpon>
     </EmbeddedResource>
@@ -458,6 +452,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="logo_muebles_keyda.ico" />
     <Content Include="Recursos\Manuales\MANUAL TECNICO.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -750,6 +745,7 @@
     <None Include="Resources\ventas.png" />
     <None Include="Resources\proveedor.png" />
     <None Include="Resources\segmento-de-clientes.png" />
+    <None Include="Resources\produccion.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

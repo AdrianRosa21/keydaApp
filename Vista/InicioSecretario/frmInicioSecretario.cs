@@ -34,6 +34,41 @@ namespace Vista.InicioSecretario
 
         }
 
+        //CARGAR EL LOGO DE LA EMPRESA
+        private void CargarLogoEmpresa()
+        {
+            try
+            {
+                string rutaLogo = Modelo.Properties.Settings.Default.LogoEmpresa;
+
+                if (!string.IsNullOrWhiteSpace(rutaLogo) && File.Exists(rutaLogo))
+                {
+                    if (picLogo.Image != null)
+                    {
+                        picLogo.Image.Dispose();
+                        picLogo.Image = null;
+                    }
+
+                    using (Image imagenOriginal = Image.FromFile(rutaLogo))
+                    {
+                        picLogo.Image = new Bitmap(imagenOriginal);
+                    }
+
+                    picLogo.SizeMode = PictureBoxSizeMode.Zoom;
+                }
+                else
+                {
+                    // Si todavía no hay logo configurado
+                    picLogo.Image = null;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("ERR-DASH-001: No se pudo cargar el logo de la empresa.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error
+                );
+            }
+        }
+
         //PEDIDOS RECIENTES
 
         private void MostrarPedidosRecientes()
@@ -49,12 +84,7 @@ namespace Vista.InicioSecretario
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "No se pudieron cargar los pedidos recientes.\n\n" +
-                    ex.Message,
-                    "Pedidos recientes",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
+                MessageBox.Show("No se pudieron cargar los pedidos recientes.\n\n" + ex.Message, "Pedidos recientes", MessageBoxButtons.OK, MessageBoxIcon.Warning
                 );
             }
         }
@@ -484,40 +514,7 @@ namespace Vista.InicioSecretario
             tooltip.SetToolTip(chartInventarioEstado, "Muestra los materiales agotados, por agotarse y disponibles.");
         }
 
-        private void CargarLogoEmpresa()
-        {
-            try
-            {
-                string rutaLogo =
-                    Modelo.Properties.Settings.Default.LogoEmpresa;
 
-                if (!string.IsNullOrWhiteSpace(rutaLogo) &&
-                    File.Exists(rutaLogo))
-                {
-                    if (picLogo.Image != null)
-                    {
-                        picLogo.Image.Dispose();
-                        picLogo.Image = null;
-                    }
-
-                    using (Image imagenOriginal = Image.FromFile(rutaLogo))
-                    {
-                        picLogo.Image = new Bitmap(imagenOriginal);
-                    }
-
-                    picLogo.SizeMode = PictureBoxSizeMode.Zoom;
-                }
-                else
-                {
-                    // Si todavía no hay logo configurado
-                    picLogo.Image = null;
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("ERR-DASH-001: No se pudo cargar el logo de la empresa.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
         //LOAD
         private void frmInicioSecretario_Load(object sender, EventArgs e)
@@ -534,6 +531,7 @@ namespace Vista.InicioSecretario
                 CargarPedidosPorEstado();
 
                 CargarLogoEmpresa();
+
             }
             catch (Exception ex)
             {

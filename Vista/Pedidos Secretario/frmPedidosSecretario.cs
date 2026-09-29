@@ -1,4 +1,5 @@
-﻿using Modelo.Entidades;
+﻿using Guna.UI2.WinForms;
+using Modelo.Entidades;
 using System;
 using System.Data;
 using System.Drawing;
@@ -16,6 +17,7 @@ namespace Vista.Pedidos_Secretario
             dgvDetallesDePedido.AllowUserToDeleteRows = false;
             dgvDetallesDePedido.AllowUserToAddRows = false;
             dgvDetallesDePedido.ReadOnly = true;
+            ConfigurarBarraBusqueda();
 
         }
         // PAGINACIÓN
@@ -24,6 +26,50 @@ namespace Vista.Pedidos_Secretario
         private int registrosPorPagina = 10;
         private bool buscandoPedidos = false;
         private int totalPaginas = 0;
+        private const string TextoBusqueda = "Buscar...";
+        private readonly Color ColorPlaceholder = Color.LightGray;
+        private readonly Color ColorCafe = Color.FromArgb(121, 75, 45);
+
+        private void ConfigurarBarraBusqueda()
+        {
+            ConfigurarBusqueda(txtBuscar);
+
+        }
+        private void ConfigurarBusqueda(Guna2TextBox txtBuscar)
+        {
+            txtBuscar.Text = TextoBusqueda;
+            txtBuscar.ForeColor = ColorPlaceholder;
+
+            txtBuscar.BorderRadius = 10;
+            txtBuscar.BorderThickness = 1;
+            txtBuscar.BorderColor = Color.LightGray;
+
+            txtBuscar.FocusedState.BorderColor = ColorCafe;
+
+            txtBuscar.Enter += (s, e) =>
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                {
+                    txtBuscar.Text = "";
+                    txtBuscar.ForeColor = Color.Black;
+                }
+
+                txtBuscar.BorderColor = ColorCafe;
+                txtBuscar.BorderThickness = 2;
+            };
+
+            txtBuscar.Leave += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+                {
+                    txtBuscar.Text = TextoBusqueda;
+                    txtBuscar.ForeColor = ColorPlaceholder;
+                }
+
+                txtBuscar.BorderColor = Color.LightGray;
+                txtBuscar.BorderThickness = 1;
+            };
+        }
 
         private void EliminarProducto_Click(object sender, DataGridViewCellEventArgs e)
         {
@@ -469,6 +515,45 @@ namespace Vista.Pedidos_Secretario
                 dgvDetallesDePedido.DataSource = null;
 
                 MessageBox.Show("No se pudieron cargar los productos del pedido.\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        //------------------------------------------------------------------------------------------------------------------
+        //SECCION DE BUSQUEDA
+        private void txtBuscar_TextChanged_1(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtBuscar.Text == TextoBusqueda)
+                    return;
+
+                string texto = txtBuscar.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(texto))
+                {
+                    buscandoPedidos = false;
+                    paginaActual = 1;
+
+                    CargarPaginacionPedidos();
+
+                    return;
+                }
+
+                buscandoPedidos = true;
+
+                dtPedidos = DbPedidos.BuscarPedido(texto);
+
+                paginaActual = 1;
+
+                totalPaginas = (int)Math.Ceiling((double)dtPedidos.Rows.Count / registrosPorPagina);
+
+                if (totalPaginas == 0)
+                    totalPaginas = 1;
+
+                MostrarPaginaPedidos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al buscar pedidos.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

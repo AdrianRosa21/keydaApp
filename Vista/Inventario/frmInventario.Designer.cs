@@ -161,6 +161,7 @@
             this.cbCategorias.Name = "cbCategorias";
             this.cbCategorias.Size = new System.Drawing.Size(164, 21);
             this.cbCategorias.TabIndex = 22;
+            this.cbCategorias.TextChanged += new System.EventHandler(this.cbCategorias_TextChanged);
             // 
             // btnGuardar
             // 
@@ -186,6 +187,7 @@
             this.cbUnidadMedida.Name = "cbUnidadMedida";
             this.cbUnidadMedida.Size = new System.Drawing.Size(166, 28);
             this.cbUnidadMedida.TabIndex = 18;
+            this.cbUnidadMedida.SelectedIndexChanged += new System.EventHandler(this.cbUnidadMedida_SelectedIndexChanged);
             // 
             // btnEditar
             // 
@@ -221,6 +223,7 @@
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(167, 19);
             this.txtCantidad.TabIndex = 6;
+            this.txtCantidad.TextChanged += new System.EventHandler(this.txtCantidad_TextChanged);
             this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
             // 
             // lblCantidad
@@ -255,6 +258,7 @@
             this.txtMaterial.Name = "txtMaterial";
             this.txtMaterial.Size = new System.Drawing.Size(167, 19);
             this.txtMaterial.TabIndex = 2;
+            this.txtMaterial.TextChanged += new System.EventHandler(this.txtMaterial_TextChanged);
             this.txtMaterial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMaterial_KeyPress);
             // 
             // lblMaterial
@@ -397,11 +401,12 @@
             // lblTotalRegistrados
             // 
             this.lblTotalRegistrados.AutoSize = true;
-            this.lblTotalRegistrados.Location = new System.Drawing.Point(115, 44);
+            this.lblTotalRegistrados.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalRegistrados.Location = new System.Drawing.Point(110, 35);
             this.lblTotalRegistrados.Name = "lblTotalRegistrados";
-            this.lblTotalRegistrados.Size = new System.Drawing.Size(35, 13);
+            this.lblTotalRegistrados.Size = new System.Drawing.Size(18, 25);
             this.lblTotalRegistrados.TabIndex = 7;
-            this.lblTotalRegistrados.Text = "label4";
+            this.lblTotalRegistrados.Text = "l";
             // 
             // lblTotalInventario
             // 
@@ -438,11 +443,12 @@
             // lblAgotandose
             // 
             this.lblAgotandose.AutoSize = true;
-            this.lblAgotandose.Location = new System.Drawing.Point(113, 47);
+            this.lblAgotandose.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAgotandose.Location = new System.Drawing.Point(119, 38);
             this.lblAgotandose.Name = "lblAgotandose";
-            this.lblAgotandose.Size = new System.Drawing.Size(35, 13);
+            this.lblAgotandose.Size = new System.Drawing.Size(18, 25);
             this.lblAgotandose.TabIndex = 6;
-            this.lblAgotandose.Text = "label3";
+            this.lblAgotandose.Text = "l";
             // 
             // lblPocasUnidades
             // 
@@ -479,11 +485,12 @@
             // lblMaterialesAgotados
             // 
             this.lblMaterialesAgotados.AutoSize = true;
-            this.lblMaterialesAgotados.Location = new System.Drawing.Point(131, 49);
+            this.lblMaterialesAgotados.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaterialesAgotados.Location = new System.Drawing.Point(121, 38);
             this.lblMaterialesAgotados.Name = "lblMaterialesAgotados";
-            this.lblMaterialesAgotados.Size = new System.Drawing.Size(35, 13);
+            this.lblMaterialesAgotados.Size = new System.Drawing.Size(18, 25);
             this.lblMaterialesAgotados.TabIndex = 5;
-            this.lblMaterialesAgotados.Text = "label1";
+            this.lblMaterialesAgotados.Text = "l";
             // 
             // lblAgotados
             // 
@@ -520,11 +527,12 @@
             // lblDisponibles
             // 
             this.lblDisponibles.AutoSize = true;
-            this.lblDisponibles.Location = new System.Drawing.Point(121, 47);
+            this.lblDisponibles.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDisponibles.Location = new System.Drawing.Point(127, 40);
             this.lblDisponibles.Name = "lblDisponibles";
-            this.lblDisponibles.Size = new System.Drawing.Size(35, 13);
+            this.lblDisponibles.Size = new System.Drawing.Size(18, 25);
             this.lblDisponibles.TabIndex = 6;
-            this.lblDisponibles.Text = "label2";
+            this.lblDisponibles.Text = "l";
             // 
             // lblMaterialDisponible
             // 

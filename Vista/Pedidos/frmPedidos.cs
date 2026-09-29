@@ -687,6 +687,8 @@ namespace Vista.Pedidos
         {
             if (dtpFechaDeEntrega.Value.Date < dtpFechaPedido.Value.Date)
             {
+                errorProvider1.SetError(dtpFechaDeEntrega, "La fecha de entrega no puede ser anterior a la fecha del pedido.");
+
                 MessageBox.Show("La fecha de entrega no puede ser anterior a la fecha del pedido.", "Fecha inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 return;
@@ -757,6 +759,17 @@ namespace Vista.Pedidos
 
             // Volver a mostrar los pedidos
             MostrarPedidos();
+        }
+
+        private void dtpFechaPedido_ValueChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+        }
+
+        private void dtpFechaDeEntrega_ValueChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
         }
     }
 }

@@ -703,7 +703,6 @@ namespace Vista.Categorías
         //------------------------------------------------------
         //BUSQUEDA
 
-        // Actualiza la tabla cuando se borra el texto de búsqueda
 
         private void txtBuscarCategoria_TextChanged_1(object sender, EventArgs e)
         {
@@ -837,6 +836,22 @@ namespace Vista.Categorías
             }
         }
 
+        private void txtCategoria_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+        }
+
+        private void txtDescripcion_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+        }
+
+        private void cbEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+        }
     }
 }
 

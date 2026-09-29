@@ -73,6 +73,9 @@
             this.cbTipoCliente = new System.Windows.Forms.ComboBox();
             this.lblTipoCliente = new System.Windows.Forms.Label();
             this.lblDatosMaterial = new System.Windows.Forms.Label();
+            this.btnGuardarIndividual = new Guna.UI2.WinForms.Guna2TileButton();
+            this.btnGuardarCambios = new Guna.UI2.WinForms.Guna2TileButton();
+            this.btnGuardarCorporativo = new Guna.UI2.WinForms.Guna2TileButton();
             this.gbPersonaNatural = new System.Windows.Forms.GroupBox();
             this.txtDUI = new System.Windows.Forms.TextBox();
             this.txtApellidos = new System.Windows.Forms.TextBox();
@@ -87,9 +90,6 @@
             this.lblNIT = new System.Windows.Forms.Label();
             this.lblNombreEncargado = new System.Windows.Forms.Label();
             this.lblNombreEmpresa = new System.Windows.Forms.Label();
-            this.btnGuardarIndividual = new Guna.UI2.WinForms.Guna2TileButton();
-            this.btnGuardarCambios = new Guna.UI2.WinForms.Guna2TileButton();
-            this.btnGuardarCorporativo = new Guna.UI2.WinForms.Guna2TileButton();
             this.pnlRegistroClienteIndividual = new System.Windows.Forms.Panel();
             this.lblPagina = new System.Windows.Forms.Label();
             this.btnAnterior = new System.Windows.Forms.Button();
@@ -160,7 +160,7 @@
             this.cbEstadoCliente.Margin = new System.Windows.Forms.Padding(2);
             this.cbEstadoCliente.Name = "cbEstadoCliente";
             this.cbEstadoCliente.Size = new System.Drawing.Size(148, 23);
-            this.cbEstadoCliente.TabIndex = 21;
+            this.cbEstadoCliente.TabIndex = 7;
             // 
             // lblEstado
             // 
@@ -180,7 +180,7 @@
             this.txtDireccion.Multiline = true;
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(150, 40);
-            this.txtDireccion.TabIndex = 5;
+            this.txtDireccion.TabIndex = 6;
             this.txtDireccion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDireccion_KeyPress);
             // 
             // txtCorreo
@@ -189,7 +189,7 @@
             this.txtCorreo.Margin = new System.Windows.Forms.Padding(2);
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(93, 20);
-            this.txtCorreo.TabIndex = 4;
+            this.txtCorreo.TabIndex = 5;
             // 
             // txtTelefono
             // 
@@ -197,7 +197,7 @@
             this.txtTelefono.Margin = new System.Windows.Forms.Padding(2);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(93, 20);
-            this.txtTelefono.TabIndex = 3;
+            this.txtTelefono.TabIndex = 4;
             this.txtTelefono.TextChanged += new System.EventHandler(this.txtTelefono_TextChanged_1);
             this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress_1);
             // 
@@ -342,11 +342,12 @@
             // lblClientesActivos
             // 
             this.lblClientesActivos.AutoSize = true;
-            this.lblClientesActivos.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClientesActivos.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblClientesActivos.Location = new System.Drawing.Point(97, 28);
             this.lblClientesActivos.Name = "lblClientesActivos";
-            this.lblClientesActivos.Size = new System.Drawing.Size(0, 15);
+            this.lblClientesActivos.Size = new System.Drawing.Size(19, 25);
             this.lblClientesActivos.TabIndex = 6;
+            this.lblClientesActivos.Text = ".";
             // 
             // pbClientes
             // 
@@ -393,11 +394,12 @@
             // lblClientesInactivos
             // 
             this.lblClientesInactivos.AutoSize = true;
-            this.lblClientesInactivos.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClientesInactivos.Location = new System.Drawing.Point(103, 32);
+            this.lblClientesInactivos.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClientesInactivos.Location = new System.Drawing.Point(102, 31);
             this.lblClientesInactivos.Name = "lblClientesInactivos";
-            this.lblClientesInactivos.Size = new System.Drawing.Size(0, 15);
+            this.lblClientesInactivos.Size = new System.Drawing.Size(19, 25);
             this.lblClientesInactivos.TabIndex = 3;
+            this.lblClientesInactivos.Text = ".";
             // 
             // pnlIndicador4
             // 
@@ -424,11 +426,12 @@
             // lblTotalClientes
             // 
             this.lblTotalClientes.AutoSize = true;
-            this.lblTotalClientes.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalClientes.Location = new System.Drawing.Point(86, 29);
+            this.lblTotalClientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalClientes.Location = new System.Drawing.Point(115, 28);
             this.lblTotalClientes.Name = "lblTotalClientes";
-            this.lblTotalClientes.Size = new System.Drawing.Size(0, 15);
+            this.lblTotalClientes.Size = new System.Drawing.Size(19, 25);
             this.lblTotalClientes.TabIndex = 7;
+            this.lblTotalClientes.Text = ".";
             // 
             // pbClientesTotales
             // 
@@ -481,7 +484,7 @@
             this.lblSubTexto.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSubTexto.Name = "lblSubTexto";
             this.lblSubTexto.Size = new System.Drawing.Size(268, 21);
-            this.lblSubTexto.TabIndex = 5;
+            this.lblSubTexto.TabIndex = 0;
             this.lblSubTexto.Text = "Administración general de clientes.";
             // 
             // lblMensajeInformativoPrincipal
@@ -492,7 +495,7 @@
             this.lblMensajeInformativoPrincipal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMensajeInformativoPrincipal.Name = "lblMensajeInformativoPrincipal";
             this.lblMensajeInformativoPrincipal.Size = new System.Drawing.Size(305, 40);
-            this.lblMensajeInformativoPrincipal.TabIndex = 4;
+            this.lblMensajeInformativoPrincipal.TabIndex = 0;
             this.lblMensajeInformativoPrincipal.Text = "Gestión de Clientes";
             // 
             // pnlPedirInformacion
@@ -505,11 +508,11 @@
             this.pnlPedirInformacion.Controls.Add(this.gbDatosGenerales);
             this.pnlPedirInformacion.Controls.Add(this.lblTipoCliente);
             this.pnlPedirInformacion.Controls.Add(this.lblDatosMaterial);
-            this.pnlPedirInformacion.Controls.Add(this.gbDatosEmpresa);
             this.pnlPedirInformacion.Controls.Add(this.btnGuardarIndividual);
             this.pnlPedirInformacion.Controls.Add(this.btnGuardarCambios);
             this.pnlPedirInformacion.Controls.Add(this.btnGuardarCorporativo);
             this.pnlPedirInformacion.Controls.Add(this.gbPersonaNatural);
+            this.pnlPedirInformacion.Controls.Add(this.gbDatosEmpresa);
             this.pnlPedirInformacion.Location = new System.Drawing.Point(21, 110);
             this.pnlPedirInformacion.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPedirInformacion.Name = "pnlPedirInformacion";
@@ -527,7 +530,7 @@
             this.btnNuevoCliente.Location = new System.Drawing.Point(35, 44);
             this.btnNuevoCliente.Name = "btnNuevoCliente";
             this.btnNuevoCliente.Size = new System.Drawing.Size(160, 28);
-            this.btnNuevoCliente.TabIndex = 27;
+            this.btnNuevoCliente.TabIndex = 9;
             this.btnNuevoCliente.Text = "Nuevo Cliente";
             this.btnNuevoCliente.Click += new System.EventHandler(this.btnNuevoCliente_Click_1);
             // 
@@ -591,6 +594,51 @@
             this.lblDatosMaterial.TabIndex = 0;
             this.lblDatosMaterial.Text = "Datos del cliente";
             // 
+            // btnGuardarIndividual
+            // 
+            this.btnGuardarIndividual.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardarIndividual.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardarIndividual.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnGuardarIndividual.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnGuardarIndividual.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardarIndividual.ForeColor = System.Drawing.Color.White;
+            this.btnGuardarIndividual.Location = new System.Drawing.Point(112, 461);
+            this.btnGuardarIndividual.Name = "btnGuardarIndividual";
+            this.btnGuardarIndividual.Size = new System.Drawing.Size(92, 21);
+            this.btnGuardarIndividual.TabIndex = 8;
+            this.btnGuardarIndividual.Text = "Guardar";
+            this.btnGuardarIndividual.Click += new System.EventHandler(this.btnGuardarIndividuales_Click);
+            // 
+            // btnGuardarCambios
+            // 
+            this.btnGuardarCambios.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardarCambios.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardarCambios.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnGuardarCambios.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnGuardarCambios.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardarCambios.ForeColor = System.Drawing.Color.White;
+            this.btnGuardarCambios.Location = new System.Drawing.Point(112, 461);
+            this.btnGuardarCambios.Name = "btnGuardarCambios";
+            this.btnGuardarCambios.Size = new System.Drawing.Size(92, 21);
+            this.btnGuardarCambios.TabIndex = 24;
+            this.btnGuardarCambios.Text = "Guardar";
+            this.btnGuardarCambios.Click += new System.EventHandler(this.btnGuardarCambios_Click);
+            // 
+            // btnGuardarCorporativo
+            // 
+            this.btnGuardarCorporativo.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardarCorporativo.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardarCorporativo.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnGuardarCorporativo.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnGuardarCorporativo.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardarCorporativo.ForeColor = System.Drawing.Color.White;
+            this.btnGuardarCorporativo.Location = new System.Drawing.Point(112, 461);
+            this.btnGuardarCorporativo.Name = "btnGuardarCorporativo";
+            this.btnGuardarCorporativo.Size = new System.Drawing.Size(92, 21);
+            this.btnGuardarCorporativo.TabIndex = 25;
+            this.btnGuardarCorporativo.Text = "Guardar";
+            this.btnGuardarCorporativo.Click += new System.EventHandler(this.btnGuardarCorporativo_Click);
+            // 
             // gbPersonaNatural
             // 
             this.gbPersonaNatural.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
@@ -618,7 +666,7 @@
             this.txtDUI.Margin = new System.Windows.Forms.Padding(2);
             this.txtDUI.Name = "txtDUI";
             this.txtDUI.Size = new System.Drawing.Size(93, 20);
-            this.txtDUI.TabIndex = 5;
+            this.txtDUI.TabIndex = 3;
             this.txtDUI.TextChanged += new System.EventHandler(this.txtDUI_TextChanged_1);
             this.txtDUI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDUI_KeyPress_1);
             // 
@@ -628,7 +676,8 @@
             this.txtApellidos.Margin = new System.Windows.Forms.Padding(2);
             this.txtApellidos.Name = "txtApellidos";
             this.txtApellidos.Size = new System.Drawing.Size(89, 20);
-            this.txtApellidos.TabIndex = 4;
+            this.txtApellidos.TabIndex = 2;
+            this.txtApellidos.TextChanged += new System.EventHandler(this.txtApellidos_TextChanged);
             this.txtApellidos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApellidos_KeyPress_1);
             // 
             // txtNombres
@@ -637,7 +686,8 @@
             this.txtNombres.Margin = new System.Windows.Forms.Padding(2);
             this.txtNombres.Name = "txtNombres";
             this.txtNombres.Size = new System.Drawing.Size(89, 20);
-            this.txtNombres.TabIndex = 3;
+            this.txtNombres.TabIndex = 1;
+            this.txtNombres.TextChanged += new System.EventHandler(this.txtNombres_TextChanged);
             this.txtNombres.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombres_KeyPress_1);
             // 
             // lblDUI
@@ -700,7 +750,7 @@
             this.txtNIT.Margin = new System.Windows.Forms.Padding(2);
             this.txtNIT.Name = "txtNIT";
             this.txtNIT.Size = new System.Drawing.Size(93, 20);
-            this.txtNIT.TabIndex = 5;
+            this.txtNIT.TabIndex = 3;
             this.txtNIT.TextChanged += new System.EventHandler(this.txtNIT_TextChanged);
             this.txtNIT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNIT_KeyPress);
             // 
@@ -710,7 +760,8 @@
             this.txtNombreEncargado.Margin = new System.Windows.Forms.Padding(2);
             this.txtNombreEncargado.Name = "txtNombreEncargado";
             this.txtNombreEncargado.Size = new System.Drawing.Size(151, 20);
-            this.txtNombreEncargado.TabIndex = 4;
+            this.txtNombreEncargado.TabIndex = 2;
+            this.txtNombreEncargado.TextChanged += new System.EventHandler(this.txtNombreEncargado_TextChanged);
             // 
             // txtNombreEmpresa
             // 
@@ -718,7 +769,8 @@
             this.txtNombreEmpresa.Margin = new System.Windows.Forms.Padding(2);
             this.txtNombreEmpresa.Name = "txtNombreEmpresa";
             this.txtNombreEmpresa.Size = new System.Drawing.Size(151, 20);
-            this.txtNombreEmpresa.TabIndex = 3;
+            this.txtNombreEmpresa.TabIndex = 1;
+            this.txtNombreEmpresa.TextChanged += new System.EventHandler(this.txtNombreEmpresa_TextChanged);
             // 
             // lblNIT
             // 
@@ -752,51 +804,6 @@
             this.lblNombreEmpresa.Size = new System.Drawing.Size(137, 16);
             this.lblNombreEmpresa.TabIndex = 0;
             this.lblNombreEmpresa.Text = "Nombre de la empresa:";
-            // 
-            // btnGuardarIndividual
-            // 
-            this.btnGuardarIndividual.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnGuardarIndividual.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnGuardarIndividual.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnGuardarIndividual.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnGuardarIndividual.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardarIndividual.ForeColor = System.Drawing.Color.White;
-            this.btnGuardarIndividual.Location = new System.Drawing.Point(112, 461);
-            this.btnGuardarIndividual.Name = "btnGuardarIndividual";
-            this.btnGuardarIndividual.Size = new System.Drawing.Size(92, 21);
-            this.btnGuardarIndividual.TabIndex = 28;
-            this.btnGuardarIndividual.Text = "Guardar";
-            this.btnGuardarIndividual.Click += new System.EventHandler(this.btnGuardarIndividuales_Click);
-            // 
-            // btnGuardarCambios
-            // 
-            this.btnGuardarCambios.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnGuardarCambios.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnGuardarCambios.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnGuardarCambios.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnGuardarCambios.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardarCambios.ForeColor = System.Drawing.Color.White;
-            this.btnGuardarCambios.Location = new System.Drawing.Point(112, 461);
-            this.btnGuardarCambios.Name = "btnGuardarCambios";
-            this.btnGuardarCambios.Size = new System.Drawing.Size(92, 21);
-            this.btnGuardarCambios.TabIndex = 24;
-            this.btnGuardarCambios.Text = "Guardar";
-            this.btnGuardarCambios.Click += new System.EventHandler(this.btnGuardarCambios_Click);
-            // 
-            // btnGuardarCorporativo
-            // 
-            this.btnGuardarCorporativo.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnGuardarCorporativo.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnGuardarCorporativo.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnGuardarCorporativo.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnGuardarCorporativo.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardarCorporativo.ForeColor = System.Drawing.Color.White;
-            this.btnGuardarCorporativo.Location = new System.Drawing.Point(112, 461);
-            this.btnGuardarCorporativo.Name = "btnGuardarCorporativo";
-            this.btnGuardarCorporativo.Size = new System.Drawing.Size(92, 21);
-            this.btnGuardarCorporativo.TabIndex = 25;
-            this.btnGuardarCorporativo.Text = "Guardar";
-            this.btnGuardarCorporativo.Click += new System.EventHandler(this.btnGuardarCorporativo_Click);
             // 
             // pnlRegistroClienteIndividual
             // 

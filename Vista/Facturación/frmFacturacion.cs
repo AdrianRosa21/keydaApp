@@ -3,6 +3,7 @@ using Modelo.Entidades;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Windows.Forms;
 using Vista.Responsive;
 using Color = System.Drawing.Color;
@@ -366,7 +367,7 @@ namespace Vista.Facturación
         {
             MostrarRegistrosFacturas();
 
-            MostrarDetalleFactura();
+            dgvDetalleVenta.DataSource = null;
 
             // CONFIGURACION DE LAS TABLAS
             ConfigurarTablasFacturacion();
@@ -460,11 +461,44 @@ namespace Vista.Facturación
             btnAnterior.Enabled = paginaActual > 1;
             btnSiguiente.Enabled = paginaActual < totalPaginas;
         }
-
-        private void MostrarDetalleFactura()
+        private void MostrarDetalleFactura(int idVenta)
         {
-            dgvDetalleVenta.DataSource = null;
-            dgvDetalleVenta.DataSource = DbFactura.BuscarVentaParaFactura(0);
+            try
+            {
+                DataTable detalle = DbFactura.CargarDetalleVentaParaFactura(idVenta);
+
+                dgvDetalleVenta.DataSource = null;
+                dgvDetalleVenta.DataSource = detalle;
+
+                if (dgvDetalleVenta.Columns.Contains("IdDetalleVenta"))
+                    dgvDetalleVenta.Columns["IdDetalleVenta"].HeaderText = "#";
+
+                if (dgvDetalleVenta.Columns.Contains("IdVenta"))
+                    dgvDetalleVenta.Columns["IdVenta"].Visible = false;
+
+                if (dgvDetalleVenta.Columns.Contains("ProductoVendido"))
+                    dgvDetalleVenta.Columns["ProductoVendido"].HeaderText = "Producto";
+
+                if (dgvDetalleVenta.Columns.Contains("Cantidad"))
+                    dgvDetalleVenta.Columns["Cantidad"].HeaderText = "Cantidad";
+
+                if (dgvDetalleVenta.Columns.Contains("PrecioUnitario"))
+                    dgvDetalleVenta.Columns["PrecioUnitario"].HeaderText = "Precio unitario";
+
+                if (dgvDetalleVenta.Columns.Contains("SubTotal"))
+                    dgvDetalleVenta.Columns["SubTotal"].HeaderText = "Subtotal";
+
+                ConfigurarTablasFacturacion();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "No se pudo cargar el detalle de la venta.\n" + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
 
         private void btnNuevaFactura_Click(object sender, EventArgs e)
@@ -521,7 +555,7 @@ namespace Vista.Facturación
 
             MessageBox.Show("Venta encontrada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            // Datos del cliente en los TextBox
+            // DATOS DEL CLIENTE
             txtMostrarCliente.Text = fila["Cliente"].ToString();
             txtDui.Text = fila["Documento"].ToString();
             txtTelefono.Text = fila["Telefono"].ToString();
@@ -539,17 +573,11 @@ namespace Vista.Facturación
             // CALCULAR IVA Y TOTAL
             CalcularTotales();
 
-            DataTable detalle = DbFactura.CargarDetalleVentaParaFactura(idVenta);
-
-            dgvDetalleVenta.DataSource = null;
-            dgvDetalleVenta.DataSource = detalle;
-
-            // CONFIGURAR DISEÑO DE LA TABLA
-            ConfigurarTablasFacturacion();
+            // CARGAR DETALLE DE LA VENTA
+            MostrarDetalleFactura(idVenta);
 
             // Calcular cantidad total de productos
             int cantidadProductos = CalcularCantidadProductos();
-
             // Mostrar cantidad en la pestaña verde
             lblTotalDeProductos.Text = cantidadProductos.ToString();
         }
@@ -600,22 +628,6 @@ namespace Vista.Facturación
             CalcularTotales();
         }
 
-        //Método para limpiar los controles
-        private void btnLimpiarFactura_Click(object sender, EventArgs e)
-        {
-            txtnVenta.Text = null;
-            txtMostrarCliente.Text = null;
-            txtTelefono.Text = null;
-            txtDui.Text = null;
-            txtCorreo.Text = null;
-            txtNumeroFactura.Text = null;
-            txtSubTotal.Text = null;
-            txtIVA.Text = null;
-            txtDescuento.Text = null;
-            txtTotal.Text = null;
-            txtObservaciones.Text = null;
-
-        }
 
         private void txtTotal_TextChanged(object sender, EventArgs e)
         {
@@ -647,55 +659,6 @@ namespace Vista.Facturación
             return cantidadTotal;
         }
 
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtBuscar_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
-                {
-                    txtBuscar.Text = "Buscar por número de factura...";
-                    txtBuscar.ForeColor = Color.Gray;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void txtBuscar_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txtBuscar.Text == "Buscar por número de factura...")
-                {
-                    txtBuscar.Text = "";
-                    txtBuscar.ForeColor = Color.Black;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnLimpiar_Click(object sender, EventArgs e)
-        {
-            // Vaciar el buscador
-            txtBuscar.Text = "";
-
-            // Volver a mostrar el texto de indicación
-            txtBuscar.Text = "Buscar por número de factura...";
-            txtBuscar.ForeColor = Color.Gray;
-
-            // Recargar todas las facturas
-            MostrarRegistrosFacturas();
-        }
 
         private void dgvFacturasRegistradas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -833,45 +796,6 @@ namespace Vista.Facturación
             // Restablecer total a pagar
             lblTotalAPagar.Text = "Total a pagar $ : 0.00";
         }
-        private void btnGuardarFactura_Click(object sender, EventArgs e)
-        {
-            GuardarFactura();
-            MostrarRegistrosFacturas();
-        }
-
-        private void btnGenerarPDF_Click(object sender, EventArgs e)
-        {
-            try
-            {// Verificar que exista una factura
-                if (!int.TryParse(txtNumeroFactura.Text.Trim(), out int idFactura))
-                {
-                    MessageBox.Show("Primero debes guardar una factura.", "Generar PDF", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                    return;
-                }
-
-                // Ventana para elegir dónde guardar el PDF
-                using (SaveFileDialog guardar = new SaveFileDialog())
-                {
-                    guardar.Title = "Guardar factura en PDF";
-                    guardar.Filter = "Archivo PDF (*.pdf)|*.pdf";
-                    guardar.FileName = $"Factura_{idFactura}.pdf";
-
-                    if (guardar.ShowDialog() != DialogResult.OK)
-                        return;
-
-                    // Generar el PDF
-                    GeneradorFactura.Generar(idFactura, guardar.FileName);
-
-                    // Limpiar solamente después de generar
-                    LimpiarFormulario();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al generar el PDF:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
         private void btnAnterior_Click(object sender, EventArgs e)
         {
@@ -926,6 +850,90 @@ namespace Vista.Facturación
             {
                 MessageBox.Show("Ocurrió un error al buscar facturas.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnGenerarPDF_Click_1(object sender, EventArgs e)
+        {
+            try
+            {// Verificar que exista una factura
+                if (!int.TryParse(txtNumeroFactura.Text.Trim(), out int idFactura))
+                {
+                    MessageBox.Show("Primero debes guardar una factura.", "Generar PDF", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                using (SaveFileDialog guardar = new SaveFileDialog())
+                {
+                    guardar.Title = "Guardar factura en PDF";
+                    guardar.Filter = "Archivo PDF (*.pdf)|*.pdf";
+                    guardar.FileName = $"Factura_{idFactura}.pdf";
+
+                    if (guardar.ShowDialog() != DialogResult.OK)
+                        return;
+
+                    // Generar el PDF
+                    GeneradorFactura.Generar(idFactura, guardar.FileName);
+
+                    // Abrir automáticamente el PDF
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = guardar.FileName,
+                        UseShellExecute = true
+                    });
+
+                    // Limpiar solamente después de generar
+                    LimpiarFormulario();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al generar el PDF:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnLimpiarFactura_Click_1(object sender, EventArgs e)
+        {
+            txtnVenta.Text = null;
+            txtMostrarCliente.Text = null;
+            txtTelefono.Text = null;
+            txtDui.Text = null;
+            txtCorreo.Text = null;
+            txtNumeroFactura.Text = null;
+            txtSubTotal.Text = null;
+            txtIVA.Text = null;
+            txtDescuento.Text = null;
+            txtTotal.Text = null;
+            txtObservaciones.Text = null;
+        }
+
+        private void btnLimpiarFiltros_Click(object sender, EventArgs e)
+        {
+            // Vaciar el buscador
+            txtBuscar.Text = "";
+
+            // Volver a mostrar el texto de indicación
+            txtBuscar.Text = "Buscar...";
+            txtBuscar.ForeColor = Color.Gray;
+
+            // Recargar todas las facturas
+            MostrarRegistrosFacturas();
+        }
+
+        private void btnGuardarFactura_Click_1(object sender, EventArgs e)
+        {
+            GuardarFactura();
+            MostrarRegistrosFacturas();
+        }
+
+        private void dtFechaDatosGeneralesFactura_ValueChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+        }
+
+        private void dtpFechaVencimiento_ValueChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
         }
     }
 }

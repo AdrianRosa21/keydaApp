@@ -841,6 +841,8 @@ namespace Vista.Clientes
         //VALIDAR CORREO
         private bool ValidarCorreo()
         {
+            errorProvider1.Clear();
+
             try
             {
                 MailAddress correo = new MailAddress(txtCorreo.Text);
@@ -926,6 +928,7 @@ namespace Vista.Clientes
 
         private void txtTelefono_TextChanged_1(object sender, EventArgs e)
         {
+            errorProvider1.Clear();
             string texto = txtTelefono.Text.Replace("-", "");
 
             if (texto.Length > 4)
@@ -937,6 +940,7 @@ namespace Vista.Clientes
 
         private void txtDUI_TextChanged_1(object sender, EventArgs e)
         {
+            errorProvider1.Clear();
             string texto = txtDUI.Text.Replace("-", "");
 
             if (texto.Length > 8)
@@ -1603,6 +1607,8 @@ namespace Vista.Clientes
 
         private void LimpiarFormularioCliente()
         {
+            errorProvider1.Clear();
+
             // Habilitar los campos para registrar un nuevo cliente
             HabilitarCampos();
 
@@ -1792,6 +1798,7 @@ namespace Vista.Clientes
 
         private void txtNIT_TextChanged(object sender, EventArgs e)
         {
+            errorProvider1.Clear();
             string nit = txtNIT.Text.Replace("-", "");
 
             if (nit.Length > 14)
@@ -1815,6 +1822,25 @@ namespace Vista.Clientes
             txtNIT.SelectionStart = txtNIT.Text.Length;
         }
 
+        private void txtNombres_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(txtCorreo, "");
+        }
+
+        private void txtApellidos_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+        }
+
+        private void txtNombreEncargado_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+        }
+
+        private void txtNombreEmpresa_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+        }
     }
 }
 
