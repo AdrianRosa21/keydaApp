@@ -234,77 +234,81 @@ namespace Vista.Inventario
 
         //-------------------------------------------------------------------------
         // CONFIGURAR DISEÑO DE LA TABLA
-
         private void ConfigurarTablaInventario()
         {
-            // Encabezado
+            // Configuración general
+            dgvMateriales.AutoGenerateColumns = true;
             dgvMateriales.EnableHeadersVisualStyles = false;
+            dgvMateriales.AllowUserToAddRows = false;
+            dgvMateriales.AllowUserToDeleteRows = false;
+            dgvMateriales.AllowUserToResizeRows = false;
+            dgvMateriales.AllowUserToResizeColumns = false;
+            dgvMateriales.ReadOnly = true;
+            dgvMateriales.MultiSelect = false;
+            dgvMateriales.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvMateriales.RowHeadersVisible = false;
+            dgvMateriales.BorderStyle = BorderStyle.None;
+            dgvMateriales.BackgroundColor = Color.White;
+            dgvMateriales.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvMateriales.GridColor = Color.FromArgb(225, 225, 225);
 
-            dgvMateriales.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
+            // Altura del encabezado
+            dgvMateriales.ColumnHeadersHeight = 40;
+            dgvMateriales.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 
-            dgvMateriales.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            // Altura de las filas
+            dgvMateriales.RowTemplate.Height = 36;
 
-            dgvMateriales.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+            // No cambiar automáticamente la altura
+            dgvMateriales.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
 
-            dgvMateriales.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            // Ajustar columnas
+            dgvMateriales.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            dgvMateriales.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
-
-            dgvMateriales.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+            // Encabezado
+            dgvMateriales.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(121, 75, 45),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(121, 75, 45),
+                SelectionForeColor = Color.White,
+                Padding = new Padding(5)
+            };
 
             // Filas
-            dgvMateriales.DefaultCellStyle.BackColor = Color.White;
-
-            dgvMateriales.DefaultCellStyle.ForeColor = Color.FromArgb(45, 45, 45);
-
-            dgvMateriales.DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-
-            dgvMateriales.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvMateriales.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.White,
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35),
+                Padding = new Padding(5)
+            };
 
             // Filas alternadas
-            dgvMateriales.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 241, 232);
+            dgvMateriales.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(250, 246, 240),
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35)
+            };
 
-            // Selección
-            dgvMateriales.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 193, 157);
+            // Fila seleccionada
+            dgvMateriales.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+            dgvMateriales.RowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
 
-            dgvMateriales.DefaultCellStyle.SelectionForeColor = Color.Black;
-
-            // Bordes
-            dgvMateriales.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-
-            dgvMateriales.GridColor = Color.FromArgb(220, 220, 220);
-
-            // Alto de las filas
-            dgvMateriales.RowTemplate.Height = 32;
-
-            // Alto del encabezado
-            dgvMateriales.ColumnHeadersHeight = 30;
-
-            // No permitir modificar
-            dgvMateriales.ReadOnly = true;
-
-            dgvMateriales.AllowUserToAddRows = false;
-
-            dgvMateriales.AllowUserToDeleteRows = false;
-
-            // Seleccionar fila completa
-            dgvMateriales.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-            dgvMateriales.MultiSelect = false;
-
-            // Quitar borde exterior
-            dgvMateriales.BorderStyle = BorderStyle.None;
-
-            // Ajustar contenido
-            dgvMateriales.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-
-            dgvMateriales.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-
-            // Quitar columna de selección de filas
-            dgvMateriales.RowHeadersVisible = false;
+            // No permitir ordenar
+            foreach (DataGridViewColumn columna in dgvMateriales.Columns)
+            {
+                columna.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
-
-
         private void MostrarInventario()
         {
             paginaActual = 1;
@@ -430,6 +434,7 @@ namespace Vista.Inventario
             if (string.IsNullOrWhiteSpace(txtMaterial.Text))
             {
                 errorProvider1.SetError(txtMaterial, "Ingrese el nombre del material.");
+                MessageBox.Show("Ingrese el nombre del material.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtMaterial.Focus();
                 return;
             }
@@ -438,6 +443,7 @@ namespace Vista.Inventario
             if (string.IsNullOrWhiteSpace(cbUnidadMedida.Text))
             {
                 errorProvider1.SetError(cbUnidadMedida, "Ingrese la unidad de medida.");
+                MessageBox.Show("Ingrese la unidad de medida.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cbUnidadMedida.Focus();
                 return;
             }
@@ -446,6 +452,7 @@ namespace Vista.Inventario
             if (cbCategorias.SelectedIndex == -1)
             {
                 errorProvider1.SetError(cbCategorias, "Seleccione una categoría.");
+                MessageBox.Show("Seleccione una categoría.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cbCategorias.Focus();
                 return;
             }
@@ -454,6 +461,7 @@ namespace Vista.Inventario
             if (string.IsNullOrWhiteSpace(txtCantidad.Text))
             {
                 errorProvider1.SetError(txtCantidad, "Ingrese el stock inicial.");
+                MessageBox.Show("Ingrese el stock inicial.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCantidad.Focus();
                 return;
             }
@@ -462,6 +470,7 @@ namespace Vista.Inventario
             if (!int.TryParse(txtCantidad.Text, out int stock))
             {
                 errorProvider1.SetError(txtCantidad, "El stock inicial debe ser un número.");
+                MessageBox.Show("El stock inicial debe ser un número.", "Dato inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCantidad.Focus();
                 return;
             }
@@ -470,6 +479,7 @@ namespace Vista.Inventario
             if (stock < 0)
             {
                 errorProvider1.SetError(txtCantidad, "El stock inicial no puede ser negativo.");
+                MessageBox.Show("El stock inicial no puede ser negativo.", "Dato inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCantidad.Focus();
                 return;
             }
@@ -721,8 +731,7 @@ namespace Vista.Inventario
 
                 int totalResultados = dtInventario.Rows.Count;
 
-                totalPaginas = (int)Math.Ceiling(
-                    (double)totalResultados / registrosPorPagina
+                totalPaginas = (int)Math.Ceiling((double)totalResultados / registrosPorPagina
                 );
 
                 if (totalPaginas == 0)

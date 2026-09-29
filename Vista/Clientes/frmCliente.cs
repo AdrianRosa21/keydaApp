@@ -33,7 +33,7 @@ namespace Vista.Clientes
         private int tipoClienteSeleccionado = 0;
 
         // Cantidad de clientes que se mostrarán por página.
-        private int registrosPorPagina = 10;
+        private int registrosPorPagina = 20;
 
         // Página en la que estamos actualmente.
         private int paginaActual = 1;

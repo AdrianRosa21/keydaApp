@@ -4,6 +4,7 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
 using Vista.Responsive;
 using Color = System.Drawing.Color;
@@ -159,7 +160,7 @@ namespace Vista.Facturación
         // VARIABLES PARA LA PAGINACIÓN
         private DataTable dtFacturas;
         private int paginaActual = 1;
-        private int registrosPorPagina = 10;
+        private int registrosPorPagina = 20;
         private int totalPaginas = 0;
 
         private void ConfigurarTooltips()
@@ -239,129 +240,146 @@ namespace Vista.Facturación
         {
             // TABLA DE FACTURAS
 
-            // Encabezado
+            dgvFacturasRegistradas.AutoGenerateColumns = true;
             dgvFacturasRegistradas.EnableHeadersVisualStyles = false;
-
-            dgvFacturasRegistradas.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
-
-            dgvFacturasRegistradas.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-
-            dgvFacturasRegistradas.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Regular);
-
-            dgvFacturasRegistradas.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            dgvFacturasRegistradas.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
-
-            dgvFacturasRegistradas.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
-
-            // Filas
-            dgvFacturasRegistradas.DefaultCellStyle.BackColor = Color.White;
-            dgvFacturasRegistradas.DefaultCellStyle.ForeColor = Color.FromArgb(45, 45, 45);
-            dgvFacturasRegistradas.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Regular);
-            dgvFacturasRegistradas.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            // Filas alternadas
-            dgvFacturasRegistradas.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 241, 232);
-
-            // Selección
-            dgvFacturasRegistradas.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 193, 157);
-
-            dgvFacturasRegistradas.DefaultCellStyle.SelectionForeColor = Color.Black;
-
-            // Bordes
+            dgvFacturasRegistradas.AllowUserToAddRows = false;
+            dgvFacturasRegistradas.AllowUserToDeleteRows = false;
+            dgvFacturasRegistradas.AllowUserToResizeRows = false;
+            dgvFacturasRegistradas.AllowUserToResizeColumns = false;
+            dgvFacturasRegistradas.ReadOnly = true;
+            dgvFacturasRegistradas.MultiSelect = false;
+            dgvFacturasRegistradas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvFacturasRegistradas.RowHeadersVisible = false;
+            dgvFacturasRegistradas.BorderStyle = BorderStyle.None;
+            dgvFacturasRegistradas.BackgroundColor = Color.White;
             dgvFacturasRegistradas.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-
-            dgvFacturasRegistradas.GridColor = Color.FromArgb(220, 220, 220);
-
-            // Alto de las filas
-            dgvFacturasRegistradas.RowTemplate.Height = 32;
+            dgvFacturasRegistradas.GridColor = Color.FromArgb(225, 225, 225);
 
             // Alto del encabezado
             dgvFacturasRegistradas.ColumnHeadersHeight = 40;
 
-            // No permitir modificar
-            dgvFacturasRegistradas.ReadOnly = true;
+            // Alto de las filas
+            dgvFacturasRegistradas.RowTemplate.Height = 36;
+            dgvFacturasRegistradas.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
 
-            dgvFacturasRegistradas.AllowUserToAddRows = false;
-
-            dgvFacturasRegistradas.AllowUserToDeleteRows = false;
-
-            // Seleccionar fila completa
-            dgvFacturasRegistradas.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
-
-            dgvFacturasRegistradas.MultiSelect = false;
-
-            // Quitar borde exterior
-            dgvFacturasRegistradas.BorderStyle =
-                BorderStyle.None;
-
-            // Quitar columna de selección de filas
-            dgvFacturasRegistradas.RowHeadersVisible = false;
-
-
-            // TABLA DETALLE DE VENTA
+            // Ajustar columnas
+            dgvFacturasRegistradas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             // Encabezado
-            dgvDetalleVenta.EnableHeadersVisualStyles = false;
-
-            dgvDetalleVenta.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
-
-            dgvDetalleVenta.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-
-            dgvDetalleVenta.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Regular);
-
-            dgvDetalleVenta.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            dgvDetalleVenta.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
-
-            dgvDetalleVenta.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+            dgvFacturasRegistradas.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(121, 75, 45),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(121, 75, 45),
+                SelectionForeColor = Color.White,
+                Padding = new Padding(5)
+            };
 
             // Filas
-            dgvDetalleVenta.DefaultCellStyle.BackColor = Color.White;
-
-            dgvDetalleVenta.DefaultCellStyle.ForeColor = Color.FromArgb(45, 45, 45);
-
-            dgvDetalleVenta.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Regular);
-
-            dgvDetalleVenta.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvFacturasRegistradas.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.White,
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35),
+                Padding = new Padding(5)
+            };
 
             // Filas alternadas
-            dgvDetalleVenta.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 241, 232);
+            dgvFacturasRegistradas.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(250, 246, 240),
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35)
+            };
 
-            // Selección
-            dgvDetalleVenta.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 193, 157);
+            // Fila seleccionada
+            dgvFacturasRegistradas.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+            dgvFacturasRegistradas.RowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
 
-            dgvDetalleVenta.DefaultCellStyle.SelectionForeColor = Color.Black;
+            // No permitir ordenar las columnas
+            foreach (DataGridViewColumn columna in dgvFacturasRegistradas.Columns)
+            {
+                columna.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
 
-            // Bordes
+
+            // TABLA DE DETALLE DE VENTA
+
+            dgvDetalleVenta.AutoGenerateColumns = true;
+            dgvDetalleVenta.EnableHeadersVisualStyles = false;
+            dgvDetalleVenta.AllowUserToAddRows = false;
+            dgvDetalleVenta.AllowUserToDeleteRows = false;
+            dgvDetalleVenta.AllowUserToResizeRows = false;
+            dgvDetalleVenta.AllowUserToResizeColumns = false;
+            dgvDetalleVenta.ReadOnly = true;
+            dgvDetalleVenta.MultiSelect = false;
+            dgvDetalleVenta.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvDetalleVenta.RowHeadersVisible = false;
+            dgvDetalleVenta.BorderStyle = BorderStyle.None;
+            dgvDetalleVenta.BackgroundColor = Color.White;
             dgvDetalleVenta.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-
-            dgvDetalleVenta.GridColor = Color.FromArgb(220, 220, 220);
-
-            // Alto de las filas
-            dgvDetalleVenta.RowTemplate.Height = 32;
+            dgvDetalleVenta.GridColor = Color.FromArgb(225, 225, 225);
 
             // Alto del encabezado
             dgvDetalleVenta.ColumnHeadersHeight = 40;
 
-            // No permitir modificar
-            dgvDetalleVenta.ReadOnly = true;
+            // Alto de las filas
+            dgvDetalleVenta.RowTemplate.Height = 36;
+            dgvDetalleVenta.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
 
-            dgvDetalleVenta.AllowUserToAddRows = false;
+            // Ajustar columnas
+            dgvDetalleVenta.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            dgvDetalleVenta.AllowUserToDeleteRows = false;
+            // Encabezado
+            dgvDetalleVenta.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(121, 75, 45),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(121, 75, 45),
+                SelectionForeColor = Color.White,
+                Padding = new Padding(5)
+            };
 
-            // Seleccionar fila completa
-            dgvDetalleVenta.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            // Filas
+            dgvDetalleVenta.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.White,
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35),
+                Padding = new Padding(5)
+            };
 
-            dgvDetalleVenta.MultiSelect = false;
+            // Filas alternadas
+            dgvDetalleVenta.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(250, 246, 240),
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35)
+            };
 
-            // Quitar borde exterior
-            dgvDetalleVenta.BorderStyle = BorderStyle.None;
+            // Fila seleccionada
+            dgvDetalleVenta.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+            dgvDetalleVenta.RowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
 
-            // Quitar columna de selección de filas
-            dgvDetalleVenta.RowHeadersVisible = false;
+            // No permitir ordenar las columnas
+            foreach (DataGridViewColumn columna in dgvDetalleVenta.Columns)
+            {
+                columna.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
         private void frmFacturacion_Load(object sender, EventArgs e)
         {

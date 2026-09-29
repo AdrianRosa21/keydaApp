@@ -27,7 +27,7 @@ namespace Vista.Clientes_Secretario
         private int tipoClienteSeleccionado = 0;
 
         // Cantidad de clientes que se mostrarán por página.
-        private int registrosPorPagina = 10;
+        private int registrosPorPagina = 20;
 
         // Página en la que estamos actualmente.
         private int paginaActual = 1;
@@ -165,46 +165,48 @@ namespace Vista.Clientes_Secretario
 
             tabla.AllowUserToAddRows = false;
             tabla.AllowUserToDeleteRows = false;
+
+            // No permitir cambiar tamaño de filas ni columnas
             tabla.AllowUserToResizeRows = false;
             tabla.AllowUserToResizeColumns = false;
 
+            // No permitir editar la tabla
             tabla.ReadOnly = true;
 
             tabla.MultiSelect = false;
-
             tabla.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             tabla.RowHeadersVisible = false;
-
             tabla.BorderStyle = BorderStyle.None;
-
             tabla.BackgroundColor = Color.White;
 
             tabla.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-
             tabla.GridColor = Color.FromArgb(225, 225, 225);
 
             tabla.EnableHeadersVisualStyles = false;
 
-            // Altura del encabezado
+            // No permitir cambiar el tamaño del encabezado
             tabla.ColumnHeadersHeight = 40;
+            tabla.ColumnHeadersHeightSizeMode =
+                DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 
-            // Altura de las filas
+            // Altura fija de las filas
             tabla.RowTemplate.Height = 34;
+
+            // No cambiar automáticamente la altura de las filas
+            tabla.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
 
             // Ajustar columnas al espacio disponible
             tabla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-
-            //---------------------------------------------------------------------- 
             // ENCABEZADO
             tabla.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
             {
-                BackColor = Color.FromArgb(121, 78, 48),
+                BackColor = Color.FromArgb(121, 75, 45),
                 ForeColor = Color.White,
                 Font = new Font("Segoe UI", 10, FontStyle.Bold),
                 Alignment = DataGridViewContentAlignment.MiddleCenter,
-                SelectionBackColor = Color.FromArgb(121, 78, 48),
+                SelectionBackColor = Color.FromArgb(121, 75, 45),
                 SelectionForeColor = Color.White,
                 Padding = new Padding(5)
             };
@@ -233,6 +235,7 @@ namespace Vista.Clientes_Secretario
 
             // FILA SELECCIONADA
             tabla.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+
             tabla.RowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
         }
         //----------------------------------------------------------------------

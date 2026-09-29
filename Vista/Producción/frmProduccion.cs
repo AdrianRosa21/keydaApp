@@ -13,7 +13,7 @@ namespace Vista.Producción
         // PAGINACIÓN
         private DataTable dtProduccion;
         private int paginaActual = 1;
-        private int registrosPorPagina = 10;
+        private int registrosPorPagina = 20;
         private int totalPaginas = 0;
         private DataTable dtProduccionOriginal;
 
@@ -227,65 +227,75 @@ namespace Vista.Producción
         // CONFIGURAR DISEÑO DE LA TABLA
         private void ConfigurarTablaProduccion()
         {
-            // Encabezado
+            // Configuración general
+            dgvProduccion.AutoGenerateColumns = true;
             dgvProduccion.EnableHeadersVisualStyles = false;
-
-            dgvProduccion.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
-
-            dgvProduccion.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-
-            dgvProduccion.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-
-            dgvProduccion.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            // Color del encabezado al seleccionar
-            dgvProduccion.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
-
-            dgvProduccion.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
-
-            // Filas
-            dgvProduccion.DefaultCellStyle.BackColor = Color.White;
-
-            dgvProduccion.DefaultCellStyle.ForeColor =
-                Color.FromArgb(45, 45, 45);
-
-            dgvProduccion.DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-
-            dgvProduccion.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-
-            // Filas alternadas
-            dgvProduccion.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 241, 232);
-
-            // Selección
-            dgvProduccion.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 193, 157);
-
-            dgvProduccion.DefaultCellStyle.SelectionForeColor = Color.Black;
-
-            // Bordes
+            dgvProduccion.AllowUserToAddRows = false;
+            dgvProduccion.AllowUserToDeleteRows = false;
+            dgvProduccion.AllowUserToResizeRows = false;
+            dgvProduccion.AllowUserToResizeColumns = false;
+            dgvProduccion.ReadOnly = true;
+            dgvProduccion.MultiSelect = false;
+            dgvProduccion.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvProduccion.RowHeadersVisible = false;
+            dgvProduccion.BorderStyle = BorderStyle.None;
+            dgvProduccion.BackgroundColor = Color.White;
             dgvProduccion.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-
-            dgvProduccion.GridColor = Color.FromArgb(220, 220, 220);
-
-            // Alto de las filas
-            dgvProduccion.RowTemplate.Height = 32;
+            dgvProduccion.GridColor = Color.FromArgb(225, 225, 225);
 
             // Alto del encabezado
-            dgvProduccion.ColumnHeadersHeight = 30;
+            dgvProduccion.ColumnHeadersHeight = 40;
 
-            // No permitir modificar
-            dgvProduccion.ReadOnly = true;
+            // Alto de las filas
+            dgvProduccion.RowTemplate.Height = 36;
+            dgvProduccion.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
 
-            dgvProduccion.AllowUserToAddRows = false;
+            // Ajustar columnas
+            dgvProduccion.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            dgvProduccion.AllowUserToDeleteRows = false;
+            // Encabezado
+            dgvProduccion.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(121, 75, 45),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 8, FontStyle.Bold),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(121, 75, 45),
+                SelectionForeColor = Color.White,
+                Padding = new Padding(5)
+            };
 
-            // Seleccionar fila completa
-            dgvProduccion.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            // Filas
+            dgvProduccion.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.White,
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35),
+                Padding = new Padding(5)
+            };
 
-            dgvProduccion.MultiSelect = false;
+            // Filas alternadas
+            dgvProduccion.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(250, 246, 240),
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35)
+            };
 
-            // Quitar borde exterior
-            dgvProduccion.BorderStyle = BorderStyle.None;
+            // Fila seleccionada
+            dgvProduccion.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+            dgvProduccion.RowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
+
+            // No permitir ordenar las columnas
+            foreach (DataGridViewColumn columna in dgvProduccion.Columns)
+            {
+                columna.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
 
         }
         //CONFIGURAR TOOLTIPS----------------------------------------------------------

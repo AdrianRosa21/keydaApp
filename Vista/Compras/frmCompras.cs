@@ -111,7 +111,7 @@ namespace Vista.Compras
         // VARIABLES PARA LA PAGINACIÓN
         private DataTable dtCompras;
         private int paginaActual = 1;
-        private int registrosPorPagina = 10;
+        private int registrosPorPagina = 20;
         private int totalPaginas = 0;
         private int idDetalleEditando = 0;
         private decimal totalCompra = 0;
@@ -171,97 +171,134 @@ namespace Vista.Compras
         private void ConfigurarTablasCompras()
         {
             // TABLA HISTORIAL DE COMPRAS
-
-            // Encabezado
+            dgvHistorialCompras.AutoGenerateColumns = true;
             dgvHistorialCompras.EnableHeadersVisualStyles = false;
-            dgvHistorialCompras.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
-            dgvHistorialCompras.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvHistorialCompras.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 9, FontStyle.Regular);
-            dgvHistorialCompras.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvHistorialCompras.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
-            dgvHistorialCompras.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
-
-            // Filas
-            dgvHistorialCompras.DefaultCellStyle.BackColor = Color.White;
-            dgvHistorialCompras.DefaultCellStyle.ForeColor = Color.FromArgb(45, 45, 45);
-            dgvHistorialCompras.DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-            dgvHistorialCompras.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-
-            // Filas alternadas
-            dgvHistorialCompras.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 241, 232);
-
-            // Selección
-            dgvHistorialCompras.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 193, 157);
-            dgvHistorialCompras.DefaultCellStyle.SelectionForeColor = Color.Black;
-
-            // Bordes
-            dgvHistorialCompras.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvHistorialCompras.GridColor = Color.FromArgb(220, 220, 220);
-
-            // Alto de las filas
-            dgvHistorialCompras.RowTemplate.Height = 32;
-
-            // Alto del encabezado
-            dgvHistorialCompras.ColumnHeadersHeight = 30;
-
-            // No permitir modificar
-            dgvHistorialCompras.ReadOnly = true;
             dgvHistorialCompras.AllowUserToAddRows = false;
             dgvHistorialCompras.AllowUserToDeleteRows = false;
-
-            // Seleccionar fila completa
-            dgvHistorialCompras.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvHistorialCompras.AllowUserToResizeRows = false;
+            dgvHistorialCompras.AllowUserToResizeColumns = false;
+            dgvHistorialCompras.ReadOnly = true;
             dgvHistorialCompras.MultiSelect = false;
-
-            // Quitar borde exterior
+            dgvHistorialCompras.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvHistorialCompras.RowHeadersVisible = false;
             dgvHistorialCompras.BorderStyle = BorderStyle.None;
+            dgvHistorialCompras.BackgroundColor = Color.White;
+            dgvHistorialCompras.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvHistorialCompras.GridColor = Color.FromArgb(225, 225, 225);
+            dgvHistorialCompras.ColumnHeadersHeight = 40;
+            dgvHistorialCompras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvHistorialCompras.RowTemplate.Height = 36;
+            dgvHistorialCompras.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            dgvHistorialCompras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
+            // ENCABEZADO
+            dgvHistorialCompras.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(121, 75, 45),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(121, 75, 45),
+                SelectionForeColor = Color.White,
+                Padding = new Padding(5)
+            };
+
+            // FILAS
+            dgvHistorialCompras.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.White,
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35),
+                Padding = new Padding(5)
+            };
+
+            // FILAS ALTERNADAS
+            dgvHistorialCompras.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(250, 246, 240),
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35)
+            };
+
+            // FILA SELECCIONADA
+            dgvHistorialCompras.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+            dgvHistorialCompras.RowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
+
+            // NO PERMITIR ORDENAR
+            foreach (DataGridViewColumn columna in dgvHistorialCompras.Columns)
+            {
+                columna.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
 
             // TABLA DETALLE DE COMPRAS
-
-            // Encabezado
+            dgvDetalleCompras.AutoGenerateColumns = true;
             dgvDetalleCompras.EnableHeadersVisualStyles = false;
-            dgvDetalleCompras.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
-            dgvDetalleCompras.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvDetalleCompras.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 9, FontStyle.Regular);
-            dgvDetalleCompras.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvDetalleCompras.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
-            dgvDetalleCompras.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
-
-            // Filas
-            dgvDetalleCompras.DefaultCellStyle.BackColor = Color.White;
-            dgvDetalleCompras.DefaultCellStyle.ForeColor = Color.FromArgb(45, 45, 45);
-            dgvDetalleCompras.DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-            dgvDetalleCompras.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-
-            // Filas alternadas
-            dgvDetalleCompras.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 241, 232);
-
-            // Selección
-            dgvDetalleCompras.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 193, 157);
-            dgvDetalleCompras.DefaultCellStyle.SelectionForeColor = Color.Black;
-
-            // Bordes
-            dgvDetalleCompras.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvDetalleCompras.GridColor = Color.FromArgb(220, 220, 220);
-
-            // Alto de las filas
-            dgvDetalleCompras.RowTemplate.Height = 32;
-
-            // Alto del encabezado
-            dgvDetalleCompras.ColumnHeadersHeight = 30;
-
-            // No permitir modificar
-            dgvDetalleCompras.ReadOnly = true;
             dgvDetalleCompras.AllowUserToAddRows = false;
             dgvDetalleCompras.AllowUserToDeleteRows = false;
-
-            // Seleccionar fila completa
-            dgvDetalleCompras.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvDetalleCompras.AllowUserToResizeRows = false;
+            dgvDetalleCompras.AllowUserToResizeColumns = false;
+            dgvDetalleCompras.ReadOnly = true;
             dgvDetalleCompras.MultiSelect = false;
-
-            // Quitar borde exterior
+            dgvDetalleCompras.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvDetalleCompras.RowHeadersVisible = false;
             dgvDetalleCompras.BorderStyle = BorderStyle.None;
+            dgvDetalleCompras.BackgroundColor = Color.White;
+            dgvDetalleCompras.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvDetalleCompras.GridColor = Color.FromArgb(225, 225, 225);
+            dgvDetalleCompras.ColumnHeadersHeight = 40;
+            dgvDetalleCompras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvDetalleCompras.RowTemplate.Height = 36;
+            dgvDetalleCompras.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            dgvDetalleCompras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // ENCABEZADO
+            dgvDetalleCompras.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(121, 75, 45),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(121, 75, 45),
+                SelectionForeColor = Color.White,
+                Padding = new Padding(5)
+            };
+
+            // FILAS
+            dgvDetalleCompras.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.White,
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35),
+                Padding = new Padding(5)
+            };
+
+            // FILAS ALTERNADAS
+            dgvDetalleCompras.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(250, 246, 240),
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35)
+            };
+
+            // FILA SELECCIONADA
+            dgvDetalleCompras.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+            dgvDetalleCompras.RowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
+
+            // NO PERMITIR ORDENAR
+            foreach (DataGridViewColumn columna in dgvDetalleCompras.Columns)
+            {
+                columna.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
 
         private void frmCompras_Load(object sender, EventArgs e)

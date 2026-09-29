@@ -258,6 +258,7 @@ namespace Vista.Reportes
             ActualizarEstadisticasClientes();
             ActualizarEstadisticasVentas();
             ActualizarEstadisticasCotizaciones();
+            ConfigurarTablasReportes();
 
             //CONFIGURACION DE TOOLTPS
             ConfigurarTooltips();
@@ -772,6 +773,192 @@ namespace Vista.Reportes
             {
                 MessageBox.Show("Ocurrió un error al exportar el reporte de cotizaciones:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+
+        private void ConfigurarTablasReportes()
+        {
+            // TABLA REPORTE DE VENTAS
+            dgvReporteVentas.AutoGenerateColumns = true;
+            dgvReporteVentas.EnableHeadersVisualStyles = false;
+
+            // No permitir modificar
+            dgvReporteVentas.ReadOnly = true;
+            dgvReporteVentas.AllowUserToAddRows = false;
+            dgvReporteVentas.AllowUserToDeleteRows = false;
+
+            // No permitir cambiar tamaño de filas ni columnas
+            dgvReporteVentas.AllowUserToResizeRows = false;
+            dgvReporteVentas.AllowUserToResizeColumns = false;
+
+            // Selección
+            dgvReporteVentas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvReporteVentas.MultiSelect = false;
+
+            // Ocultar encabezado lateral
+            dgvReporteVentas.RowHeadersVisible = false;
+
+            // Borde exterior
+            dgvReporteVentas.BorderStyle = BorderStyle.None;
+            dgvReporteVentas.BackgroundColor = Color.White;
+
+            // Bordes
+            dgvReporteVentas.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvReporteVentas.GridColor = Color.FromArgb(220, 220, 220);
+
+            // Altura del encabezado
+            dgvReporteVentas.ColumnHeadersHeight = 30;
+            dgvReporteVentas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
+            // Altura de las filas
+            dgvReporteVentas.RowTemplate.Height = 32;
+            dgvReporteVentas.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+
+            // Ajustar columnas
+            dgvReporteVentas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // ENCABEZADO
+            dgvReporteVentas.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
+            dgvReporteVentas.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvReporteVentas.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+            dgvReporteVentas.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvReporteVentas.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
+            dgvReporteVentas.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+
+            // FILAS
+            dgvReporteVentas.DefaultCellStyle.BackColor = Color.White;
+            dgvReporteVentas.DefaultCellStyle.ForeColor = Color.FromArgb(45, 45, 45);
+            dgvReporteVentas.DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+            dgvReporteVentas.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+            // Selección
+            dgvReporteVentas.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 193, 157);
+            dgvReporteVentas.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            // Filas alternadas
+            dgvReporteVentas.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 241, 232);
+
+
+            // TABLA REPORTE DE CLIENTES
+            dgvReporteClientes.AutoGenerateColumns = true;
+            dgvReporteClientes.EnableHeadersVisualStyles = false;
+
+            // No permitir modificar
+            dgvReporteClientes.ReadOnly = true;
+            dgvReporteClientes.AllowUserToAddRows = false;
+            dgvReporteClientes.AllowUserToDeleteRows = false;
+
+            // No permitir cambiar tamaño de filas ni columnas
+            dgvReporteClientes.AllowUserToResizeRows = false;
+            dgvReporteClientes.AllowUserToResizeColumns = false;
+
+            // Selección
+            dgvReporteClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvReporteClientes.MultiSelect = false;
+
+            // Ocultar encabezado lateral
+            dgvReporteClientes.RowHeadersVisible = false;
+
+            // Borde exterior
+            dgvReporteClientes.BorderStyle = BorderStyle.None;
+            dgvReporteClientes.BackgroundColor = Color.White;
+
+            // Bordes
+            dgvReporteClientes.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvReporteClientes.GridColor = Color.FromArgb(220, 220, 220);
+
+            // Altura del encabezado
+            dgvReporteClientes.ColumnHeadersHeight = 30;
+            dgvReporteClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
+            // Altura de las filas
+            dgvReporteClientes.RowTemplate.Height = 32;
+            dgvReporteClientes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+
+            // Ajustar columnas
+            dgvReporteClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // ENCABEZADO
+            dgvReporteClientes.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
+            dgvReporteClientes.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvReporteClientes.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+            dgvReporteClientes.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvReporteClientes.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
+            dgvReporteClientes.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+
+            // FILAS
+            dgvReporteClientes.DefaultCellStyle.BackColor = Color.White;
+            dgvReporteClientes.DefaultCellStyle.ForeColor = Color.FromArgb(45, 45, 45);
+            dgvReporteClientes.DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+            dgvReporteClientes.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+            // Selección
+            dgvReporteClientes.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 193, 157);
+            dgvReporteClientes.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            // Filas alternadas
+            dgvReporteClientes.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 241, 232);
+
+
+            // TABLA REPORTE DE COTIZACIONES
+            dgvReporteCotizaciones.AutoGenerateColumns = true;
+            dgvReporteCotizaciones.EnableHeadersVisualStyles = false;
+
+            // No permitir modificar
+            dgvReporteCotizaciones.ReadOnly = true;
+            dgvReporteCotizaciones.AllowUserToAddRows = false;
+            dgvReporteCotizaciones.AllowUserToDeleteRows = false;
+
+            // No permitir cambiar tamaño de filas ni columnas
+            dgvReporteCotizaciones.AllowUserToResizeRows = false;
+            dgvReporteCotizaciones.AllowUserToResizeColumns = false;
+
+            // Selección
+            dgvReporteCotizaciones.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvReporteCotizaciones.MultiSelect = false;
+
+            // Ocultar encabezado lateral
+            dgvReporteCotizaciones.RowHeadersVisible = false;
+
+            // Borde exterior
+            dgvReporteCotizaciones.BorderStyle = BorderStyle.None;
+            dgvReporteCotizaciones.BackgroundColor = Color.White;
+
+            // Bordes
+            dgvReporteCotizaciones.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvReporteCotizaciones.GridColor = Color.FromArgb(220, 220, 220);
+
+            // Altura del encabezado
+            dgvReporteCotizaciones.ColumnHeadersHeight = 30;
+            dgvReporteCotizaciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
+            // Altura de las filas
+            dgvReporteCotizaciones.RowTemplate.Height = 32;
+            dgvReporteCotizaciones.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+
+            // Ajustar columnas
+            dgvReporteCotizaciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // ENCABEZADO
+            dgvReporteCotizaciones.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
+            dgvReporteCotizaciones.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvReporteCotizaciones.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+            dgvReporteCotizaciones.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvReporteCotizaciones.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
+            dgvReporteCotizaciones.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+
+            // FILAS
+            dgvReporteCotizaciones.DefaultCellStyle.BackColor = Color.White;
+            dgvReporteCotizaciones.DefaultCellStyle.ForeColor = Color.FromArgb(45, 45, 45);
+            dgvReporteCotizaciones.DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+            dgvReporteCotizaciones.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+            // Selección
+            dgvReporteCotizaciones.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 193, 157);
+            dgvReporteCotizaciones.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            // Filas alternadas
+            dgvReporteCotizaciones.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 241, 232);
         }
     }
 }

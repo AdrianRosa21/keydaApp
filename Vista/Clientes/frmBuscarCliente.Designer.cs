@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBuscarCliente));
             this.pnlBuscarClienteSuperior = new System.Windows.Forms.Panel();
             this.btnSlir = new System.Windows.Forms.Button();
             this.lblBuscarCliente = new System.Windows.Forms.Label();
@@ -132,6 +133,7 @@
             this.Controls.Add(this.dgvClientes);
             this.Controls.Add(this.pnlBuscarClienteSuperior);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmBuscarCliente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Buscar Cliente";

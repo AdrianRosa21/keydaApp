@@ -29,6 +29,7 @@ namespace Vista.DashboardSecretario
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDashboardSecretariocs));
             this.label2 = new System.Windows.Forms.Label();
             this.pnlBotones = new System.Windows.Forms.Panel();
             this.btnAyuda = new System.Windows.Forms.Button();
@@ -722,6 +723,7 @@ namespace Vista.DashboardSecretario
             this.Controls.Add(this.pnlContenedorPrincipal);
             this.Controls.Add(this.pnlBarraSuperior);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmDashboardSecretariocs";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmDashboardSecretariocs";

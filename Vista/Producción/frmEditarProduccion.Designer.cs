@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEditarProduccion));
             this.dtpFechaEntrega = new System.Windows.Forms.DateTimePicker();
             this.nudProgreso = new System.Windows.Forms.NumericUpDown();
             this.txtMuebleRealizar = new System.Windows.Forms.TextBox();
@@ -247,6 +248,7 @@
             this.Controls.Add(this.btnGuardarCambios);
             this.Controls.Add(this.lblEstado);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmEditarProduccion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmEditarProduccion";

@@ -186,68 +186,63 @@ namespace Vista.Proveedores
         //---------------------- CONFIGURAR TABLA DE PROVEEDORES -----------------------------------------------//
         private void ConfigurarTablaProveedores()
         {
-            // Encabezado
+            dgvProveedores.AutoGenerateColumns = true;
             dgvProveedores.EnableHeadersVisualStyles = false;
-
-            dgvProveedores.AllowUserToResizeRows = false;
-
-            dgvProveedores.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
-
-            dgvProveedores.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-
-            dgvProveedores.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-
-            dgvProveedores.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            dgvProveedores.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
-
-            dgvProveedores.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
-
-            // Filas
-            dgvProveedores.DefaultCellStyle.BackColor = Color.White;
-
-            dgvProveedores.DefaultCellStyle.ForeColor = Color.FromArgb(45, 45, 45);
-
-            dgvProveedores.DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-
-            dgvProveedores.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-
-            // Filas alternadas
-            dgvProveedores.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 241, 232);
-
-            // Selección
-            dgvProveedores.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 193, 157);
-
-            dgvProveedores.DefaultCellStyle.SelectionForeColor = Color.Black;
-
-            // Bordes
-            dgvProveedores.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-
-            dgvProveedores.GridColor = Color.FromArgb(220, 220, 220);
-
-            // Alto de las filas
-            dgvProveedores.RowTemplate.Height = 40;
-
-            // Alto del encabezado
-            dgvProveedores.ColumnHeadersHeight = 30;
-
-            // No permitir modificar
-            dgvProveedores.ReadOnly = true;
-
             dgvProveedores.AllowUserToAddRows = false;
-
             dgvProveedores.AllowUserToDeleteRows = false;
-
-            // Seleccionar fila completa
-            dgvProveedores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
+            dgvProveedores.AllowUserToResizeRows = false;
+            dgvProveedores.AllowUserToResizeColumns = false;
+            dgvProveedores.ReadOnly = true;
             dgvProveedores.MultiSelect = false;
-
-            // Quitar borde exterior
-            dgvProveedores.BorderStyle = BorderStyle.None;
-
-            // Quitar columna de selección de filas
+            dgvProveedores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvProveedores.RowHeadersVisible = false;
+            dgvProveedores.BorderStyle = BorderStyle.None;
+            dgvProveedores.BackgroundColor = Color.White;
+            dgvProveedores.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvProveedores.GridColor = Color.FromArgb(225, 225, 225);
+            dgvProveedores.ColumnHeadersHeight = 40;
+            dgvProveedores.RowTemplate.Height = 36;
+            dgvProveedores.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            dgvProveedores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            dgvProveedores.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(121, 75, 45),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(121, 75, 45),
+                SelectionForeColor = Color.White,
+                Padding = new Padding(5)
+            };
+
+            dgvProveedores.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.White,
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35),
+                Padding = new Padding(5)
+            };
+
+            dgvProveedores.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(250, 246, 240),
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35)
+            };
+
+            dgvProveedores.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+            dgvProveedores.RowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
+
+            foreach (DataGridViewColumn columna in dgvProveedores.Columns)
+            {
+                columna.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
         //----------------------------------------------------------------------------------------------
         //----------------------EVENTO LOAD DEL FORMULARIO-------------------------------------------------//

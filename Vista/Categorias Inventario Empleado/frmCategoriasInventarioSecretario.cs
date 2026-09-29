@@ -19,7 +19,7 @@ namespace Vista.Categorias_Inventario_Empleado
         // DATOS PARA LA PAGINACIÓN
         private DataTable dtCategorias;
         private int paginaActual = 1;
-        private int registrosPorPagina = 10;
+        private int registrosPorPagina = 20;
         private int totalPaginas = 0;
 
         private const string TextoBusqueda = "Buscar...";
@@ -221,87 +221,59 @@ namespace Vista.Categorias_Inventario_Empleado
         // CONFIGURAR DISEÑO DE LA TABLA
         private void ConfigurarTablaCategorias()
         {
-            // Encabezado
+            // Configuración general
             dgvCategorias.EnableHeadersVisualStyles = false;
+            dgvCategorias.ReadOnly = true;
+            dgvCategorias.AllowUserToAddRows = false;
+            dgvCategorias.AllowUserToDeleteRows = false;
+            dgvCategorias.AllowUserToResizeRows = false;
+            dgvCategorias.AllowUserToResizeColumns = false;
 
-            dgvCategorias.ColumnHeadersDefaultCellStyle.BackColor =
-                Color.FromArgb(121, 75, 45);
+            // Encabezado
+            dgvCategorias.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
+            dgvCategorias.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCategorias.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 9, FontStyle.Regular);
+            dgvCategorias.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvCategorias.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
+            dgvCategorias.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
 
-            dgvCategorias.ColumnHeadersDefaultCellStyle.ForeColor =
-                Color.White;
-
-            dgvCategorias.ColumnHeadersDefaultCellStyle.Font =
-                new Font("Times New Roman", 9, FontStyle.Regular);
-
-            dgvCategorias.ColumnHeadersDefaultCellStyle.Alignment =
-                DataGridViewContentAlignment.MiddleCenter;
-
-            dgvCategorias.ColumnHeadersDefaultCellStyle.SelectionBackColor =
-                Color.FromArgb(121, 75, 45);
-
-            dgvCategorias.ColumnHeadersDefaultCellStyle.SelectionForeColor =
-                Color.White;
+            // Altura del encabezado
+            dgvCategorias.ColumnHeadersHeight = 40;
+            dgvCategorias.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 
             // Filas
-            dgvCategorias.DefaultCellStyle.BackColor =
-                Color.White;
-
-            dgvCategorias.DefaultCellStyle.ForeColor =
-                Color.FromArgb(45, 45, 45);
-
-            dgvCategorias.DefaultCellStyle.Font =
-                new Font("Segoe UI", 9, FontStyle.Regular);
-
-            dgvCategorias.DefaultCellStyle.Alignment =
-                DataGridViewContentAlignment.MiddleLeft;
+            dgvCategorias.DefaultCellStyle.BackColor = Color.White;
+            dgvCategorias.DefaultCellStyle.ForeColor = Color.FromArgb(45, 45, 45);
+            dgvCategorias.DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+            dgvCategorias.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvCategorias.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 193, 157);
+            dgvCategorias.DefaultCellStyle.SelectionForeColor = Color.Black;
 
             // Filas alternadas
-            dgvCategorias.AlternatingRowsDefaultCellStyle.BackColor =
-                Color.FromArgb(248, 241, 232);
+            dgvCategorias.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 241, 232);
 
-            // Selección
-            dgvCategorias.DefaultCellStyle.SelectionBackColor =
-                Color.FromArgb(224, 193, 157);
-
-            dgvCategorias.DefaultCellStyle.SelectionForeColor =
-                Color.Black;
+            // Altura de las filas
+            dgvCategorias.RowTemplate.Height = 36;
+            dgvCategorias.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
 
             // Bordes
-            dgvCategorias.CellBorderStyle =
-                DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvCategorias.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvCategorias.GridColor = Color.FromArgb(220, 220, 220);
+            dgvCategorias.BorderStyle = BorderStyle.None;
 
-            dgvCategorias.GridColor =
-                Color.FromArgb(220, 220, 220);
-
-            // Alto de las filas
-            dgvCategorias.RowTemplate.Height = 32;
-
-            // Alto del encabezado
-            dgvCategorias.ColumnHeadersHeight = 30;
-
-            // No permitir modificar
-            dgvCategorias.ReadOnly = true;
-
-            dgvCategorias.AllowUserToAddRows = false;
-
-            dgvCategorias.AllowUserToDeleteRows = false;
-
-            // Seleccionar fila completa
-            dgvCategorias.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
-
+            // Selección
+            dgvCategorias.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCategorias.MultiSelect = false;
 
-            // Quitar borde exterior
-            dgvCategorias.BorderStyle =
-                BorderStyle.None;
+            // Ajustar columnas
+            dgvCategorias.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
+            // Bloquear tamaño del encabezado lateral
             dgvCategorias.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+
             // Ocultar cuadrito de la izquierda
             dgvCategorias.RowHeadersVisible = false;
         }
-
-
 
         //--------------------------------------------------------------------------
         //BUSQUEDA

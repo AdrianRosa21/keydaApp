@@ -81,35 +81,64 @@ namespace Vista.Usuarios
 
         private void ConfigurarTablaUsuarios()
         {
+            // Configuración general
+            dgvUsuariosRegistrados.AutoGenerateColumns = true;
             dgvUsuariosRegistrados.EnableHeadersVisualStyles = false;
+            dgvUsuariosRegistrados.AllowUserToAddRows = false;
+            dgvUsuariosRegistrados.AllowUserToDeleteRows = false;
+            dgvUsuariosRegistrados.AllowUserToResizeRows = false;
+            dgvUsuariosRegistrados.AllowUserToResizeColumns = false;
+            dgvUsuariosRegistrados.ReadOnly = true;
+            dgvUsuariosRegistrados.MultiSelect = false;
+            dgvUsuariosRegistrados.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvUsuariosRegistrados.RowHeadersVisible = false;
+            dgvUsuariosRegistrados.BorderStyle = BorderStyle.None;
+            dgvUsuariosRegistrados.BackgroundColor = Color.White;
+            dgvUsuariosRegistrados.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvUsuariosRegistrados.GridColor = Color.FromArgb(225, 225, 225);
+
+            // Encabezado
+            dgvUsuariosRegistrados.ColumnHeadersHeight = 40;
+            dgvUsuariosRegistrados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
             dgvUsuariosRegistrados.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
             dgvUsuariosRegistrados.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvUsuariosRegistrados.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+            dgvUsuariosRegistrados.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             dgvUsuariosRegistrados.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvUsuariosRegistrados.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
             dgvUsuariosRegistrados.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+            dgvUsuariosRegistrados.ColumnHeadersDefaultCellStyle.Padding = new Padding(5);
+
+            // Filas
+            dgvUsuariosRegistrados.RowTemplate.Height = 36;
 
             dgvUsuariosRegistrados.DefaultCellStyle.BackColor = Color.White;
-            dgvUsuariosRegistrados.DefaultCellStyle.ForeColor = Color.FromArgb(45, 45, 45);
-            dgvUsuariosRegistrados.DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-            dgvUsuariosRegistrados.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgvUsuariosRegistrados.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 241, 232);
-            dgvUsuariosRegistrados.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 193, 157);
-            dgvUsuariosRegistrados.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvUsuariosRegistrados.DefaultCellStyle.ForeColor = Color.FromArgb(55, 55, 55);
+            dgvUsuariosRegistrados.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            dgvUsuariosRegistrados.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvUsuariosRegistrados.DefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+            dgvUsuariosRegistrados.DefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
+            dgvUsuariosRegistrados.DefaultCellStyle.Padding = new Padding(5);
 
-            dgvUsuariosRegistrados.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvUsuariosRegistrados.GridColor = Color.FromArgb(220, 220, 220);
-            dgvUsuariosRegistrados.RowTemplate.Height = 32;
-            dgvUsuariosRegistrados.ColumnHeadersHeight = 30;
-            dgvUsuariosRegistrados.ReadOnly = true;
-            dgvUsuariosRegistrados.AllowUserToAddRows = false;
-            dgvUsuariosRegistrados.AllowUserToDeleteRows = false;
-            dgvUsuariosRegistrados.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvUsuariosRegistrados.MultiSelect = false;
-            dgvUsuariosRegistrados.BorderStyle = BorderStyle.None;
-            dgvUsuariosRegistrados.RowHeadersVisible = false;
+            // Filas alternadas
+            dgvUsuariosRegistrados.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 246, 240);
+            dgvUsuariosRegistrados.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(55, 55, 55);
+            dgvUsuariosRegistrados.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+            dgvUsuariosRegistrados.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
+
+            // Fila seleccionada
+            dgvUsuariosRegistrados.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+            dgvUsuariosRegistrados.RowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
+
+            // Ajustar columnas
+            dgvUsuariosRegistrados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // No permitir ordenar las columnas
+            foreach (DataGridViewColumn columna in dgvUsuariosRegistrados.Columns)
+            {
+                columna.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
-
         private void RegistrarUsuario()
         {
             try

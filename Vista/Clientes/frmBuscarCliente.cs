@@ -14,7 +14,7 @@ namespace Vista.Clientes
             ResponsiveHelper.Apply(this);
 
             // CONFIGURACIÓN DEL DATA GRID
-            ConfigurarDataGrid();
+            DiseñoConfigurarDataGrid();
 
             // TOOLTIPS
             ConfigurarTooltips();
@@ -29,58 +29,74 @@ namespace Vista.Clientes
 
         //----------------------------------------------------------------------
         // CONFIGURACIÓN DEL DATA GRID
-        private void ConfigurarDataGrid()
+        private void DiseñoConfigurarDataGrid()
         {
+            // CONFIGURACIÓN GENERAL
             dgvClientes.AutoGenerateColumns = true;
             dgvClientes.AllowUserToAddRows = false;
             dgvClientes.AllowUserToDeleteRows = false;
             dgvClientes.AllowUserToResizeRows = false;
+            dgvClientes.AllowUserToResizeColumns = false;
             dgvClientes.ReadOnly = true;
             dgvClientes.MultiSelect = false;
             dgvClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvClientes.RowHeadersVisible = false;
-            dgvClientes.BackgroundColor = Color.White;
             dgvClientes.BorderStyle = BorderStyle.None;
+            dgvClientes.BackgroundColor = Color.White;
             dgvClientes.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvClientes.GridColor = Color.FromArgb(225, 225, 225);
+            dgvClientes.GridColor = Color.FromArgb(220, 220, 220);
             dgvClientes.EnableHeadersVisualStyles = false;
-            dgvClientes.ColumnHeadersHeight = 38;
-            dgvClientes.RowTemplate.Height = 32;
-            dgvClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             // ENCABEZADO
+            dgvClientes.ColumnHeadersHeight = 40;
+            dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
             dgvClientes.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
             {
-                BackColor = Color.FromArgb(121, 78, 48),
+                BackColor = Color.FromArgb(121, 75, 45),
                 ForeColor = Color.White,
-                Font = new Font("Times New Roman", 10, FontStyle.Bold),
+                Font = new Font("Segoe UI", 10, FontStyle.Regular),
                 Alignment = DataGridViewContentAlignment.MiddleCenter,
-                SelectionBackColor = Color.FromArgb(121, 78, 48),
-                SelectionForeColor = Color.White
+                SelectionBackColor = Color.FromArgb(121, 75, 45),
+                SelectionForeColor = Color.White,
+                Padding = new Padding(5)
             };
 
             // FILAS
+            dgvClientes.RowTemplate.Height = 36;
+
             dgvClientes.DefaultCellStyle = new DataGridViewCellStyle
             {
                 BackColor = Color.White,
-                ForeColor = Color.FromArgb(55, 55, 55),
-                Font = new Font("Times New Roman", 10),
+                ForeColor = Color.FromArgb(45, 45, 45),
+                Font = new Font("Segoe UI", 8, FontStyle.Regular),
                 Alignment = DataGridViewContentAlignment.MiddleCenter,
-                SelectionBackColor = Color.FromArgb(238, 215, 185),
-                SelectionForeColor = Color.FromArgb(60, 45, 35),
+                SelectionBackColor = Color.FromArgb(224, 193, 157),
+                SelectionForeColor = Color.Black,
                 Padding = new Padding(5)
             };
 
             // FILAS ALTERNADAS
             dgvClientes.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
             {
-                BackColor = Color.FromArgb(250, 246, 240),
-                ForeColor = Color.FromArgb(55, 55, 55),
-                Font = new Font("Times New Roman", 10),
-                SelectionBackColor = Color.FromArgb(238, 215, 185),
-                SelectionForeColor = Color.FromArgb(60, 45, 35)
+                BackColor = Color.FromArgb(248, 241, 232),
+                ForeColor = Color.FromArgb(45, 45, 45),
+                Font = new Font("Segoe UI", 8, FontStyle.Regular),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(224, 193, 157),
+                SelectionForeColor = Color.Black
             };
+
+            // AJUSTAR COLUMNAS
+            dgvClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // NO PERMITIR ORDENAMIENTO
+            foreach (DataGridViewColumn columna in dgvClientes.Columns)
+            {
+                columna.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
+
         // ----------------------------------------------------------------------
         // FORMATEAR DATA GRID
 
@@ -261,6 +277,9 @@ namespace Vista.Clientes
                 txtBuscarCliente.ForeColor = Color.Black;
             }
         }
+
+
+
     }
 }
 

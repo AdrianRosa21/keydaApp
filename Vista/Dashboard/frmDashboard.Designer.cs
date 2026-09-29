@@ -29,6 +29,7 @@ namespace Vista.Dashboard
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDashboard));
             this.pnlCotizaciones = new System.Windows.Forms.Panel();
             this.btnCotizaciones = new System.Windows.Forms.Button();
             this.pnlReportes = new System.Windows.Forms.Panel();
@@ -785,6 +786,7 @@ namespace Vista.Dashboard
             this.Controls.Add(this.pnlContenedorPrincipal);
             this.Controls.Add(this.pnlBarraSuperior);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximumSize = new System.Drawing.Size(1920, 1080);
             this.MinimumSize = new System.Drawing.Size(1265, 673);

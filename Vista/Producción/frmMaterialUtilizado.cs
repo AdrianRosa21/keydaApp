@@ -176,6 +176,7 @@ namespace Vista.Producción
             dtMateriales.Columns.Add("Material", typeof(int));
             dtMateriales.Columns.Add("[Cantidad Utilizada]", typeof(int));
             dtMateriales.Columns.Add("Unidad", typeof(string));
+            ConfigurarTablaMaterialesAgregados();
 
             // Vincular la tabla con el DataGridView
             dgvMaterialesAgregados.DataSource = dtMateriales;
@@ -237,26 +238,59 @@ namespace Vista.Producción
 
             using (SqlConnection conectar = Conexion.Conectar())
             {
-                string consulta = @" SELECT * FROM VerMaterialesUtilizados WHERE IdProduccion = @IdProduccion";
+                string consulta = @"SELECT * FROM VerMaterialesUtilizados WHERE IdProduccion = @IdProduccion";
 
                 using (SqlDataAdapter adapter = new SqlDataAdapter(consulta, conectar))
                 {
                     adapter.SelectCommand.Parameters.AddWithValue("@IdProduccion", idProduccion);
-
                     adapter.Fill(dt);
                 }
             }
 
-            // Actualizar la tabla temporal con los registros
-            // que ya existen en la base de datos.
             dtMateriales = dt;
 
-            // Mostrar los registros en el DataGridView
+            dgvMaterialesAgregados.DataSource = null;
             dgvMaterialesAgregados.DataSource = dtMateriales;
+
             dgvMaterialesAgregados.ReadOnly = true;
             dgvMaterialesAgregados.AllowUserToDeleteRows = false;
             dgvMaterialesAgregados.AllowUserToAddRows = false;
+            dgvMaterialesAgregados.AllowUserToResizeRows = false;
+            dgvMaterialesAgregados.AllowUserToResizeColumns = false;
 
+            // RESET DE ENCABEZADOS
+            if (dgvMaterialesAgregados.Columns.Contains("IdMaterialUtilizado"))
+                dgvMaterialesAgregados.Columns["IdMaterialUtilizado"].HeaderText = "N°";
+
+            if (dgvMaterialesAgregados.Columns.Contains("IdProduccion"))
+                dgvMaterialesAgregados.Columns["IdProduccion"].HeaderText = "N° Producción";
+
+            if (dgvMaterialesAgregados.Columns.Contains("NombreDelMaterial"))
+                dgvMaterialesAgregados.Columns["NombreDelMaterial"].HeaderText = "Material";
+
+            if (dgvMaterialesAgregados.Columns.Contains("Cantidad_Utilizada"))
+                dgvMaterialesAgregados.Columns["Cantidad_Utilizada"].HeaderText = "Cantidad Utilizada";
+
+            if (dgvMaterialesAgregados.Columns.Contains("UnidadMedida"))
+                dgvMaterialesAgregados.Columns["UnidadMedida"].HeaderText = "Unidad";
+
+            // OCULTAR ID INTERNO
+            if (dgvMaterialesAgregados.Columns.Contains("IdMaterialUtilizado"))
+                dgvMaterialesAgregados.Columns["IdMaterialUtilizado"].Visible = false;
+
+            if (dgvMaterialesAgregados.Columns.Contains("IdProduccion"))
+                dgvMaterialesAgregados.Columns["IdProduccion"].Visible = false;
+
+            if (dgvMaterialesAgregados.Columns.Contains("IdMaterial"))
+                dgvMaterialesAgregados.Columns["IdMaterial"].Visible = false;
+
+            // NO PERMITIR ORDENAR
+            foreach (DataGridViewColumn columna in dgvMaterialesAgregados.Columns)
+            {
+                columna.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            ConfigurarTablaMaterialesAgregados();
         }
 
         // CAMBIO DE MATERIAL SELECCIONADO
@@ -399,6 +433,67 @@ namespace Vista.Producción
                 MessageBox.Show("Error al guardar los materiales:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void ConfigurarTablaMaterialesAgregados()
+        {
+            // Configuración general
+            dgvMaterialesAgregados.AutoGenerateColumns = true;
+            dgvMaterialesAgregados.EnableHeadersVisualStyles = false;
+            dgvMaterialesAgregados.AllowUserToAddRows = false;
+            dgvMaterialesAgregados.AllowUserToDeleteRows = false;
+            dgvMaterialesAgregados.AllowUserToResizeRows = false;
+            dgvMaterialesAgregados.AllowUserToResizeColumns = false;
+            dgvMaterialesAgregados.ReadOnly = true;
+            dgvMaterialesAgregados.MultiSelect = false;
+            dgvMaterialesAgregados.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvMaterialesAgregados.RowHeadersVisible = false;
+            dgvMaterialesAgregados.BorderStyle = BorderStyle.None;
+            dgvMaterialesAgregados.BackgroundColor = Color.White;
+            dgvMaterialesAgregados.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvMaterialesAgregados.GridColor = Color.FromArgb(220, 220, 220);
+
+            // Encabezado
+            dgvMaterialesAgregados.ColumnHeadersHeight = 40;
+            dgvMaterialesAgregados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
+            dgvMaterialesAgregados.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
+            dgvMaterialesAgregados.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvMaterialesAgregados.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 8, FontStyle.Bold);
+            dgvMaterialesAgregados.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvMaterialesAgregados.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
+            dgvMaterialesAgregados.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+            dgvMaterialesAgregados.ColumnHeadersDefaultCellStyle.Padding = new Padding(5);
+
+            // Filas
+            dgvMaterialesAgregados.RowTemplate.Height = 36;
+
+            dgvMaterialesAgregados.DefaultCellStyle.BackColor = Color.White;
+            dgvMaterialesAgregados.DefaultCellStyle.ForeColor = Color.FromArgb(55, 55, 55);
+            dgvMaterialesAgregados.DefaultCellStyle.Font = new Font("Segoe UI", 8);
+            dgvMaterialesAgregados.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvMaterialesAgregados.DefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+            dgvMaterialesAgregados.DefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
+            dgvMaterialesAgregados.DefaultCellStyle.Padding = new Padding(5);
+
+            // Filas alternadas
+            dgvMaterialesAgregados.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 246, 240);
+            dgvMaterialesAgregados.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(55, 55, 55);
+            dgvMaterialesAgregados.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+            dgvMaterialesAgregados.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
+
+            // Fila seleccionada
+            dgvMaterialesAgregados.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+            dgvMaterialesAgregados.RowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
+
+            // Ajustar columnas
+            dgvMaterialesAgregados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // No permitir ordenar las columnas
+            foreach (DataGridViewColumn columna in dgvMaterialesAgregados.Columns)
+            {
+                columna.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+        }
+
 
 
     }

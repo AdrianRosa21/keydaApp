@@ -3,6 +3,7 @@ using QuestPDF.Infrastructure;
 using System;
 using System.Windows.Forms;
 using Vista.Configuracion_Inicial;
+using Vista.Login;
 
 namespace Vista
 {
@@ -21,7 +22,15 @@ namespace Vista
 
             bool existenUsuarios = DbUsuarios.ExistenUsuarios();
 
-            Application.Run(new ConfiguracionInicial());
+            if (existenUsuarios)
+            {
+                Application.Run(new frmLogin());
+            }
+            else
+            {
+                Application.Run(new ConfiguracionInicial());
+            }
+
         }
     }
 }

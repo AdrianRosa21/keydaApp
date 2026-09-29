@@ -301,7 +301,7 @@ namespace Vista.Cotizaciones
         // VARIABLES PARA LA PAGINACIÓN
         private DataTable dtCotizaciones;
         private int paginaActual = 1;
-        private int registrosPorPagina = 10;
+        private int registrosPorPagina = 20;
         private int totalPaginas = 0;
         //-----------------------------------
         private int idClienteSeleccionado = 0;
@@ -337,104 +337,121 @@ namespace Vista.Cotizaciones
         }
         private void ConfigurarTablasCotizaciones()
         {
-            // TABLA DE COTIZACIONES REGISTRADAS
+            dgvCotizacionesRegistradas.AutoGenerateColumns = true;
             dgvCotizacionesRegistradas.EnableHeadersVisualStyles = false;
-
-            // Encabezado
-            dgvCotizacionesRegistradas.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
-            dgvCotizacionesRegistradas.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvCotizacionesRegistradas.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-            dgvCotizacionesRegistradas.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvCotizacionesRegistradas.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
-            dgvCotizacionesRegistradas.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
-
-            // Filas
-            dgvCotizacionesRegistradas.DefaultCellStyle.BackColor = Color.White;
-            dgvCotizacionesRegistradas.DefaultCellStyle.ForeColor = Color.FromArgb(45, 45, 45);
-            dgvCotizacionesRegistradas.DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-            dgvCotizacionesRegistradas.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-
-            // Filas alternadas
-            dgvCotizacionesRegistradas.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 241, 232);
-
-            // Selección
-            dgvCotizacionesRegistradas.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 193, 157);
-            dgvCotizacionesRegistradas.DefaultCellStyle.SelectionForeColor = Color.Black;
-
-            // Bordes
-            dgvCotizacionesRegistradas.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvCotizacionesRegistradas.GridColor = Color.FromArgb(220, 220, 220);
-
-            // Alto de las filas
-            dgvCotizacionesRegistradas.RowTemplate.Height = 32;
-
-            // Alto del encabezado
-            dgvCotizacionesRegistradas.ColumnHeadersHeight = 30;
-
-            // No permitir modificar
-            dgvCotizacionesRegistradas.ReadOnly = true;
             dgvCotizacionesRegistradas.AllowUserToAddRows = false;
             dgvCotizacionesRegistradas.AllowUserToDeleteRows = false;
-
-            // Seleccionar fila completa
-            dgvCotizacionesRegistradas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvCotizacionesRegistradas.AllowUserToResizeRows = false;
+            dgvCotizacionesRegistradas.AllowUserToResizeColumns = false;
+            dgvCotizacionesRegistradas.ReadOnly = true;
             dgvCotizacionesRegistradas.MultiSelect = false;
-
-            // Quitar borde exterior
-            dgvCotizacionesRegistradas.BorderStyle = BorderStyle.None;
-
-            // Ocultar el cuadrito de la izquierda
+            dgvCotizacionesRegistradas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCotizacionesRegistradas.RowHeadersVisible = false;
+            dgvCotizacionesRegistradas.BorderStyle = BorderStyle.None;
+            dgvCotizacionesRegistradas.BackgroundColor = Color.White;
+            dgvCotizacionesRegistradas.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvCotizacionesRegistradas.GridColor = Color.FromArgb(225, 225, 225);
+            dgvCotizacionesRegistradas.ColumnHeadersHeight = 40;
+            dgvCotizacionesRegistradas.RowTemplate.Height = 36;
+            dgvCotizacionesRegistradas.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            dgvCotizacionesRegistradas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
+            dgvCotizacionesRegistradas.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(121, 75, 45),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(121, 75, 45),
+                SelectionForeColor = Color.White,
+                Padding = new Padding(5)
+            };
 
-            // TABLA DE DETALLE DE COTIZACIÓN
+            dgvCotizacionesRegistradas.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.White,
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35),
+                Padding = new Padding(5)
+            };
+
+            dgvCotizacionesRegistradas.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(250, 246, 240),
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35)
+            };
+
+            dgvCotizacionesRegistradas.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+            dgvCotizacionesRegistradas.RowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
+
+            foreach (DataGridViewColumn columna in dgvCotizacionesRegistradas.Columns)
+            {
+                columna.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            dgvDetalleDeCotizacion.AutoGenerateColumns = true;
             dgvDetalleDeCotizacion.EnableHeadersVisualStyles = false;
-
-            // Encabezado
-            dgvDetalleDeCotizacion.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
-            dgvDetalleDeCotizacion.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvDetalleDeCotizacion.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-            dgvDetalleDeCotizacion.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvDetalleDeCotizacion.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
-            dgvDetalleDeCotizacion.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
-
-            // Filas
-            dgvDetalleDeCotizacion.DefaultCellStyle.BackColor = Color.White;
-            dgvDetalleDeCotizacion.DefaultCellStyle.ForeColor = Color.FromArgb(45, 45, 45);
-            dgvDetalleDeCotizacion.DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-            dgvDetalleDeCotizacion.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-
-            // Filas alternadas
-            dgvDetalleDeCotizacion.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 241, 232);
-
-            // Selección
-            dgvDetalleDeCotizacion.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 193, 157);
-            dgvDetalleDeCotizacion.DefaultCellStyle.SelectionForeColor = Color.Black;
-
-            // Bordes
-            dgvDetalleDeCotizacion.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvDetalleDeCotizacion.GridColor = Color.FromArgb(220, 220, 220);
-
-            // Alto de las filas
-            dgvDetalleDeCotizacion.RowTemplate.Height = 32;
-
-            // Alto del encabezado
-            dgvDetalleDeCotizacion.ColumnHeadersHeight = 30;
-
-            // No permitir modificar
-            dgvDetalleDeCotizacion.ReadOnly = true;
             dgvDetalleDeCotizacion.AllowUserToAddRows = false;
             dgvDetalleDeCotizacion.AllowUserToDeleteRows = false;
-
-            // Seleccionar fila completa
-            dgvDetalleDeCotizacion.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvDetalleDeCotizacion.AllowUserToResizeRows = false;
+            dgvDetalleDeCotizacion.AllowUserToResizeColumns = false;
+            dgvDetalleDeCotizacion.ReadOnly = true;
             dgvDetalleDeCotizacion.MultiSelect = false;
-
-            // Quitar borde exterior
-            dgvDetalleDeCotizacion.BorderStyle = BorderStyle.None;
-
-            // Ocultar el cuadrito de la izquierda
+            dgvDetalleDeCotizacion.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDetalleDeCotizacion.RowHeadersVisible = false;
+            dgvDetalleDeCotizacion.BorderStyle = BorderStyle.None;
+            dgvDetalleDeCotizacion.BackgroundColor = Color.White;
+            dgvDetalleDeCotizacion.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvDetalleDeCotizacion.GridColor = Color.FromArgb(225, 225, 225);
+            dgvDetalleDeCotizacion.ColumnHeadersHeight = 40;
+            dgvDetalleDeCotizacion.RowTemplate.Height = 36;
+            dgvDetalleDeCotizacion.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            dgvDetalleDeCotizacion.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            dgvDetalleDeCotizacion.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(121, 75, 45),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(121, 75, 45),
+                SelectionForeColor = Color.White,
+                Padding = new Padding(5)
+            };
+
+            dgvDetalleDeCotizacion.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.White,
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35),
+                Padding = new Padding(5)
+            };
+
+            dgvDetalleDeCotizacion.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(250, 246, 240),
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10),
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35)
+            };
+
+            dgvDetalleDeCotizacion.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+            dgvDetalleDeCotizacion.RowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
+
+            foreach (DataGridViewColumn columna in dgvDetalleDeCotizacion.Columns)
+            {
+                columna.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
         private void CalcularPaginasCotizaciones()
         {

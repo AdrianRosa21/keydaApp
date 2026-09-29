@@ -23,7 +23,7 @@ namespace Vista.Pedidos_Secretario
         // PAGINACIÓN
         private DataTable dtPedidos;
         private int paginaActual = 1;
-        private int registrosPorPagina = 10;
+        private int registrosPorPagina = 20;
         private bool buscandoPedidos = false;
         private int totalPaginas = 0;
         private const string TextoBusqueda = "Buscar...";
@@ -95,73 +95,6 @@ namespace Vista.Pedidos_Secretario
             {
                 MessageBox.Show("No se pudo eliminar el producto: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        //-------------------------------------------------------------------------
-        //METODOS DE BUSQUEDA
-
-        private void txtBuscar_Leave_1(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtBuscar.Text))
-            {
-                txtBuscar.Text = "Buscar Pedido...";
-                txtBuscar.ForeColor = Color.Gray;
-            }
-        }
-
-        private void txtBuscar_Enter_1(object sender, EventArgs e)
-        {
-            //Cuando el usuario de enter para escribir, se va a borrar el texto de indicacion
-            // Y el texto ya no sera opaco, sera color negro
-
-            if (txtBuscar.Text == "Buscar Pedido...")
-            {
-                txtBuscar.Text = "";
-                txtBuscar.ForeColor = Color.Black;
-            }
-        }
-
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txtBuscar.Text == "Buscar pedido...")
-                    return;
-
-                string texto = txtBuscar.Text.Trim();
-
-                // Si el buscador está vacío
-                if (string.IsNullOrWhiteSpace(texto))
-                {
-                    buscandoPedidos = false;
-                    paginaActual = 1;
-
-                    CargarPaginacionPedidos();
-
-                    return;
-                }
-
-                buscandoPedidos = true;
-
-                // Buscar pedidos
-                dtPedidos = DbPedidos.BuscarPedido(texto);
-
-                paginaActual = 1;
-
-                // Calcular páginas de los resultados
-                totalPaginas = (int)Math.Ceiling((double)dtPedidos.Rows.Count / registrosPorPagina);
-
-                if (totalPaginas == 0)
-                {
-                    totalPaginas = 1;
-                }
-                MostrarPaginaPedidos();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
         }
 
         //------------------------------------------------------------------------
@@ -244,48 +177,83 @@ namespace Vista.Pedidos_Secretario
 
         private void ConfigurarEstiloTabla(DataGridView tabla)
         {
+            // Configuración general
             tabla.RowHeadersVisible = false;
             tabla.EnableHeadersVisualStyles = false;
 
-            tabla.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(121, 75, 45);
-
-            tabla.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            tabla.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-
-            tabla.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            tabla.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(121, 75, 45);
-
-            tabla.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
-
-            tabla.DefaultCellStyle.BackColor = Color.White;
-            tabla.DefaultCellStyle.ForeColor = Color.FromArgb(45, 45, 45);
-
-            tabla.DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-
-            tabla.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-
-            tabla.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 193, 157);
-
-            tabla.DefaultCellStyle.SelectionForeColor = Color.Black;
-
-            tabla.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 241, 232);
-
-            tabla.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-
-            tabla.GridColor = Color.FromArgb(220, 220, 220);
-
-            tabla.BorderStyle = BorderStyle.None;
-
-            tabla.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-            tabla.MultiSelect = false;
-            tabla.ReadOnly = true;
+            // No permitir modificar filas ni columnas
             tabla.AllowUserToAddRows = false;
             tabla.AllowUserToDeleteRows = false;
+            tabla.AllowUserToResizeRows = false;
+            tabla.AllowUserToResizeColumns = false;
+
+            // No permitir editar la tabla
+            tabla.ReadOnly = true;
+
+            // Selección
+            tabla.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            tabla.MultiSelect = false;
+
+            // Encabezado
+            tabla.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(121, 75, 45),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(121, 75, 45),
+                SelectionForeColor = Color.White,
+                Padding = new Padding(5)
+            };
+
+            // Altura del encabezado
+            tabla.ColumnHeadersHeight = 40;
+            tabla.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
+            // Filas
+            tabla.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.White,
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10, FontStyle.Regular),
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35),
+                Padding = new Padding(5)
+            };
+
+            // Altura de las filas
+            tabla.RowTemplate.Height = 36;
+            tabla.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+
+            // Filas alternadas
+            tabla.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(250, 246, 240),
+                ForeColor = Color.FromArgb(55, 55, 55),
+                Font = new Font("Segoe UI", 10, FontStyle.Regular),
+                SelectionBackColor = Color.FromArgb(238, 215, 185),
+                SelectionForeColor = Color.FromArgb(60, 45, 35)
+            };
+
+            // Fila seleccionada
+            tabla.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(238, 215, 185);
+            tabla.RowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(60, 45, 35);
+
+            // Bordes
+            tabla.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            tabla.GridColor = Color.FromArgb(225, 225, 225);
+            tabla.BorderStyle = BorderStyle.None;
+
+            // Ajustar columnas
+            tabla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // No permitir ordenar las columnas
+            foreach (DataGridViewColumn columna in tabla.Columns)
+            {
+                columna.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
-
-
         private void ConfigurarColumnasPedidos()
         {
             if (dgvPedidosRegistrados.Columns.Contains("IdPedido"))
