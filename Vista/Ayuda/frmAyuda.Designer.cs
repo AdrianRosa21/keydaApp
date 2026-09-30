@@ -35,24 +35,24 @@
             this.pbPerfil = new System.Windows.Forms.PictureBox();
             this.pnlContenedorPrincipal = new System.Windows.Forms.Panel();
             this.pnlContainerVideos = new System.Windows.Forms.Panel();
-            this.pnlRecuperarContrasena = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.btnVerTuTorialRecuperar = new System.Windows.Forms.Button();
+            this.pnlTutorialReportes = new System.Windows.Forms.Panel();
+            this.lblDescripcionReportes = new System.Windows.Forms.Label();
+            this.lblTituloReportes = new System.Windows.Forms.Label();
+            this.btnVerTutorialReportes = new System.Windows.Forms.Button();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.pnlRegistrarVenta = new System.Windows.Forms.Panel();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.btnVerTutorialVenta = new System.Windows.Forms.Button();
+            this.pnlTutorialCompra = new System.Windows.Forms.Panel();
+            this.lblDescripcionCompra = new System.Windows.Forms.Label();
+            this.lblTituloCompra = new System.Windows.Forms.Label();
+            this.btnVerTutorialCompra = new System.Windows.Forms.Button();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.pnlTutorialFactura = new System.Windows.Forms.Panel();
+            this.lblDescripcionFactura = new System.Windows.Forms.Label();
+            this.lblTituloFactura = new System.Windows.Forms.Label();
             this.btnTutorialFactura = new System.Windows.Forms.Button();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.pnlTutorialCotizacion = new System.Windows.Forms.Panel();
+            this.lblDescripcionCotizacion = new System.Windows.Forms.Label();
+            this.lblTituloCotizacion = new System.Windows.Forms.Label();
             this.btnVerTutorialCotizacion = new System.Windows.Forms.Button();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
@@ -77,13 +77,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbPerfil)).BeginInit();
             this.pnlContenedorPrincipal.SuspendLayout();
             this.pnlContainerVideos.SuspendLayout();
-            this.pnlRecuperarContrasena.SuspendLayout();
+            this.pnlTutorialReportes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
-            this.pnlRegistrarVenta.SuspendLayout();
+            this.pnlTutorialCompra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            this.panel6.SuspendLayout();
+            this.pnlTutorialFactura.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            this.panel5.SuspendLayout();
+            this.pnlTutorialCotizacion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.pnlContenedorManuales.SuspendLayout();
@@ -168,10 +168,10 @@
             // pnlContainerVideos
             // 
             this.pnlContainerVideos.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.pnlContainerVideos.Controls.Add(this.pnlRecuperarContrasena);
-            this.pnlContainerVideos.Controls.Add(this.pnlRegistrarVenta);
-            this.pnlContainerVideos.Controls.Add(this.panel6);
-            this.pnlContainerVideos.Controls.Add(this.panel5);
+            this.pnlContainerVideos.Controls.Add(this.pnlTutorialReportes);
+            this.pnlContainerVideos.Controls.Add(this.pnlTutorialCompra);
+            this.pnlContainerVideos.Controls.Add(this.pnlTutorialFactura);
+            this.pnlContainerVideos.Controls.Add(this.pnlTutorialCotizacion);
             this.pnlContainerVideos.Controls.Add(this.pictureBox7);
             this.pnlContainerVideos.Controls.Add(this.lblTutoriales);
             this.pnlContainerVideos.Location = new System.Drawing.Point(18, 352);
@@ -179,54 +179,54 @@
             this.pnlContainerVideos.Size = new System.Drawing.Size(1049, 264);
             this.pnlContainerVideos.TabIndex = 26;
             // 
-            // pnlRecuperarContrasena
+            // pnlTutorialReportes
             // 
-            this.pnlRecuperarContrasena.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlRecuperarContrasena.Controls.Add(this.label10);
-            this.pnlRecuperarContrasena.Controls.Add(this.label14);
-            this.pnlRecuperarContrasena.Controls.Add(this.btnVerTuTorialRecuperar);
-            this.pnlRecuperarContrasena.Controls.Add(this.pictureBox9);
-            this.pnlRecuperarContrasena.Location = new System.Drawing.Point(41, 56);
-            this.pnlRecuperarContrasena.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
-            this.pnlRecuperarContrasena.Name = "pnlRecuperarContrasena";
-            this.pnlRecuperarContrasena.Size = new System.Drawing.Size(228, 195);
-            this.pnlRecuperarContrasena.TabIndex = 11;
+            this.pnlTutorialReportes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTutorialReportes.Controls.Add(this.lblDescripcionReportes);
+            this.pnlTutorialReportes.Controls.Add(this.lblTituloReportes);
+            this.pnlTutorialReportes.Controls.Add(this.btnVerTutorialReportes);
+            this.pnlTutorialReportes.Controls.Add(this.pictureBox9);
+            this.pnlTutorialReportes.Location = new System.Drawing.Point(41, 56);
+            this.pnlTutorialReportes.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
+            this.pnlTutorialReportes.Name = "pnlTutorialReportes";
+            this.pnlTutorialReportes.Size = new System.Drawing.Size(228, 195);
+            this.pnlTutorialReportes.TabIndex = 11;
             // 
-            // label10
+            // lblDescripcionReportes
             // 
-            this.label10.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label10.Location = new System.Drawing.Point(36, 106);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(161, 41);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "Recupera tu contraseña en caso que la hayas olvidado.";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblDescripcionReportes.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescripcionReportes.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblDescripcionReportes.Location = new System.Drawing.Point(14, 108);
+            this.lblDescripcionReportes.Name = "lblDescripcionReportes";
+            this.lblDescripcionReportes.Size = new System.Drawing.Size(198, 42);
+            this.lblDescripcionReportes.TabIndex = 3;
+            this.lblDescripcionReportes.Text = "Genera un reporte en formato PDF de forma rápida y sencilla.";
+            this.lblDescripcionReportes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label14
+            // lblTituloReportes
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label14.Location = new System.Drawing.Point(18, 83);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(192, 22);
-            this.label14.TabIndex = 2;
-            this.label14.Text = "Recuperar contraseña";
+            this.lblTituloReportes.AutoSize = true;
+            this.lblTituloReportes.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
+            this.lblTituloReportes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.lblTituloReportes.Location = new System.Drawing.Point(18, 83);
+            this.lblTituloReportes.Name = "lblTituloReportes";
+            this.lblTituloReportes.Size = new System.Drawing.Size(192, 22);
+            this.lblTituloReportes.TabIndex = 2;
+            this.lblTituloReportes.Text = "Generar un reporte";
             // 
-            // btnVerTuTorialRecuperar
+            // btnVerTutorialReportes
             // 
-            this.btnVerTuTorialRecuperar.BackColor = System.Drawing.Color.SaddleBrown;
-            this.btnVerTuTorialRecuperar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnVerTuTorialRecuperar.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVerTuTorialRecuperar.ForeColor = System.Drawing.Color.White;
-            this.btnVerTuTorialRecuperar.Location = new System.Drawing.Point(39, 154);
-            this.btnVerTuTorialRecuperar.Name = "btnVerTuTorialRecuperar";
-            this.btnVerTuTorialRecuperar.Size = new System.Drawing.Size(140, 27);
-            this.btnVerTuTorialRecuperar.TabIndex = 1;
-            this.btnVerTuTorialRecuperar.Text = "Ver Tutorial";
-            this.btnVerTuTorialRecuperar.UseVisualStyleBackColor = false;
-            this.btnVerTuTorialRecuperar.Click += new System.EventHandler(this.btnVerTuTorialRecuperar_Click);
+            this.btnVerTutorialReportes.BackColor = System.Drawing.Color.SaddleBrown;
+            this.btnVerTutorialReportes.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnVerTutorialReportes.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVerTutorialReportes.ForeColor = System.Drawing.Color.White;
+            this.btnVerTutorialReportes.Location = new System.Drawing.Point(39, 154);
+            this.btnVerTutorialReportes.Name = "btnVerTutorialReportes";
+            this.btnVerTutorialReportes.Size = new System.Drawing.Size(140, 27);
+            this.btnVerTutorialReportes.TabIndex = 1;
+            this.btnVerTutorialReportes.Text = "Ver Tutorial";
+            this.btnVerTutorialReportes.UseVisualStyleBackColor = false;
+            this.btnVerTutorialReportes.Click += new System.EventHandler(this.btnVerTutorialReportes_Click);
             // 
             // pictureBox9
             // 
@@ -236,54 +236,54 @@
             this.pictureBox9.TabIndex = 0;
             this.pictureBox9.TabStop = false;
             // 
-            // pnlRegistrarVenta
+            // pnlTutorialCompra
             // 
-            this.pnlRegistrarVenta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlRegistrarVenta.Controls.Add(this.label12);
-            this.pnlRegistrarVenta.Controls.Add(this.label13);
-            this.pnlRegistrarVenta.Controls.Add(this.btnVerTutorialVenta);
-            this.pnlRegistrarVenta.Controls.Add(this.pictureBox8);
-            this.pnlRegistrarVenta.Location = new System.Drawing.Point(296, 57);
-            this.pnlRegistrarVenta.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
-            this.pnlRegistrarVenta.Name = "pnlRegistrarVenta";
-            this.pnlRegistrarVenta.Size = new System.Drawing.Size(228, 195);
-            this.pnlRegistrarVenta.TabIndex = 10;
+            this.pnlTutorialCompra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTutorialCompra.Controls.Add(this.lblDescripcionCompra);
+            this.pnlTutorialCompra.Controls.Add(this.lblTituloCompra);
+            this.pnlTutorialCompra.Controls.Add(this.btnVerTutorialCompra);
+            this.pnlTutorialCompra.Controls.Add(this.pictureBox8);
+            this.pnlTutorialCompra.Location = new System.Drawing.Point(788, 56);
+            this.pnlTutorialCompra.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
+            this.pnlTutorialCompra.Name = "pnlTutorialCompra";
+            this.pnlTutorialCompra.Size = new System.Drawing.Size(228, 195);
+            this.pnlTutorialCompra.TabIndex = 10;
             // 
-            // label12
+            // lblDescripcionCompra
             // 
-            this.label12.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label12.Location = new System.Drawing.Point(36, 110);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(150, 38);
-            this.label12.TabIndex = 3;
-            this.label12.Text = "Pasos detallados para registrar una venta.";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblDescripcionCompra.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescripcionCompra.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblDescripcionCompra.Location = new System.Drawing.Point(14, 108);
+            this.lblDescripcionCompra.Name = "lblDescripcionCompra";
+            this.lblDescripcionCompra.Size = new System.Drawing.Size(198, 42);
+            this.lblDescripcionCompra.TabIndex = 3;
+            this.lblDescripcionCompra.Text = "Pasos detallados para registrar una compra.";
+            this.lblDescripcionCompra.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label13
+            // lblTituloCompra
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label13.Location = new System.Drawing.Point(30, 84);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(172, 22);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Registrar una venta";
+            this.lblTituloCompra.AutoSize = true;
+            this.lblTituloCompra.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
+            this.lblTituloCompra.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.lblTituloCompra.Location = new System.Drawing.Point(30, 84);
+            this.lblTituloCompra.Name = "lblTituloCompra";
+            this.lblTituloCompra.Size = new System.Drawing.Size(172, 22);
+            this.lblTituloCompra.TabIndex = 2;
+            this.lblTituloCompra.Text = "Registrar una compra";
             // 
-            // btnVerTutorialVenta
+            // btnVerTutorialCompra
             // 
-            this.btnVerTutorialVenta.BackColor = System.Drawing.Color.SaddleBrown;
-            this.btnVerTutorialVenta.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnVerTutorialVenta.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVerTutorialVenta.ForeColor = System.Drawing.Color.White;
-            this.btnVerTutorialVenta.Location = new System.Drawing.Point(39, 154);
-            this.btnVerTutorialVenta.Name = "btnVerTutorialVenta";
-            this.btnVerTutorialVenta.Size = new System.Drawing.Size(140, 27);
-            this.btnVerTutorialVenta.TabIndex = 1;
-            this.btnVerTutorialVenta.Text = "Ver Tutorial";
-            this.btnVerTutorialVenta.UseVisualStyleBackColor = false;
-            this.btnVerTutorialVenta.Click += new System.EventHandler(this.btnVerTutorialVenta_Click);
+            this.btnVerTutorialCompra.BackColor = System.Drawing.Color.SaddleBrown;
+            this.btnVerTutorialCompra.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnVerTutorialCompra.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVerTutorialCompra.ForeColor = System.Drawing.Color.White;
+            this.btnVerTutorialCompra.Location = new System.Drawing.Point(39, 154);
+            this.btnVerTutorialCompra.Name = "btnVerTutorialCompra";
+            this.btnVerTutorialCompra.Size = new System.Drawing.Size(140, 27);
+            this.btnVerTutorialCompra.TabIndex = 1;
+            this.btnVerTutorialCompra.Text = "Ver Tutorial";
+            this.btnVerTutorialCompra.UseVisualStyleBackColor = false;
+            this.btnVerTutorialCompra.Click += new System.EventHandler(this.btnVerTutorialCompra_Click);
             // 
             // pictureBox8
             // 
@@ -293,40 +293,40 @@
             this.pictureBox8.TabIndex = 0;
             this.pictureBox8.TabStop = false;
             // 
-            // panel6
+            // pnlTutorialFactura
             // 
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Controls.Add(this.label8);
-            this.panel6.Controls.Add(this.label9);
-            this.panel6.Controls.Add(this.btnTutorialFactura);
-            this.panel6.Controls.Add(this.pictureBox6);
-            this.panel6.Location = new System.Drawing.Point(543, 56);
-            this.panel6.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(228, 195);
-            this.panel6.TabIndex = 9;
+            this.pnlTutorialFactura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTutorialFactura.Controls.Add(this.lblDescripcionFactura);
+            this.pnlTutorialFactura.Controls.Add(this.lblTituloFactura);
+            this.pnlTutorialFactura.Controls.Add(this.btnTutorialFactura);
+            this.pnlTutorialFactura.Controls.Add(this.pictureBox6);
+            this.pnlTutorialFactura.Location = new System.Drawing.Point(543, 56);
+            this.pnlTutorialFactura.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
+            this.pnlTutorialFactura.Name = "pnlTutorialFactura";
+            this.pnlTutorialFactura.Size = new System.Drawing.Size(228, 195);
+            this.pnlTutorialFactura.TabIndex = 9;
             // 
-            // label8
+            // lblDescripcionFactura
             // 
-            this.label8.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(31, 105);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(171, 38);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "Genera una factura en formato PDF de forma rápida y sencilla.";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblDescripcionFactura.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescripcionFactura.Location = new System.Drawing.Point(14, 108);
+            this.lblDescripcionFactura.Name = "lblDescripcionFactura";
+            this.lblDescripcionFactura.Size = new System.Drawing.Size(198, 42);
+            this.lblDescripcionFactura.TabIndex = 3;
+            this.lblDescripcionFactura.Text = "Genera una factura en formato PDF de forma rápida y sencilla.";
+            this.lblDescripcionFactura.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label9
+            // lblTituloFactura
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label9.Location = new System.Drawing.Point(24, 83);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(178, 22);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "Generar una factura";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTituloFactura.AutoSize = true;
+            this.lblTituloFactura.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
+            this.lblTituloFactura.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.lblTituloFactura.Location = new System.Drawing.Point(24, 83);
+            this.lblTituloFactura.Name = "lblTituloFactura";
+            this.lblTituloFactura.Size = new System.Drawing.Size(178, 22);
+            this.lblTituloFactura.TabIndex = 2;
+            this.lblTituloFactura.Text = "Generar una factura";
+            this.lblTituloFactura.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnTutorialFactura
             // 
@@ -350,39 +350,39 @@
             this.pictureBox6.TabIndex = 0;
             this.pictureBox6.TabStop = false;
             // 
-            // panel5
+            // pnlTutorialCotizacion
             // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.label6);
-            this.panel5.Controls.Add(this.label7);
-            this.panel5.Controls.Add(this.btnVerTutorialCotizacion);
-            this.panel5.Controls.Add(this.pictureBox5);
-            this.panel5.Location = new System.Drawing.Point(788, 56);
-            this.panel5.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(228, 195);
-            this.panel5.TabIndex = 8;
+            this.pnlTutorialCotizacion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTutorialCotizacion.Controls.Add(this.lblDescripcionCotizacion);
+            this.pnlTutorialCotizacion.Controls.Add(this.lblTituloCotizacion);
+            this.pnlTutorialCotizacion.Controls.Add(this.btnVerTutorialCotizacion);
+            this.pnlTutorialCotizacion.Controls.Add(this.pictureBox5);
+            this.pnlTutorialCotizacion.Location = new System.Drawing.Point(296, 56);
+            this.pnlTutorialCotizacion.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
+            this.pnlTutorialCotizacion.Name = "pnlTutorialCotizacion";
+            this.pnlTutorialCotizacion.Size = new System.Drawing.Size(228, 195);
+            this.pnlTutorialCotizacion.TabIndex = 8;
             // 
-            // label6
+            // lblDescripcionCotizacion
             // 
-            this.label6.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(40, 106);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(139, 38);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "Crea una cotización de forma rápida y sencilla.";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblDescripcionCotizacion.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescripcionCotizacion.Location = new System.Drawing.Point(14, 108);
+            this.lblDescripcionCotizacion.Name = "lblDescripcionCotizacion";
+            this.lblDescripcionCotizacion.Size = new System.Drawing.Size(198, 42);
+            this.lblDescripcionCotizacion.TabIndex = 3;
+            this.lblDescripcionCotizacion.Text = "Crea una cotización de forma rápida y sencilla.";
+            this.lblDescripcionCotizacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label7
+            // lblTituloCotizacion
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label7.Location = new System.Drawing.Point(11, 84);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(201, 22);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Realizar una cotización";
+            this.lblTituloCotizacion.AutoSize = true;
+            this.lblTituloCotizacion.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
+            this.lblTituloCotizacion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.lblTituloCotizacion.Location = new System.Drawing.Point(11, 84);
+            this.lblTituloCotizacion.Name = "lblTituloCotizacion";
+            this.lblTituloCotizacion.Size = new System.Drawing.Size(201, 22);
+            this.lblTituloCotizacion.TabIndex = 2;
+            this.lblTituloCotizacion.Text = "Realizar una cotización";
             // 
             // btnVerTutorialCotizacion
             // 
@@ -623,17 +623,17 @@
             this.pnlContenedorPrincipal.ResumeLayout(false);
             this.pnlContainerVideos.ResumeLayout(false);
             this.pnlContainerVideos.PerformLayout();
-            this.pnlRecuperarContrasena.ResumeLayout(false);
-            this.pnlRecuperarContrasena.PerformLayout();
+            this.pnlTutorialReportes.ResumeLayout(false);
+            this.pnlTutorialReportes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
-            this.pnlRegistrarVenta.ResumeLayout(false);
-            this.pnlRegistrarVenta.PerformLayout();
+            this.pnlTutorialCompra.ResumeLayout(false);
+            this.pnlTutorialCompra.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
+            this.pnlTutorialFactura.ResumeLayout(false);
+            this.pnlTutorialFactura.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
+            this.pnlTutorialCotizacion.ResumeLayout(false);
+            this.pnlTutorialCotizacion.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.pnlContenedorManuales.ResumeLayout(false);
@@ -677,27 +677,27 @@
         private System.Windows.Forms.PictureBox picpdf2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Panel pnlContainerVideos;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel pnlTutorialCotizacion;
+        private System.Windows.Forms.Label lblDescripcionCotizacion;
+        private System.Windows.Forms.Label lblTituloCotizacion;
         private System.Windows.Forms.Button btnVerTutorialCotizacion;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.Label lblTutoriales;
-        private System.Windows.Forms.Panel pnlRegistrarVenta;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Button btnVerTutorialVenta;
+        private System.Windows.Forms.Panel pnlTutorialCompra;
+        private System.Windows.Forms.Label lblDescripcionCompra;
+        private System.Windows.Forms.Label lblTituloCompra;
+        private System.Windows.Forms.Button btnVerTutorialCompra;
         private System.Windows.Forms.PictureBox pictureBox8;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Panel pnlTutorialFactura;
+        private System.Windows.Forms.Label lblDescripcionFactura;
+        private System.Windows.Forms.Label lblTituloFactura;
         private System.Windows.Forms.Button btnTutorialFactura;
         private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.Panel pnlRecuperarContrasena;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button btnVerTuTorialRecuperar;
+        private System.Windows.Forms.Panel pnlTutorialReportes;
+        private System.Windows.Forms.Label lblDescripcionReportes;
+        private System.Windows.Forms.Label lblTituloReportes;
+        private System.Windows.Forms.Button btnVerTutorialReportes;
         private System.Windows.Forms.PictureBox pictureBox9;
     }
 }

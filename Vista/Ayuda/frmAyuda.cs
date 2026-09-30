@@ -11,6 +11,7 @@ namespace Vista.Ayuda
         public frmAyuda()
         {
             InitializeComponent();
+            CentrarTitulosTutoriales();
             ResponsiveHelper.Apply(this);
             ConfigurarTooltips();
             // Configuración del formulario
@@ -18,6 +19,20 @@ namespace Vista.Ayuda
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
+        }
+
+        // CENTRA EL TÍTULO DE CADA TARJETA DE TUTORIAL DENTRO DE SU PANEL
+        private void CentrarTitulosTutoriales()
+        {
+            CentrarEnPanel(pnlTutorialReportes, lblTituloReportes);
+            CentrarEnPanel(pnlTutorialCotizacion, lblTituloCotizacion);
+            CentrarEnPanel(pnlTutorialFactura, lblTituloFactura);
+            CentrarEnPanel(pnlTutorialCompra, lblTituloCompra);
+        }
+
+        private static void CentrarEnPanel(Panel panel, Label titulo)
+        {
+            titulo.Left = Math.Max(0, (panel.ClientSize.Width - titulo.Width) / 2);
         }
 
         private void ConfigurarTooltips()
@@ -39,13 +54,13 @@ namespace Vista.Ayuda
                 "Descarga el manual técnico del sistema.");
 
             // Tutoriales
-            toolTip1.SetToolTip(btnVerTuTorialRecuperar, "Muestra el tutorial para recuperar una contraseña.");
-
-            toolTip1.SetToolTip(btnVerTutorialVenta, "Muestra el tutorial para registrar una venta.");
-
-            toolTip1.SetToolTip(btnTutorialFactura, "Muestra el tutorial para generar una factura.");
+            toolTip1.SetToolTip(btnVerTutorialReportes, "Muestra el tutorial para generar un reporte en PDF.");
 
             toolTip1.SetToolTip(btnVerTutorialCotizacion, "Muestra el tutorial para realizar una cotización.");
+
+            toolTip1.SetToolTip(btnTutorialFactura, "Muestra el tutorial para generar una factura en PDF.");
+
+            toolTip1.SetToolTip(btnVerTutorialCompra, "Muestra el tutorial para registrar una compra.");
         }
 
         private void btnDescargarManualUsuario_Click(object sender, EventArgs e)
@@ -97,53 +112,44 @@ namespace Vista.Ayuda
             });
         }
 
-        private void btnVerTuTorialRecuperar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                AbrirTutorial("https://www.youtube.com/");
-            }
-            catch (Exception)
-            {
-                MostrarError(6);
-            }
-        }
+        // ENLACES DE LOS TUTORIALES EN YOUTUBE
+        private const string UrlTutorialReportes = "https://youtu.be/uuEF77gL1O4?feature=shared";
+        private const string UrlTutorialCotizacion = "https://youtu.be/rTF1JbZRBHU?si=JfCeQHd22z3K_PSy";
+        private const string UrlTutorialFactura = "https://youtu.be/1NdffwxrFOA?si=pi90tAWOmR6-3gUx";
+        private const string UrlTutorialCompra = "https://youtu.be/Jzk7pa7hfRU?si=qJV09aPtxcETI9Xw";
 
-        private void btnVerTutorialVenta_Click(object sender, EventArgs e)
+        private void btnVerTutorialReportes_Click(object sender, EventArgs e)
         {
-            try
-            {
-                AbrirTutorial("https://www.youtube.com/");
-            }
-            catch (Exception)
-            {
-                MostrarError(6);
-            }
-        }
-
-        private void btnTutorialFactura_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                AbrirTutorial("https://www.youtube.com/");
-            }
-            catch (Exception)
-            {
-                MostrarError(6);
-            }
+            AbrirTutorialSeguro(UrlTutorialReportes);
         }
 
         private void btnVerTutorialCotizacion_Click(object sender, EventArgs e)
         {
+            AbrirTutorialSeguro(UrlTutorialCotizacion);
+        }
+
+        private void btnTutorialFactura_Click(object sender, EventArgs e)
+        {
+            AbrirTutorialSeguro(UrlTutorialFactura);
+        }
+
+        private void btnVerTutorialCompra_Click(object sender, EventArgs e)
+        {
+            AbrirTutorialSeguro(UrlTutorialCompra);
+        }
+
+        private void AbrirTutorialSeguro(string url)
+        {
             try
             {
-                AbrirTutorial("https://youtu.be/rTF1JbZRBHU?si=JfCeQHd22z3K_PSy");
+                AbrirTutorial(url);
             }
             catch (Exception)
             {
                 MostrarError(6);
             }
         }
+
         // ABRIR TUTORIAL
         private void AbrirTutorial(string url)
         {
