@@ -13,8 +13,7 @@ namespace Vista.Configuracion_Inicial
 
         private void button5_Click(object sender, EventArgs e)
         {
-            frmConfiguracionparte2 frm = new frmConfiguracionparte2();
-            frm.ShowDialog();
+            Navegacion.Ir(this, new frmConfiguracionparte2());
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -101,9 +100,7 @@ namespace Vista.Configuracion_Inicial
 
 
 
-                ConfiguracionUltimaParte frm = new ConfiguracionUltimaParte();
-                frm.ShowDialog();
-                Hide();
+                Navegacion.Ir(this, new ConfiguracionUltimaParte());
 
             }
         }

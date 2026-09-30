@@ -17,11 +17,7 @@ namespace Vista.Configuracion_Inicial
 
         private void btnInicioLogin_Click(object sender, EventArgs e)
         {
-
-            frmLogin frm = new frmLogin();
-
-            frm.ShowDialog();
-            this.Close();
+            Navegacion.Ir(this, new frmLogin());
         }
 
         private void lblAAdministrador_Click(object sender, EventArgs e)

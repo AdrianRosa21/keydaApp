@@ -17,9 +17,7 @@ namespace Vista.Configuracion_Inicial
 
         private void btnAtras_Click(object sender, EventArgs e)
         {
-            ConfiguracionInicial frm = new ConfiguracionInicial();
-            frm.ShowDialog();
-            this.Hide();
+            Navegacion.Ir(this, new ConfiguracionInicial());
         }
 
 
@@ -138,9 +136,7 @@ namespace Vista.Configuracion_Inicial
                 MessageBox.Show("La configuración se guardó correctamente.", "Configuración", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Abrir siguiente formulario
-                ConfiguracionParte3 frm = new ConfiguracionParte3();
-                frm.Show();
-                Hide();
+                Navegacion.Ir(this, new ConfiguracionParte3());
 
             }
             catch (Exception ex)

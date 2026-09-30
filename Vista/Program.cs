@@ -27,14 +27,10 @@ namespace Vista
 
             bool existenUsuarios = DbUsuarios.ExistenUsuarios();
 
-            if (existenUsuarios)
-            {
-                Application.Run(new frmLogin());
-            }
-            else
-            {
-                Application.Run(new ConfiguracionInicial());
-            }
+            // SI YA HAY USUARIOS SE MUESTRA EL LOGIN; SI NO, EL ASISTENTE DE CONFIGURACIÓN INICIAL
+            Form pantallaInicial = existenUsuarios ? (Form)new frmLogin() : new ConfiguracionInicial();
+
+            Navegacion.Iniciar(pantallaInicial);
 
         }
 

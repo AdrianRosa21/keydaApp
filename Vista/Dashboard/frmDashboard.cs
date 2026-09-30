@@ -163,9 +163,7 @@ namespace Vista.Dashboard
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
-            frmLogin form_principal = new frmLogin();
-            this.Hide();
-            form_principal.Show();
+            Navegacion.Ir(this, new frmLogin());
 
         }
 

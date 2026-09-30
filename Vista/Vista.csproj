@@ -307,6 +307,7 @@
     <Compile Include="Producción\frmProduccion.Designer.cs">
       <DependentUpon>frmProduccion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Navegacion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

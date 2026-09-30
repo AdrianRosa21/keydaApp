@@ -151,22 +151,15 @@ namespace Vista.Login
 
                             DbUsuarios usuarios = new DbUsuarios(idUsuario, nombre, usuarioBD, hashGuardado, rol, estado);
 
-                            // Abrir Dashboard según el rol
+                            // Abrir Dashboard según el rol y cerrar el Login
                             if (rol == "Administrador")
                             {
-                                frmDashboard dashboard = new frmDashboard();
-
-                                dashboard.Show();
+                                Navegacion.Ir(this, new frmDashboard());
                             }
                             else if (rol == "Secretario")
                             {
-                                frmDashboardSecretariocs dashboard = new frmDashboardSecretariocs();
-
-                                dashboard.Show();
+                                Navegacion.Ir(this, new frmDashboardSecretariocs());
                             }
-
-                            // Ocultar Login
-                            this.Hide();
 
                         }
                     }
