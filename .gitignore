@@ -30,3 +30,22 @@ PrintO.cs
 !Vista/SqlServerTypes/x64/
 !Vista/SqlServerTypes/x86/*.dll
 !Vista/SqlServerTypes/x64/*.dll
+
+# Archivos de trabajo sueltos (scripts de ayuda, copias de seguridad y pruebas locales)
+/*.py
+/Check*.cs
+/Fix*.cs
+/SafeFix.cs
+/Test*.cs
+/add_*.cs
+/check_db.cs
+/fix_*.cs
+/hex*.cs
+*.bak
+UpgradeLog.htm
+/DBFINAL100.sql
+Vista/Resources/Factura_*.pdf
+
+# Instalador (el .exe se publica como Release en GitHub, no se versiona)
+installer/Output/
+MueblesKeydaSetup/
