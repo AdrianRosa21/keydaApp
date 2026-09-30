@@ -49,3 +49,4 @@ Vista/Resources/Factura_*.pdf
 # Instalador (el .exe se publica como Release en GitHub, no se versiona)
 installer/Output/
 MueblesKeydaSetup/
+/Script_BD_MueblesKeyda.sql
