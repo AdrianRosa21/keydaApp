@@ -38,9 +38,11 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblBienvenida = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.btnSeguir = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnConfigurarDB = new Guna.UI2.WinForms.Guna2Button();
+            this.lblEstadoDB = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.flpBotones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
@@ -135,33 +137,22 @@
             // 
             // lblBienvenida
             // 
-            this.lblBienvenida.Font = new System.Drawing.Font("Times New Roman", 40F, System.Drawing.FontStyle.Bold);
-            this.lblBienvenida.Location = new System.Drawing.Point(258, 199);
+            this.lblBienvenida.Font = new System.Drawing.Font("Times New Roman", 30F, System.Drawing.FontStyle.Bold);
+            this.lblBienvenida.Location = new System.Drawing.Point(343, 192);
             this.lblBienvenida.Name = "lblBienvenida";
-            this.lblBienvenida.Size = new System.Drawing.Size(601, 72);
+            this.lblBienvenida.Size = new System.Drawing.Size(378, 72);
             this.lblBienvenida.TabIndex = 1;
-            this.lblBienvenida.Text = "¡Bienvenido al sistema!";
+            this.lblBienvenida.Text = "¡Antes de comenzar!";
             // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Times New Roman", 16F);
-            this.label1.Location = new System.Drawing.Point(287, 283);
+            this.label1.Location = new System.Drawing.Point(259, 249);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(483, 55);
             this.label1.TabIndex = 2;
             this.label1.Text = "Para comenzar, es necesario configurar la información inicial del sistema. ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(265, 340);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(524, 55);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Esto permitirá personalizar la información de su empresa, y crear el primer usuar" +
-    "io administrador.";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // guna2PictureBox1
             // 
@@ -170,11 +161,10 @@
             this.guna2PictureBox1.ImageRotate = 0F;
             this.guna2PictureBox1.Location = new System.Drawing.Point(388, 12);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(312, 184);
+            this.guna2PictureBox1.Size = new System.Drawing.Size(302, 172);
             this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.guna2PictureBox1.TabIndex = 6;
             this.guna2PictureBox1.TabStop = false;
-            this.guna2PictureBox1.Click += new System.EventHandler(this.guna2PictureBox1_Click);
             // 
             // btnSeguir
             // 
@@ -182,9 +172,9 @@
             this.btnSeguir.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSeguir.Image = global::Vista.Properties.Resources.flecha_correcta__1_;
             this.btnSeguir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSeguir.Location = new System.Drawing.Point(340, 415);
+            this.btnSeguir.Location = new System.Drawing.Point(588, 395);
             this.btnSeguir.Name = "btnSeguir";
-            this.btnSeguir.Size = new System.Drawing.Size(402, 53);
+            this.btnSeguir.Size = new System.Drawing.Size(271, 53);
             this.btnSeguir.TabIndex = 4;
             this.btnSeguir.Text = "Comenzar";
             this.btnSeguir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -192,15 +182,54 @@
             this.btnSeguir.UseVisualStyleBackColor = false;
             this.btnSeguir.Click += new System.EventHandler(this.btnSeguir_Click);
             // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 16F);
+            this.label2.Location = new System.Drawing.Point(259, 313);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(145, 46);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Base de datos ";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnConfigurarDB
+            // 
+            this.btnConfigurarDB.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnConfigurarDB.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnConfigurarDB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnConfigurarDB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnConfigurarDB.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnConfigurarDB.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfigurarDB.ForeColor = System.Drawing.Color.White;
+            this.btnConfigurarDB.Location = new System.Drawing.Point(265, 385);
+            this.btnConfigurarDB.Name = "btnConfigurarDB";
+            this.btnConfigurarDB.Size = new System.Drawing.Size(190, 28);
+            this.btnConfigurarDB.TabIndex = 8;
+            this.btnConfigurarDB.Text = "Configurar base datos";
+            this.btnConfigurarDB.Click += new System.EventHandler(this.btnConfigurarDB_Click);
+            // 
+            // lblEstadoDB
+            // 
+            this.lblEstadoDB.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstadoDB.ForeColor = System.Drawing.Color.OrangeRed;
+            this.lblEstadoDB.Location = new System.Drawing.Point(264, 348);
+            this.lblEstadoDB.Name = "lblEstadoDB";
+            this.lblEstadoDB.Size = new System.Drawing.Size(145, 23);
+            this.lblEstadoDB.TabIndex = 9;
+            this.lblEstadoDB.Text = "No configurada!";
+            this.lblEstadoDB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // ConfiguracionInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(902, 549);
+            this.Controls.Add(this.lblEstadoDB);
+            this.Controls.Add(this.btnConfigurarDB);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.guna2PictureBox1);
             this.Controls.Add(this.btnSeguir);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblBienvenida);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -208,7 +237,6 @@
             this.Name = "ConfiguracionInicial";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configuracion Inicial";
-            this.Load += new System.EventHandler(this.ConfiguracionParte1_Load);
             this.panel1.ResumeLayout(false);
             this.flpBotones.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
@@ -227,8 +255,10 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label lblBienvenida;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSeguir;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
+        private System.Windows.Forms.Label label2;
+        private Guna.UI2.WinForms.Guna2Button btnConfigurarDB;
+        private System.Windows.Forms.Label lblEstadoDB;
     }
 }

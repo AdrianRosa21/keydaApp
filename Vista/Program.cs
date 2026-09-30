@@ -1,6 +1,9 @@
 using Modelo.Entidades;
 using QuestPDF.Infrastructure;
 using System;
+using System.Drawing;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 using Vista.Configuracion_Inicial;
 using Vista.Login;
@@ -20,6 +23,8 @@ namespace Vista
 
             QuestPDF.Settings.License = LicenseType.Community;
 
+            AplicarIconoPredeterminado();
+
             bool existenUsuarios = DbUsuarios.ExistenUsuarios();
 
             if (existenUsuarios)
@@ -31,6 +36,28 @@ namespace Vista
                 Application.Run(new ConfiguracionInicial());
             }
 
+        }
+
+        // LAS VENTANAS SIN ICONO PROPIO USAN EL ICONO DE LA APLICACIÓN EN LUGAR DEL DE WINDOWS FORMS
+        private static void AplicarIconoPredeterminado()
+        {
+            try
+            {
+                using (Stream flujo = Assembly.GetExecutingAssembly().GetManifestResourceStream("icono-app.ico"))
+                {
+                    if (flujo == null)
+                        return;
+
+                    FieldInfo campo = typeof(Form).GetField("defaultIcon", BindingFlags.Static | BindingFlags.NonPublic);
+
+                    if (campo != null)
+                        campo.SetValue(null, new Icon(flujo));
+                }
+            }
+            catch (Exception)
+            {
+                // SI FALLA, SE CONSERVA EL ICONO PREDETERMINADO
+            }
         }
     }
 }

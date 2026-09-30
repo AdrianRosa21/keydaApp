@@ -235,7 +235,7 @@ namespace Modelo.Entidades
                         break;
 
                     case 4060:
-                        MessageBox.Show("No se puede acceder a la base de datos.", "ERR-SQL-002", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        // LA BASE DE DATOS AÚN NO EXISTE (PRIMER USO): LA CONFIGURACIÓN INICIAL LA CREA
                         break;
 
                     case -2:

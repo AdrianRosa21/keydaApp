@@ -51,7 +51,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>logo_muebles_keyda.ico</ApplicationIcon>
+    <ApplicationIcon>icono-app.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>
@@ -471,7 +471,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icono-app.ico" />
+    <EmbeddedResource Include="icono-app.ico">
+      <LogicalName>icono-app.ico</LogicalName>
+    </EmbeddedResource>
     <Content Include="logo_muebles_keyda.ico" />
+    <Content Include="..\database\MueblesKeyda.sql">
+      <Link>MueblesKeyda.sql</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Recursos\Manuales\MANUAL TECNICO.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
