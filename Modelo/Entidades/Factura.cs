@@ -306,7 +306,7 @@ namespace Modelo.Entidades
         }
 
         // ACTUALIZAR FACTURA
-        public static void ActualizarFactura(int idFactura, DateTime fechaVencimiento, decimal? descuento, string observaciones)
+        public static bool ActualizarFactura(int idFactura, DateTime fechaVencimiento, decimal? descuento, string observaciones)
         {
             string sql = @"UPDATE Factura 
                            SET FechaVencimiento = @FechaVencimiento,
@@ -320,21 +320,15 @@ namespace Modelo.Entidades
                 using (SqlCommand cmd = new SqlCommand(sql, cn))
                 {
                     cmd.Parameters.AddWithValue("@FechaVencimiento", fechaVencimiento);
-                    cmd.Parameters.AddWithValue("@Descuento", (object)descuento ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Descuento", descuento ?? 0m);
                     cmd.Parameters.AddWithValue("@Observaciones",
                         string.IsNullOrWhiteSpace(observaciones) ? (object)DBNull.Value : observaciones);
                     cmd.Parameters.AddWithValue("@IdFactura", idFactura);
 
-                    int filasAfectadas = cmd.ExecuteNonQuery();
+                    if (cmd.ExecuteNonQuery() > 0)
+                        return true;
 
-                    if (filasAfectadas > 0)
-                    {
-                        MessageBox.Show("Factura actualizada correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se encontró la factura seleccionada.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                    MessageBox.Show("No se encontró la factura seleccionada.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (SqlException ex)
@@ -345,6 +339,8 @@ namespace Modelo.Entidades
             {
                 MessageBox.Show("Error inesperado.", "ERR-SQL-999", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            return false;
         }
 
         // BUSCAR FACTURAS

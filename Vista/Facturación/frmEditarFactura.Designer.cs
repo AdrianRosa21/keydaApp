@@ -49,10 +49,7 @@
             this.lblTotalFactura = new System.Windows.Forms.Label();
             this.pnlObservacion = new System.Windows.Forms.Panel();
             this.txtObservaciones = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.lblObservacion = new System.Windows.Forms.Label();
-            this.btnGenerarFactura = new System.Windows.Forms.Button();
             this.btnGerarPdfModificado = new System.Windows.Forms.Button();
             this.btnGuardarCambios = new System.Windows.Forms.Button();
             this.pnlDatosGeneralesFactura.SuspendLayout();
@@ -189,6 +186,7 @@
             this.txtDescuento.Size = new System.Drawing.Size(155, 19);
             this.txtDescuento.TabIndex = 15;
             this.txtDescuento.TextChanged += new System.EventHandler(this.txtDescuento_TextChanged);
+            this.txtDescuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDescuento_KeyPress);
             // 
             // txtTotal
             // 
@@ -270,10 +268,7 @@
             this.pnlObservacion.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnlObservacion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
             this.pnlObservacion.Controls.Add(this.txtObservaciones);
-            this.pnlObservacion.Controls.Add(this.label5);
-            this.pnlObservacion.Controls.Add(this.label9);
             this.pnlObservacion.Controls.Add(this.lblObservacion);
-            this.pnlObservacion.Controls.Add(this.btnGenerarFactura);
             this.pnlObservacion.Location = new System.Drawing.Point(8, 343);
             this.pnlObservacion.Margin = new System.Windows.Forms.Padding(2);
             this.pnlObservacion.Name = "pnlObservacion";
@@ -291,28 +286,6 @@
             this.txtObservaciones.Size = new System.Drawing.Size(300, 37);
             this.txtObservaciones.TabIndex = 36;
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(672, 136);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(13, 19);
-            this.label5.TabIndex = 35;
-            this.label5.Text = ".";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(512, 139);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(130, 19);
-            this.label9.TabIndex = 34;
-            this.label9.Text = "Total de productos :";
-            // 
             // lblObservacion
             // 
             this.lblObservacion.AutoSize = true;
@@ -323,20 +296,6 @@
             this.lblObservacion.Size = new System.Drawing.Size(169, 25);
             this.lblObservacion.TabIndex = 0;
             this.lblObservacion.Text = "Observaciones  :";
-            // 
-            // btnGenerarFactura
-            // 
-            this.btnGenerarFactura.BackColor = System.Drawing.Color.Silver;
-            this.btnGenerarFactura.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGenerarFactura.Image = global::Vista.Properties.Resources.PDFIcono;
-            this.btnGenerarFactura.Location = new System.Drawing.Point(584, 16);
-            this.btnGenerarFactura.Margin = new System.Windows.Forms.Padding(2);
-            this.btnGenerarFactura.Name = "btnGenerarFactura";
-            this.btnGenerarFactura.Size = new System.Drawing.Size(120, 54);
-            this.btnGenerarFactura.TabIndex = 32;
-            this.btnGenerarFactura.Text = "Generar PDF";
-            this.btnGenerarFactura.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnGenerarFactura.UseVisualStyleBackColor = false;
             // 
             // btnGerarPdfModificado
             // 
@@ -351,6 +310,7 @@
             this.btnGerarPdfModificado.Text = "Generar PDF";
             this.btnGerarPdfModificado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnGerarPdfModificado.UseVisualStyleBackColor = false;
+            this.btnGerarPdfModificado.Click += new System.EventHandler(this.btnGerarPdfModificado_Click);
             // 
             // btnGuardarCambios
             // 
@@ -376,10 +336,13 @@
             this.Controls.Add(this.pnlObservacion);
             this.Controls.Add(this.pnlResumenDePagoFactura);
             this.Controls.Add(this.pnlDatosGeneralesFactura);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmEditarFactura";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmEditarFactura";
+            this.Text = "Editar factura";
             this.Load += new System.EventHandler(this.frmEditarFactura_Load);
             this.pnlDatosGeneralesFactura.ResumeLayout(false);
             this.pnlDatosGeneralesFactura.PerformLayout();
@@ -413,10 +376,7 @@
         private System.Windows.Forms.Label lblTotalFactura;
         private System.Windows.Forms.Panel pnlObservacion;
         private System.Windows.Forms.TextBox txtObservaciones;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblObservacion;
-        private System.Windows.Forms.Button btnGenerarFactura;
         private System.Windows.Forms.Button btnGerarPdfModificado;
         private System.Windows.Forms.Button btnGuardarCambios;
     }
