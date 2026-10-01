@@ -668,15 +668,13 @@ namespace Vista.Dashboard
             this.btnInicio.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(153)))), ((int)(((byte)(105)))));
             this.btnInicio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInicio.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInicio.Image = global::Vista.Properties.Resources.Inicio16px;
-            this.btnInicio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnInicio.Location = new System.Drawing.Point(0, 0);
             this.btnInicio.Margin = new System.Windows.Forms.Padding(0);
             this.btnInicio.Name = "btnInicio";
             this.btnInicio.Size = new System.Drawing.Size(121, 35);
             this.btnInicio.TabIndex = 0;
             this.btnInicio.Text = "Inicio";
-            this.btnInicio.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnInicio.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.btnInicio.UseVisualStyleBackColor = false;
             this.btnInicio.Click += new System.EventHandler(this.btnInicio_Click);
             // 
