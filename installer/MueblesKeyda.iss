@@ -6,7 +6,7 @@
 ; El instalador queda en installer\Output\MueblesKeydaSetup.exe
 
 #define AppName "Muebles Keyda"
-#define AppVersion "1.0.0"
+#define AppVersion "1.0.2"
 #define AppPublisher "Muebles Keyda"
 #define AppExeName "Vista.exe"
 #define BuildDir "..\Vista\bin\Release"
@@ -68,16 +68,33 @@ const
   UrlLocalDB2019 = 'https://download.microsoft.com/download/7/c/1/7c14e92e-bdcb-4f89-b7cf-93543e7112d1/SqlLocalDB.msi';
   ArchivoLocalDB = 'SqlLocalDB.msi';
 
-var
-  PaginaDescarga: TDownloadWizardPage;
-  InstalarLocalDB: Boolean;
+  // Microsoft Edge WebView2 Runtime (lo usa la vista previa de cotizaciones). Instalador oficial "Evergreen".
+  UrlWebView2 = 'https://go.microsoft.com/fwlink/p/?LinkId=2124703';
+  ArchivoWebView2 = 'MicrosoftEdgeWebview2Setup.exe';
+  ClaveWebView2 = 'SOFTWARE\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}';
 
 function LocalDBInstalado: Boolean;
 var
   Versiones: TArrayOfString;
 begin
+#ifdef PRUEBA_DESCARGAS
+  Result := False;
+#else
   Result := RegGetSubkeyNames(HKLM, 'SOFTWARE\Microsoft\Microsoft SQL Server Local DB\Installed Versions', Versiones)
     and (GetArrayLength(Versiones) > 0);
+#endif
+end;
+
+function WebView2Instalado: Boolean;
+var
+  Version: String;
+begin
+#ifdef PRUEBA_DESCARGAS
+  Result := False;
+#else
+  Result := (RegQueryStringValue(HKLM32, ClaveWebView2, 'pv', Version) or RegQueryStringValue(HKCU, ClaveWebView2, 'pv', Version))
+    and (Version <> '') and (Version <> '0.0.0.0');
+#endif
 end;
 
 function NetFramework472Instalado: Boolean;
@@ -95,76 +112,135 @@ begin
 
   if not NetFramework472Instalado then
   begin
-    MsgBox('Muebles Keyda necesita .NET Framework 4.7.2 o superior, que no está instalado en este equipo.' + #13#10#13#10 +
+    SuppressibleMsgBox('Muebles Keyda necesita .NET Framework 4.7.2 o superior, que no está instalado en este equipo.' + #13#10#13#10 +
       'Instálalo desde https://dotnet.microsoft.com/download/dotnet-framework y vuelve a ejecutar este instalador.',
-      mbCriticalError, MB_OK);
+      mbCriticalError, MB_OK, IDOK);
     Result := False;
   end;
 end;
 
-procedure InitializeWizard;
+procedure MostrarEstado(const Texto: String);
 begin
-  PaginaDescarga := CreateDownloadPage(SetupMessage(msgWizardPreparing), 'Descargando SQL Server LocalDB...', nil);
+  Log(Texto);
+  if not WizardSilent then
+    WizardForm.StatusLabel.Caption := Texto;
 end;
 
-function DescargarLocalDB(const Url: String): Boolean;
+function ProgresoDescarga(const Url, NombreArchivo: String; const Progreso, ProgresoMax: Int64): Boolean;
+begin
+  if (not WizardSilent) and (ProgresoMax > 0) then
+  begin
+    WizardForm.ProgressGauge.Style := npbstNormal;
+    WizardForm.ProgressGauge.Max := 100;
+    WizardForm.ProgressGauge.Position := Integer((Progreso * 100) div ProgresoMax);
+  end;
+  Result := True;
+end;
+
+function Descargar(const Url, Archivo: String): Boolean;
 begin
   Result := False;
-  PaginaDescarga.Clear;
-  PaginaDescarga.Add(Url, ArchivoLocalDB, '');
-  PaginaDescarga.Show;
   try
-    try
-      PaginaDescarga.Download;
-      Result := True;
-    except
-      Log('No se pudo descargar ' + Url + ': ' + GetExceptionMessage);
-    end;
-  finally
-    PaginaDescarga.Hide;
+    DownloadTemporaryFile(Url, Archivo, '', @ProgresoDescarga);
+    Result := True;
+  except
+    Log('No se pudo descargar ' + Url + ': ' + GetExceptionMessage);
   end;
 end;
 
-function NextButtonClick(CurPageID: Integer): Boolean;
+// Ejecuta un instalador externo esperando a que termine. Devuelve el código de salida (-1 si no se pudo ejecutar).
+function EjecutarEspera(const Archivo, Parametros: String): Integer;
+var
+  Codigo: Integer;
 begin
-  Result := True;
+  if not Exec(Archivo, Parametros, '', SW_HIDE, ewWaitUntilTerminated, Codigo) then
+    Codigo := -1;
+  Result := Codigo;
+end;
 
-  // Al pulsar "Instalar": si falta LocalDB se descarga antes de copiar los archivos
-  if (CurPageID = wpReady) and not LocalDBInstalado then
+procedure InstalarLocalDB;
+var
+  Codigo: Integer;
+  Descargado: Boolean;
+begin
+  MostrarEstado('Descargando SQL Server LocalDB...');
+
+  Descargado := Descargar(UrlLocalDB2022, ArchivoLocalDB);
+  if not Descargado then
+    Descargado := Descargar(UrlLocalDB2019, ArchivoLocalDB);
+
+  if not Descargado then
   begin
-    if DescargarLocalDB(UrlLocalDB2022) or DescargarLocalDB(UrlLocalDB2019) then
-      InstalarLocalDB := True
-    else
-    begin
-      InstalarLocalDB := False;
-      Result := MsgBox('No se pudo descargar SQL Server LocalDB, necesario para la base de datos.' + #13#10#13#10 +
-        'Comprueba tu conexión a Internet. Si continúas, se instalará solo la aplicación y tendrás que instalar ' +
-        'SQL Server Express LocalDB manualmente antes de abrirla.' + #13#10#13#10 +
-        '¿Deseas continuar de todos modos?', mbConfirmation, MB_YESNO) = IDYES;
-    end;
+    SuppressibleMsgBox('No se pudo descargar SQL Server LocalDB, necesario para la base de datos.' + #13#10#13#10 +
+      'La aplicación se instalará, pero deberás instalar SQL Server Express LocalDB manualmente ' +
+      '(https://aka.ms/sqlexpress) antes de abrirla. Comprueba tu conexión a Internet.', mbError, MB_OK, IDOK);
+    Exit;
+  end;
+
+#ifdef PRUEBA_DESCARGAS
+  Log('PRUEBA: descarga de LocalDB correcta (' + ExpandConstant('{tmp}\' + ArchivoLocalDB) + '); se omite msiexec.');
+  Exit;
+#endif
+
+  MostrarEstado('Instalando SQL Server LocalDB (puede tardar unos minutos)...');
+  if not WizardSilent then
+    WizardForm.ProgressGauge.Style := npbstMarquee;
+  try
+    // 0 = correcto, 3010 = correcto (requiere reiniciar), 1638 = ya hay otra versión instalada
+    Codigo := EjecutarEspera(ExpandConstant('{sys}\msiexec.exe'),
+      '/i "' + ExpandConstant('{tmp}\' + ArchivoLocalDB) + '" /qn /norestart IACCEPTSQLLOCALDBLICENSETERMS=YES');
+    Log('msiexec LocalDB: código ' + IntToStr(Codigo));
+
+    if (Codigo <> 0) and (Codigo <> 3010) and (Codigo <> 1638) then
+      SuppressibleMsgBox('No se pudo instalar SQL Server LocalDB (código ' + IntToStr(Codigo) + ').' + #13#10#13#10 +
+        'La aplicación se instalará, pero deberás instalar SQL Server Express LocalDB manualmente ' +
+        '(https://aka.ms/sqlexpress) antes de abrirla.', mbError, MB_OK, IDOK);
+  finally
+    if not WizardSilent then
+      WizardForm.ProgressGauge.Style := npbstNormal;
+  end;
+end;
+
+procedure InstalarWebView2;
+var
+  Codigo: Integer;
+begin
+  MostrarEstado('Descargando Microsoft Edge WebView2...');
+
+  if not Descargar(UrlWebView2, ArchivoWebView2) then
+  begin
+    SuppressibleMsgBox('No se pudo descargar Microsoft Edge WebView2, necesario para la vista previa de cotizaciones.' + #13#10#13#10 +
+      'La aplicación se instalará; la vista previa funcionará cuando instales WebView2 Runtime ' +
+      '(https://go.microsoft.com/fwlink/p/?LinkId=2124703).', mbInformation, MB_OK, IDOK);
+    Exit;
+  end;
+
+  MostrarEstado('Instalando Microsoft Edge WebView2...');
+  if not WizardSilent then
+    WizardForm.ProgressGauge.Style := npbstMarquee;
+  try
+    Codigo := EjecutarEspera(ExpandConstant('{tmp}\' + ArchivoWebView2), '/silent /install');
+    Log('WebView2 Runtime: código ' + IntToStr(Codigo));
+
+    if Codigo <> 0 then
+      SuppressibleMsgBox('No se pudo instalar Microsoft Edge WebView2 (código ' + IntToStr(Codigo) + ').' + #13#10#13#10 +
+        'La vista previa de cotizaciones no funcionará hasta instalar WebView2 Runtime ' +
+        '(https://go.microsoft.com/fwlink/p/?LinkId=2124703).', mbInformation, MB_OK, IDOK);
+  finally
+    if not WizardSilent then
+      WizardForm.ProgressGauge.Style := npbstNormal;
   end;
 end;
 
 procedure CurStepChanged(CurStep: TSetupStep);
-var
-  CodigoResultado: Integer;
-  Argumentos: String;
 begin
-  if (CurStep = ssPostInstall) and InstalarLocalDB then
+  // Antes de copiar los archivos se instalan los componentes que falten (necesitan Internet solo si faltan)
+  if CurStep = ssInstall then
   begin
-    WizardForm.StatusLabel.Caption := 'Instalando SQL Server LocalDB (puede tardar unos minutos)...';
-    WizardForm.ProgressGauge.Style := npbstMarquee;
-    try
-      Argumentos := '/i "' + ExpandConstant('{tmp}\' + ArchivoLocalDB) + '" /qn /norestart IACCEPTSQLLOCALDBLICENSETERMS=YES';
+    if not LocalDBInstalado then
+      InstalarLocalDB;
 
-      // 0 = correcto, 3010 = correcto (requiere reiniciar), 1638 = ya hay otra versión instalada
-      if not Exec(ExpandConstant('{sys}\msiexec.exe'), Argumentos, '', SW_HIDE, ewWaitUntilTerminated, CodigoResultado)
-        or ((CodigoResultado <> 0) and (CodigoResultado <> 3010) and (CodigoResultado <> 1638)) then
-        MsgBox('La aplicación se instaló, pero no se pudo instalar SQL Server LocalDB (código ' + IntToStr(CodigoResultado) + ').' + #13#10#13#10 +
-          'Instálalo manualmente desde https://aka.ms/sqlexpress (SQL Server Express LocalDB) antes de abrir Muebles Keyda.',
-          mbError, MB_OK);
-    finally
-      WizardForm.ProgressGauge.Style := npbstNormal;
-    end;
+    if not WebView2Instalado then
+      InstalarWebView2;
   end;
 end;
