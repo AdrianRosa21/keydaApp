@@ -484,6 +484,9 @@
     <Content Include="Recursos\Manuales\MANUAL TECNICO.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Recursos\Manuales\ManualUsuario.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\Captura de pantalla 2026-07-06 171749.png" />
   </ItemGroup>
   <ItemGroup>
