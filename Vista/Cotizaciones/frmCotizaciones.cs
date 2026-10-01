@@ -1,4 +1,5 @@
 using Guna.UI2.WinForms;
+using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.WinForms;
 using Modelo;
 using Modelo.Entidades;
@@ -614,7 +615,14 @@ namespace Vista.Cotizaciones
 
             try
             {
-                await visorPDF.EnsureCoreWebView2Async();
+                // LA CARPETA DE DATOS DE WEBVIEW2 SE GUARDA EN EL PERFIL DEL USUARIO, PORQUE LA CARPETA
+                // DE INSTALACIÓN (PROGRAM FILES) NO PERMITE ESCRITURA A USUARIOS SIN PERMISOS DE ADMINISTRADOR
+                string carpetaDatosWebView = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Muebles Keyda", "WebView2");
+
+                CoreWebView2Environment entornoWebView = await CoreWebView2Environment.CreateAsync(null, carpetaDatosWebView);
+
+                await visorPDF.EnsureCoreWebView2Async(entornoWebView);
             }
             catch (Exception ex)
             {
